@@ -1,0 +1,28 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+    }
+  },
+  "plugins": [
+    "react",
+  ],
+  "extends": ["airbnb"],
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "15.2.1"
+    }
+  },
+  "globals": {
+    "__dirname": true,
+    "document": true,
+    "module": true,
+    "require": true,
+    "window": true,
+    "localStorage": true,
+    "dispatch": true
+  }
+}

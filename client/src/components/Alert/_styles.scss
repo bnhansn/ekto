@@ -1,0 +1,35 @@
+.alert {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  color: #fff;
+
+}
+
+.alert-close {
+  color: rgba(0,0,0,.2);
+  cursor: pointer;
+
+  &:hover { color: rgba(0,0,0,.4); }
+}
+
+.alert-primary {
+  background: $brand-primary;
+}
+
+.alert-danger {
+  background: $brand-danger;
+}
+
+.alert-info {
+  background: $brand-info;
+}
+
+.alert-warning {
+  background: $brand-warning;
+}
+
+.alert-success {
+  background: $brand-success;
+}

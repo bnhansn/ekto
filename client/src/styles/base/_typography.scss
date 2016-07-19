@@ -1,0 +1,10 @@
+::-webkit-input-placeholder { color: $input-color-placeholder; }
+// scss-lint:disable VendorPrefix
+::-moz-placeholder {
+  color: $input-color-placeholder;
+  opacity: 1;
+}
+// scss-lint:enable VendorPrefix
+:-ms-input-placeholder { color: $input-color-placeholder; }
+:placeholder-shown { color: $input-color-placeholder; }
+::placeholder { color: $input-color-placeholder; }

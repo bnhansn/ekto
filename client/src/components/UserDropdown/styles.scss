@@ -1,0 +1,28 @@
+.user-dropdown {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.user-dropdown-button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: 0;
+  outline: none !important;
+
+  i {
+    margin-right: .75rem;
+    font-size: 16px;
+  }
+}
+
+.user-dropdown-item {
+  i { margin-right: .5rem; }
+}
+
+.user-dropdown-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
