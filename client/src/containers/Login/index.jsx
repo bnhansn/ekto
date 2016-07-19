@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { login, loginAttempt } from './actions';
+import { login } from './actions';
 import { routerActions } from 'react-router-redux';
 import LoginForm from '../../components/LoginForm';
 import React, { Component, PropTypes } from 'react';
@@ -9,7 +9,6 @@ class LoginContainer extends Component {
     login: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    loginAttempt: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -29,7 +28,6 @@ class LoginContainer extends Component {
   }
 
   handleSubmit(data) {
-    this.props.loginAttempt();
     this.props.login(data);
   }
 
@@ -48,5 +46,5 @@ export default connect(
     isAuthenticated: state.app.isAuthenticated,
     redirect: ownProps.location.query.redirect || '/',
   }),
-  { login, loginAttempt, replace: routerActions.replace }
+  { login, replace: routerActions.replace }
 )(LoginContainer);

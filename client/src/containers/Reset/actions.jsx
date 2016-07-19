@@ -11,6 +11,7 @@ import { API_URL } from 'config'; // eslint-disable-line
 
 export function resetPassword(data) {
   return dispatch => {
+    dispatch({ type: RESET_PASSWORD_ATTEMPT });
     axios({
       method: 'post',
       url: `${API_URL}/reset`,
@@ -29,8 +30,4 @@ export function resetPassword(data) {
         });
       });
   };
-}
-
-export function resetPasswordAttempt() {
-  return { type: RESET_PASSWORD_ATTEMPT };
 }

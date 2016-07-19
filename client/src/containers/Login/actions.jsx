@@ -10,6 +10,7 @@ import { API_URL } from 'config'; // eslint-disable-line
 
 export function login(data) {
   return dispatch => {
+    dispatch({ type: LOGIN_ATTEMPT });
     axios({
       method: 'post',
       url: `${API_URL}/login`,
@@ -28,8 +29,4 @@ export function login(data) {
         });
       });
   };
-}
-
-export function loginAttempt() {
-  return { type: LOGIN_ATTEMPT };
 }

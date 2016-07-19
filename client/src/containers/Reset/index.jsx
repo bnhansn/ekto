@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import ResetForm from '../../components/ResetForm';
 import React, { Component, PropTypes } from 'react';
-import { resetPassword, resetPasswordAttempt } from './actions';
+import { resetPassword } from './actions';
 
 class ResetContainer extends Component {
   static propTypes = {
@@ -10,7 +10,6 @@ class ResetContainer extends Component {
     replace: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     resetPassword: PropTypes.func.isRequired,
-    resetPasswordAttempt: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -30,7 +29,6 @@ class ResetContainer extends Component {
   }
 
   handleSubmit(data) {
-    this.props.resetPasswordAttempt();
     this.props.resetPassword({
       ...data,
       token: this.props.params.token,
@@ -52,5 +50,5 @@ export default connect(
     isAuthenticated: state.app.isAuthenticated,
     redirect: ownProps.location.query.redirect || '/',
   }),
-  { resetPassword, resetPasswordAttempt, replace: routerActions.replace }
+  { resetPassword, replace: routerActions.replace }
 )(ResetContainer);

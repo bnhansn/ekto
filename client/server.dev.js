@@ -9,10 +9,16 @@ const server = new WebpackDevServer(webpack(config), {
   publicPath: config.output.publicPath,
 });
 
+const port = 8000;
+
 server.listen(
-  8000,
+  port,
   ip.address(),
   error => {
-    if (error) { console.log(error); }
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(`==> 🌎  Listening at http://${ip.address()}:${port}`);
+    }
   }
 );

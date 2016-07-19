@@ -11,6 +11,7 @@ import { API_URL } from 'config'; // eslint-disable-line
 
 export function signup(data) {
   return dispatch => {
+    dispatch({ type: SIGNUP_ATTEMPT });
     axios({
       method: 'post',
       url: `${API_URL}/signup`,
@@ -37,8 +38,4 @@ export function signup(data) {
         });
       });
   };
-}
-
-export function signupAttempt() {
-  return { type: SIGNUP_ATTEMPT };
 }

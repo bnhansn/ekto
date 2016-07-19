@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { signup, signupAttempt } from './actions';
+import { signup } from './actions';
 import { routerActions } from 'react-router-redux';
 import React, { Component, PropTypes } from 'react';
 import SignupForm from '../../components/SignupForm';
@@ -9,7 +9,6 @@ class SignupContainer extends Component {
     signup: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    signupAttempt: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -29,7 +28,6 @@ class SignupContainer extends Component {
   }
 
   handleSubmit(data) {
-    this.props.signupAttempt();
     this.props.signup(data);
   }
 
@@ -48,5 +46,5 @@ export default connect(
     isAuthenticated: state.app.isAuthenticated,
     redirect: ownProps.location.query.redirect || '/',
   }),
-  { signup, signupAttempt, replace: routerActions.replace }
+  { signup, replace: routerActions.replace }
 )(SignupContainer);

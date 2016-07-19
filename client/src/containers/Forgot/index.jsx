@@ -2,14 +2,13 @@ import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
 import React, { Component, PropTypes } from 'react';
 import ForgotForm from '../../components/ForgotForm';
-import { forgotPassword, forgotPasswordAttempt } from './actions';
+import { forgotPassword } from './actions';
 
 class ForgotContainer extends Component {
   static propTypes = {
     replace: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     forgotPassword: PropTypes.func.isRequired,
-    forgotPasswordAttempt: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -29,7 +28,6 @@ class ForgotContainer extends Component {
   }
 
   handleSubmit(data) {
-    this.props.forgotPasswordAttempt();
     this.props.forgotPassword(data);
   }
 
@@ -48,5 +46,5 @@ export default connect(
     isAuthenticated: state.app.isAuthenticated,
     redirect: ownProps.location.query.redirect || '/',
   }),
-  { forgotPassword, forgotPasswordAttempt, replace: routerActions.replace }
+  { forgotPassword, replace: routerActions.replace }
 )(ForgotContainer);
