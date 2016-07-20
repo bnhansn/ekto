@@ -15,6 +15,7 @@ RSpec.describe Api::PostsController, type: :controller do
 
         result = JSON.parse(response.body)
         ids = result['data'].map { |x| x['id'] }
+
         expect(response).to have_http_status(:ok)
         expect(result['data'].count).to eq(2)
         expect(ids).to include(*[post_1.id.to_s, post_2.id.to_s])
@@ -30,6 +31,7 @@ RSpec.describe Api::PostsController, type: :controller do
         process :index, params: { account_id: account.id }
 
         result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:not_found)
         expect(result['errors'][0]['title']).to match(/Couldn't find account/)
       end
@@ -56,6 +58,7 @@ RSpec.describe Api::PostsController, type: :controller do
                 params: { account_id: @account.id, title: 'New post title' }
 
         result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:created)
         expect(result['data']['id']).not_to be(nil)
         expect(result['data']['attributes']['title']).to eq('New post title')
@@ -66,6 +69,7 @@ RSpec.describe Api::PostsController, type: :controller do
         process :create, method: :post, params: { account_id: @account.id }
 
         result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:created)
         expect(result['data']['id']).not_to be(nil)
         expect(result['data']['attributes']['title']).not_to be(nil)
@@ -76,6 +80,7 @@ RSpec.describe Api::PostsController, type: :controller do
         process :create, method: :post, params: { account_id: @account.id }
 
         result = JSON.parse(response.body)
+
         expect(result['data']['attributes']['createdBy']).to eq(@user.id)
         expect(result['data']['attributes']['updatedBy']).to eq(@user.id)
       end
@@ -92,6 +97,7 @@ RSpec.describe Api::PostsController, type: :controller do
                 params: { account_id: account.id, title: 'New post title' }
 
         result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:not_found)
         expect(result['errors'][0]['title']).to match(/Couldn't find account/)
       end
@@ -126,6 +132,7 @@ RSpec.describe Api::PostsController, type: :controller do
                 }
 
         result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:ok)
         expect(result['data']['id']).to eq(post.id.to_s)
         expect(result['data']['attributes']['title']).to eq('Updated title')
@@ -139,6 +146,7 @@ RSpec.describe Api::PostsController, type: :controller do
                 params: { id: post.id, account_id: @account.id }
 
         result = JSON.parse(response.body)
+
         expect(result['data']['attributes']['updatedBy']).to eq(@user.id)
       end
     end
@@ -159,6 +167,7 @@ RSpec.describe Api::PostsController, type: :controller do
                 }
 
         result = JSON.parse(response.body)
+
         expect(response).to have_http_status(:not_found)
         expect(result['errors'][0]['title']).to match(/Couldn't find account/)
       end
@@ -206,6 +215,7 @@ RSpec.describe Api::PostsController, type: :controller do
                   params: { id: 0, account_id: @account.id }
 
           result = JSON.parse(response.body)
+
           expect(response).to have_http_status(:not_found)
           expect(result['errors'][0]['title']).to match(/Couldn't find post/)
         end

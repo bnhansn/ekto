@@ -10,6 +10,7 @@ RSpec.describe Api::LoginController, type: :controller do
               params: { email: user.email, password: user.password }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:ok)
       expect(result['meta']['token']).not_to be(nil)
       expect(result['data']['id']).to eq(user.id.to_s)
@@ -24,6 +25,7 @@ RSpec.describe Api::LoginController, type: :controller do
               params: { email: user.email, password: 'invalidpassword' }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:unauthorized)
       expect(result['errors'][0]['title']).to match(/Invalid email or password/)
     end
@@ -36,6 +38,7 @@ RSpec.describe Api::LoginController, type: :controller do
               params: { email: 'invalid@test.com', password: user.password }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:unauthorized)
       expect(result['errors'][0]['title']).to match(/Invalid email or password/)
     end

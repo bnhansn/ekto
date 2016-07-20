@@ -10,6 +10,7 @@ RSpec.describe Api::AuthenticationController, type: :controller do
       process :authenticate, method: :post, params: { token: token }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:ok)
       expect(result['meta']['token']).not_to be(nil)
       expect(result['data']['id']).to eq(user.id.to_s)
@@ -20,6 +21,7 @@ RSpec.describe Api::AuthenticationController, type: :controller do
       process :authenticate, method: :post, params: {}
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:unauthorized)
       expect(result['errors'][0]['title']).to match(/Unauthorized/)
     end
@@ -30,6 +32,7 @@ RSpec.describe Api::AuthenticationController, type: :controller do
       process :authenticate, method: :post, params: { token: token }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:not_found)
       expect(result['errors'][0]['title']).to match(/Couldn't find user/)
     end

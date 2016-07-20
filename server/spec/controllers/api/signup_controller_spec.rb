@@ -13,6 +13,7 @@ RSpec.describe Api::SignupController, type: :controller do
               }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:created)
       expect(result['meta']['token']).not_to be(nil)
       expect(result['data']['id']).not_to be(nil)
@@ -30,10 +31,8 @@ RSpec.describe Api::SignupController, type: :controller do
               }
 
       result = JSON.parse(response.body)
-      errors = []
-      result['errors'].each do |error|
-        errors << error['title']
-      end
+      errors = collect_errors(result)
+
       expect(response).to have_http_status(:unprocessable_entity)
       expect(errors).to include('First name can\'t be blank')
       expect(errors).to include('Last name can\'t be blank')

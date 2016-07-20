@@ -9,6 +9,7 @@ RSpec.describe Api::PasswordsController, type: :controller do
       process :forgot, method: :post, params: { email: user.email }
 
       email = ActionMailer::Base.deliveries.last
+
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       expect(email.subject).to eq('Password reset')
       expect(response).to have_http_status(:ok)
@@ -38,6 +39,7 @@ RSpec.describe Api::PasswordsController, type: :controller do
               params: { token: user.password_reset_token, password: 'password' }
 
       result = JSON.parse(response.body)
+
       expect(response).to have_http_status(:ok)
       expect(result['meta']['token']).not_to be(nil)
       expect(result['data']['id']).to eq(user.id.to_s)
@@ -52,6 +54,7 @@ RSpec.describe Api::PasswordsController, type: :controller do
       process :reset,
               method: :post,
               params: { token: user.password_reset_token, password: 'x' }
+
       result = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unprocessable_entity)
@@ -66,6 +69,7 @@ RSpec.describe Api::PasswordsController, type: :controller do
       process :reset,
               method: :post,
               params: { token: user.password_reset_token, password: 'password' }
+
       result = JSON.parse(response.body)
 
       expect(response).to have_http_status(:forbidden)
