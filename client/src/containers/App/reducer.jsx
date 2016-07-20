@@ -1,11 +1,13 @@
 import {
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
+  LOCATION_CHANGE,
 } from './constants';
 
 const initialState = {
   user: {},
   token: null,
+  location: {},
   isAuthenticated: false,
 };
 
@@ -24,6 +26,11 @@ export default function (state = initialState, action) {
         user: {},
         token: null,
         isAuthenticated: false,
+      };
+    case LOCATION_CHANGE:
+      return {
+        ...state,
+        location: { ...location },
       };
     default:
       return state;

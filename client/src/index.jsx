@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { Router, browserHistory } from 'react-router';
-import { authenticate } from './containers/App/actions';
+import { authenticate, locationChange } from './containers/App/actions';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 require('./styles/main.scss');
 
@@ -19,6 +19,10 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+// dispatch location data on all route changes
+history.listen(() => store.dispatch(locationChange(location)));
+
+// attempt login if token is stored
 const token = localStorage.getItem('token');
 if (token !== null) {
   store.dispatch(authenticate(JSON.parse(token)));

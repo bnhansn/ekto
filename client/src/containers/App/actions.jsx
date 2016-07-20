@@ -1,6 +1,7 @@
 import {
   LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
+  LOCATION_CHANGE,
 } from './constants';
 import axios from 'axios';
 import { API_URL } from 'config'; // eslint-disable-line
@@ -28,4 +29,8 @@ export function authenticate(token) {
         logout();
       });
   };
+}
+
+export function locationChange(location) {
+  return { type: LOCATION_CHANGE, ...location };
 }

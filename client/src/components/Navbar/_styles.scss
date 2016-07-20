@@ -2,5 +2,8 @@
   color: rgb(120,120,120);
 
   &:hover,
-  &:focus { color: rgb(60,60,60); }
+  &:focus {
+    color: rgb(60,60,60);
+    text-decoration: none;
+  }
 }
