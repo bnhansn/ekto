@@ -4,7 +4,6 @@ class Dropdown extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
-    triggerClassName: PropTypes.string,
   };
 
   constructor(props) {
@@ -34,7 +33,7 @@ class Dropdown extends Component {
   handleListenedClick(e) {
     const componentClicked = this.refs.instance.contains(e.target);
 
-    // close for oustide clicks or child <a> clicks
+    // close for oustide clicks or <a> clicks
     if (!componentClicked || e.target.nodeName === 'A') {
       this.setState({ isOpen: false });
       window.removeEventListener('click', this.clickListener);
@@ -43,11 +42,11 @@ class Dropdown extends Component {
 
   render() {
     const { isOpen } = this.state;
-    const { children, className, triggerClassName } = this.props;
+    const { children, className } = this.props;
 
     return (
       <div ref="instance" className={`dropdown ${className}`}>
-        <div onClick={::this.toggleDropdown} className={`dropdown-trigger ${triggerClassName}`}>
+        <div onClick={::this.toggleDropdown}>
           {children[0]}
         </div>
         {isOpen && children[1]}

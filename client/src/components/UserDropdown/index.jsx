@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import Dropdown from '../Dropdown';
 
 const UserDropdown = ({ user: { email }, onLogoutClick }) =>
-  <Dropdown className="user-dropdown" triggerClassName="navbar-item-pad">
+  <Dropdown className="user-dropdown">
     <button className="user-dropdown-button">
       <i className="icon icon-menu7"></i>
       <Gravatar email={email} size={30} className="user-dropdown-avatar" />
@@ -12,9 +12,8 @@ const UserDropdown = ({ user: { email }, onLogoutClick }) =>
       <a
         href="#"
         onClick={(e) => { onLogoutClick(e); }}
-        className="dropdown-item user-dropdown-item"
+        className="dropdown-item"
       >
-        <i className="icon icon-exit"></i>
         Logout
       </a>
     </div>

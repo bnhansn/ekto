@@ -4,36 +4,26 @@ import React, { PropTypes } from 'react';
 
 const Navbar = ({ user, isAuthenticated, onLogoutClick }) =>
   <nav className="navbar">
-    <Link to="/" className="navbar-item navbar-item-left">
-      <span className="navbar-item-pad">
-        <span className="navbar-item-label">Billow</span>
-      </span>
-    </Link>
-    <div className="navbar-right">
-      {!isAuthenticated &&
-        <Link to="/signup" className="navbar-item navbar-item-right" activeClassName="active">
-          <div className="navbar-item-pad">
-            <span className="navbar-item-label">Signup</span>
-            <i className="icon icon-enter navbar-item-icon"></i>
-          </div>
-        </Link>
-      }
-      {!isAuthenticated &&
-        <Link to="/login" className="navbar-item navbar-item-right" activeClassName="active">
-          <div className="navbar-item-pad">
-            <span className="navbar-item-label">Login</span>
-            <i className="icon icon-enter navbar-item-icon"></i>
-          </div>
-        </Link>
-      }
-      {isAuthenticated &&
-        <div className="navbar-item navbar-item-right">
+    <div className="container">
+      <Link to="/" className="navbar-brand">Billow</Link>
+      <ul className="nav navbar-nav pull-xs-right">
+        {!isAuthenticated &&
+          <Link to="/signup" className="nav-item nav-link" activeClassName="active">
+            Signup
+          </Link>
+        }
+        {!isAuthenticated &&
+          <Link to="/login" className="nav-item nav-link" activeClassName="active">
+            Login
+          </Link>
+        }
+        {isAuthenticated &&
           <UserDropdown
             user={user}
             onLogoutClick={onLogoutClick}
           />
-        </div>
-      }
+        }
+      </ul>
     </div>
   </nav>;
 

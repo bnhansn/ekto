@@ -1,7 +1,6 @@
 .user-dropdown {
   display: flex;
   align-items: center;
-  height: 100%;
 }
 
 .user-dropdown-button {
@@ -15,10 +14,6 @@
     margin-right: .75rem;
     font-size: 16px;
   }
-}
-
-.user-dropdown-item {
-  i { margin-right: .5rem; }
 }
 
 .user-dropdown-avatar {

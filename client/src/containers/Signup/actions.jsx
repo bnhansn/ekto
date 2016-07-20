@@ -7,6 +7,7 @@ import {
 } from './constants';
 import axios from 'axios';
 import get from 'lodash/get';
+import { keyTransform } from '../../utils';
 import { API_URL } from 'config'; // eslint-disable-line
 
 export function signup(data) {
@@ -15,14 +16,7 @@ export function signup(data) {
     axios({
       method: 'post',
       url: `${API_URL}/signup`,
-      data: {
-        user: {
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          password: data.password,
-        },
-      },
+      data: keyTransform(data),
     })
       .then(response => {
         localStorage.setItem('token', JSON.stringify(response.data.meta.token));

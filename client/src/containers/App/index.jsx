@@ -1,7 +1,6 @@
-import { API_URL } from 'config'; // eslint-disable-line
+import Alert from '../Alert';
 import { logout } from './actions';
 import { connect } from 'react-redux';
-import Alert from '../Alert';
 import Navbar from '../../components/Navbar';
 import React, { Component, PropTypes } from 'react';
 

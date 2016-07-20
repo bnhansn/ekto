@@ -23,8 +23,8 @@ $gray-light:                rgb(150,150,150) !default;
 $gray-lighter:              rgb(230,230,230) !default;
 $gray-lightest:             rgb(245,245,245) !default;
 //
-$brand-primary:             #007a87 !default;
-$brand-success:             #3fb34f !default;
+$brand-primary:             #5ba4e5 !default;
+$brand-success:             #98c468 !default;
 $brand-info:                #009aab !default;
 $brand-warning:             #ffb400 !default;
 $brand-danger:              #ff5a5f !default;
@@ -80,7 +80,7 @@ $brand-danger:              #ff5a5f !default;
 // Settings for the `<body>` element.
 //
 $body-bg:    rgb(249,249,251) !default;
-$body-color: rgb(70,70,70) !default;
+$body-color: rgb(55,65,75) !default;
 //
 //
 // Links
@@ -417,7 +417,7 @@ $btn-secondary-border:           rgb(200,200,200) !default;
 // $dropdown-margin-top:            2px !default;
 // $dropdown-bg:                    #fff !default;
 // $dropdown-border-color:          rgba(0,0,0,.15) !default;
-// $dropdown-border-width:          $border-width !default;
+$dropdown-border-width:          0 !default;
 // $dropdown-divider-bg:            #e5e5e5 !default;
 // $dropdown-box-shadow:            0 6px 12px rgba(0,0,0,.175) !default;
 //
@@ -455,7 +455,7 @@ $btn-secondary-border:           rgb(200,200,200) !default;
 //
 // $navbar-border-radius:              $border-radius !default;
 // $navbar-padding-x:                  $spacer !default;
-// $navbar-padding-y:                  ($spacer / 2) !default;
+$navbar-padding-y:                  1.5rem !default;
 // $navbar-brand-padding-y:            .25rem !default;
 //
 // $navbar-dark-color:                 rgba(255,255,255,.5) !default;
@@ -553,11 +553,11 @@ $btn-secondary-border:           rgb(200,200,200) !default;
 // Cards
 // $card-spacer-x:            1.25rem !default;
 // $card-spacer-y:            .75rem !default;
-// $card-border-width:        1px !default;
+$card-border-width:        0px !default;
 // $card-border-radius:       $border-radius !default;
 // $card-border-color:        rgba(0,0,0,.125) !default;
 // $card-border-radius-inner: $card-border-radius !default;
-// $card-cap-bg:              #f5f5f5 !default;
+$card-cap-bg:              #fff !default;
 // $card-bg:                  #fff !default;
 //
 // $card-link-hover-color:    #fff !default;
