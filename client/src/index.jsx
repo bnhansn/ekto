@@ -19,7 +19,7 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-// dispatch location data on all route changes
+// update location store on route changes
 history.listen(() => store.dispatch(locationChange(location)));
 
 // attempt login if token is stored
