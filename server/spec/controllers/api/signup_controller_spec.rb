@@ -6,12 +6,10 @@ RSpec.describe Api::SignupController, type: :controller do
       process :signup,
               method: :post,
               params: {
-                user: {
-                  first_name: 'First',
-                  last_name: 'Last',
-                  email: 'email@test.com',
-                  password: 'password'
-                }
+                first_name: 'First',
+                last_name: 'Last',
+                email: 'email@test.com',
+                password: 'password'
               }
 
       result = JSON.parse(response.body)
@@ -25,12 +23,10 @@ RSpec.describe Api::SignupController, type: :controller do
       process :signup,
               method: :post,
               params: {
-                user: {
-                  first_name: '',
-                  last_name: '',
-                  email: '',
-                  password: ''
-                }
+                first_name: '',
+                last_name: '',
+                email: '',
+                password: ''
               }
 
       result = JSON.parse(response.body)

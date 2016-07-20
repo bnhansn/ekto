@@ -15,17 +15,13 @@ RSpec.describe Api::PasswordsController, type: :controller do
     end
 
     it 'returns 200 status if params are empty' do
-      process :forgot,
-              method: :post,
-              params: {}
+      process :forgot, method: :post, params: {}
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'returns 200 status if email in not found' do
-      process :forgot,
-              method: :post,
-              params: { email: 'xxx' }
+      process :forgot, method: :post, params: { email: 'xxx' }
 
       expect(response).to have_http_status(:ok)
     end
@@ -73,8 +69,7 @@ RSpec.describe Api::PasswordsController, type: :controller do
       result = JSON.parse(response.body)
 
       expect(response).to have_http_status(:forbidden)
-      expect(result['errors'][0]['title']).to
-      match(/Password reset token has expired/)
+      expect(result['errors'][0]['title']).to match(/token has expired/)
     end
   end
 end

@@ -13,6 +13,6 @@ class Api::SignupController < Api::BaseController
   private
 
   def signup_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password)
+    params.permit(:first_name, :last_name, :email, :password)
   end
 end

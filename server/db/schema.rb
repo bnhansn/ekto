@@ -10,10 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714215311) do
+ActiveRecord::Schema.define(version: 20160720010532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_users", force: :cascade do |t|
+    t.integer  "account_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_users_on_account_id", using: :btree
+    t.index ["user_id"], name: "index_account_users_on_user_id", using: :btree
+  end
+
+  create_table "accounts", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "created_by"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string   "title"
+    t.string   "slug"
+    t.text     "markdown"
+    t.text     "html"
+    t.string   "image"
+    t.integer  "author_id"
+    t.string   "uuid"
+    t.boolean  "featured",     default: false
+    t.boolean  "published",    default: false
+    t.integer  "published_by"
+    t.datetime "published_at"
+    t.integer  "account_id"
+    t.integer  "created_by"
+    t.integer  "updated_by"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["account_id"], name: "index_posts_on_account_id", using: :btree
+    t.index ["slug"], name: "index_posts_on_slug", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
