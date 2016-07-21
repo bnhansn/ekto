@@ -1,3 +1,7 @@
+.navbar-container {
+  @media #{$xs-down} { padding: 0; }
+}
+
 .nav-link {
   color: rgb(120,120,120);
 
@@ -6,4 +10,27 @@
     color: rgb(60,60,60);
     text-decoration: none;
   }
+}
+
+.user-dropdown-trigger {
+  display: flex;
+  align-items: center;
+  color: $body-color;
+
+  &:hover,
+  &:focus {
+    color: rgb(85,95,105);
+    text-decoration: none;
+  }
+}
+
+.user-dropdown-icon {
+  margin-right: .75rem;
+  font-size: 16px;
+}
+
+.user-dropdown-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }

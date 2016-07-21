@@ -13,6 +13,21 @@
 // Fonts
 // Components
 //
+@mixin _assert-ascending($map, $map-name) {
+  $prev-key: null;
+  $prev-num: null;
+  @each $key, $num in $map {
+    @if $prev-num == null {
+      // Do nothing
+    } @else if not comparable($prev-num, $num) {
+      @warn "Potentially invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} whose unit makes it incomparable to #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    } @else if $prev-num >= $num {
+      @warn "Invalid value for #{$map-name}: This map must be in ascending order, but key '#{$key}' has value #{$num} which isn't greater than #{$prev-num}, the value of the previous key '#{$prev-key}' !";
+    }
+    $prev-key: $key;
+    $prev-num: $num;
+  }
+}
 // Colors
 // //
 // Grayscale and brand colors for use across Bootstrap.
@@ -23,11 +38,11 @@ $gray-light:                rgb(150,150,150) !default;
 $gray-lighter:              rgb(230,230,230) !default;
 $gray-lightest:             rgb(245,245,245) !default;
 //
-$brand-primary:             #5ba4e5 !default;
-$brand-success:             #98c468 !default;
-$brand-info:                #009aab !default;
-$brand-warning:             #ffb400 !default;
-$brand-danger:              #ff5a5f !default;
+$brand-primary:             #61afef !default;
+$brand-success:             #98c379 !default;
+$brand-info:                #56b6c2 !default;
+$brand-warning:             #e5c07b !default;
+$brand-danger:              #e06c75 !default;
 // $brand-inverse:             $gray-dark !default;
 //
 //
@@ -112,13 +127,13 @@ $body-color: rgb(55,65,75) !default;
 // //
 // Define the maximum width of `.container` for different screen sizes.
 //
-// $container-max-widths: (
-//   sm: 576px,
-//   md: 720px,
-//   lg: 940px,
-//   xl: 1140px
-// ) !default;
-// @include _assert-ascending($container-max-widths, "$container-max-widths");
+$container-max-widths: (
+  sm: 576px,
+  md: 720px,
+  lg: 800px,
+  xl: 900px,
+) !default;
+@include _assert-ascending($container-max-widths, "$container-max-widths");
 //
 //
 // Grid columns
@@ -417,7 +432,7 @@ $btn-secondary-border:           rgb(200,200,200) !default;
 // $dropdown-margin-top:            2px !default;
 // $dropdown-bg:                    #fff !default;
 // $dropdown-border-color:          rgba(0,0,0,.15) !default;
-$dropdown-border-width:          0 !default;
+// $dropdown-border-width:          0 !default;
 // $dropdown-divider-bg:            #e5e5e5 !default;
 // $dropdown-box-shadow:            0 6px 12px rgba(0,0,0,.175) !default;
 //

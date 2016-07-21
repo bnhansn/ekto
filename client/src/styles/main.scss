@@ -8,6 +8,7 @@
 @import
 'base/buttons',
 'base/cards',
+'base/dropdowns',
 'base/fonts',
 'base/typography';
 
@@ -20,7 +21,5 @@
 
 @import
 '../components/Alert/styles',
-'../components/Dropdown/styles',
 '../components/Input/styles',
-'../components/Navbar/styles',
-'../components/UserDropdown/styles';
+'../components/Navbar/styles';

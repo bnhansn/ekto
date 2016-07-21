@@ -7,6 +7,7 @@ import {
 import axios from 'axios';
 import get from 'lodash/get';
 import { API_URL } from 'config'; // eslint-disable-line
+import { push } from 'react-router-redux';
 
 export function login(data) {
   return dispatch => {
@@ -19,6 +20,7 @@ export function login(data) {
       .then(response => {
         localStorage.setItem('token', JSON.stringify(response.data.meta.token));
         dispatch({ type: LOGIN_SUCCESS, payload: response });
+        dispatch(push('/accounts'));
       })
       .catch(error => {
         const message = get(error, 'response.data.errors[0].title', 'Error logging in');

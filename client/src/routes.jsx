@@ -6,7 +6,17 @@ import Login from './containers/Login';
 import NotFound from './pages/NotFound';
 import Signup from './containers/Signup';
 import Forgot from './containers/Forgot';
+import { push } from 'react-router-redux';
+import Accounts from './containers/Accounts';
 import { Route, IndexRoute } from 'react-router';
+import { UserAuthWrapper } from 'redux-auth-wrapper';
+
+const requireAuthentication = UserAuthWrapper({ // eslint-disable-line new-cap
+  authSelector: state => state.app,
+  predicate: auth => auth.isAuthenticated,
+  redirectAction: push,
+  wrapperDisplayName: 'UserIsJWTAuthenticated',
+});
 
 export default (
   <Route path="/" component={App}>
@@ -15,6 +25,7 @@ export default (
     <Route path="/signup" component={Signup} />
     <Route path="/forgot" component={Forgot} />
     <Route path="/reset/:token" component={Reset} />
+    <Route path="/accounts" component={requireAuthentication(Accounts)} />
     <Route path="*" component={NotFound} />
   </Route>
 );
