@@ -1,7 +1,7 @@
 import {
   SHOW_ALERT,
+  LOGIN_START,
   LOGIN_ERROR,
-  LOGIN_ATTEMPT,
   LOGIN_SUCCESS,
 } from './constants';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import { push } from 'react-router-redux';
 
 export function login(data) {
   return dispatch => {
-    dispatch({ type: LOGIN_ATTEMPT });
+    dispatch({ type: LOGIN_START });
     axios({
       method: 'post',
       url: `${API_URL}/login`,

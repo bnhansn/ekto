@@ -7,9 +7,11 @@ RSpec.describe Api::PostsController, type: :controller do
 
       it 'returns all of the account\'s posts' do
         outside_account = create(:account)
-        post_1 = create(:post, account_id: @account.id)
-        post_2 = create(:post, account_id: @account.id)
-        create(:post, account_id: outside_account.id)
+        expect do
+          @post_1 = create(:post, account_id: @account.id)
+          @post_2 = create(:post, account_id: @account.id)
+          create(:post, account_id: outside_account.id)
+        end.to change { Post.count }.from(0).to(3)
 
         process :index, params: { account_id: @account.id }
 
@@ -18,7 +20,7 @@ RSpec.describe Api::PostsController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(result['data'].count).to eq(2)
-        expect(ids).to include(*[post_1.id.to_s, post_2.id.to_s])
+        expect(ids).to include(*[@post_1.id.to_s, @post_2.id.to_s])
       end
     end
 
@@ -52,7 +54,7 @@ RSpec.describe Api::PostsController, type: :controller do
     context 'authorized' do
       include_context :with_authorized_user_and_account
 
-      it 'creates and returns a new post' do
+      it 'creates a new post' do
         process :create,
                 method: :post,
                 params: { account_id: @account.id, title: 'New post title' }
@@ -62,27 +64,6 @@ RSpec.describe Api::PostsController, type: :controller do
         expect(response).to have_http_status(:created)
         expect(result['data']['id']).not_to be(nil)
         expect(result['data']['attributes']['title']).to eq('New post title')
-        expect(result['data']['attributes']['createdBy']).not_to be(nil)
-      end
-
-      it 'creates post with default values if no post params' do
-        process :create, method: :post, params: { account_id: @account.id }
-
-        result = JSON.parse(response.body)
-
-        expect(response).to have_http_status(:created)
-        expect(result['data']['id']).not_to be(nil)
-        expect(result['data']['attributes']['title']).not_to be(nil)
-        expect(result['data']['attributes']['slug']).not_to be(nil)
-      end
-
-      it 'sets created_by & updated_by to current user' do
-        process :create, method: :post, params: { account_id: @account.id }
-
-        result = JSON.parse(response.body)
-
-        expect(result['data']['attributes']['createdBy']).to eq(@user.id)
-        expect(result['data']['attributes']['updatedBy']).to eq(@user.id)
       end
     end
 
@@ -120,7 +101,7 @@ RSpec.describe Api::PostsController, type: :controller do
     context 'authorized' do
       include_context :with_authorized_user_and_account
 
-      it 'updates and returns a post' do
+      it 'updates a post' do
         post = create(:post, title: 'Original title', account_id: @account.id)
 
         process :update,
@@ -136,18 +117,6 @@ RSpec.describe Api::PostsController, type: :controller do
         expect(response).to have_http_status(:ok)
         expect(result['data']['id']).to eq(post.id.to_s)
         expect(result['data']['attributes']['title']).to eq('Updated title')
-      end
-
-      it 'sets updated_by to current user' do
-        post = create(:post, account_id: @account.id)
-
-        process :update,
-                method: :post,
-                params: { id: post.id, account_id: @account.id }
-
-        result = JSON.parse(response.body)
-
-        expect(result['data']['attributes']['updatedBy']).to eq(@user.id)
       end
     end
 

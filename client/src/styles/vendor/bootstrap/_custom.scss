@@ -568,9 +568,9 @@ $navbar-padding-y:                  1.5rem !default;
 // Cards
 // $card-spacer-x:            1.25rem !default;
 // $card-spacer-y:            .75rem !default;
-$card-border-width:        0px !default;
+// $card-border-width:        1px !default;
 // $card-border-radius:       $border-radius !default;
-// $card-border-color:        rgba(0,0,0,.125) !default;
+$card-border-color:        rgb(233,239,243) !default;
 // $card-border-radius-inner: $card-border-radius !default;
 $card-cap-bg:              #fff !default;
 // $card-bg:                  #fff !default;
@@ -714,7 +714,7 @@ $card-cap-bg:              #fff !default;
 // List group
 //
 // $list-group-bg:                 #fff !default;
-// $list-group-border-color:       #ddd !default;
+$list-group-border-color:       rgb(233,239,243) !default;
 // $list-group-border-width:       $border-width !default;
 // $list-group-border-radius:      $border-radius !default;
 //

@@ -6,11 +6,12 @@ RSpec.describe Api::PasswordsController, type: :controller do
       user = create(:user)
       ActionMailer::Base.deliveries.clear
 
-      process :forgot, method: :post, params: { email: user.email }
+      expect do
+        process :forgot, method: :post, params: { email: user.email }
+      end.to change { ActionMailer::Base.deliveries.count }.from(0).to(1)
 
       email = ActionMailer::Base.deliveries.last
 
-      expect(ActionMailer::Base.deliveries.count).to eq(1)
       expect(email.subject).to eq('Password reset')
       expect(response).to have_http_status(:ok)
     end

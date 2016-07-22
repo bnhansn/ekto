@@ -7,6 +7,7 @@ import loginReducer from './containers/Login/reducer';
 import resetReducer from './containers/Reset/reducer';
 import signupReducer from './containers/Signup/reducer';
 import forgotReducer from './containers/Forgot/reducer';
+import accountsReducer from './containers/Accounts/reducer';
 
 const reducers = combineReducers({
   app: appReducer,
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   signup: signupReducer,
   forgot: forgotReducer,
   routing: routerReducer,
+  accounts: accountsReducer,
 });
 
 export default reducers;

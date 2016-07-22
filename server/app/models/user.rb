@@ -4,14 +4,9 @@ class User < ApplicationRecord
   has_many :account_users
   has_many :accounts, through: :account_users
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
+  validates :name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 6 }, if: :password_digest_changed?
-
-  def name
-    "#{first_name} #{last_name}"
-  end
 
   def send_password_reset
     generate_token(:password_reset_token)

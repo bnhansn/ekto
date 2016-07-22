@@ -1,22 +1,21 @@
 import {
   SHOW_ALERT,
+  SIGNUP_START,
   SIGNUP_ERROR,
   LOGIN_SUCCESS,
-  SIGNUP_ATTEMPT,
   SIGNUP_SUCCESS,
 } from './constants';
 import axios from 'axios';
 import get from 'lodash/get';
-import { keyTransform } from '../../utils';
 import { API_URL } from 'config'; // eslint-disable-line
 
 export function signup(data) {
   return dispatch => {
-    dispatch({ type: SIGNUP_ATTEMPT });
+    dispatch({ type: SIGNUP_START });
     axios({
       method: 'post',
       url: `${API_URL}/signup`,
-      data: keyTransform(data),
+      data,
     })
       .then(response => {
         localStorage.setItem('token', JSON.stringify(response.data.meta.token));

@@ -18,10 +18,11 @@ class Navbar extends Component {
     this.props.onLogoutClick(e);
   }
 
-  handleDropdownLinkClick(e) {
+  handleLinkClick(e) {
     e.preventDefault();
     this.refs.dropdown.hide();
-    this.context.router.push('/accounts');
+    const route = e.target.dataset.route;
+    this.context.router.push(route);
   }
 
   render() {
@@ -51,10 +52,19 @@ class Navbar extends Component {
                 <DropdownContent className="dropdown-right">
                   <a
                     href="#"
+                    data-route="/accounts"
                     className="dropdown-item"
-                    onClick={(e) => this.handleDropdownLinkClick(e)}
+                    onClick={(e) => this.handleLinkClick(e)}
                   >
-                      Accounts
+                    Accounts
+                  </a>
+                  <a
+                    href="#"
+                    data-route="/profile"
+                    className="dropdown-item"
+                    onClick={(e) => this.handleLinkClick(e)}
+                  >
+                    Profile
                   </a>
                   <a
                     href="#"

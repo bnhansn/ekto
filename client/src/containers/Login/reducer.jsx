@@ -1,6 +1,6 @@
 import {
+  LOGIN_START,
   LOGIN_ERROR,
-  LOGIN_ATTEMPT,
   LOGIN_SUCCESS,
 } from './constants';
 
@@ -10,7 +10,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LOGIN_ATTEMPT:
+    case LOGIN_START:
       return {
         ...state,
         isSubmitting: true,

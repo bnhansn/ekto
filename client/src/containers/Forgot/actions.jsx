@@ -1,7 +1,7 @@
 import {
   SHOW_ALERT,
+  FORGOT_PASSWORD_START,
   FORGOT_PASSWORD_ERROR,
-  FORGOT_PASSWORD_ATTEMPT,
   FORGOT_PASSWORD_SUCCESS,
 } from './constants';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import { push } from 'react-router-redux';
 
 export function forgotPassword(data) {
   return dispatch => {
-    dispatch({ type: FORGOT_PASSWORD_ATTEMPT });
+    dispatch({ type: FORGOT_PASSWORD_START });
     axios({
       method: 'post',
       url: `${API_URL}/forgot`,

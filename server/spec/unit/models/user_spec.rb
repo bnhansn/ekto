@@ -1,14 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe '#name' do
-    it 'returns the concatenated first and last name' do
-      user = build(:user, first_name: 'Ben', last_name: 'Hansen')
-
-      expect(user.name).to eq('Ben Hansen')
-    end
-  end
-
   describe '#send_password_reset' do
     it 'saves a url safe token as password_reset_token' do
       user = build(:user)

@@ -1,8 +1,8 @@
 import {
   SHOW_ALERT,
   LOGIN_SUCCESS,
+  RESET_PASSWORD_START,
   RESET_PASSWORD_ERROR,
-  RESET_PASSWORD_ATTEMPT,
   RESET_PASSWORD_SUCCESS,
 } from './constants';
 import axios from 'axios';
@@ -11,7 +11,7 @@ import { API_URL } from 'config'; // eslint-disable-line
 
 export function resetPassword(data) {
   return dispatch => {
-    dispatch({ type: RESET_PASSWORD_ATTEMPT });
+    dispatch({ type: RESET_PASSWORD_START });
     axios({
       method: 'post',
       url: `${API_URL}/reset`,

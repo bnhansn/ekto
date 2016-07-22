@@ -4,9 +4,8 @@ class Api::AccountsController < Api::BaseController
   end
 
   def create
-    account = Account.new(create_params)
-    if account.save
-      AccountUser.create(user: @user, account: account)
+    account = Savers::Account.create(@user.id, params)
+    if account.persisted?
       render json: account, status: :created
     else
       render_errors(account)
@@ -20,20 +19,12 @@ class Api::AccountsController < Api::BaseController
 
   def update
     account = @user.accounts.find(params[:id])
-    if account.update(account_params)
+    account = Savers::Account.update(account, params)
+
+    if account.errors.empty?
       render json: account, status: :ok
     else
       render_errors(account)
     end
-  end
-
-  private
-
-  def account_params
-    params.permit(:name)
-  end
-
-  def create_params
-    account_params.merge(created_by: @user.id)
   end
 end

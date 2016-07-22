@@ -6,8 +6,7 @@ RSpec.describe Api::SignupController, type: :controller do
       process :signup,
               method: :post,
               params: {
-                first_name: 'First',
-                last_name: 'Last',
+                name: 'Full name',
                 email: 'email@test.com',
                 password: 'password'
               }
@@ -24,8 +23,7 @@ RSpec.describe Api::SignupController, type: :controller do
       process :signup,
               method: :post,
               params: {
-                first_name: '',
-                last_name: '',
+                name: '',
                 email: '',
                 password: ''
               }
@@ -34,8 +32,7 @@ RSpec.describe Api::SignupController, type: :controller do
       errors = collect_errors(result)
 
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(errors).to include('First name can\'t be blank')
-      expect(errors).to include('Last name can\'t be blank')
+      expect(errors).to include('Name can\'t be blank')
       expect(errors).to include('Email can\'t be blank')
       expect(errors).to include('Password can\'t be blank')
     end

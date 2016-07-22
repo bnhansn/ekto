@@ -27,8 +27,7 @@ class SignupForm extends Component {
             Signup
           </div>
           <div className="card-block">
-            <Field name="firstName" type="text" component={Input} placeholder="First name" />
-            <Field name="lastName" type="text" component={Input} placeholder="Last name" />
+            <Field name="name" type="text" component={Input} placeholder="Full name" />
             <Field name="email" type="email" component={Input} placeholder="Email" />
             <Field name="password" type="password" component={Input} placeholder="Password" />
             <button
@@ -47,11 +46,8 @@ class SignupForm extends Component {
 
 const validate = values => {
   const errors = {};
-  if (!values.firstName) {
-    errors.firstName = 'Required';
-  }
-  if (!values.lastName) {
-    errors.lastName = 'Required';
+  if (!values.name) {
+    errors.name = 'Required';
   }
   if (!values.email) {
     errors.email = 'Required';

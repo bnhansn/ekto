@@ -1,6 +1,6 @@
 import {
+  RESET_PASSWORD_START,
   RESET_PASSWORD_ERROR,
-  RESET_PASSWORD_ATTEMPT,
   RESET_PASSWORD_SUCCESS,
 } from './constants';
 
@@ -10,7 +10,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case RESET_PASSWORD_ATTEMPT:
+    case RESET_PASSWORD_START:
       return {
         ...state,
         isSubmitting: true,

@@ -44,25 +44,7 @@ RSpec.describe Api::AccountsController, type: :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
-        expect(result['data']['id']).not_to be(nil)
         expect(result['data']['attributes']['name']).to eq('New account')
-      end
-
-      it 'enables account access for the account creator' do
-        process :create, method: :post, params: { name: 'New account' }
-
-        result = JSON.parse(response.body)
-        new_account_id = result['data']['id'].to_i
-
-        expect(@user.accounts.map(&:id)).to include(new_account_id)
-      end
-
-      it 'sets created_by to current user' do
-        process :create, method: :post, params: { name: 'New account' }
-
-        result = JSON.parse(response.body)
-
-        expect(result['data']['attributes']['createdBy']).to eq(@user.id)
       end
 
       it 'returns errors if unsuccessful' do
@@ -71,7 +53,7 @@ RSpec.describe Api::AccountsController, type: :controller do
         result = JSON.parse(response.body)
         errors = collect_errors(result)
 
-        expect(errors).to include('Name can\'t be blank')
+        expect(errors).to include(/Name can't be blank/)
       end
     end
 
