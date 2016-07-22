@@ -1,25 +1,27 @@
 require 'rails_helper'
 
 describe Factories::Post do
+  before do
+    attrs = {
+      author_id: 1,
+      featured: true,
+      html: '<div>test</div>',
+      markdown: '#Header',
+      title: 'Post title',
+      image: 'http://google.com',
+      published: true,
+      published_at: Date.today,
+      published_by: 1,
+      slug_candidate: 'slug-candidate'
+    }
+    @params = ActionController::Parameters.new(attrs)
+    @user_id = 1
+    @account_id = 1
+  end
+
   describe '#build' do
     it 'accepts sanitized parameters' do
-      attrs = {
-        author_id: 1,
-        featured: true,
-        html: '<div>test</div>',
-        markdown: '#Header',
-        title: 'Post title',
-        image: 'http://google.com',
-        published: true,
-        published_at: Date.today,
-        published_by: 1,
-        slug_candidate: 'slug-candidate'
-      }
-      params = ActionController::Parameters.new(attrs)
-      user_id = 1
-      account_id = 1
-
-      post = Factories::Post.build(user_id, account_id, params)
+      post = Factories::Post.build(@user_id, @account_id, @params)
 
       expect(post.author_id).to eq(1)
       expect(post.featured).to eq(true)
@@ -36,13 +38,11 @@ describe Factories::Post do
     it 'sets default parameters' do
       attrs = {}
       params = ActionController::Parameters.new(attrs)
-      user_id = 1
-      account_id = 1
 
-      post = Factories::Post.build(user_id, account_id, params)
+      post = Factories::Post.build(@user_id, @account_id, params)
 
-      expect(post.account_id).to eq(account_id)
-      expect(post.created_by).to eq(user_id)
+      expect(post.account_id).to eq(@account_id)
+      expect(post.created_by).to eq(@user_id)
       expect(post.title).to eq('Untitled')
       expect(post.slug_candidate).to eq('untitled')
       expect(post.slug_id).not_to be(nil)
@@ -52,22 +52,8 @@ describe Factories::Post do
   describe '#assign' do
     it 'accepts sanitized parameters' do
       post = create(:post)
-      attrs = {
-        author_id: 1,
-        featured: true,
-        html: '<div>test</div>',
-        markdown: '#Header',
-        title: 'Post title',
-        image: 'http://google.com',
-        published: true,
-        published_at: Date.today,
-        published_by: 1,
-        slug_candidate: 'slug-candidate'
-      }
-      params = ActionController::Parameters.new(attrs)
-      user_id = 1
 
-      post = Factories::Post.build(post, user_id, params)
+      post = Factories::Post.build(post, @user_id, @params)
 
       expect(post.author_id).to eq(1)
       expect(post.featured).to eq(true)
@@ -85,9 +71,8 @@ describe Factories::Post do
       post = create(:post)
       attrs = { title: '', slug_candidate: '' }
       params = ActionController::Parameters.new(attrs)
-      user_id = 1
 
-      post = Factories::Post.assign(post, user_id, params)
+      post = Factories::Post.assign(post, @user_id, params)
 
       expect(post.title).to eq('Untitled')
       expect(post.slug_candidate).to eq('untitled')

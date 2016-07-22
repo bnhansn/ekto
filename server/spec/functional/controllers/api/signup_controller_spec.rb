@@ -19,7 +19,7 @@ RSpec.describe Api::SignupController, type: :controller do
       expect(result['data']['attributes']['email']).to eq('email@test.com')
     end
 
-    it 'returns errors if invalid params' do
+    it 'returns errors if unsuccessful' do
       process :signup,
               method: :post,
               params: {
@@ -29,8 +29,8 @@ RSpec.describe Api::SignupController, type: :controller do
               }
 
       result = JSON.parse(response.body)
-      errors = collect_errors(result)
 
+      errors = collect_errors(result)
       expect(response).to have_http_status(:unprocessable_entity)
       expect(errors).to include('Name can\'t be blank')
       expect(errors).to include('Email can\'t be blank')

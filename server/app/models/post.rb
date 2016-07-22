@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   extend FriendlyId
 
-  belongs_to :account
+  belongs_to :account, required: true
 
   validates :title, presence: true
 
