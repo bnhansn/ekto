@@ -21,13 +21,13 @@ const params = {
 const uploader = client.uploadDir(params);
 
 uploader.on('error', err => {
-  console.error('Unable to sync:', err.stack);
+  console.error('==> 😱  Unable to sync:', err.stack);
 });
 
 uploader.on('progress', () => {
-  console.log(`${uploader.progressAmount} of ${uploader.progressTotal} complete`);
+  console.log(`==> 🚀  ${uploader.progressAmount} of ${uploader.progressTotal} complete`);
 });
 
 uploader.on('end', () => {
-  console.log('Upload successful');
+  console.log('==> 🎉  Upload successful');
 });
