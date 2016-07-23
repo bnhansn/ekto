@@ -1,5 +1,7 @@
 language: ruby
 rvm:
   - 2.3.1
-script: bundle exec rspec server/spec
 gemfile: server/Gemfile
+before_script:
+  - psql -c 'create database billow_test;' -U postgres
+script: bundle exec rspec server/spec
