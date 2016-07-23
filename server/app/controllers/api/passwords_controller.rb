@@ -3,29 +3,28 @@ class Api::PasswordsController < Api::BaseController
 
   def forgot
     user = User.find_by_email(params[:email])
-    user.send_password_reset if user
-    render json: {}, status: :ok
+    success = Services::PasswordReset.send_reset(user)
+
+    if success
+      render json: {}, status: :ok
+    else
+      render json: {
+        errors: [{ title: 'Account was not found by this email' }]
+      }, status: :not_found
+    end
   end
 
   def reset
     user = User.find_by_password_reset_token(params[:token])
-    reset_allowed = user && user.password_reset_sent_at > 6.hours.ago
-    if reset_allowed
-      update_password(user, params[:password])
-    else
-      render json: {
-        errors: [{ title: 'Password reset token has expired' }]
-      }, status: :forbidden
-    end
-  end
+    user, error, status =
+      Services::PasswordReset.update_password(user, params[:password])
 
-  private
-
-  def update_password(user, password)
-    if user.reset_password(password)
+    if user && !error
       render_user_and_token(user)
     else
-      render_errors(user)
+      render json: {
+        errors: [{ title: error }]
+      }, status: status
     end
   end
 end

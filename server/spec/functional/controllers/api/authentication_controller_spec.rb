@@ -17,24 +17,13 @@ RSpec.describe Api::AuthenticationController, type: :controller do
       expect(result['data']['attributes']['email']).to eq(user.email)
     end
 
-    it 'returns unauthorized if no jwt is received' do
-      process :authenticate, method: :post, params: {}
+    it 'handles errors' do
+      process :authenticate, method: :post
 
       result = JSON.parse(response.body)
 
       expect(response).to have_http_status(:unauthorized)
       expect(result['errors'][0]['title']).to match(/Unauthorized/)
-    end
-
-    it 'returns not_found if no valid user_id is in decoded jwt' do
-      token = JsonWebToken.encode(user_id: 0)
-
-      process :authenticate, method: :post, params: { token: token }
-
-      result = JSON.parse(response.body)
-
-      expect(response).to have_http_status(:not_found)
-      expect(result['errors'][0]['title']).to match(/Couldn't find user/)
     end
   end
 end

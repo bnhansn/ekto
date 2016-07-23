@@ -56,15 +56,7 @@ class Navbar extends Component {
                     className="dropdown-item"
                     onClick={(e) => this.handleLinkClick(e)}
                   >
-                    Accounts
-                  </a>
-                  <a
-                    href="#"
-                    data-route="/profile"
-                    className="dropdown-item"
-                    onClick={(e) => this.handleLinkClick(e)}
-                  >
-                    Profile
+                    Dashboard
                   </a>
                   <a
                     href="#"

@@ -2,17 +2,31 @@ require 'rails_helper'
 require 'json_web_token'
 
 describe JsonWebToken do
-  it 'can encode and decode a user_id and expiration time' do
-    expiration = 30.minutes.from_now.to_i
+  it 'can encode and decode a payload' do
     user_id = 1
 
-    token = JsonWebToken.encode(user_id: user_id, exp: expiration)
+    token = JsonWebToken.encode(user_id: user_id)
 
     expect(token).to be_a(String)
 
     decoded_token = JsonWebToken.decode(token)
 
     expect(decoded_token[:user_id]).to eq(user_id)
-    expect(decoded_token[:exp]).to eq(expiration)
+  end
+
+  it 'sets an expiration time as an integer' do
+    token = JsonWebToken.encode({ user_id: 1 }, 1.week.from_now)
+
+    decoded_token = JsonWebToken.decode(token)
+
+    expect(decoded_token[:exp]).to be_a(Integer)
+  end
+
+  it 'returns nil when decoded_token has expired' do
+    token = JsonWebToken.encode({ user_id: 1 }, 1.day.ago)
+
+    decoded_token = JsonWebToken.decode(token)
+
+    expect(decoded_token).to eq(nil)
   end
 end

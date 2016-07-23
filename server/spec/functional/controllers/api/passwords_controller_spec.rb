@@ -2,9 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Api::PasswordsController, type: :controller do
   describe 'POST #forgot' do
-    it 'sends password reset email if user if found by email' do
+    it 'sends password reset email' do
       user = create(:user)
-      ActionMailer::Base.deliveries.clear
 
       expect do
         process :forgot, method: :post, params: { email: user.email }
@@ -16,24 +15,20 @@ RSpec.describe Api::PasswordsController, type: :controller do
       expect(response).to have_http_status(:ok)
     end
 
-    it 'returns 200 status if params are empty' do
-      process :forgot, method: :post, params: {}
+    it 'returns error if user is not found' do
+      process :reset, method: :post, params: { email: 'xxx' }
 
-      expect(response).to have_http_status(:ok)
-    end
-
-    it 'returns 200 status if email in not found' do
-      process :forgot, method: :post, params: { email: 'xxx' }
-
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:not_found)
     end
   end
 
   describe 'POST #reset' do
     it 'returns encoded token and user info' do
-      user = create(:user, password_reset_sent_at: Time.zone.now)
-      user.generate_token(:password_reset_token)
-      user.save
+      user = create(
+        :user,
+        password_reset_sent_at: Time.zone.now,
+        password_reset_token: 'token'
+      )
 
       process :reset,
               method: :post,
@@ -47,10 +42,12 @@ RSpec.describe Api::PasswordsController, type: :controller do
       expect(result['data']['attributes']['email']).to eq(user.email)
     end
 
-    it 'returns error if new password is too short' do
-      user = create(:user, password_reset_sent_at: Time.zone.now)
-      user.generate_token(:password_reset_token)
-      user.save
+    it 'returns errors' do
+      user = create(
+        :user,
+        password_reset_sent_at: Time.zone.now,
+        password_reset_token: 'token'
+      )
 
       process :reset,
               method: :post,
@@ -60,21 +57,6 @@ RSpec.describe Api::PasswordsController, type: :controller do
 
       expect(response).to have_http_status(:unprocessable_entity)
       expect(result['errors'][0]['title']).to match(/Password is too short/)
-    end
-
-    it 'returns forbidden if password_reset_token is expired' do
-      user = create(:user, password_reset_sent_at: 1.year.ago)
-      user.generate_token(:password_reset_token)
-      user.save
-
-      process :reset,
-              method: :post,
-              params: { token: user.password_reset_token, password: 'password' }
-
-      result = JSON.parse(response.body)
-
-      expect(response).to have_http_status(:forbidden)
-      expect(result['errors'][0]['title']).to match(/token has expired/)
     end
   end
 end
