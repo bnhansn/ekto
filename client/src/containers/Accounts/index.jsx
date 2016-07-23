@@ -1,7 +1,8 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { fetchAccounts, createAccount } from './actions';
+import Callout from '../../components/Callout';
 import React, { Component, PropTypes } from 'react';
+import { fetchAccounts, createAccount } from './actions';
 import DashboardNavbar from '../../components/DashboardNavbar';
 import NewAccountForm from '../../components/NewAccountForm';
 
@@ -58,8 +59,14 @@ class Accounts extends Component {
     return (
       <div className="container">
         <DashboardNavbar className="m-b-2" />
-        <div>{isLoading && 'Loading'}</div>
-        <div>{noAccounts && 'No accounts'}</div>
+        {isLoading &&
+          <div>Loading</div>
+        }
+        {noAccounts &&
+          <Callout klass="primary">
+            <p>Create an account with the icon below to get started</p>
+          </Callout>
+        }
         <div className="list-group m-b-1">
           {this.renderAccounts()}
         </div>
