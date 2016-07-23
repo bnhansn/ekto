@@ -5,7 +5,6 @@ import DashboardNavbar from '../../components/DashboardNavbar';
 
 class Accounts extends Component {
   static propTypes = {
-    token: PropTypes.string.isRequired,
     isLoading: PropTypes.bool.isRequired,
     accounts: PropTypes.array.isRequired,
     fetchAccounts: PropTypes.func.isRequired,
@@ -13,7 +12,7 @@ class Accounts extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchAccounts(this.props.token);
+    this.props.fetchAccounts();
   }
 
   renderAccounts() {
@@ -52,7 +51,6 @@ class Accounts extends Component {
 
 export default connect(
   state => ({
-    token: state.app.token,
     accounts: state.accounts.accounts,
     isLoading: state.accounts.isLoading,
     finishedLoading: state.accounts.finishedLoading,

@@ -52,7 +52,7 @@ module.exports = {
       template: 'index.ejs',
     }),
     new ProgressBarPlugin({
-      format: 'build [:bar] (:elapsed seconds)',
+      format: '[:bar] Running for :elapsed seconds',
       clear: false,
     }),
   ],

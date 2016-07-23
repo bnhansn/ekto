@@ -40,8 +40,17 @@ describe Savers::Account do
 
         expect do
           result = Savers::Account.create(@user_id, @attrs)
+
           expect(result.errors.full_messages).to include(/Name can't be blank/)
         end.not_to change { Account.count }
+      end
+
+      it 'does not enable account access if save fails' do
+        @attrs[:name] = ''
+
+        expect do
+          Savers::Account.create(@user_id, @attrs)
+        end.not_to change { AccountUser.count }
       end
     end
   end

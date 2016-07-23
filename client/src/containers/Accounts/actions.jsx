@@ -1,27 +1,27 @@
 import {
-  SHOW_ALERT,
   FETCH_ACCOUNTS_START,
   FETCH_ACCOUNTS_ERROR,
   FETCH_ACCOUNTS_SUCCESS,
 } from './constants';
-import axios from 'axios';
+import api from '../../api';
 import get from 'lodash/get';
-import { API_URL } from 'config'; // eslint-disable-line
+import { SHOW_ALERT } from '../Alert/constants';
 
-export function fetchAccounts(token) {
+export function fetchAccounts() {
   return dispatch => {
     dispatch({ type: FETCH_ACCOUNTS_START });
-    axios.get(`${API_URL}/accounts`, { headers: { Authorization: `Bearer ${token}` } })
+    api.get('/accounts')
       .then(response => {
-        dispatch({ type: FETCH_ACCOUNTS_SUCCESS, payload: response });
-      })
-      .catch(error => {
-        dispatch({ type: FETCH_ACCOUNTS_ERROR });
-        const message = get(error, 'response.data.errors[0].title', 'Error retrieving accounts');
-        dispatch({
-          type: SHOW_ALERT,
-          alert: { klass: 'danger', message },
-        });
+        if (response.status >= 200 && response.status < 400) {
+          dispatch({ type: FETCH_ACCOUNTS_SUCCESS, payload: response });
+        } else {
+          dispatch({ type: FETCH_ACCOUNTS_ERROR });
+          const message = get(response, 'data.errors[0].title', 'Error retrieving accounts');
+          dispatch({
+            type: SHOW_ALERT,
+            alert: { klass: 'danger', message },
+          });
+        }
       });
   };
 }

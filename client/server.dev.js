@@ -18,7 +18,7 @@ server.listen(
     if (error) {
       console.log(error);
     } else {
-      console.log(`==> 🌎  Listening at http://${ip.address()}:${port}`);
+      console.log(`\n==> 🌎  WebpackDevServer listening at http://${ip.address()}:${port}`);
     }
   }
 );

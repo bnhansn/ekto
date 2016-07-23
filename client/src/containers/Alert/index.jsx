@@ -8,7 +8,6 @@ class AlertContainer extends Component {
     const { alert: { visible }, location: { pathname } } = this.props;
     const newPathname = newProps.location.pathname;
 
-    // hide alert when route changes
     if (visible && pathname !== newPathname) {
       this.props.hideAlert();
     }

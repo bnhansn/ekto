@@ -1,33 +1,36 @@
 import {
-  SHOW_ALERT,
   FORGOT_PASSWORD_START,
   FORGOT_PASSWORD_ERROR,
   FORGOT_PASSWORD_SUCCESS,
 } from './constants';
-import axios from 'axios';
+import api from '../../api';
 import get from 'lodash/get';
-import { API_URL } from 'config'; // eslint-disable-line
 import { push } from 'react-router-redux';
+import { SHOW_ALERT } from '../Alert/constants';
 
 export function forgotPassword(data) {
   return dispatch => {
     dispatch({ type: FORGOT_PASSWORD_START });
-    axios({
-      method: 'post',
-      url: `${API_URL}/forgot`,
-      data,
-    })
-      .then(() => {
-        dispatch({ type: FORGOT_PASSWORD_SUCCESS });
-        dispatch(push('/login'));
-      })
-      .catch(error => {
-        const message = get(error, 'response.data.errors[0].title', 'Error resetting password');
-        dispatch({ type: FORGOT_PASSWORD_ERROR });
-        dispatch({
-          type: SHOW_ALERT,
-          alert: { klass: 'danger', message },
-        });
+    api.post('/forgot', data)
+      .then(response => {
+        if (response.status >= 200 && response.status < 400) {
+          dispatch({ type: FORGOT_PASSWORD_SUCCESS });
+          dispatch(push('/login'));
+          dispatch({
+            type: SHOW_ALERT,
+            alert: {
+              klass: 'primary',
+              message: 'Please check your email for a password reset link',
+            },
+          });
+        } else {
+          const message = get(response, 'data.errors[0].title', 'Error resetting password');
+          dispatch({ type: FORGOT_PASSWORD_ERROR });
+          dispatch({
+            type: SHOW_ALERT,
+            alert: { klass: 'danger', message },
+          });
+        }
       });
   };
 }

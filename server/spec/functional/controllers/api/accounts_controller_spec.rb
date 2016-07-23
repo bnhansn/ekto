@@ -60,6 +60,8 @@ RSpec.describe Api::AccountsController, type: :controller do
     context 'unauthorized' do
       it 'returns unauthorized' do
         process :create, method: :post, params: { name: 'Account name' }
+
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end

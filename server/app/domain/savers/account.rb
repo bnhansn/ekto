@@ -7,6 +7,7 @@ module Savers
 
       ActiveRecord::Base.transaction do
         account.save
+        return account if account.errors.any?
         AccountUser.create(user_id: user_id, account_id: account.id)
       end
       account

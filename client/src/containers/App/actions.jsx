@@ -1,11 +1,7 @@
-import {
-  LOGIN_SUCCESS,
-  LOGOUT_SUCCESS,
-  LOCATION_CHANGE,
-} from './constants';
-import axios from 'axios';
-import { API_URL } from 'config'; // eslint-disable-line
+import api from '../../api';
 import { push } from 'react-router-redux';
+import { LOCATION_CHANGE } from './constants';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../Login/constants';
 
 export function logout() {
   return dispatch => {
@@ -17,16 +13,14 @@ export function logout() {
 
 export function authenticate(token) {
   return dispatch => {
-    axios({
-      method: 'post',
-      url: `${API_URL}/authenticate`,
-      data: { token },
-    })
+    api.post('/authenticate', { token })
       .then(response => {
-        dispatch({ type: LOGIN_SUCCESS, payload: response });
-      })
-      .catch(() => {
-        logout();
+        if (response.status >= 200 && response.status < 400) {
+          localStorage.setItem('token', JSON.stringify(response.data.meta.token));
+          dispatch({ type: LOGIN_SUCCESS, payload: response });
+        } else {
+          dispatch(logout());
+        }
       });
   };
 }

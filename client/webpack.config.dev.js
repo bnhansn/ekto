@@ -50,11 +50,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('styles.css', { allChunks: true }),
     new ProgressBarPlugin({
-      format: 'build [:bar] (:elapsed seconds)',
+      format: '[:bar] Running for :elapsed seconds',
       clear: false,
-      callback: () => {
-        console.log(`Listening at ${ip.address()}:8000`);
-      },
     }),
   ],
   resolve: {
