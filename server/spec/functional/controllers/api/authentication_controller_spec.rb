@@ -1,5 +1,5 @@
-require 'rails_helper'
-require 'json_web_token'
+require_relative '../../../rails_helper'
+require_relative '../../../../lib/json_web_token'
 
 RSpec.describe Api::AuthenticationController, type: :controller do
   describe 'POST #authenticate' do

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../../rails_helper'
 
 describe Factories::User do
   describe '#build' do

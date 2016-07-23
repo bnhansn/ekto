@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../../rails_helper'
 
 RSpec.describe Api::LoginController, type: :controller do
   describe 'POST #login' do

@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative '../../../rails_helper'
 
 RSpec.describe Api::AccountsController, type: :controller do
   describe 'GET #index' do
