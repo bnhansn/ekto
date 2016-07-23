@@ -58,6 +58,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   externals: {
-    config: JSON.stringify(environment.config()),
+    config: JSON.stringify(environment.config('development')),
   },
 };

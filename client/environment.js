@@ -1,8 +1,8 @@
 const ip = require('ip');
 
 module.exports = {
-  config() {
-    if (process.env.NODE_ENV === 'production') {
+  config(environment) {
+    if (environment === 'production') {
       return {
         API_URL: 'http://billow.us-west-2.elasticbeanstalk.com/api',
       };
