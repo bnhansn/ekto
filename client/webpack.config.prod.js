@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 const path = require('path');
 const webpack = require('webpack');
-const config = require('./config.prod');
 const autoprefixer = require('autoprefixer');
+const environment = require('./environment');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -60,6 +60,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   externals: {
-    config: JSON.stringify(config),
+    config: JSON.stringify(environment.config()),
   },
 };

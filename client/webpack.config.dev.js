@@ -2,7 +2,7 @@
 const ip = require('ip');
 const path = require('path');
 const webpack = require('webpack');
-const config = require('./config.dev');
+const environment = require('./environment');
 const autoprefixer = require('autoprefixer');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
@@ -58,6 +58,6 @@ module.exports = {
     extensions: ['', '.js', '.jsx'],
   },
   externals: {
-    config: JSON.stringify(config),
+    config: JSON.stringify(environment.config()),
   },
 };

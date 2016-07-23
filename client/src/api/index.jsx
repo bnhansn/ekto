@@ -22,8 +22,6 @@ export default {
   },
 
   post(path, data) {
-    console.log(`${API_URL}${path}`);
-    console.log(data);
     return axios.post(
       `${API_URL}${path}`,
       data,
