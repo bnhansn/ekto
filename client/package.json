@@ -8,7 +8,7 @@
     "eslint": "eslint src/**/*.jsx",
     "scss-lint": "scss-lint ./src/** --exclude src/styles/vendor/** --color",
     "lint": "npm run eslint && npm run scss-lint",
-    "build": "webpack --config webpack.config.prod.js --color --progress",
+    "build": "webpack --config webpack.config.prod.js",
     "upload": "node upload.js",
     "deploy": "npm run build && npm run upload"
   },

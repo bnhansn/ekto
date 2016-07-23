@@ -13,7 +13,7 @@ export function login(data) {
     dispatch({ type: LOGIN_START });
     api.post('/login', data)
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: LOGIN_SUCCESS, payload: response });
           dispatch(push('/accounts'));

@@ -16,7 +16,7 @@ export function fetchAccounts() {
     dispatch({ type: FETCH_ACCOUNTS_START });
     api.get('/accounts')
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           dispatch({ type: FETCH_ACCOUNTS_SUCCESS, payload: response });
         } else {
           dispatch({ type: FETCH_ACCOUNTS_ERROR });
@@ -35,7 +35,7 @@ export function createAccount(data) {
     dispatch({ type: CREATE_ACCOUNT_START });
     api.post('/accounts', data)
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: response });
           dispatch(reset('newAccount'));
         } else {

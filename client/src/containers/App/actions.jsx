@@ -15,7 +15,7 @@ export function authenticate(token) {
   return dispatch => {
     api.post('/authenticate', { token })
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: LOGIN_SUCCESS, payload: response });
         } else {

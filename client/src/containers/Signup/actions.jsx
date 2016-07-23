@@ -14,7 +14,7 @@ export function signup(data) {
     dispatch({ type: SIGNUP_START });
     api.post('/signup', data)
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: SIGNUP_SUCCESS });
           dispatch({ type: LOGIN_SUCCESS, payload: response });

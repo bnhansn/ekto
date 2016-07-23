@@ -13,7 +13,7 @@ export function forgotPassword(data) {
     dispatch({ type: FORGOT_PASSWORD_START });
     api.post('/forgot', data)
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           dispatch({ type: FORGOT_PASSWORD_SUCCESS });
           dispatch(push('/login'));
           dispatch({

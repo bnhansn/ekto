@@ -13,7 +13,7 @@ export function resetPassword(data) {
     dispatch({ type: RESET_PASSWORD_START });
     api.post('/reset', data)
       .then(response => {
-        if (response.status >= 200 && response.status < 400) {
+        if (api.success(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: RESET_PASSWORD_SUCCESS });
           dispatch({ type: LOGIN_SUCCESS, payload: response });
