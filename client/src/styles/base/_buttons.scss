@@ -1,6 +1,5 @@
 .btn-primary {
   border-bottom-color: darken($brand-primary, 10%);
-  border-bottom-width: 2px;
 
   @include hover-focus {
     background: lighten($brand-primary, 5%);
@@ -11,7 +10,6 @@
 
 .btn-danger {
   border-bottom-color: darken($brand-danger, 10%);
-  border-bottom-width: 2px;
 
   @include hover-focus {
     background: lighten($brand-danger, 5%);
@@ -21,8 +19,11 @@
 }
 
 .btn-secondary {
+  border-bottom-color: darken($btn-secondary-border, 5%);
+
   @include hover-focus {
     background: #fff;
-    border-color: rgb(170,170,170);
+    border-color: darken($btn-secondary-border, 5%);
+    border-bottom-color: darken($btn-secondary-border, 10%);
   }
 }

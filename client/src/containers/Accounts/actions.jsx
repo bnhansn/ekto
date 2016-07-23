@@ -2,9 +2,13 @@ import {
   FETCH_ACCOUNTS_START,
   FETCH_ACCOUNTS_ERROR,
   FETCH_ACCOUNTS_SUCCESS,
+  CREATE_ACCOUNT_START,
+  CREATE_ACCOUNT_ERROR,
+  CREATE_ACCOUNT_SUCCESS,
 } from './constants';
 import api from '../../api';
 import get from 'lodash/get';
+import { reset } from 'redux-form';
 import { SHOW_ALERT } from '../Alert/constants';
 
 export function fetchAccounts() {
@@ -21,6 +25,21 @@ export function fetchAccounts() {
             type: SHOW_ALERT,
             alert: { klass: 'danger', message },
           });
+        }
+      });
+  };
+}
+
+export function createAccount(data) {
+  return dispatch => {
+    dispatch({ type: CREATE_ACCOUNT_START });
+    api.post('/accounts', data)
+      .then(response => {
+        if (response.status >= 200 && response.status < 400) {
+          dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: response });
+          dispatch(reset('newAccount'));
+        } else {
+          dispatch({ type: CREATE_ACCOUNT_ERROR });
         }
       });
   };
