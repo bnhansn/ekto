@@ -1,6 +1,6 @@
-require_relative '../../../rails_helper'
+require_relative '../../../../rails_helper'
 
-RSpec.describe Api::LoginController, type: :controller do
+RSpec.describe Api::V0::LoginController, type: :controller do
   describe 'POST #login' do
     it 'returns encoded token and user info with successful login' do
       user = create(:user)

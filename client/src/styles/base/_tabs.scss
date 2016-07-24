@@ -1,20 +1,22 @@
 .tabs {
   background: #fff;
-  border: 1px solid rgb(233,239,243);
-  border-radius: 1px;
+  box-shadow: inset 0 -1px $gray-lightest;
 }
 
-.tab-item {
+.tab-link {
   display: inline-block;
   padding: 15px 20px;
+  color: $gray-light;
 
   &:hover,
   &:focus {
+    color: $gray-light;
     text-decoration: none;
+    box-shadow: inset 0 -1px $gray-lighter;
   }
 
   &.active {
-    color: rgb(135,166,188);
-    box-shadow: inset 0 -2px rgb(135,166,188);
+    color: $brand-primary;
+    box-shadow: inset 0 -1px $brand-primary;
   }
 }

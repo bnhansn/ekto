@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 import ForgotForm from '../../components/ForgotForm';
 import { forgotPassword } from './actions';
 
-class ForgotContainer extends Component {
+class Forgot extends Component {
   static propTypes = {
     replace: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
@@ -47,4 +47,4 @@ export default connect(
     redirect: ownProps.location.query.redirect || '/',
   }),
   { forgotPassword, replace: routerActions.replace }
-)(ForgotContainer);
+)(Forgot);

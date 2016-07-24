@@ -1,25 +1,21 @@
-.navbar-container {
-  @media #{$xs-down} { padding: 0; }
-}
-
-.nav-link {
-  color: rgb(120,120,120);
+.nav-link,
+.navbar-brand {
+  color: #fff;
 
   &:hover,
   &:focus {
-    color: rgb(60,60,60);
-    text-decoration: none;
+    color: rgba(255,255,255,.8);
   }
 }
 
 .user-dropdown-trigger {
   display: flex;
   align-items: center;
-  color: $body-color;
+  color: #fff;
 
   &:hover,
   &:focus {
-    color: rgb(85,95,105);
+    color: rgba(255,255,255,.8);
     text-decoration: none;
   }
 }

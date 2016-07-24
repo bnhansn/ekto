@@ -17,7 +17,7 @@
 .dropdown__content {
   min-width: 160px;
   background: #fff;
-  border: 1px solid rgb(233,239,243);
+  border: 1px solid $gray-lighter;
   border-radius: 1px;
   box-shadow: 0 2px 10px rgba(0,0,0,.05);
 }
@@ -40,6 +40,6 @@
   &:focus {
     color: $body-color;
     text-decoration: none;
-    background-color: rgb(240,243,246);
+    background-color: $gray-lightest;
   }
 }

@@ -1,6 +1,6 @@
-require_relative '../../../rails_helper'
+require_relative '../../../../rails_helper'
 
-RSpec.describe Api::PostsController, type: :controller do
+RSpec.describe Api::V0::PostsController, type: :controller do
   describe 'GET #index' do
     context 'authorized' do
       include_context :with_authorized_user_and_account

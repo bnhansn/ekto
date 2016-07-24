@@ -1,7 +1,7 @@
-require_relative '../../../rails_helper'
-require_relative '../../../../lib/json_web_token'
+require_relative '../../../../rails_helper'
+require_relative '../../../../../lib/json_web_token'
 
-RSpec.describe Api::AuthenticationController, type: :controller do
+RSpec.describe Api::V0::AuthenticationController, type: :controller do
   describe 'POST #authenticate' do
     it 'responds with encoded token and user info if jwt is valid' do
       user = create(:user)

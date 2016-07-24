@@ -1,6 +1,6 @@
-require_relative '../../../rails_helper'
+require_relative '../../../../rails_helper'
 
-RSpec.describe Api::SignupController, type: :controller do
+RSpec.describe Api::V0::SignupController, type: :controller do
   describe 'POST #signup' do
     it 'returns encoded token and user info with successful signup' do
       process :signup,

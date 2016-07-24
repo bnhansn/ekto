@@ -1,4 +1,4 @@
-class Api::AccountsController < Api::BaseController
+class Api::V0::AccountsController < Api::V0::BaseController
   def index
     render json: @user.accounts
   end

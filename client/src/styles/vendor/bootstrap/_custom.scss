@@ -32,13 +32,13 @@
 // //
 // Grayscale and brand colors for use across Bootstrap.
 //
-$gray-dark:                 rgb(60,60,60) !default;
-$gray:                      rgb(85,85,85) !default;
-$gray-light:                rgb(150,150,150) !default;
-$gray-lighter:              rgb(230,230,230) !default;
-$gray-lightest:             rgb(245,245,245) !default;
+$gray-dark:                 rgb(63,65,68) !default;
+$gray:                      rgb(85,90,95) !default;
+$gray-light:                rgb(150,163,182) !default;
+$gray-lighter:              rgb(233,239,243) !default;
+$gray-lightest:             rgb(249,250,251) !default;
 //
-$brand-primary:             #61afef !default;
+$brand-primary:             #c678dd !default;
 $brand-success:             #98c379 !default;
 $brand-info:                #56b6c2 !default;
 $brand-warning:             #e5c07b !default;
@@ -94,8 +94,8 @@ $brand-danger:              #e06c75 !default;
 // //
 // Settings for the `<body>` element.
 //
-$body-bg:    rgb(249,249,251) !default;
-$body-color: rgb(46,68,83) !default;
+$body-bg:    $gray-lightest !default;
+$body-color: $gray-dark !default;
 //
 //
 // Links
@@ -264,7 +264,7 @@ $border-radius-sm:       1px !default;
 //
 $btn-secondary-color:            $body-color !default;
 // $btn-secondary-bg:               #fff !default;
-$btn-secondary-border:           rgb(233,239,243) !default;
+$btn-secondary-border:           $gray-lighter !default;
 //
 // $btn-info-color:                 #fff !default;
 // $btn-info-bg:                    $brand-info !default;
@@ -468,9 +468,9 @@ $btn-secondary-border:           rgb(233,239,243) !default;
 //
 // Navbar
 //
-// $navbar-border-radius:              $border-radius !default;
+$navbar-border-radius:              0 !default;
 // $navbar-padding-x:                  $spacer !default;
-$navbar-padding-y:                  1.5rem !default;
+// $navbar-padding-y:                  ($spacer / 2) !default;
 // $navbar-brand-padding-y:            .25rem !default;
 //
 // $navbar-dark-color:                 rgba(255,255,255,.5) !default;
@@ -570,7 +570,7 @@ $navbar-padding-y:                  1.5rem !default;
 // $card-spacer-y:            .75rem !default;
 // $card-border-width:        1px !default;
 // $card-border-radius:       $border-radius !default;
-$card-border-color:        rgb(233,239,243) !default;
+$card-border-color:        $gray-lighter !default;
 // $card-border-radius-inner: $card-border-radius !default;
 $card-cap-bg:              #fff !default;
 // $card-bg:                  #fff !default;
@@ -714,11 +714,11 @@ $card-cap-bg:              #fff !default;
 // List group
 //
 // $list-group-bg:                 #fff !default;
-$list-group-border-color:       rgb(233,239,243) !default;
+$list-group-border-color:       $gray-lighter !default;
 // $list-group-border-width:       $border-width !default;
 // $list-group-border-radius:      $border-radius !default;
 //
-$list-group-hover-bg:           rgb(240,243,246) !default;
+$list-group-hover-bg:           $gray-lightest !default;
 // $list-group-active-color:       $component-active-color !default;
 // $list-group-active-bg:          $component-active-bg !default;
 // $list-group-active-border:      $list-group-active-bg !default;

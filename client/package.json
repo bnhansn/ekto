@@ -1,7 +1,7 @@
 {
-  "name": "billow",
+  "name": "ekto",
   "version": "1.0.0",
-  "description": "Billow frontend",
+  "description": "Ekto frontend",
   "main": "./src/index.jsx",
   "scripts": {
     "start": "node server.dev.js",
@@ -16,10 +16,10 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bnhansn/billow.git"
+    "url": "https://github.com/bnhansn/ekto.git"
   },
   "bugs": {
-    "url": "https://github.com/bnhansn/billow.git/issues"
+    "url": "https://github.com/bnhansn/ekto.git/issues"
   },
   "dependencies": {
     "axios": "^0.13.1",

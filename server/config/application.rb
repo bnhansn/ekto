@@ -15,7 +15,7 @@ Bundler.require(*Rails.groups)
 
 Dotenv.load unless Rails.env == 'production'
 
-module Billow
+module Ekto
   class Application < Rails::Application
     config.api_only = true
     config.autoload_paths += %W(#{config.root}/lib)

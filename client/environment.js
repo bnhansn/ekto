@@ -4,11 +4,11 @@ module.exports = {
   config(environment) {
     if (environment === 'production') {
       return {
-        API_URL: 'http://billow.us-west-2.elasticbeanstalk.com/api',
+        API_URL: 'http://api.ekto.com/v0',
       };
     }
     return {
-      API_URL: `http://${ip.address()}:3000/api`,
+      API_URL: `http://${ip.address()}:3000/v0`,
     };
   },
 };

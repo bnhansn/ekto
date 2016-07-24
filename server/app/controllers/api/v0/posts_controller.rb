@@ -1,4 +1,4 @@
-class Api::PostsController < Api::BaseController
+class Api::V0::PostsController < Api::V0::BaseController
   def index
     account = @user.accounts.find(params[:account_id])
     render json: account.posts

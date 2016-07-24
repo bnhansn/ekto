@@ -1,4 +1,4 @@
-class Api::PasswordsController < Api::BaseController
+class Api::V0::PasswordsController < Api::V0::BaseController
   skip_before_action :authenticate_user
 
   def forgot

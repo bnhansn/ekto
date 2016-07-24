@@ -1,4 +1,4 @@
-require_relative '../rails_helper'
+require_relative '../../rails_helper'
 
 RSpec.describe PasswordMailer, type: :mailer do
   describe 'password_reset' do
@@ -11,7 +11,7 @@ RSpec.describe PasswordMailer, type: :mailer do
     it 'renders the headers' do
       expect(mail.subject).to eq('Password reset')
       expect(mail.to).to eq([@user.email])
-      expect(mail.from).to eq(['mail@techbient.com'])
+      expect(mail.from).to eq(['ben@techbient.com'])
     end
 
     it 'includes the password_reset_token in the email body' do

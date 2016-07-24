@@ -2,7 +2,6 @@ import Alert from '../Alert';
 import { logout } from './actions';
 import { connect } from 'react-redux';
 import Navbar from '../../components/Navbar';
-import Sidebar from '../../components/Sidebar';
 import React, { Component, PropTypes } from 'react';
 
 class App extends Component {
@@ -22,11 +21,8 @@ class App extends Component {
     const { children, user, isAuthenticated } = this.props;
 
     return (
-      <div className={isAuthenticated ? 'authenticated' : ''}>
+      <div>
         <Alert />
-        {isAuthenticated &&
-          <Sidebar />
-        }
         <Navbar
           user={user}
           isAuthenticated={isAuthenticated}

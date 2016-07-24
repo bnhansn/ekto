@@ -29,47 +29,60 @@ class Navbar extends Component {
     const { user, isAuthenticated } = this.props;
 
     return (
-      <nav className="navbar">
-        <div className="container navbar-container">
-          <Link to="/" className="navbar-brand">Billow</Link>
-          <ul className="nav navbar-nav pull-xs-right">
+      <nav className="navbar bg-primary">
+        <Link to="/" className="navbar-brand">Ekto</Link>
+        <ul className="nav navbar-nav pull-xs-right">
+          <li className="nav-item">
             {!isAuthenticated &&
-              <Link to="/login" className="nav-item nav-link" activeClassName="active">
+              <Link to="/login" className="nav-link" activeClassName="active">
               Login
               </Link>
             }
+          </li>
+          <li className="nav-item">
             {!isAuthenticated &&
-              <Link to="/signup" className="nav-item nav-link" activeClassName="active">
+              <Link to="/signup" className="nav-link" activeClassName="active">
                 Signup
               </Link>
             }
-            {isAuthenticated &&
-              <Dropdown ref="dropdown">
-                <DropdownTrigger className="user-dropdown-trigger">
-                  <i className="icon icon-menu7 user-dropdown-icon"></i>
-                  <Gravatar email={user.email} size={30} className="user-dropdown-avatar" />
-                </DropdownTrigger>
-                <DropdownContent className="dropdown-right">
-                  <a
-                    href="#"
-                    data-route="/accounts"
-                    className="dropdown-item"
-                    onClick={(e) => this.handleLinkClick(e)}
-                  >
-                    Dashboard
-                  </a>
-                  <a
-                    href="#"
-                    onClick={(e) => { ::this.handleLogoutClick(e); }}
-                    className="dropdown-item"
-                  >
-                    Logout
-                  </a>
-                </DropdownContent>
-              </Dropdown>
-            }
-          </ul>
-        </div>
+          </li>
+          {isAuthenticated &&
+            <Dropdown ref="dropdown">
+              <DropdownTrigger className="user-dropdown-trigger">
+                <i className="icon icon-menu7 user-dropdown-icon"></i>
+                <Gravatar email={user.email} size={30} className="user-dropdown-avatar" />
+              </DropdownTrigger>
+              <DropdownContent className="dropdown-right">
+                <a
+                  href="#"
+                  data-route="/accounts"
+                  className="dropdown-item"
+                  onClick={(e) => this.handleLinkClick(e)}
+                >
+                  <i className="icon icon-database2 user-dropdown-icon"></i>
+                  <span>Dashboard</span>
+                </a>
+                <a
+                  href="#"
+                  data-route="/settings"
+                  className="dropdown-item"
+                  onClick={(e) => this.handleLinkClick(e)}
+                >
+                  <i className="icon icon-equalizer2 user-dropdown-icon"></i>
+                  <span>Settings</span>
+                </a>
+                <a
+                  href="#"
+                  onClick={(e) => { ::this.handleLogoutClick(e); }}
+                  className="dropdown-item"
+                >
+                  <i className="icon icon-exit user-dropdown-icon"></i>
+                  <span>Logout</span>
+                </a>
+              </DropdownContent>
+            </Dropdown>
+          }
+        </ul>
       </nav>
     );
   }

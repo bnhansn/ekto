@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound';
 import Signup from './containers/Signup';
 import Forgot from './containers/Forgot';
 import { push } from 'react-router-redux';
-import Profile from './containers/Profile';
+import Settings from './containers/Settings';
 import Account from './containers/Account';
 import Accounts from './containers/Accounts';
 import { Route, IndexRoute } from 'react-router';
@@ -29,7 +29,7 @@ export default (
     <Route path="/reset/:token" component={Reset} />
     <Route path="/accounts" component={requireAuthentication(Accounts)} />
     <Route path="/accounts/:id" component={requireAuthentication(Account)} />
-    <Route path="/profile" component={requireAuthentication(Profile)} />
+    <Route path="/settings" component={requireAuthentication(Settings)} />
     <Route path="*" component={NotFound} />
   </Route>
 );

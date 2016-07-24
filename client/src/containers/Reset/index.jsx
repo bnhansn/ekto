@@ -4,7 +4,7 @@ import ResetForm from '../../components/ResetForm';
 import React, { Component, PropTypes } from 'react';
 import { resetPassword } from './actions';
 
-class ResetContainer extends Component {
+class Reset extends Component {
   static propTypes = {
     params: PropTypes.object,
     replace: PropTypes.func.isRequired,
@@ -51,4 +51,4 @@ export default connect(
     redirect: ownProps.location.query.redirect || '/',
   }),
   { resetPassword, replace: routerActions.replace }
-)(ResetContainer);
+)(Reset);

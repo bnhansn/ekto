@@ -5,11 +5,11 @@ default: &default
 
 development:
   <<: *default
-  database: billow_development
+  database: ekto_development
 
 test:
   <<: *default
-  database: billow_test
+  database: ekto_test
 
 production:
   <<: *default

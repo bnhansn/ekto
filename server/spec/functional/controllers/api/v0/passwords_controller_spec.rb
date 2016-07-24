@@ -1,6 +1,6 @@
-require_relative '../../../rails_helper'
+require_relative '../../../../rails_helper'
 
-RSpec.describe Api::PasswordsController, type: :controller do
+RSpec.describe Api::V0::PasswordsController, type: :controller do
   describe 'POST #forgot' do
     it 'sends password reset email' do
       user = create(:user)

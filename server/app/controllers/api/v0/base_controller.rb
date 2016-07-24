@@ -1,4 +1,4 @@
-class Api::BaseController < ApplicationController
+class Api::V0::BaseController < ApplicationController
   require 'json_web_token'
   before_action :authenticate_user
 

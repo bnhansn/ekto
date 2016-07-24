@@ -1,4 +1,4 @@
-class Api::AuthenticationController < Api::BaseController
+class Api::V0::AuthenticationController < Api::V0::BaseController
   skip_before_action :authenticate_user
 
   def authenticate

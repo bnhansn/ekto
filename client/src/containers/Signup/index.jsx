@@ -4,7 +4,7 @@ import { routerActions } from 'react-router-redux';
 import React, { Component, PropTypes } from 'react';
 import SignupForm from '../../components/SignupForm';
 
-class SignupContainer extends Component {
+class Signup extends Component {
   static propTypes = {
     signup: PropTypes.func.isRequired,
     replace: PropTypes.func.isRequired,
@@ -47,4 +47,4 @@ export default connect(
     redirect: ownProps.location.query.redirect || '/',
   }),
   { signup, replace: routerActions.replace }
-)(SignupContainer);
+)(Signup);
