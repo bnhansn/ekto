@@ -4,7 +4,7 @@ module.exports = {
   config(environment) {
     if (environment === 'production') {
       return {
-        API_URL: 'http://api.ekto.com/v0',
+        API_URL: 'http://api.ekto.tech/v0',
       };
     }
     return {
