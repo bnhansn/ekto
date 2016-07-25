@@ -1,7 +1,7 @@
-class Api::V0::SignupController < Api::V0::BaseController
+class Api::V0::UsersController < Api::V0::BaseController
   skip_before_action :authenticate_user
 
-  def signup
+  def create
     user = Savers::User.create(params)
     if user.persisted?
       render_user_and_token(user, :created)

@@ -3,7 +3,7 @@ require_relative '../../../rails_helper'
 describe Factories::Account do
   describe '#build' do
     it 'works' do
-      attrs = { name: 'Account name' }
+      attrs = { data: { attributes: { name: 'Account name' } } }
       params = ActionController::Parameters.new(attrs)
       user_id = 1
 
@@ -11,6 +11,18 @@ describe Factories::Account do
 
       expect(account.name).to eq('Account name')
       expect(account.created_by).to eq(user_id)
+    end
+  end
+
+  describe '#assign' do
+    it 'works' do
+      account = create(:account)
+      attrs = { data: { attributes: { name: 'Updated name' } } }
+      params = ActionController::Parameters.new(attrs)
+
+      account = Factories::Account.build(account, params)
+
+      expect(account.name).to eq('Updated name')
     end
   end
 end

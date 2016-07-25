@@ -39,7 +39,9 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       include_context :with_authorized_user
 
       it 'creates a new account' do
-        process :create, method: :post, params: { name: 'New account' }
+        process :create,
+                method: :post,
+                params: { data: { attributes: { name: 'New account' } } }
 
         result = JSON.parse(response.body)
 
@@ -48,18 +50,20 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       end
 
       it 'returns errors if unsuccessful' do
-        process :create, method: :post
+        process :create,
+                method: :post,
+                params: { data: { attributes: { name: '' } } }
 
-        result = JSON.parse(response.body)
-        errors = collect_errors(result)
-
-        expect(errors).to include(/Name can't be blank/)
+        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response.body).to have_error("Name can't be blank")
       end
     end
 
     context 'unauthorized' do
       it 'returns unauthorized' do
-        process :create, method: :post, params: { name: 'Account name' }
+        process :create,
+                method: :post,
+                params: { data: { attributes: { name: 'New account' } } }
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -111,7 +115,10 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       it 'updates an account' do
         process :update,
                 method: :post,
-                params: { id: @account.id, name: 'Updated name' }
+                params: {
+                  id: @account.id,
+                  data: { attributes: { name: 'Updated name' } }
+                }
 
         result = JSON.parse(response.body)
 
@@ -129,7 +136,10 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
 
         process :update,
                 method: :post,
-                params: { id: account.id, name: 'Updated name' }
+                params: {
+                  id: account.id,
+                  data: { attributes: { name: 'Updated name' } }
+                }
 
         expect(response).to have_http_status(:not_found)
       end
@@ -141,7 +151,10 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
 
         process :update,
                 method: :post,
-                params: { id: account.id, name: 'Updated name' }
+                params: {
+                  id: account.id,
+                  data: { attributes: { name: 'Updated name' } }
+                }
 
         expect(response).to have_http_status(:unauthorized)
       end

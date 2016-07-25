@@ -20,10 +20,8 @@ RSpec.describe Api::V0::AuthenticationController, type: :controller do
     it 'handles errors' do
       process :authenticate, method: :post
 
-      result = JSON.parse(response.body)
-
       expect(response).to have_http_status(:unauthorized)
-      expect(result['errors'][0]['title']).to match(/Unauthorized/)
+      expect(response.body).to have_error('Unauthorized')
     end
   end
 end

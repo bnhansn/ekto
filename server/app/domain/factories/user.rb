@@ -3,16 +3,20 @@ module Factories
     module_function
 
     def build(params)
-      user = ::User.new(sanitize_params(params))
+      attributes = sanitize(params)
+      user = ::User.new(attributes)
       user
     end
 
-    def sanitize_params(params)
-      params.permit(
-        :email,
-        :name,
-        :password
+    def sanitize(params)
+      params = params.require(:data).permit(
+        attributes: [
+          :email,
+          :name,
+          :password
+        ]
       )
+      params[:attributes] || {}
     end
   end
 end

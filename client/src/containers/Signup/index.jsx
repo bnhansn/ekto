@@ -28,7 +28,8 @@ class Signup extends Component {
   }
 
   handleSubmit(data) {
-    this.props.signup(data);
+    const attrs = { data: { attributes: { ...data } } };
+    this.props.signup(attrs);
   }
 
   render() {

@@ -53,10 +53,8 @@ RSpec.describe Api::V0::PasswordsController, type: :controller do
               method: :post,
               params: { token: user.password_reset_token, password: 'x' }
 
-      result = JSON.parse(response.body)
-
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(result['errors'][0]['title']).to match(/Password is too short/)
+      expect(response.body).to have_error('Password is too short')
     end
   end
 end

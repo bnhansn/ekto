@@ -8,8 +8,8 @@ module Savers
       post
     end
 
-    def update(post, user_id, params)
-      post = Factories::Post.assign(post, user_id, params)
+    def update(post, user_id, account_id, params)
+      post = Factories::Post.assign(post, user_id, account_id, params)
       post.save
       post
     end

@@ -19,11 +19,3 @@ end
 def enable_account_access(user_id, account_id)
   AccountUser.create(user_id: user_id, account_id: account_id)
 end
-
-def collect_errors(result)
-  errors = []
-  result['errors'].each do |error|
-    errors << error['title']
-  end
-  errors
-end

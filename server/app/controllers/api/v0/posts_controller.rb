@@ -17,7 +17,7 @@ class Api::V0::PostsController < Api::V0::BaseController
   def update
     account = @user.accounts.find(params[:account_id])
     post = account.posts.find(params[:id])
-    post = Savers::Post.update(post, @user.id, params)
+    post = Savers::Post.update(post, @user.id, account.id, params)
     if post.errors.empty?
       render json: post, status: :ok
     else

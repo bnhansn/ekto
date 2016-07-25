@@ -24,10 +24,8 @@ RSpec.describe Api::V0::LoginController, type: :controller do
               method: :post,
               params: { email: user.email, password: 'invalidpassword' }
 
-      result = JSON.parse(response.body)
-
       expect(response).to have_http_status(:unauthorized)
-      expect(result['errors'][0]['title']).to match(/Invalid email or password/)
+      expect(response.body).to have_error('Invalid email or password')
     end
 
     it 'returns unauthorized if no user is found by email' do
@@ -37,10 +35,8 @@ RSpec.describe Api::V0::LoginController, type: :controller do
               method: :post,
               params: { email: 'invalid@test.com', password: user.password }
 
-      result = JSON.parse(response.body)
-
       expect(response).to have_http_status(:unauthorized)
-      expect(result['errors'][0]['title']).to match(/Invalid email or password/)
+      expect(response.body).to have_error('Invalid email or password')
     end
   end
 end

@@ -3,6 +3,7 @@ class Api::V0::BaseController < ApplicationController
   before_action :authenticate_user
 
   rescue_from Exception, with: :generic_error
+  rescue_from ActionController::ParameterMissing, with: :parameter_missing
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
   def render_user_and_token(user, status = :ok)
@@ -10,12 +11,10 @@ class Api::V0::BaseController < ApplicationController
     render json: user, meta: { token: token }, status: status
   end
 
-  def render_errors(resource, status = :unprocessable_entity)
-    errors = []
-    resource.errors.full_messages.each do |error|
-      errors << { title: error }
-    end
-    render json: { errors: errors }, status: status
+  def render_errors(resource)
+    render json: {
+      errors: ErrorSerializer.serialize(resource)
+    }, status: :unprocessable_entity
   end
 
   private
@@ -44,5 +43,11 @@ class Api::V0::BaseController < ApplicationController
     render json: {
       errors: [{ title: error.message.capitalize }]
     }, status: :not_found
+  end
+
+  def parameter_missing(error)
+    render json: {
+      errors: [{ title: error.message.capitalize }]
+    }, status: :bad_request
   end
 end

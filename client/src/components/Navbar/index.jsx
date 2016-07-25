@@ -32,20 +32,20 @@ class Navbar extends Component {
       <nav className="navbar bg-primary">
         <Link to="/" className="navbar-brand">Ekto</Link>
         <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item">
-            {!isAuthenticated &&
+          {!isAuthenticated &&
+            <li className="nav-item">
               <Link to="/login" className="nav-link" activeClassName="active">
-              Login
+                Login
               </Link>
-            }
-          </li>
-          <li className="nav-item">
-            {!isAuthenticated &&
+            </li>
+          }
+          {!isAuthenticated &&
+            <li className="nav-item">
               <Link to="/signup" className="nav-link" activeClassName="active">
                 Signup
               </Link>
-            }
-          </li>
+            </li>
+          }
           {isAuthenticated &&
             <Dropdown ref="dropdown">
               <DropdownTrigger className="user-dropdown-trigger">

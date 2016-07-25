@@ -5,9 +5,13 @@ describe Savers::User do
     context 'success' do
       it 'creates a user' do
         attrs = {
-          name: 'Full name',
-          email: 'email@test.com',
-          password: 'password'
+          data: {
+            attributes: {
+              name: 'Full name',
+              email: 'email@test.com',
+              password: 'password'
+            }
+          }
         }
         params = ActionController::Parameters.new(attrs)
 
@@ -22,7 +26,7 @@ describe Savers::User do
 
     context 'errors' do
       it 'returns errors' do
-        attrs = {}
+        attrs = { data: { attributes: { name: '' } } }
         params = ActionController::Parameters.new(attrs)
 
         expect do

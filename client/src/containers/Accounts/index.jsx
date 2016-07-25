@@ -28,7 +28,8 @@ class Accounts extends Component {
   }
 
   handleNewAccountSubmit(data) {
-    this.props.createAccount(data);
+    const attrs = { data: { attributes: { ...data } } };
+    this.props.createAccount(attrs);
   }
 
   renderAccounts() {

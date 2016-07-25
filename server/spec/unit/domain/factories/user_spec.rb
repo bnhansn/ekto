@@ -4,9 +4,13 @@ describe Factories::User do
   describe '#build' do
     it 'works' do
       attrs = {
-        name: 'Full name',
-        email: 'email@test.com',
-        password: 'password'
+        data: {
+          attributes: {
+            name: 'Full name',
+            email: 'email@test.com',
+            password: 'password'
+          }
+        }
       }
       params = ActionController::Parameters.new(attrs)
 

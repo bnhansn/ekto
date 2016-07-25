@@ -10,7 +10,7 @@
     "lint": "npm run eslint && npm run scss-lint",
     "build": "webpack --config webpack.config.prod.js",
     "upload": "node upload.js",
-    "deploy": "rm -r build && npm run build && npm run upload"
+    "deploy": "rm -rf build && npm run build && npm run upload"
   },
   "author": "Ben Hansen <bnhansn@gmail.com>",
   "license": "UNLICENSED",

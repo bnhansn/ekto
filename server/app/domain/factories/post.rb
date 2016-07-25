@@ -3,40 +3,44 @@ module Factories
     module_function
 
     def build(user_id, account_id, params)
-      post = ::Post.new(sanitize_params(params))
-      post = assign_defaults(post)
+      attributes = sanitize(params)
+      post = ::Post.new(attributes)
+      post = defaults(post, account_id)
       post.account_id = account_id
       post.created_by = user_id
       post.updated_by = user_id
       post
     end
 
-    def assign(post, user_id, params)
-      post.assign_attributes(sanitize_params(params))
-      post = assign_defaults(post)
+    def assign(post, user_id, account_id, params)
+      attributes = sanitize(params)
+      post.assign_attributes(attributes)
+      post = defaults(post, account_id)
       post.updated_by = user_id
       post
     end
 
-    def sanitize_params(params)
-      params.permit(
-        :author_id,
-        :featured,
-        :html,
-        :markdown,
-        :title,
-        :image,
-        :published,
-        :published_at,
-        :published_by,
-        :slug_candidate
+    def sanitize(params)
+      params.require(:data).permit(
+        attributes: [
+          :author_id,
+          :featured,
+          :html,
+          :markdown,
+          :title,
+          :image,
+          :published,
+          :published_at,
+          :published_by,
+          :slug_candidate
+        ]
       )
     end
 
-    def assign_defaults(post)
+    def defaults(post, account_id)
       post.title = 'Untitled' unless post.title.present?
       post.slug_candidate = 'untitled' unless post.slug_candidate.present?
-      post.slug_id = ::Post.count + 1
+      post.slug_id = ::Post.where(account_id: account_id).count + 1
       post
     end
   end

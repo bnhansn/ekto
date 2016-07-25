@@ -12,7 +12,7 @@ import { LOGIN_SUCCESS } from '../Login/constants';
 export function signup(data) {
   return dispatch => {
     dispatch({ type: SIGNUP_START });
-    api.post('/signup', data)
+    api.post('/users', data)
       .then(response => {
         if (api.success(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));

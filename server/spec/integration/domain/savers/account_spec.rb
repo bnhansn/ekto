@@ -3,7 +3,7 @@ require_relative '../../../rails_helper'
 describe Savers::Account do
   describe '#create' do
     before do
-      attrs = { name: 'New account name' }
+      attrs = { data: { attributes: { name: 'New account name' } } }
       @attrs = ActionController::Parameters.new(attrs)
       @user_id = 1
     end
@@ -36,7 +36,7 @@ describe Savers::Account do
 
     context 'errors' do
       it 'returns errors' do
-        @attrs[:name] = ''
+        @attrs[:data][:attributes][:name] = ''
 
         expect do
           result = Savers::Account.create(@user_id, @attrs)
@@ -46,7 +46,7 @@ describe Savers::Account do
       end
 
       it 'does not enable account access if save fails' do
-        @attrs[:name] = ''
+        @attrs[:data][:attributes][:name] = ''
 
         expect do
           Savers::Account.create(@user_id, @attrs)
@@ -58,7 +58,7 @@ describe Savers::Account do
   describe '#update' do
     before do
       @account = create(:account)
-      attrs = { name: 'Updated account name' }
+      attrs = { data: { attributes: { name: 'Updated account name' } } }
       @attrs = ActionController::Parameters.new(attrs)
     end
 
@@ -72,7 +72,7 @@ describe Savers::Account do
 
     context 'errors' do
       it 'returns errors' do
-        @attrs[:name] = ''
+        @attrs[:data][:attributes][:name] = ''
 
         result = Savers::Account.update(@account, @attrs)
 
