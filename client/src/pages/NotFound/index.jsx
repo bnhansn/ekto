@@ -1,10 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const NotFound = () =>
-  <div className="container m-t-2">
-    <div className="jumbotron">
-      <h1 className="display-3">Not found</h1>
-    </div>
+  <div className="not-found">
+    <h1 className="display-3">¡Not found!</h1>
+    <Link to="/" className="btn btn-link">Head to home page</Link>
   </div>;
 
 export default NotFound;
