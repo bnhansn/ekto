@@ -7,12 +7,12 @@ Rails.application.routes.draw do
       post 'reset', to: 'passwords#reset'
       resources :users, only: [:create]
       resources :accounts, only: [:index, :create, :show, :update] do
-        resources :posts, only: [:index, :create, :update, :destroy]
+        resources :posts, only: [:index, :create, :show, :update, :destroy]
       end
     end
     namespace :v1 do
       resources :accounts, only: [] do
-        resources :posts, only: [:index]
+        resources :posts, only: [:index, :show]
       end
     end
   end

@@ -16,11 +16,11 @@ class Account extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchAccount(this.props.params.slug);
+    this.props.fetchAccount(this.props.params.accountSlug);
   }
 
   render() {
-    const { params: { slug }, account, children } = this.props;
+    const { params: { accountSlug }, account, children } = this.props;
     if (isEmpty(account)) {
       return <div>Loading...</div>;
     }
@@ -32,7 +32,7 @@ class Account extends Component {
           headerRoute="/accounts"
           subheader={account.attributes.name}
         />
-        <AccountTabs slug={slug} />
+        <AccountTabs accountSlug={accountSlug} />
         {children}
       </div>
     );

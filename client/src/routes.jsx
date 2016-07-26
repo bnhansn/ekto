@@ -6,6 +6,8 @@ import Reset from './containers/Reset';
 import Login from './containers/Login';
 import Posts from './containers/Posts';
 import NotFound from './pages/NotFound';
+import Post from './containers/Post';
+import PostNew from './containers/PostNew';
 import Signup from './containers/Signup';
 import Forgot from './containers/Forgot';
 import Account from './containers/Account';
@@ -20,7 +22,6 @@ const requireAuthentication = UserAuthWrapper({ // eslint-disable-line new-cap
   authSelector: state => state.app,
   predicate: auth => auth.isAuthenticated,
   redirectAction: push,
-  wrapperDisplayName: 'UserIsJWTAuthenticated',
 });
 
 export default (
@@ -32,11 +33,22 @@ export default (
     <Route path="/reset/:token" component={Reset} />
     <Route path="/settings" component={requireAuthentication(Settings)} />
     <Route path="/accounts" component={requireAuthentication(Accounts)} />
-    <Route path="/accounts/:slug" component={requireAuthentication(Account)}>
-      <IndexRedirect to="/accounts/:slug/posts" />
-      <Route path="/accounts/:slug/posts" component={requireAuthentication(Posts)} />
-      <Route path="/accounts/:slug/team" component={requireAuthentication(Team)} />
-      <Route path="/accounts/:slug/settings" component={requireAuthentication(AccountSettings)} />
+    <Route path="/accounts/:accountSlug" component={requireAuthentication(Account)}>
+      <IndexRedirect to="/accounts/:accountSlug/posts" />
+      <Route path="/accounts/:accountSlug/posts" component={requireAuthentication(Posts)} />
+      <Route path="/accounts/:accountSlug/team" component={requireAuthentication(Team)} />
+      <Route
+        path="/accounts/:accountSlug/settings"
+        component={requireAuthentication(AccountSettings)}
+      />
+      <Route
+        path="/accounts/:accountSlug/posts/new"
+        component={requireAuthentication(PostNew)}
+      />
+      <Route
+        path="/accounts/:accountSlug/posts/:postSlug"
+        component={requireAuthentication(Post)}
+      />
     </Route>
 
     <Route path="*" component={NotFound} />

@@ -102,6 +102,46 @@ RSpec.describe Api::V0::PostsController, type: :controller do
     end
   end
 
+  describe 'GET #show' do
+    context 'authorized' do
+      include_context :with_authorized_user_and_account
+
+      it 'renders a post' do
+        post = create(:post, account_id: @account.id)
+
+        process :show, params: { id: post.id, account_id: @account.id }
+
+        result = JSON.parse(response.body)
+
+        expect(result['data']['attributes']['title']).to eq(post.title)
+      end
+    end
+
+    context 'authorized user unauthorized account' do
+      include_context :with_authorized_user
+
+      it 'returns not_found' do
+        account = create(:account)
+        post = create(:post, account_id: account.id)
+
+        process :show, params: { id: post.id, account_id: account.id }
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'unauthorized' do
+      it 'returns unauthorized' do
+        account = create(:account)
+        post = create(:post, account_id: account.id)
+
+        process :show, params: { id: post.id, account_id: account.id }
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
   describe 'POST #update' do
     context 'authorized' do
       include_context :with_authorized_user_and_account
