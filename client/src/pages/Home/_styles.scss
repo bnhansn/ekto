@@ -1,6 +1,17 @@
 .hero {
-  padding: 125px 0;
+  padding: 100px 0;
   color: #fff;
-  text-align: center;
   background: $brand-primary;
+}
+
+.hero-brand {
+  padding: 20px 0;
+  margin-bottom: 2rem;
+  background: rgba(255,255,255,.1);
+}
+
+.cta {
+  padding-left: 2rem;
+  font-size: 2rem;
+  border-left: 4px solid #fff;
 }

@@ -22,7 +22,7 @@ class Account extends Component {
   render() {
     const { params: { accountSlug }, account, children } = this.props;
     if (isEmpty(account)) {
-      return <div>Loading...</div>;
+      return <div className="container">Loading...</div>;
     }
 
     return (

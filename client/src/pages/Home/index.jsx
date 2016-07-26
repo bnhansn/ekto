@@ -2,13 +2,17 @@ import React from 'react';
 
 const Home = () =>
   <div className="hero">
-    <h1 className="display-2">Ekto</h1>
-    <p style={{ fontSize: '2rem', fontWeight: '300' }}>
-      A full stack blogging service.
-    </p>
-    <p style={{ fontSize: '2rem', fontWeight: '300' }}>
-      Publish on our platform and fetch through a simple api.
-    </p>
+    <div className="hero-brand">
+      <div className="container">
+        <h1 className="display-2">Ekto</h1>
+      </div>
+    </div>
+    <div className="container">
+      <div className="cta">
+        <p>A full stack blogging service.</p>
+        <p>Publish on our platform and fetch through a simple api.</p>
+      </div>
+    </div>
   </div>;
 
 export default Home;
