@@ -7,20 +7,20 @@ import {
   CREATE_ACCOUNT_SUCCESS,
 } from './constants';
 import api from '../../api';
-import get from 'lodash/get';
 import { reset } from 'redux-form';
 import { SHOW_ALERT } from '../Alert/constants';
+import { isSuccess, parseError } from '../../utils';
 
 export function fetchAccounts() {
   return dispatch => {
     dispatch({ type: FETCH_ACCOUNTS_START });
     api.get('/accounts')
       .then(response => {
-        if (api.success(response)) {
+        if (isSuccess(response)) {
           dispatch({ type: FETCH_ACCOUNTS_SUCCESS, payload: response });
         } else {
           dispatch({ type: FETCH_ACCOUNTS_ERROR });
-          const message = get(response, 'data.errors[0].title', 'Error retrieving accounts');
+          const message = parseError(response, 'Error retrieving accounts');
           dispatch({
             type: SHOW_ALERT,
             alert: { klass: 'danger', message },
@@ -35,7 +35,7 @@ export function createAccount(data) {
     dispatch({ type: CREATE_ACCOUNT_START });
     api.post('/accounts', data)
       .then(response => {
-        if (api.success(response)) {
+        if (isSuccess(response)) {
           dispatch({ type: CREATE_ACCOUNT_SUCCESS, payload: response });
           dispatch(reset('newAccount'));
         } else {

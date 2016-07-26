@@ -4,6 +4,7 @@ import {
   FETCH_POST_SUCCESS,
 } from './constants';
 import api from '../../api';
+import { isSuccess } from '../../utils';
 import { push } from 'react-router-redux';
 
 export function fetchPost(accountSlug, postSlug) {
@@ -11,7 +12,7 @@ export function fetchPost(accountSlug, postSlug) {
     dispatch({ type: FETCH_POST_START });
     api.get(`/accounts/${accountSlug}/posts/${postSlug}`)
       .then(response => {
-        if (api.success(response)) {
+        if (isSuccess(response)) {
           dispatch({ type: FETCH_POST_SUCCESS, payload: response });
         } else {
           dispatch({ type: FETCH_POST_ERROR });

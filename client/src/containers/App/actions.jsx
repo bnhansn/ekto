@@ -1,4 +1,5 @@
 import api from '../../api';
+import { isSuccess } from '../../utils';
 import { push } from 'react-router-redux';
 import { LOCATION_CHANGE } from './constants';
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../Login/constants';
@@ -15,7 +16,7 @@ export function authenticate(token) {
   return dispatch => {
     api.post('/authenticate', { token })
       .then(response => {
-        if (api.success(response)) {
+        if (isSuccess(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: LOGIN_SUCCESS, payload: response });
         } else {

@@ -6,13 +6,6 @@ export default {
     return JSON.parse(localStorage.getItem('token'));
   },
 
-  success(response) {
-    if (response && response.status && response.status >= 200 && response.status < 400) {
-      return true;
-    }
-    return false;
-  },
-
   get(path) {
     return axios.get(
       `${API_URL}${path}`,
