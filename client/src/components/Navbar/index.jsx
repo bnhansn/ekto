@@ -21,7 +21,8 @@ class Navbar extends Component {
   handleLinkClick(e) {
     e.preventDefault();
     this.refs.dropdown.hide();
-    const route = e.target.dataset.route;
+    let route = e.target.dataset.route;
+    if (!route) { route = e.target.parentNode.dataset.route; }
     this.context.router.push(route);
   }
 
@@ -47,40 +48,42 @@ class Navbar extends Component {
             </li>
           }
           {isAuthenticated &&
-            <Dropdown ref="dropdown">
-              <DropdownTrigger className="user-dropdown-trigger">
-                <i className="icon icon-menu7 user-dropdown-icon"></i>
-                <Gravatar email={user.email} size={30} className="user-dropdown-avatar" />
-              </DropdownTrigger>
-              <DropdownContent className="dropdown-right">
-                <a
-                  href="#"
-                  data-route="/accounts"
-                  className="dropdown-item"
-                  onClick={(e) => this.handleLinkClick(e)}
-                >
-                  <i className="icon icon-database2 user-dropdown-icon"></i>
-                  <span>Dashboard</span>
-                </a>
-                <a
-                  href="#"
-                  data-route="/settings"
-                  className="dropdown-item"
-                  onClick={(e) => this.handleLinkClick(e)}
-                >
-                  <i className="icon icon-equalizer2 user-dropdown-icon"></i>
-                  <span>Settings</span>
-                </a>
-                <a
-                  href="#"
-                  onClick={(e) => { ::this.handleLogoutClick(e); }}
-                  className="dropdown-item"
-                >
-                  <i className="icon icon-exit user-dropdown-icon"></i>
-                  <span>Logout</span>
-                </a>
-              </DropdownContent>
-            </Dropdown>
+            <li className="nav-item">
+              <Dropdown ref="dropdown">
+                <DropdownTrigger className="user-dropdown-trigger">
+                  <i className="icon icon-menu7 user-dropdown-icon"></i>
+                  <Gravatar email={user.email} size={30} className="user-dropdown-avatar" />
+                </DropdownTrigger>
+                <DropdownContent className="dropdown-right">
+                  <a
+                    href="#"
+                    data-route="/accounts"
+                    className="dropdown-item"
+                    onClick={(e) => this.handleLinkClick(e)}
+                  >
+                    <i className="icon icon-database2 user-dropdown-icon"></i>
+                    <span>Dashboard</span>
+                  </a>
+                  <a
+                    href="#"
+                    data-route="/settings"
+                    className="dropdown-item"
+                    onClick={(e) => this.handleLinkClick(e)}
+                  >
+                    <i className="icon icon-equalizer2 user-dropdown-icon"></i>
+                    <span>Settings</span>
+                  </a>
+                  <a
+                    href="#"
+                    onClick={(e) => { ::this.handleLogoutClick(e); }}
+                    className="dropdown-item"
+                  >
+                    <i className="icon icon-exit user-dropdown-icon"></i>
+                    <span>Logout</span>
+                  </a>
+                </DropdownContent>
+              </Dropdown>
+            </li>
           }
         </ul>
       </nav>

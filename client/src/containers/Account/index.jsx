@@ -2,9 +2,12 @@ import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
 import { fetchAccount } from './actions';
 import React, { Component, PropTypes } from 'react';
+import AccountTabs from '../../components/AccountTabs';
+import Topnav from '../../components/Topnav';
 
 class Account extends Component {
   static propTypes = {
+    children: PropTypes.node.isRequired,
     params: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
@@ -13,22 +16,24 @@ class Account extends Component {
   };
 
   componentWillMount() {
-    this.props.fetchAccount(this.props.params.id);
-  }
-
-  renderAccount() {
-    const { account } = this.props;
-    if (isEmpty(account)) { return false; }
-
-    return (
-      <div>{account.attributes.name}</div>
-    );
+    this.props.fetchAccount(this.props.params.slug);
   }
 
   render() {
+    const { params: { slug }, account, children } = this.props;
+    if (isEmpty(account)) {
+      return <div>Loading...</div>;
+    }
+
     return (
-      <div className="container">
-        {::this.renderAccount()}
+      <div>
+        <Topnav
+          header="Accounts"
+          headerRoute="/accounts"
+          subheader={account.attributes.name}
+        />
+        <AccountTabs slug={slug} />
+        {children}
       </div>
     );
   }

@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class HomePage extends Component {
-  render() {
-    return (
-      <div className="container">
-        <div className="jumbotron">
-          <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-            <i className="icon icon-cloud2 text-primary" style={{ fontSize: '5rem', marginTop: '9px' }}></i>
-            <h1 style={{ fontSize: '5rem', fontWeight: '400' }}>Ekto</h1>
-          </div>
-          <hr />
-          <p className="lead">A blogging platform</p>
-        </div>
-      </div>
-    );
-  }
-}
+const Home = () =>
+  <div className="hero">
+    <h1 className="display-2">Ekto</h1>
+    <p style={{ fontSize: '2rem', fontWeight: '300' }}>
+      A full stack blogging service.
+    </p>
+    <p style={{ fontSize: '2rem', fontWeight: '300' }}>
+      Publish on our platform and fetch through a simple api.
+    </p>
+  </div>;
 
-export default HomePage;
+export default Home;

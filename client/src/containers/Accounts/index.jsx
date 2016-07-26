@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import Topnav from '../../components/Topnav';
 import Callout from '../../components/Callout';
 import React, { Component, PropTypes } from 'react';
 import { fetchAccounts, createAccount } from './actions';
-import DashboardNavbar from '../../components/DashboardNavbar';
 import NewAccountForm from '../../components/NewAccountForm';
 
 class Accounts extends Component {
@@ -40,7 +40,7 @@ class Accounts extends Component {
     return accounts.map(account =>
       <Link
         key={account.id}
-        to={`/accounts/${account.id}`}
+        to={`/accounts/${account.attributes.slug}`}
         className="list-group-item list-group-item-action"
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
       >
@@ -58,31 +58,33 @@ class Accounts extends Component {
     const noAccounts = !accounts.length && finishedLoading;
 
     return (
-      <div className="container">
-        <DashboardNavbar className="m-b-2" />
-        {isLoading &&
-          <div>Loading</div>
-        }
-        {noAccounts &&
-          <Callout klass="primary">
-            <p>Create an account with the icon below to get started</p>
-          </Callout>
-        }
-        <div className="list-group m-b-1">
-          {this.renderAccounts()}
+      <div>
+        <Topnav header="Accounts" className="m-b-2" />
+        <div className="container">
+          {isLoading &&
+            <div>Loading</div>
+          }
+          {noAccounts &&
+            <Callout klass="primary">
+              <p>Create an account with the icon below to get started</p>
+            </Callout>
+          }
+          <div className="list-group m-b-1">
+            {this.renderAccounts()}
+          </div>
+          <button
+            className="btn btn-secondary m-b-1"
+            onClick={() => this.setState({ accountFormOpen: !accountFormOpen })}
+          >
+            <i className={`icon icon-${accountFormOpen ? 'minus3' : 'plus3'}`}></i>
+          </button>
+          {accountFormOpen &&
+            <NewAccountForm
+              isSavingNewAccount={isSavingNewAccount}
+              onSubmit={::this.handleNewAccountSubmit}
+            />
+          }
         </div>
-        <button
-          className="btn btn-secondary m-b-1"
-          onClick={() => this.setState({ accountFormOpen: !accountFormOpen })}
-        >
-          <i className={`icon icon-${accountFormOpen ? 'minus3' : 'plus3'}`}></i>
-        </button>
-        {accountFormOpen &&
-          <NewAccountForm
-            isSavingNewAccount={isSavingNewAccount}
-            onSubmit={::this.handleNewAccountSubmit}
-          />
-        }
       </div>
     );
   }

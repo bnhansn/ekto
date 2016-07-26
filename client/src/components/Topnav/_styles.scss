@@ -1,0 +1,26 @@
+.topnav {
+  padding: 20px 0;
+  background: $gray-lighter;
+  border-bottom: 1px solid darken($gray-lighter, 2%);
+}
+
+.topnav-header,
+.topnav-subheader {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.subheader-arrow { margin: 0 5px; }
+
+.topnav-header-link {
+  padding: 5px;
+  margin: -5px 0 -5px -5px;
+  color: $brand-primary;
+  border-radius: 3px;
+
+  &:hover,
+  &:focus {
+    color: darken($brand-primary, 10%);
+    background: rgba($gray,.05);
+  }
+}

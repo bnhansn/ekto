@@ -13,12 +13,12 @@ class Api::V0::AccountsController < Api::V0::BaseController
   end
 
   def show
-    account = @user.accounts.find(params[:id])
+    account = @user.accounts.friendly.find(params[:id])
     render json: account
   end
 
   def update
-    account = @user.accounts.find(params[:id])
+    account = @user.accounts.friendly.find(params[:id])
     account = Savers::Account.update(account, params)
 
     if account.errors.empty?
