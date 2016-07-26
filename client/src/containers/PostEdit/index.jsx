@@ -19,7 +19,7 @@ class PostEdit extends Component {
   render() {
     const { post, isLoading } = this.props;
 
-    if (isLoading && isEmpty(post)) {
+    if (isLoading || isEmpty(post)) {
       return (
         <div className="container">
           Loading...

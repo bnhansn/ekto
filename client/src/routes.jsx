@@ -6,12 +6,12 @@ import Reset from './containers/Reset';
 import Login from './containers/Login';
 import Posts from './containers/Posts';
 import NotFound from './pages/NotFound';
-import Post from './containers/Post';
-import PostNew from './containers/PostNew';
 import Signup from './containers/Signup';
 import Forgot from './containers/Forgot';
-import Account from './containers/Account';
 import { push } from 'react-router-redux';
+import Account from './containers/Account';
+import PostNew from './containers/PostNew';
+import PostEdit from './containers/PostEdit';
 import Settings from './containers/Settings';
 import Accounts from './containers/Accounts';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
@@ -47,7 +47,7 @@ export default (
       />
       <Route
         path="/accounts/:accountSlug/posts/:postSlug"
-        component={requireAuthentication(Post)}
+        component={requireAuthentication(PostEdit)}
       />
     </Route>
 
