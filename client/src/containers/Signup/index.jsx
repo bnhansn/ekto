@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { signup } from './actions';
+import { assignAttributes } from '../../utils';
 import { routerActions } from 'react-router-redux';
 import React, { Component, PropTypes } from 'react';
 import SignupForm from '../../components/SignupForm';
@@ -27,9 +28,9 @@ class Signup extends Component {
     }
   }
 
-  handleSubmit(data) {
-    const attrs = { data: { attributes: { ...data } } };
-    this.props.signup(attrs);
+  handleSubmit(attrs) {
+    const data = assignAttributes(attrs);
+    this.props.signup(data);
   }
 
   render() {

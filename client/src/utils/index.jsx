@@ -23,3 +23,7 @@ export function isSuccess(response) {
 export function parseError(response, defaultMessage) {
   return get(response, 'data.errors[0].title', defaultMessage);
 }
+
+export function assignAttributes(attrs) {
+  return { data: { attributes: { ...attrs } } };
+}
