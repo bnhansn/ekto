@@ -7,5 +7,11 @@ module Savers
       user.save
       user
     end
+
+    def update(user, params)
+      user = Factories::User.assign(user, params)
+      user.save
+      user
+    end
   end
 end

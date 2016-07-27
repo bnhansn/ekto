@@ -37,4 +37,30 @@ describe Savers::User do
       end
     end
   end
+
+  describe '#update' do
+    before do
+      @user = create(:user)
+      attrs = { data: { attributes: { name: 'Updated user name' } } }
+      @params = ActionController::Parameters.new(attrs)
+    end
+
+    context 'success' do
+      it 'works' do
+        user = Savers::User.update(@user, @params)
+
+        expect(user.name).to eq('Updated user name')
+      end
+    end
+
+    context 'errors' do
+      it 'returns errors' do
+        @params[:data][:attributes][:name] = ''
+
+        user = Savers::User.update(@user, @params)
+
+        expect(user.errors.full_messages).to include(/Name can't be blank/)
+      end
+    end
+  end
 end

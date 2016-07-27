@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       post 'authenticate', to: 'authentication#authenticate'
       post 'forgot', to: 'passwords#forgot'
       post 'reset', to: 'passwords#reset'
-      resources :users, only: [:create]
+      resources :users, only: [:create, :update]
       resources :accounts, only: [:index, :create, :show, :update] do
         resources :posts, only: [:index, :create, :show, :update, :destroy]
       end

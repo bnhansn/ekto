@@ -8,6 +8,12 @@ module Factories
       user
     end
 
+    def assign(user, params)
+      attributes = sanitize(params)
+      user.assign_attributes(attributes)
+      user
+    end
+
     def sanitize(params)
       params = params.require(:data).permit(
         attributes: [

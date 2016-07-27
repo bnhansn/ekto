@@ -21,4 +21,16 @@ describe Factories::User do
       expect(user.password).to eq('password')
     end
   end
+
+  describe '#assign' do
+    it 'works' do
+      user = create(:user)
+      attrs = { data: { attributes: { name: 'Updated name' } } }
+      params = ActionController::Parameters.new(attrs)
+
+      user = Factories::User.assign(user, params)
+
+      expect(user.name).to eq('Updated name')
+    end
+  end
 end

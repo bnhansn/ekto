@@ -17,13 +17,17 @@ class Api::V0::BaseController < ApplicationController
     }, status: :unprocessable_entity
   end
 
+  def unauthorized_error
+    render json: {
+      errors: [{ title: 'Unauthorized' }]
+    }, status: :unauthorized
+  end
+
   private
 
   def authenticate_user
     @user = User.find(decoded_token[:user_id]) if decoded_token
-    render json: {
-      errors: [{ title: 'Unauthorized' }]
-    }, status: :unauthorized unless @user
+    return unauthorized_error unless @user
   end
 
   def decoded_token
