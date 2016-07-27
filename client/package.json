@@ -13,7 +13,7 @@
     "deploy": "rm -rf build && npm run build && npm run upload"
   },
   "author": "Ben Hansen <bnhansn@gmail.com>",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/bnhansn/ekto.git"
@@ -34,7 +34,6 @@
     "react-router-redux": "^4.0.5",
     "react-simple-dropdown": "^1.1.4",
     "redux": "^3.5.2",
-    "redux-auth-wrapper": "^0.5.2",
     "redux-form": "^6.0.0-rc.3",
     "redux-thunk": "^2.1.0"
   },

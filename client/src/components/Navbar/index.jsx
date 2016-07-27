@@ -10,20 +10,12 @@ class Navbar extends Component {
     isAuthenticated: PropTypes.bool.isRequired,
   };
 
-  static contextTypes = {
-    router: PropTypes.object,
-  };
-
   handleLogoutClick(e) {
     this.props.onLogoutClick(e);
   }
 
-  handleLinkClick(e) {
-    e.preventDefault();
+  handleLinkClick() {
     this.refs.dropdown.hide();
-    let route = e.target.dataset.route;
-    if (!route) { route = e.target.parentNode.dataset.route; }
-    this.context.router.push(route);
   }
 
   render() {
@@ -32,47 +24,45 @@ class Navbar extends Component {
     return (
       <nav className="navbar bg-primary">
         <Link to="/" className="navbar-brand">Ekto</Link>
-        <ul className="nav navbar-nav pull-xs-right">
-          {!isAuthenticated &&
+        {!isAuthenticated &&
+          <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
               <Link to="/login" className="nav-link" activeClassName="active">
                 Login
               </Link>
             </li>
-          }
-          {!isAuthenticated &&
             <li className="nav-item">
               <Link to="/signup" className="nav-link" activeClassName="active">
                 Signup
               </Link>
             </li>
-          }
-          {isAuthenticated &&
+          </ul>
+        }
+        {isAuthenticated &&
+          <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
               <Dropdown ref="dropdown">
                 <DropdownTrigger className="user-dropdown-trigger">
                   <i className="icon icon-menu7 user-dropdown-icon"></i>
-                  <Gravatar email={user.email} size={30} className="user-dropdown-avatar" />
+                  <Gravatar email={user.email || ''} size={30} className="user-dropdown-avatar" />
                 </DropdownTrigger>
                 <DropdownContent className="dropdown-right">
-                  <a
-                    href="#"
-                    data-route="/accounts"
+                  <Link
+                    to="/accounts"
                     className="dropdown-item"
-                    onClick={(e) => this.handleLinkClick(e)}
+                    onClick={() => this.refs.dropdown.hide()}
                   >
                     <i className="icon icon-database2 user-dropdown-icon"></i>
                     <span>Dashboard</span>
-                  </a>
-                  <a
-                    href="#"
-                    data-route="/settings"
+                  </Link>
+                  <Link
+                    to="/settings"
                     className="dropdown-item"
-                    onClick={(e) => this.handleLinkClick(e)}
+                    onClick={() => this.refs.dropdown.hide()}
                   >
                     <i className="icon icon-equalizer2 user-dropdown-icon"></i>
                     <span>Settings</span>
-                  </a>
+                  </Link>
                   <a
                     href="#"
                     onClick={(e) => { ::this.handleLogoutClick(e); }}
@@ -84,8 +74,8 @@ class Navbar extends Component {
                 </DropdownContent>
               </Dropdown>
             </li>
-          }
-        </ul>
+          </ul>
+        }
       </nav>
     );
   }

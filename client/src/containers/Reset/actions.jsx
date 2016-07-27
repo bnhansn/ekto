@@ -5,7 +5,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { LOGIN_SUCCESS } from '../Login/constants';
+import { AUTHENTICATION_SUCCESS } from '../App/constants';
 import { isSuccess, parseError } from '../../utils';
 
 export function resetPassword(data) {
@@ -16,7 +16,7 @@ export function resetPassword(data) {
         if (isSuccess(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: RESET_PASSWORD_SUCCESS });
-          dispatch({ type: LOGIN_SUCCESS, payload: response });
+          dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
           dispatch({
             type: SHOW_ALERT,
             alert: { klass: 'success', message: 'Your password has been updated' },
@@ -26,7 +26,7 @@ export function resetPassword(data) {
           dispatch({ type: RESET_PASSWORD_ERROR });
           dispatch({
             type: SHOW_ALERT,
-            alert: { type: 'danger', message },
+            alert: { klass: 'danger', message },
           });
         }
       });

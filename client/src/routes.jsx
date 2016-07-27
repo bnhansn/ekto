@@ -8,46 +8,41 @@ import Posts from './containers/Posts';
 import NotFound from './pages/NotFound';
 import Signup from './containers/Signup';
 import Forgot from './containers/Forgot';
-import { push } from 'react-router-redux';
 import Account from './containers/Account';
 import PostNew from './containers/PostNew';
 import PostEdit from './containers/PostEdit';
 import Settings from './containers/Settings';
 import Accounts from './containers/Accounts';
-import { UserAuthWrapper } from 'redux-auth-wrapper';
 import AccountSettings from './containers/AccountSettings';
 import { Route, IndexRoute, IndexRedirect } from 'react-router';
-
-const requireAuthentication = UserAuthWrapper({ // eslint-disable-line new-cap
-  authSelector: state => state.app,
-  predicate: auth => auth.isAuthenticated,
-  redirectAction: push,
-});
+import { authenticate } from './containers/Authenticate';
+import { redirectAuthenticated } from './containers/Redirect';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} />
-    <Route path="/login" component={Login} />
-    <Route path="/signup" component={Signup} />
-    <Route path="/forgot" component={Forgot} />
-    <Route path="/reset/:token" component={Reset} />
-    <Route path="/settings" component={requireAuthentication(Settings)} />
-    <Route path="/accounts" component={requireAuthentication(Accounts)} />
-    <Route path="/accounts/:accountSlug" component={requireAuthentication(Account)}>
+    <Route path="/login" component={redirectAuthenticated(Login)} />
+    <Route path="/signup" component={redirectAuthenticated(Signup)} />
+    <Route path="/forgot" component={redirectAuthenticated(Forgot)} />
+    <Route path="/reset/:token" component={redirectAuthenticated(Reset)} />
+
+    <Route path="/settings" component={authenticate(Settings)} />
+    <Route path="/accounts" component={authenticate(Accounts)} />
+    <Route path="/accounts/:accountSlug" component={authenticate(Account)}>
       <IndexRedirect to="/accounts/:accountSlug/posts" />
-      <Route path="/accounts/:accountSlug/posts" component={requireAuthentication(Posts)} />
-      <Route path="/accounts/:accountSlug/team" component={requireAuthentication(Team)} />
+      <Route path="/accounts/:accountSlug/posts" component={authenticate(Posts)} />
+      <Route path="/accounts/:accountSlug/team" component={authenticate(Team)} />
       <Route
         path="/accounts/:accountSlug/settings"
-        component={requireAuthentication(AccountSettings)}
+        component={authenticate(AccountSettings)}
       />
       <Route
         path="/accounts/:accountSlug/posts/new"
-        component={requireAuthentication(PostNew)}
+        component={authenticate(PostNew)}
       />
       <Route
         path="/accounts/:accountSlug/posts/:postSlug"
-        component={requireAuthentication(PostEdit)}
+        component={authenticate(PostEdit)}
       />
     </Route>
 

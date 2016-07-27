@@ -1,31 +1,13 @@
 import { connect } from 'react-redux';
-import { routerActions } from 'react-router-redux';
+import { forgotPassword } from './actions';
 import React, { Component, PropTypes } from 'react';
 import ForgotForm from '../../components/ForgotForm';
-import { forgotPassword } from './actions';
 
 class Forgot extends Component {
   static propTypes = {
-    replace: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     forgotPassword: PropTypes.func.isRequired,
   };
-
-  componentWillMount() {
-    this.redirectIfLoggedIn(this.props);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.redirectIfLoggedIn(nextProps);
-  }
-
-  redirectIfLoggedIn(props) {
-    const { isAuthenticated, replace, redirect } = props;
-
-    if (isAuthenticated) {
-      replace(redirect);
-    }
-  }
 
   handleSubmit(data) {
     this.props.forgotPassword(data);
@@ -41,10 +23,8 @@ class Forgot extends Component {
 }
 
 export default connect(
-  (state, ownProps) => ({
+  state => ({
     isSubmitting: state.forgot.isSubmitting,
-    isAuthenticated: state.app.isAuthenticated,
-    redirect: ownProps.location.query.redirect || '/',
   }),
-  { forgotPassword, replace: routerActions.replace }
+  { forgotPassword }
 )(Forgot);

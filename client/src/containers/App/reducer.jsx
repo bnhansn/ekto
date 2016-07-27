@@ -1,24 +1,45 @@
-import { LOCATION_CHANGE } from './constants';
-import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from '../Login/constants';
+import {
+  LOGOUT_SUCCESS,
+  LOCATION_CHANGE,
+  AUTHENTICATION_START,
+  AUTHENTICATION_ERROR,
+  AUTHENTICATION_SUCCESS,
+} from './constants';
 
 const initialState = {
   user: {},
+  clients: [],
   location: {},
   isAuthenticated: false,
+  isAuthenticating: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case AUTHENTICATION_START:
+      return {
+        ...state,
+        isAuthenticating: true,
+      };
+    case AUTHENTICATION_SUCCESS:
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.data.data.attributes,
+        isAuthenticating: false,
+        user: action.payload.data.data,
+      };
+    case AUTHENTICATION_ERROR:
+      return {
+        ...state,
+        isAuthenticated: false,
+        isAuthenticating: false,
+        user: {},
       };
     case LOGOUT_SUCCESS:
       return {
         ...state,
         user: {},
+        clients: [],
         isAuthenticated: false,
       };
     case LOCATION_CHANGE:

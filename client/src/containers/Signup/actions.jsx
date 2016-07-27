@@ -6,7 +6,7 @@ import {
 import api from '../../api';
 import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
-import { LOGIN_SUCCESS } from '../Login/constants';
+import { AUTHENTICATION_SUCCESS } from '../App/constants';
 import { isSuccess, parseError } from '../../utils';
 
 export function signup(data) {
@@ -17,14 +17,14 @@ export function signup(data) {
         if (isSuccess(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
           dispatch({ type: SIGNUP_SUCCESS });
-          dispatch({ type: LOGIN_SUCCESS, payload: response });
+          dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
           dispatch(push('/accounts'));
         } else {
           const message = parseError(response, 'Error signing up');
           dispatch({ type: SIGNUP_ERROR });
           dispatch({
             type: SHOW_ALERT,
-            alert: { type: 'danger', message },
+            alert: { klass: 'danger', message },
           });
         }
       });
