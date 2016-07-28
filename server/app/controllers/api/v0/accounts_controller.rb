@@ -27,4 +27,9 @@ class Api::V0::AccountsController < Api::V0::BaseController
       render_errors(account)
     end
   end
+
+  def team
+    account = @user.accounts.friendly.find(params[:id])
+    render json: account.users
+  end
 end

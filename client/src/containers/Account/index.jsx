@@ -25,9 +25,13 @@ class Account extends Component {
   }
 
   render() {
-    const { account, children } = this.props;
-    if (isEmpty(account)) {
+    const { account, children, isLoading } = this.props;
+    if (isLoading) {
       return <div className="container">Loading...</div>;
+    }
+
+    if (isEmpty(account)) {
+      return null;
     }
 
     return (

@@ -46,7 +46,7 @@ class Navbar extends Component {
                   <i className="icon icon-menu7 user-dropdown-icon"></i>
                   <Gravatar
                     size={30}
-                    className="user-dropdown-avatar"
+                    className="img-circle"
                     email={user.attributes.email || ''}
                   />
                 </DropdownTrigger>

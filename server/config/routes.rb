@@ -7,6 +7,9 @@ Rails.application.routes.draw do
       post 'reset', to: 'passwords#reset'
       resources :users, only: [:create, :update]
       resources :accounts, only: [:index, :create, :show, :update] do
+        member do
+          get 'team'
+        end
         resources :posts, only: [:index, :create, :show, :update, :destroy]
       end
     end

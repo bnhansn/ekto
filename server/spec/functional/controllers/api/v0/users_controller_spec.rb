@@ -59,7 +59,7 @@ RSpec.describe Api::V0::UsersController, type: :controller do
                   }
 
           result = JSON.parse(response.body)
-          puts result
+
           expect(response).to have_http_status(:ok)
           expect(result['data']['id']).to eq(@user.id.to_s)
           expect(result['data']['attributes']['name']).to eq('Updated name')

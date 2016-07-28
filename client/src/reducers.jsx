@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 import appReducer from './containers/App/reducer';
 import { routerReducer } from 'react-router-redux';
+import teamReducer from './containers/Team/reducer';
 import { reducer as formReducer } from 'redux-form';
 import alertReducer from './containers/Alert/reducer';
 import loginReducer from './containers/Login/reducer';
@@ -18,6 +19,7 @@ const reducers = combineReducers({
   app: appReducer,
   form: formReducer,
   post: postReducer,
+  team: teamReducer,
   posts: postsReducer,
   alert: alertReducer,
   login: loginReducer,

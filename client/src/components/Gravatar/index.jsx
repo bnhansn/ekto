@@ -5,7 +5,7 @@ const Gravatar = ({ email, size, className }) => {
   const hash = md5(email);
   const src = `https://secure.gravatar.com/avatar/${hash}?s=${size || 48}`;
 
-  return <img src={src} alt={email} className={className} />;
+  return <img src={src} alt={email} className={className || ''} />;
 };
 
 Gravatar.propTypes = {
