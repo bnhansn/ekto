@@ -12,15 +12,20 @@ class Account extends Component {
     account: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     fetchAccount: PropTypes.func.isRequired,
-    finishedLoading: PropTypes.bool.isRequired,
   };
 
   componentWillMount() {
     this.props.fetchAccount(this.props.params.accountSlug);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.accountSlug !== this.props.params.accountSlug) {
+      this.props.fetchAccount(nextProps.params.accountSlug);
+    }
+  }
+
   render() {
-    const { params: { accountSlug }, account, children } = this.props;
+    const { account, children } = this.props;
     if (isEmpty(account)) {
       return <div className="container">Loading...</div>;
     }
@@ -32,7 +37,7 @@ class Account extends Component {
           headerRoute="/accounts"
           subheader={account.attributes.name}
         />
-        <AccountTabs accountSlug={accountSlug} />
+        <AccountTabs account={account} />
         {children}
       </div>
     );
@@ -43,7 +48,6 @@ export default connect(
   state => ({
     account: state.account.account,
     isLoading: state.account.isLoading,
-    finishedLoading: state.accounts.finishedLoading,
   }),
   { fetchAccount }
 )(Account);

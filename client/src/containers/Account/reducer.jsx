@@ -1,12 +1,13 @@
 import {
   FETCH_ACCOUNT_START,
+  FETCH_ACCOUNT_ERROR,
   FETCH_ACCOUNT_SUCCESS,
 } from './constants';
+import { UPDATE_ACCOUNT_SUCCESS } from '../AccountSettings/constants';
 
 const initialState = {
   account: {},
   isLoading: false,
-  finishedLoading: false,
 };
 
 export default function (state = initialState, action) {
@@ -14,13 +15,24 @@ export default function (state = initialState, action) {
     case FETCH_ACCOUNT_START:
       return {
         ...state,
+        account: {},
         isLoading: true,
       };
     case FETCH_ACCOUNT_SUCCESS:
       return {
         ...state,
         isLoading: false,
-        finishedLoading: true,
+        account: action.payload.data.data,
+      };
+    case FETCH_ACCOUNT_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        account: {},
+      };
+    case UPDATE_ACCOUNT_SUCCESS:
+      return {
+        ...state,
         account: action.payload.data.data,
       };
     default:

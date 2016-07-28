@@ -1,25 +1,25 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const AccountTabs = ({ accountSlug }) =>
+const AccountTabs = ({ account }) =>
   <nav className="tabs m-b-2">
     <div className="container">
       <Link
-        to={`/accounts/${accountSlug}/posts`}
+        to={`/accounts/${account.attributes.slug}/posts`}
         className="tab-link"
         activeClassName="active"
       >
         Posts
       </Link>
       <Link
-        to={`/accounts/${accountSlug}/team`}
+        to={`/accounts/${account.attributes.slug}/team`}
         className="tab-link"
         activeClassName="active"
       >
         Team
       </Link>
       <Link
-        to={`/accounts/${accountSlug}/settings`}
+        to={`/accounts/${account.attributes.slug}/settings`}
         className="tab-link"
         activeClassName="active"
       >
@@ -29,10 +29,7 @@ const AccountTabs = ({ accountSlug }) =>
   </nav>;
 
 AccountTabs.propTypes = {
-  accountSlug: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-  ]),
+  account: PropTypes.object.isRequired,
 };
 
 export default AccountTabs;

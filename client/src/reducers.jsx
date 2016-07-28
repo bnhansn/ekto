@@ -12,6 +12,7 @@ import settingsReducer from './containers/Settings/reducer';
 import accountsReducer from './containers/Accounts/reducer';
 import resetPasswordReducer from './containers/ResetPassword/reducer';
 import forgotPasswordReducer from './containers/ForgotPassword/reducer';
+import accountSettingsReducer from './containers/AccountSettings/reducer';
 
 const reducers = combineReducers({
   app: appReducer,
@@ -27,6 +28,7 @@ const reducers = combineReducers({
   settings: settingsReducer,
   resetPassword: resetPasswordReducer,
   forgotPassword: forgotPasswordReducer,
+  accountSettings: accountSettingsReducer,
 });
 
 export default reducers;
