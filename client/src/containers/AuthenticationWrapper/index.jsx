@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 
-export function redirectAuthenticated(WrappedComponent) {
-  class Redirect extends Component {
+export function authenticate(WrappedComponent) {
+  class AuthenticationWrapper extends Component {
     static propTypes = {
       isAuthenticated: PropTypes.bool.isRequired,
       isAuthenticating: PropTypes.bool.isRequired,
@@ -13,14 +13,14 @@ export function redirectAuthenticated(WrappedComponent) {
     };
 
     componentWillMount() {
-      if (this.props.isAuthenticated) {
-        this.context.router.push('/accounts');
+      if (!this.props.isAuthenticating && !this.props.isAuthenticated) {
+        this.context.router.push('/login');
       }
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.isAuthenticated) {
-        this.context.router.push('/accounts');
+      if (!nextProps.isAuthenticating && !nextProps.isAuthenticated) {
+        this.context.router.push('/login');
       }
     }
 
@@ -40,5 +40,5 @@ export function redirectAuthenticated(WrappedComponent) {
       isAuthenticating: state.app.isAuthenticating,
     }),
     null
-  )(Redirect);
+  )(AuthenticationWrapper);
 }

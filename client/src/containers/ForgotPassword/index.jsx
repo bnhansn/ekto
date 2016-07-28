@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import { forgotPassword } from './actions';
 import React, { Component, PropTypes } from 'react';
-import ForgotForm from '../../components/ForgotForm';
+import ForgotPasswordForm from '../../components/ForgotPasswordForm';
 
-class Forgot extends Component {
+class ForgotPassword extends Component {
   static propTypes = {
     isSubmitting: PropTypes.bool.isRequired,
     forgotPassword: PropTypes.func.isRequired,
@@ -17,14 +17,14 @@ class Forgot extends Component {
     const { isSubmitting } = this.props;
 
     return (
-      <ForgotForm isSubmitting={isSubmitting} onSubmit={::this.handleSubmit} />
+      <ForgotPasswordForm isSubmitting={isSubmitting} onSubmit={::this.handleSubmit} />
     );
   }
 }
 
 export default connect(
   state => ({
-    isSubmitting: state.forgot.isSubmitting,
+    isSubmitting: state.forgotPassword.isSubmitting,
   }),
   { forgotPassword }
-)(Forgot);
+)(ForgotPassword);

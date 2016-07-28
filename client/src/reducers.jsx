@@ -5,12 +5,13 @@ import { reducer as formReducer } from 'redux-form';
 import alertReducer from './containers/Alert/reducer';
 import loginReducer from './containers/Login/reducer';
 import postsReducer from './containers/Posts/reducer';
-import resetReducer from './containers/Reset/reducer';
 import postReducer from './containers/PostEdit/reducer';
 import signupReducer from './containers/Signup/reducer';
-import forgotReducer from './containers/Forgot/reducer';
 import accountReducer from './containers/Account/reducer';
+import settingsReducer from './containers/Settings/reducer';
 import accountsReducer from './containers/Accounts/reducer';
+import resetPasswordReducer from './containers/ResetPassword/reducer';
+import forgotPasswordReducer from './containers/ForgotPassword/reducer';
 
 const reducers = combineReducers({
   app: appReducer,
@@ -18,13 +19,14 @@ const reducers = combineReducers({
   post: postReducer,
   posts: postsReducer,
   alert: alertReducer,
-  reset: resetReducer,
   login: loginReducer,
   signup: signupReducer,
-  forgot: forgotReducer,
   routing: routerReducer,
   account: accountReducer,
   accounts: accountsReducer,
+  settings: settingsReducer,
+  resetPassword: resetPasswordReducer,
+  forgotPassword: forgotPasswordReducer,
 });
 
 export default reducers;

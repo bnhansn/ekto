@@ -1,8 +1,9 @@
 import Input from '../Input';
+import { Link } from 'react-router';
 import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes, Component } from 'react';
 
-class ForgotForm extends Component {
+class ForgotPasswordForm extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
@@ -24,10 +25,10 @@ class ForgotForm extends Component {
       >
         <div className="card">
           <div className="card-header">
-            Reset password
+            Forgot password
           </div>
           <div className="card-block">
-            <Field name="password" type="password" component={Input} placeholder="New password" />
+            <Field name="email" component={Input} placeholder="Email" />
             <button
               type="submit"
               className="btn btn-primary"
@@ -35,6 +36,7 @@ class ForgotForm extends Component {
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
+            <Link to="/login" className="btn btn-link">Cancel</Link>
           </div>
         </div>
       </form>
@@ -44,15 +46,13 @@ class ForgotForm extends Component {
 
 const validate = values => {
   const errors = {};
-  if (!values.password) {
-    errors.password = 'Required';
-  } else if (values.password.length < 6) {
-    errors.password = 'Minimum of 6 characters';
+  if (!values.email) {
+    errors.email = 'Required';
   }
   return errors;
 };
 
 export default reduxForm({
-  form: 'reset',
+  form: 'forgotPassword',
   validate,
-})(ForgotForm);
+})(ForgotPasswordForm);

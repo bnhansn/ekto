@@ -19,7 +19,7 @@ export function forgotPassword(data) {
           dispatch({
             type: SHOW_ALERT,
             alert: {
-              klass: 'primary',
+              klass: 'info',
               message: 'Please check your email for a password reset link',
             },
           });
