@@ -1,23 +1,41 @@
 import { connect } from 'react-redux';
-import { updateAccount } from './actions';
 import React, { Component, PropTypes } from 'react';
 import AccountSettingsForm from '../../components/AccountSettingsForm';
+import AccountDomainsList from '../../components/AccountDomainsList';
+import { updateAccount, fetchDomains, createDomain, deleteDomain } from './actions';
 
 class AccountSettings extends Component {
   static propTypes = {
     initialValues: PropTypes.object,
+    domains: PropTypes.array.isRequired,
     params: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
+    createDomain: PropTypes.func.isRequired,
+    fetchDomains: PropTypes.func.isRequired,
+    deleteDomain: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
+    isCreatingDomain: PropTypes.bool.isRequired,
   };
+
+  componentWillMount() {
+    this.props.fetchDomains(this.props.account.id);
+  }
 
   handleSubmit(data) {
     this.props.updateAccount(this.props.account.id, data);
   }
 
+  handleNewDomainSubmit(data) {
+    this.props.createDomain(this.props.account.id, data);
+  }
+
+  handleDomainDelete(id) {
+    this.props.deleteDomain(this.props.account.id, id);
+  }
+
   render() {
-    const { isSubmitting, initialValues } = this.props;
+    const { isSubmitting, initialValues, domains, isCreatingDomain } = this.props;
 
     return (
       <div className="container">
@@ -27,6 +45,12 @@ class AccountSettings extends Component {
           initialValues={initialValues}
           onSubmit={::this.handleSubmit}
         />
+        <AccountDomainsList
+          domains={domains}
+          isCreatingDomain={isCreatingDomain}
+          onDomainDelete={::this.handleDomainDelete}
+          onNewDomainSubmit={::this.handleNewDomainSubmit}
+        />
       </div>
     );
   }
@@ -34,9 +58,11 @@ class AccountSettings extends Component {
 
 export default connect(
   state => ({
+    domains: state.account.domains,
     account: state.account.account,
     isSubmitting: state.accountSettings.isSubmitting,
     initialValues: state.account.account.attributes,
+    isCreatingDomain: state.accountSettings.isCreatingDomain,
   }),
-  { updateAccount }
+  { updateAccount, fetchDomains, createDomain, deleteDomain }
 )(AccountSettings);

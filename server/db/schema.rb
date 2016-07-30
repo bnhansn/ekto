@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725231413) do
+ActiveRecord::Schema.define(version: 20160730174313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,9 @@ ActiveRecord::Schema.define(version: 20160725231413) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
     t.index ["account_id"], name: "index_account_users_on_account_id", using: :btree
+    t.index ["deleted_at"], name: "index_account_users_on_deleted_at", using: :btree
     t.index ["user_id"], name: "index_account_users_on_user_id", using: :btree
   end
 
@@ -31,6 +33,16 @@ ActiveRecord::Schema.define(version: 20160725231413) do
     t.datetime "updated_at", null: false
     t.string   "slug"
     t.integer  "slug_id"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
+  end
+
+  create_table "domains", force: :cascade do |t|
+    t.integer  "account_id"
+    t.string   "url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_domains_on_account_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|
@@ -51,7 +63,9 @@ ActiveRecord::Schema.define(version: 20160725231413) do
     t.integer  "slug_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
+    t.datetime "deleted_at"
     t.index ["account_id"], name: "index_posts_on_account_id", using: :btree
+    t.index ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree
     t.index ["slug"], name: "index_posts_on_slug", using: :btree
   end
 
@@ -63,6 +77,8 @@ ActiveRecord::Schema.define(version: 20160725231413) do
     t.datetime "password_reset_sent_at"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   end
 
 end

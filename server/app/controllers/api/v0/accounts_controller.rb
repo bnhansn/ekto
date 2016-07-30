@@ -28,6 +28,12 @@ class Api::V0::AccountsController < Api::V0::BaseController
     end
   end
 
+  def destroy
+    account = @user.accounts.friendly.find(params[:id])
+    account.destroy
+    render json: account, status: :ok
+  end
+
   def team
     account = @user.accounts.friendly.find(params[:id])
     render json: account.users

@@ -6,11 +6,12 @@ Rails.application.routes.draw do
       post 'forgot', to: 'passwords#forgot'
       post 'reset', to: 'passwords#reset'
       resources :users, only: [:create, :update]
-      resources :accounts, only: [:index, :create, :show, :update] do
+      resources :accounts, only: [:index, :create, :show, :update, :destroy] do
         member do
           get 'team'
         end
         resources :posts, only: [:index, :create, :show, :update, :destroy]
+        resources :domains, only: [:index, :create, :update, :destroy]
       end
     end
     namespace :v1 do

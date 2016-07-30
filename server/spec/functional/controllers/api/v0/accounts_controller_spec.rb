@@ -108,13 +108,13 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
     end
   end
 
-  describe 'POST #update' do
+  describe 'PATCH #update' do
     context 'authorized' do
       include_context :with_authorized_user_and_account
 
       it 'updates an account' do
         process :update,
-                method: :post,
+                method: :patch,
                 params: {
                   id: @account.id,
                   data: { attributes: { name: 'Updated name' } }
@@ -135,7 +135,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
         account = create(:account)
 
         process :update,
-                method: :post,
+                method: :patch,
                 params: {
                   id: account.id,
                   data: { attributes: { name: 'Updated name' } }
@@ -150,7 +150,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
         account = create(:account)
 
         process :update,
-                method: :post,
+                method: :patch,
                 params: {
                   id: account.id,
                   data: { attributes: { name: 'Updated name' } }
@@ -199,6 +199,48 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
         account = create(:account)
 
         process :team, method: :get, params: { id: account.id }
+
+        expect(response).to have_http_status(:unauthorized)
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'authorized' do
+      include_context :with_authorized_user_and_account
+
+      it 'deletes an account' do
+        account = create(:account)
+        enable_account_access(@user.id, account.id)
+
+        expect do
+          process :destroy, method: :delete, params: { id: account.id }
+        end.to change { Account.count }.by(-1)
+
+        result = JSON.parse(response.body)
+
+        expect(response).to have_http_status(:ok)
+        expect(result['data']['id']).to eq(account.id.to_s)
+      end
+    end
+
+    context 'authorized user unauthorized account' do
+      include_context :with_authorized_user
+
+      it 'returns not_found' do
+        account = create(:account)
+
+        process :destroy, method: :delete, params: { id: account.id }
+
+        expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'unauthorized' do
+      it 'returns unauthorized' do
+        account = create(:account)
+
+        process :destroy, method: :delete, params: { id: account.id }
 
         expect(response).to have_http_status(:unauthorized)
       end

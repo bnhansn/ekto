@@ -24,10 +24,10 @@ class AccountSettingsForm extends Component {
         <div className="card">
           <div className="card-block">
             <div className="row">
-              <div className="col-sm-4">
+              <div className="col-sm-4 col-xs-12">
                 <h5>Settings</h5>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-12">
                 <Field
                   type="text"
                   name="name"
@@ -37,7 +37,7 @@ class AccountSettingsForm extends Component {
               </div>
             </div>
           </div>
-          <div className="card-footer">
+          <div className="card-footer text-xs-right">
             <button
               type="submit"
               className="btn btn-primary"

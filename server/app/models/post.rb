@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  acts_as_paranoid
   extend FriendlyId
 
   belongs_to :account, required: true
