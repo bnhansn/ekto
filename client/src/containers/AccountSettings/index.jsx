@@ -58,8 +58,8 @@ class AccountSettings extends Component {
 
 export default connect(
   state => ({
-    domains: state.account.domains,
     account: state.account.account,
+    domains: state.accountSettings.domains,
     isSubmitting: state.accountSettings.isSubmitting,
     initialValues: state.account.account.attributes,
     isCreatingDomain: state.accountSettings.isCreatingDomain,

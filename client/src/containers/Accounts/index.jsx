@@ -61,7 +61,7 @@ class Accounts extends Component {
       <div>
         <Topnav header="Accounts" className="m-b-2" />
         <div className="container">
-          {isLoading && <div className="loader"></div>}
+          {isLoading && !accounts.length && <div className="loader"></div>}
           {noAccounts &&
             <Callout klass="primary">
               <p>Create an account with the icon below to get started</p>
