@@ -5,6 +5,7 @@ import {
   AUTHENTICATION_ERROR,
   AUTHENTICATION_SUCCESS,
 } from './constants';
+import { UPDATE_SETTINGS_SUCCESS } from '../Settings/constants';
 
 const initialState = {
   user: {},
@@ -46,6 +47,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         location: { ...location },
+      };
+    case UPDATE_SETTINGS_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.data.data,
       };
     default:
       return state;

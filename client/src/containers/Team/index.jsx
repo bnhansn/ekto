@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
 import { fetchTeam } from './actions';
 import Gravatar from '../../components/Gravatar';
@@ -43,17 +42,11 @@ class Team extends Component {
   }
 
   render() {
-    const { team, isLoading } = this.props;
-    if (isLoading) {
-      return <div className="container">Loading...</div>;
-    }
-
-    if (isEmpty(team)) {
-      return null;
-    }
+    const { isLoading } = this.props;
 
     return (
       <div className="container">
+        {isLoading && <div className="loader"></div>}
         <ul className="list-group">
           {::this.renderTeam()}
         </ul>

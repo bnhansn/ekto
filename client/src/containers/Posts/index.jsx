@@ -43,9 +43,7 @@ class Posts extends Component {
     return (
       <div>
         <div className="container">
-          {isLoading &&
-            <div>Loading...</div>
-          }
+          {isLoading && <div className="loader"></div>}
           <div className="list-group m-b-1">
             {this.renderPosts()}
           </div>

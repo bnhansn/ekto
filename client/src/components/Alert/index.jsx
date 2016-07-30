@@ -1,13 +1,14 @@
-import React, { PropTypes } from 'react';
 import classnames from 'classnames';
+import includes from 'lodash/includes';
+import React, { PropTypes } from 'react';
 
 const Alert = (props) => {
-  const { alert: { klass, message } } = props;
+  const { alert: { klass, icon, message } } = props;
   const iconClass = classnames({
-    checkmark: klass === 'success',
-    notification2: klass === 'warning',
-    warning2: klass === 'danger' || !klass,
-    info2: klass === 'primary' || klass === 'info',
+    notification2: icon === 'notification' || (!icon && klass === 'warning'),
+    warning2: icon === 'warning' || ((!icon && klass === 'danger') || !klass),
+    info2: icon === 'info' || (!icon && includes(['primary', 'info'], klass)),
+    checkmark: icon === 'checkmark' || (!icon && includes(['success', 'white', 'black'], klass)),
   });
 
   return (

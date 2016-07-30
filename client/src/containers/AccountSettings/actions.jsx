@@ -4,7 +4,7 @@ import {
   UPDATE_ACCOUNT_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { reset } from 'redux-form';
+import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 
@@ -14,11 +14,13 @@ export function updateAccount(id, data) {
     api.patch(`/accounts/${id}`, data)
       .then(response => {
         if (isSuccess(response)) {
+          const accountSlug = response.data.data.attributes.slug;
           dispatch({ type: UPDATE_ACCOUNT_SUCCESS, payload: response });
-          dispatch(reset('accountSettings'));
+          // need to update slug in url if it changed
+          dispatch(push(`/accounts/${accountSlug}/settings`));
           dispatch({
             type: SHOW_ALERT,
-            alert: { klass: 'info', message: 'Account updated successfully' },
+            alert: { klass: 'white', message: 'Account updated' },
           });
         } else {
           dispatch({ type: UPDATE_ACCOUNT_ERROR });

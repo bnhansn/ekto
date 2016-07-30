@@ -53,17 +53,15 @@ class Accounts extends Component {
   }
 
   render() {
-    const { accounts, isLoading, finishedLoading, isSavingNewAccount } = this.props;
     const { accountFormOpen } = this.state;
+    const { accounts, isLoading, finishedLoading, isSavingNewAccount } = this.props;
     const noAccounts = !accounts.length && finishedLoading;
 
     return (
       <div>
         <Topnav header="Accounts" className="m-b-2" />
         <div className="container">
-          {isLoading &&
-            <div>Loading</div>
-          }
+          {isLoading && <div className="loader"></div>}
           {noAccounts &&
             <Callout klass="primary">
               <p>Create an account with the icon below to get started</p>

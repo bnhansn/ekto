@@ -25,7 +25,7 @@ class AccountSettingsForm extends Component {
           <div className="card-block">
             <div className="row">
               <div className="col-sm-4">
-                <h5>Account settings</h5>
+                <h5>Settings</h5>
               </div>
               <div className="col-sm-8">
                 <Field

@@ -5,10 +5,10 @@ import AccountSettingsForm from '../../components/AccountSettingsForm';
 
 class AccountSettings extends Component {
   static propTypes = {
+    initialValues: PropTypes.object,
     params: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    initialValues: PropTypes.object.isRequired,
     updateAccount: PropTypes.func.isRequired,
   };
 

@@ -18,7 +18,7 @@ export function updateSettings(id, data) {
           dispatch(reset('settings'));
           dispatch({
             type: SHOW_ALERT,
-            alert: { klass: 'success', message: 'Account updated successfully' },
+            alert: { klass: 'white', message: 'Account updated' },
           });
         } else {
           dispatch({ type: UPDATE_SETTINGS_ERROR });

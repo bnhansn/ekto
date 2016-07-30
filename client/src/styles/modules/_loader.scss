@@ -1,0 +1,14 @@
+.loader {
+  width: 20px;
+  height: 20px;
+  margin: 2rem auto;
+  border: 2px solid transparent;
+  border-color: transparent $gray-light;
+  border-radius: 28px;
+  animation: rotate-loader 1.2s linear 0s infinite normal;
+}
+
+@keyframes rotate-loader {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
