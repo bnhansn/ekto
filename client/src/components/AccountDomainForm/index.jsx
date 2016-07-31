@@ -30,7 +30,7 @@ class AccountDomainForm extends Component {
           <Field
             type="text"
             name="url"
-            placeholder="Url"
+            placeholder="http://"
             component={renderField}
           />
           <div className="input-group-btn">

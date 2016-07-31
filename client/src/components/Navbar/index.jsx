@@ -8,23 +8,20 @@ class Navbar extends Component {
     user: PropTypes.object.isRequired,
     onLogoutClick: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticating: PropTypes.bool.isRequired,
   };
 
   handleLogoutClick(e) {
     this.props.onLogoutClick(e);
   }
 
-  handleLinkClick() {
-    this.refs.dropdown.hide();
-  }
-
   render() {
-    const { user, isAuthenticated } = this.props;
+    const { user, isAuthenticated, isAuthenticating } = this.props;
 
     return (
       <nav className="navbar bg-primary">
         <Link to="/" className="navbar-brand">Ekto</Link>
-        {!isAuthenticated &&
+        {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
               <Link to="/login" className="nav-link" activeClassName="active">

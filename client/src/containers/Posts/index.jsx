@@ -23,15 +23,14 @@ class Posts extends Component {
     return posts.map(post =>
       <Link
         key={post.id}
-        className="list-group-item list-group-item-action"
-        to={`/accounts/${accountSlug}/posts/${post.attributes.slug}`}
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+        to={`/accounts/${accountSlug}/posts/${post.id}`}
+        className="list-group-item list-group-item-action flex align-center justify-between"
       >
         <span>{post.attributes.title}</span>
         {!post.attributes.published &&
           <span className="tag tag-default m-l-1">Unpublished</span>
         }
-        <div style={{ flexGrow: '1' }}></div>
+        <div className="flex-grow"></div>
         <i className="icon icon-arrow-right2"></i>
       </Link>
     );

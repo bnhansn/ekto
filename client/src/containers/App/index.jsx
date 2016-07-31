@@ -10,6 +10,7 @@ class App extends Component {
     user: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
+    isAuthenticating: PropTypes.bool.isRequired,
   };
 
   handleLogout(e) {
@@ -18,13 +19,14 @@ class App extends Component {
   }
 
   render() {
-    const { children, user, isAuthenticated } = this.props;
+    const { children, user, isAuthenticated, isAuthenticating } = this.props;
 
     return (
       <div>
         <Alert />
         <Navbar
           user={user}
+          isAuthenticating={isAuthenticating}
           isAuthenticated={isAuthenticated}
           onLogoutClick={::this.handleLogout}
         />
@@ -38,6 +40,7 @@ export default connect(
   state => ({
     user: state.app.user,
     isAuthenticated: state.app.isAuthenticated,
+    isAuthenticating: state.app.isAuthenticating,
   }),
   { logout }
 )(App);

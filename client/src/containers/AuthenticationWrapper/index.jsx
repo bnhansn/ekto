@@ -26,10 +26,8 @@ export function authenticate(WrappedComponent) {
 
     render() {
       const { isAuthenticating } = this.props;
+      if (isAuthenticating) { return null; }
 
-      if (isAuthenticating) {
-        return <div></div>;
-      }
       return <WrappedComponent {...this.props} />;
     }
   }

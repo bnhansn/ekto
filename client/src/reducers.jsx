@@ -7,6 +7,7 @@ import alertReducer from './containers/Alert/reducer';
 import loginReducer from './containers/Login/reducer';
 import postsReducer from './containers/Posts/reducer';
 import postReducer from './containers/PostEdit/reducer';
+import postNewReducer from './containers/PostNew/reducer';
 import signupReducer from './containers/Signup/reducer';
 import accountReducer from './containers/Account/reducer';
 import settingsReducer from './containers/Settings/reducer';
@@ -19,6 +20,7 @@ const reducers = combineReducers({
   app: appReducer,
   form: formReducer,
   post: postReducer,
+  postNew: postNewReducer,
   team: teamReducer,
   posts: postsReducer,
   alert: alertReducer,

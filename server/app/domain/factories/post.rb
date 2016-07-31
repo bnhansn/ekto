@@ -39,7 +39,9 @@ module Factories
 
     def defaults(post, account_id)
       post.title = 'Untitled' unless post.title.present?
-      post.slug_candidate = 'untitled' unless post.slug_candidate.present?
+      unless post.slug_candidate.present?
+        post.slug_candidate = post.title.parameterize || 'untitled'
+      end
       post.slug_id = ::Post.where(account_id: account_id).count + 1
       post
     end

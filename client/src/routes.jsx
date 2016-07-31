@@ -41,7 +41,7 @@ export default (
         component={authenticate(PostNew)}
       />
       <Route
-        path="/accounts/:accountSlug/posts/:postSlug"
+        path="/accounts/:accountSlug/posts/:id"
         component={authenticate(PostEdit)}
       />
     </Route>

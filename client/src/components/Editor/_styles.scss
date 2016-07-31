@@ -1,0 +1,17 @@
+.post-title,
+.post-markdown {
+  width: 100%;
+  padding: 15px 20px;
+  color: $body-color;
+  border: 0;
+  outline: none;
+}
+
+.post-title {
+  font-size: 2rem;
+  border-bottom: 1px solid $gray-lightest;
+}
+
+.post-markdown {
+  min-height: 400px;
+}
