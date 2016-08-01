@@ -36,7 +36,8 @@
     "react-tabs": "^0.7.0",
     "redux": "^3.5.2",
     "redux-form": "^6.0.0-rc.3",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "showdown": "^1.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.7",

@@ -7,8 +7,9 @@ import {
   UPDATE_POST_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { isSuccess } from '../../utils';
 import { push } from 'react-router-redux';
+import { SHOW_ALERT } from '../Alert/constants';
+import { isSuccess, parseError, keyTransform, assignAttributes } from '../../utils';
 
 export function fetchPost(accountSlug, id) {
   return dispatch => {
@@ -26,14 +27,71 @@ export function fetchPost(accountSlug, id) {
 }
 
 export function updatePost(accountSlug, id, data) {
+  const attributes = keyTransform(data);
+  const post = assignAttributes(attributes);
   return dispatch => {
     dispatch({ type: UPDATE_POST_START });
-    api.patch(`/accounts/${accountSlug}/posts/${id}`, data)
+    api.patch(`/accounts/${accountSlug}/posts/${id}`, post)
       .then(response => {
         if (isSuccess(response)) {
           dispatch({ type: UPDATE_POST_SUCCESS, payload: response });
         } else {
           dispatch({ type: UPDATE_POST_ERROR });
+        }
+      });
+  };
+}
+
+export function publishPost(accountSlug, id, data) {
+  const postData = { ...data, published: true };
+  const attributes = keyTransform(postData);
+  const post = assignAttributes(attributes);
+  return dispatch => {
+    dispatch({ type: UPDATE_POST_START });
+    api.patch(`/accounts/${accountSlug}/posts/${id}`, post)
+      .then(response => {
+        if (isSuccess(response)) {
+          dispatch({ type: UPDATE_POST_SUCCESS, payload: response });
+        } else {
+          dispatch({ type: UPDATE_POST_ERROR });
+        }
+      });
+  };
+}
+
+export function unpublishPost(accountSlug, id, data) {
+  const postData = { ...data, published: false };
+  const attributes = keyTransform(postData);
+  const post = assignAttributes(attributes);
+  return dispatch => {
+    dispatch({ type: UPDATE_POST_START });
+    api.patch(`/accounts/${accountSlug}/posts/${id}`, post)
+      .then(response => {
+        if (isSuccess(response)) {
+          dispatch({ type: UPDATE_POST_SUCCESS, payload: response });
+        } else {
+          dispatch({ type: UPDATE_POST_ERROR });
+        }
+      });
+  };
+}
+
+export function deletePost(accountSlug, id) {
+  return dispatch => {
+    api.delete(`/accounts/${accountSlug}/posts/${id}`)
+      .then(response => {
+        if (isSuccess(response)) {
+          dispatch(push(`/accounts/${accountSlug}/posts`));
+          dispatch({
+            type: SHOW_ALERT,
+            alert: { klass: 'white', message: 'Post deleted' },
+          });
+        } else {
+          const message = parseError(response, 'Error deleting post');
+          dispatch({
+            type: SHOW_ALERT,
+            alert: { klass: 'danger', message },
+          });
         }
       });
   };

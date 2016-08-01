@@ -1,17 +1,37 @@
 .post-title,
-.post-markdown {
+.post-markdown,
+.post-title-preview,
+.post-html-preview,
+.post-settings-title,
+.post-settings-content {
   width: 100%;
   padding: 15px 20px;
   color: $body-color;
+  background: #fff;
   border: 0;
   outline: none;
 }
 
-.post-title {
-  font-size: 2rem;
+.post-title,
+.post-title-preview,
+.post-settings-title {
+  font-size: 1.5rem;
+  font-weight: 500;
   border-bottom: 1px solid $gray-lightest;
 }
 
-.post-markdown {
+.post-markdown,
+.post-html-preview {
   min-height: 400px;
+}
+
+.save-post-button {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.post-dropdown-trigger {
+  border-left: 1px solid rgba(0,0,0,.1);
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }

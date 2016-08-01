@@ -5,11 +5,23 @@ const MarkdownGuide = () =>
     <table>
       <thead>
         <tr>
-          <th><h5 className="m-b-0">Markdown</h5></th>
-          <th><h5 className="m-b-0">Result</h5></th>
+          <th><h4 className="m-b-0">Markdown</h4></th>
+          <th><h4 className="m-b-0">Result</h4></th>
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td># Heading</td>
+          <td><h1 className="m-b-0">H1</h1></td>
+        </tr>
+        <tr>
+          <td>## Heading</td>
+          <td><h2 className="m-b-0">H2</h2></td>
+        </tr>
+        <tr>
+          <td>### Heading</td>
+          <td><h3 className="m-b-0">H3</h3></td>
+        </tr>
         <tr>
           <td>**text**</td>
           <td><strong>Bold</strong></td>
@@ -40,23 +52,7 @@ const MarkdownGuide = () =>
         </tr>
         <tr>
           <td>&gt; quote</td>
-          <td><blockquote className="blockquote">Blockquote</blockquote></td>
-        </tr>
-        <tr>
-          <td>==Highlight==</td>
-          <td><mark>Highlight</mark></td>
-        </tr>
-        <tr>
-          <td># Heading</td>
-          <td><h1>H1</h1></td>
-        </tr>
-        <tr>
-          <td>## Heading</td>
-          <td><h2>H2</h2></td>
-        </tr>
-        <tr>
-          <td>### Heading</td>
-          <td><h3>H3</h3></td>
+          <td><blockquote>Blockquote</blockquote></td>
         </tr>
         <tr>
           <td>---</td>
