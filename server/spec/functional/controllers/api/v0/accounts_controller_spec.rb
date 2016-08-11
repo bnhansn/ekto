@@ -209,18 +209,33 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
     context 'authorized' do
       include_context :with_authorized_user_and_account
 
-      it 'deletes an account' do
-        account = create(:account)
-        enable_account_access(@user.id, account.id)
+      context 'account owner' do
+        it 'deletes an account' do
+          account = create(:account, owner_id: @user.id)
+          enable_account_access(@user.id, account.id)
 
-        expect do
-          process :destroy, method: :delete, params: { id: account.id }
-        end.to change { Account.count }.by(-1)
+          expect do
+            process :destroy, method: :delete, params: { id: account.id }
+          end.to change { Account.count }.by(-1)
 
-        result = JSON.parse(response.body)
+          result = JSON.parse(response.body)
 
-        expect(response).to have_http_status(:ok)
-        expect(result['data']['id']).to eq(account.id.to_s)
+          expect(response).to have_http_status(:ok)
+          expect(result['data']['id']).to eq(account.id.to_s)
+        end
+      end
+
+      context 'account team member but not owner' do
+        it 'returns unauthorized' do
+          account = create(:account)
+          enable_account_access(@user.id, account.id)
+
+          expect do
+            process :destroy, method: :delete, params: { id: account.id }
+          end.not_to change { Account.count }
+
+          expect(response).to have_http_status(:unauthorized)
+        end
       end
     end
 

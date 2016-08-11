@@ -1,12 +1,14 @@
+import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
-import AccountSettingsForm from '../../components/AccountSettingsForm';
 import AccountDomainsList from '../../components/AccountDomainsList';
-import { updateAccount, fetchDomains, createDomain, deleteDomain } from './actions';
+import AccountSettingsForm from '../../components/AccountSettingsForm';
+import { updateAccount, fetchDomains, createDomain, deleteDomain, deleteAccount } from './actions';
 
 class AccountSettings extends Component {
   static propTypes = {
     initialValues: PropTypes.object,
+    user: PropTypes.object.isRequired,
     domains: PropTypes.array.isRequired,
     params: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired,
@@ -15,8 +17,17 @@ class AccountSettings extends Component {
     fetchDomains: PropTypes.func.isRequired,
     deleteDomain: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
+    deleteAccount: PropTypes.func.isRequired,
     isCreatingDomain: PropTypes.bool.isRequired,
   };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalOpen: false,
+      deleteConfirmation: '',
+    };
+  }
 
   componentWillMount() {
     this.props.fetchDomains(this.props.account.id);
@@ -34,8 +45,26 @@ class AccountSettings extends Component {
     this.props.deleteDomain(this.props.account.id, id);
   }
 
+  handleAccountDelete(e) {
+    e.preventDefault();
+    const { account } = this.props;
+    if (this.state.deleteConfirmation !== account.attributes.name) {
+      return false;
+    }
+    this.props.deleteAccount(this.props.account.id);
+    return true;
+  }
+
+  handleModalClose() {
+    this.setState({
+      modalOpen: false,
+      deleteConfirmation: '',
+    });
+  }
+
   render() {
-    const { isSubmitting, initialValues, domains, isCreatingDomain } = this.props;
+    const { modalOpen } = this.state;
+    const { isSubmitting, initialValues, domains, isCreatingDomain, user, account } = this.props;
 
     return (
       <div className="container">
@@ -51,6 +80,76 @@ class AccountSettings extends Component {
           onDomainDelete={::this.handleDomainDelete}
           onNewDomainSubmit={::this.handleNewDomainSubmit}
         />
+        {user.id === account.attributes.ownerId.toString() &&
+          <div className="card">
+            <div className="card-block">
+              <div className="row">
+                <div className="col-sm-4 col-xs-12">
+                  <h5>Danger zone</h5>
+                  <p className="small text-muted">
+                    Deleting an account is permanent and deletes all associated posts.
+                  </p>
+                </div>
+                <div className="col-sm-8 col-xs-12">
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => this.setState({ modalOpen: true })}
+                  >
+                    Delete account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        <Modal
+          isOpen={modalOpen}
+          className="modal"
+          overlayClassName="modal-overlay"
+          onRequestClose={::this.handleModalClose}
+        >
+          <form onSubmit={::this.handleAccountDelete}>
+            <div className="modal-header">
+              <h6 className="text-primary">Delete account</h6>
+              <i
+                className="modal-close"
+                onClick={::this.handleModalClose}
+              ></i>
+            </div>
+            <div className="modal-content">
+              <p>
+                Deleting an account is irreversible and deletes all associated
+                posts. Enter your accounts's name <code>{account.attributes.name}</code>
+                &nbsp;below to confirm you want to permanently delete it.
+              </p>
+              <div className="form-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  onChange={(e) => { this.setState({ deleteConfirmation: e.target.value }); }}
+                />
+              </div>
+            </div>
+            <div className="modal-footer text-xs-right">
+              <div className="btn-toolbar">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={::this.handleModalClose}
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-danger"
+                  disabled={this.state.deleteConfirmation !== account.attributes.name}
+                >
+                  Delete account
+                </button>
+              </div>
+            </div>
+          </form>
+        </Modal>
       </div>
     );
   }
@@ -58,11 +157,12 @@ class AccountSettings extends Component {
 
 export default connect(
   state => ({
+    user: state.app.user,
     account: state.account.account,
     domains: state.accountSettings.domains,
     isSubmitting: state.accountSettings.isSubmitting,
     initialValues: state.account.account.attributes,
     isCreatingDomain: state.accountSettings.isCreatingDomain,
   }),
-  { updateAccount, fetchDomains, createDomain, deleteDomain }
+  { updateAccount, fetchDomains, createDomain, deleteDomain, deleteAccount }
 )(AccountSettings);

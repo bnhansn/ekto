@@ -5,7 +5,7 @@ module Factories
     def build(user_id, params)
       attributes = sanitize(params)
       account = ::Account.new(attributes)
-      account.created_by = user_id
+      account.owner_id = user_id
       account.slug_id = slug_id(account)
       account
     end
@@ -25,7 +25,7 @@ module Factories
     end
 
     def slug_id(account)
-      ::Account.where(name: account.name).count
+      ::Account.with_deleted.where('lower(name) = ?', account.name.downcase).count + 1 # rubocop:disable LineLength
     end
   end
 end

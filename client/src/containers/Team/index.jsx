@@ -18,7 +18,7 @@ class Team extends Component {
   renderTeam() {
     const { team, account } = this.props;
     if (!team.length) { return null; }
-    const ownerId = account.attributes.createdBy.toString();
+    const ownerId = account.attributes.ownerId.toString();
 
     return team.map(user =>
       <li key={user.id} className="list-group-item">

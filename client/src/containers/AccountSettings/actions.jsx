@@ -84,3 +84,25 @@ export function deleteDomain(accountId, id) {
       });
   };
 }
+
+export function deleteAccount(accountId) {
+  return dispatch => {
+    api.delete(`/accounts/${accountId}`)
+      .then(response => {
+        if (isSuccess(response)) {
+          const accountName = response.data.data.attributes.name;
+          dispatch(push('/accounts'));
+          dispatch({
+            type: SHOW_ALERT,
+            alert: { klass: 'white', message: `Account ${accountName} has been deleted` },
+          });
+        } else {
+          const message = parseError(response, 'Error deleting account');
+          dispatch({
+            type: SHOW_ALERT,
+            alert: { klass: 'danger', message },
+          });
+        }
+      });
+  };
+}

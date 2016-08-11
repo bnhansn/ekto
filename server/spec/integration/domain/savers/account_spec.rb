@@ -27,10 +27,10 @@ describe Savers::Account do
         expect(user.accounts).to include(result)
       end
 
-      it 'sets created_by to the account creator' do
+      it 'sets owner_id to the account creator' do
         result = Savers::Account.create(@user_id, @params)
 
-        expect(result.created_by).to eq(@user_id)
+        expect(result.owner_id).to eq(@user_id)
       end
 
       it 'creates slug as parameterized name' do

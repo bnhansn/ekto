@@ -30,6 +30,7 @@ class Api::V0::AccountsController < Api::V0::BaseController
 
   def destroy
     account = @user.accounts.friendly.find(params[:id])
+    return unauthorized_error unless account.owner_id == @user.id
     account.destroy
     render json: account, status: :ok
   end

@@ -10,7 +10,16 @@ describe Factories::Account do
       account = Factories::Account.build(user_id, params)
 
       expect(account.name).to eq('Account name')
-      expect(account.created_by).to eq(user_id)
+    end
+
+    it 'sets owner_id to account creator id' do
+      attrs = { data: { attributes: { name: 'Account name' } } }
+      params = ActionController::Parameters.new(attrs)
+      user = create(:user)
+
+      account = Factories::Account.build(user.id, params)
+
+      expect(account.owner_id).to eq(user.id)
     end
   end
 
