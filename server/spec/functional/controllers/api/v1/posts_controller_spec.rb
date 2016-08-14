@@ -1,3 +1,4 @@
+# rubocop:disable LineLength
 require_relative '../../../../rails_helper'
 
 RSpec.describe Api::V1::PostsController, type: :controller do
@@ -33,7 +34,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       process :index, method: :get, params: { account_id: @account.key }
 
       expect(response).to have_http_status(:unauthorized)
-      expect(response.body).to have_error('Domain not whitelisted for account')
+      expect(response.body).to have_error("Domain #{request.host} not whitelisted for account #{@account.key}")
     end
   end
 
@@ -82,7 +83,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
               params: { account_id: @account.key, id: @post.id }
 
       expect(response).to have_http_status(:unauthorized)
-      expect(response.body).to have_error('Domain not whitelisted')
+      expect(response.body).to have_error("Domain #{request.host} not whitelisted for account #{@account.key}")
     end
   end
 end
