@@ -26,7 +26,7 @@ class AccountDomainForm extends Component {
         <div className="input-group">
           <Field
             type="text"
-            name="url"
+            name="host"
             placeholder="http://"
             component={renderField}
           />
@@ -47,8 +47,8 @@ class AccountDomainForm extends Component {
 
 const validate = values => {
   const errors = {};
-  if (!values.url) {
-    errors.url = 'Required';
+  if (!values.host) {
+    errors.host = 'Required';
   }
   return errors;
 };
