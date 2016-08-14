@@ -6,6 +6,6 @@ class DomainSerializer < ActiveModel::Serializer
   attributes :id,
              :account_id,
              :created_at,
-             :updated_at,
-             :url
+             :host,
+             :updated_at
 end

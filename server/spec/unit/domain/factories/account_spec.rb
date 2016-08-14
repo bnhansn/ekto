@@ -2,24 +2,28 @@ require_relative '../../../rails_helper'
 
 describe Factories::Account do
   describe '#build' do
-    it 'works' do
+    before do
+      @user = create(:user)
       attrs = { name: 'Account name' }
-      params = ActionController::Parameters.new(attrs)
-      user_id = 1
+      @params = ActionController::Parameters.new(attrs)
+    end
 
-      account = Factories::Account.build(user_id, params)
+    it 'assigns passthrough fields' do
+      account = Factories::Account.build(@user.id, @params)
 
       expect(account.name).to eq('Account name')
     end
 
     it 'sets owner_id to account creator id' do
-      attrs = { name: 'Account name' }
-      params = ActionController::Parameters.new(attrs)
-      user = create(:user)
+      account = Factories::Account.build(@user.id, @params)
 
-      account = Factories::Account.build(user.id, params)
+      expect(account.owner_id).to eq(@user.id)
+    end
 
-      expect(account.owner_id).to eq(user.id)
+    it 'creates 10 character random key' do
+      account = Factories::Account.build(@user.id, @params)
+
+      expect(account.key).to match(/^[a-zA-Z0-9]{10,}/)
     end
   end
 

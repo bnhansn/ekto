@@ -24,6 +24,6 @@ class Api::V0::DomainsController < Api::V0::BaseController
   private
 
   def domain_params
-    params.permit(:url)
+    params.permit(:host)
   end
 end

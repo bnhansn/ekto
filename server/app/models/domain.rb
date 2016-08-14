@@ -1,5 +1,5 @@
 class Domain < ApplicationRecord
   belongs_to :account, required: true
 
-  validates :url, presence: true
+  validates :host, presence: true
 end

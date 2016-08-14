@@ -8,6 +8,7 @@ class Account < ApplicationRecord
   has_many :domains, dependent: :destroy
 
   validates :name, presence: true
+  validates :key, presence: true, uniqueness: true
 
   friendly_id :slug_candidates, use: :slugged
 
@@ -20,5 +21,9 @@ class Account < ApplicationRecord
 
   def should_generate_new_friendly_id?
     name_changed?
+  end
+
+  def whitelist_hosts
+    domains.map(&:host)
   end
 end

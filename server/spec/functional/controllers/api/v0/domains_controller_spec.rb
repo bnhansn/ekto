@@ -57,14 +57,14 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: @account.id,
-                  url: 'http://test.com'
+                  host: 'test.com'
                 }
 
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
         expect(result['data']['id']).not_to be(nil)
-        expect(result['data']['url']).to eq('http://test.com')
+        expect(result['data']['host']).to eq('test.com')
       end
     end
 
@@ -78,7 +78,7 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: account.id,
-                  url: 'http://test.com'
+                  host: 'test.com'
                 }
 
         expect(response).to have_http_status(:not_found)
@@ -94,7 +94,7 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: account.id,
-                  url: 'http://test.com'
+                  host: 'test.com'
                 }
 
         expect(response).to have_http_status(:unauthorized)

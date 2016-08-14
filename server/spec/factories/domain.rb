@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :domain do
-    url 'http://test.com'
+    host 'test.com'
 
     before(:create) do |obj|
       obj.account_id =
