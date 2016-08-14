@@ -21,7 +21,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(result['data'].count).to eq(2)
-        expect(ids).to include(*[account_1.id.to_s, account_2.id.to_s])
+        expect(ids).to include(account_1.id, account_2.id)
       end
     end
 
@@ -41,18 +41,18 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       it 'creates a new account' do
         process :create,
                 method: :post,
-                params: { data: { attributes: { name: 'New account' } } }
+                params: { name: 'New account' }
 
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
-        expect(result['data']['attributes']['name']).to eq('New account')
+        expect(result['data']['name']).to eq('New account')
       end
 
       it 'returns errors if unsuccessful' do
         process :create,
                 method: :post,
-                params: { data: { attributes: { name: '' } } }
+                params: { name: '' }
 
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to have_error("Name can't be blank")
@@ -63,7 +63,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       it 'returns unauthorized' do
         process :create,
                 method: :post,
-                params: { data: { attributes: { name: 'New account' } } }
+                params: { name: 'New account' }
 
         expect(response).to have_http_status(:unauthorized)
       end
@@ -80,8 +80,8 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:ok)
-        expect(result['data']['id']).to eq(@account.id.to_s)
-        expect(result['data']['attributes']['name']).to eq(@account.name)
+        expect(result['data']['id']).to eq(@account.id)
+        expect(result['data']['name']).to eq(@account.name)
       end
     end
 
@@ -117,14 +117,14 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
                 method: :patch,
                 params: {
                   id: @account.id,
-                  data: { attributes: { name: 'Updated name' } }
+                  name: 'Updated name'
                 }
 
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:ok)
-        expect(result['data']['id']).to eq(@account.id.to_s)
-        expect(result['data']['attributes']['name']).to eq('Updated name')
+        expect(result['data']['id']).to eq(@account.id)
+        expect(result['data']['name']).to eq('Updated name')
       end
     end
 
@@ -138,7 +138,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
                 method: :patch,
                 params: {
                   id: account.id,
-                  data: { attributes: { name: 'Updated name' } }
+                  name: 'Updated name'
                 }
 
         expect(response).to have_http_status(:not_found)
@@ -153,7 +153,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
                 method: :patch,
                 params: {
                   id: account.id,
-                  data: { attributes: { name: 'Updated name' } }
+                  name: 'Updated name'
                 }
 
         expect(response).to have_http_status(:unauthorized)
@@ -178,7 +178,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(result['data'].count).to eq(3)
-        expect(ids).to include(*[user_1.id.to_s, user_2.id.to_s, @user.id.to_s])
+        expect(ids).to include(user_1.id, user_2.id, @user.id)
       end
     end
 
@@ -221,7 +221,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
           result = JSON.parse(response.body)
 
           expect(response).to have_http_status(:ok)
-          expect(result['data']['id']).to eq(account.id.to_s)
+          expect(result['data']['id']).to eq(account.id)
         end
       end
 

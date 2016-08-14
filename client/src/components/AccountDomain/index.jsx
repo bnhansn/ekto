@@ -16,7 +16,7 @@ class AccountDomain extends Component {
     return (
       <div className="form-group">
         <div className="input-group">
-          <input className="form-control" disabled value={domain.attributes.url} />
+          <input className="form-control" disabled value={domain.url} />
           <div className="input-group-btn">
             <button className="btn btn-secondary" onClick={::this.handleDelete}>
               <i className="icon icon-bin"></i>

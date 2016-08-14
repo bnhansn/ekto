@@ -39,7 +39,7 @@ class Settings extends Component {
 export default connect(
   state => ({
     user: state.app.user,
-    initialValues: state.app.user.attributes,
+    initialValues: state.app.user,
     isSubmitting: state.settings.isSubmitting,
   }),
   { updateSettings }

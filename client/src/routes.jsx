@@ -20,7 +20,7 @@ import { redirectAuthenticated } from './containers/RedirectWrapper';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={Home} />
+    <IndexRoute component={redirectAuthenticated(Home)} />
     <Route path="/login" component={redirectAuthenticated(Login)} />
     <Route path="/signup" component={redirectAuthenticated(Signup)} />
     <Route path="/forgot" component={redirectAuthenticated(ForgotPassword)} />

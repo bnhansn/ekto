@@ -7,7 +7,7 @@ class Api::V0::LoginController < Api::V0::BaseController
       render_user_and_token(user)
     else
       render json: {
-        errors: [{ title: 'Invalid email or password' }]
+        errors: [{ message: 'Invalid email or password' }]
       }, status: :unauthorized
     end
   end

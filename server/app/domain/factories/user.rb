@@ -15,14 +15,12 @@ module Factories
     end
 
     def sanitize(params)
-      params = params.require(:data).permit(
-        attributes: [
-          :email,
-          :name,
-          :password
-        ]
+      params = params.permit(
+        :email,
+        :name,
+        :password
       )
-      params[:attributes] || {}
+      params
     end
   end
 end

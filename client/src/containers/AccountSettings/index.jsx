@@ -48,7 +48,7 @@ class AccountSettings extends Component {
   handleAccountDelete(e) {
     e.preventDefault();
     const { account } = this.props;
-    if (this.state.deleteConfirmation !== account.attributes.name) {
+    if (this.state.deleteConfirmation !== account.name) {
       return false;
     }
     this.props.deleteAccount(this.props.account.id);
@@ -80,7 +80,7 @@ class AccountSettings extends Component {
           onDomainDelete={::this.handleDomainDelete}
           onNewDomainSubmit={::this.handleNewDomainSubmit}
         />
-        {user.id === account.attributes.ownerId.toString() &&
+        {user.id === account.ownerId &&
           <div className="card">
             <div className="card-block">
               <div className="row">
@@ -119,7 +119,7 @@ class AccountSettings extends Component {
             <div className="modal-content">
               <p>
                 Deleting an account is irreversible and deletes all associated
-                posts. Enter your accounts's name <code>{account.attributes.name}</code>
+                posts. Enter your accounts's name <code>{account.name}</code>
                 &nbsp;below to confirm you want to permanently delete it.
               </p>
               <div className="form-group">
@@ -142,7 +142,7 @@ class AccountSettings extends Component {
                 <button
                   type="submit"
                   className="btn btn-danger"
-                  disabled={this.state.deleteConfirmation !== account.attributes.name}
+                  disabled={this.state.deleteConfirmation !== account.name}
                 >
                   Delete account
                 </button>
@@ -159,9 +159,9 @@ export default connect(
   state => ({
     user: state.app.user,
     account: state.account.account,
+    initialValues: state.account.account,
     domains: state.accountSettings.domains,
     isSubmitting: state.accountSettings.isSubmitting,
-    initialValues: state.account.account.attributes,
     isCreatingDomain: state.accountSettings.isCreatingDomain,
   }),
   { updateAccount, fetchDomains, createDomain, deleteDomain, deleteAccount }

@@ -13,8 +13,8 @@ RSpec.describe Api::V0::LoginController, type: :controller do
 
       expect(response).to have_http_status(:ok)
       expect(result['meta']['token']).not_to be(nil)
-      expect(result['data']['id']).to eq(user.id.to_s)
-      expect(result['data']['attributes']['email']).to eq(user.email)
+      expect(result['data']['id']).to eq(user.id)
+      expect(result['data']['email']).to eq(user.email)
     end
 
     it 'returns unauthorized if password is incorrect' do

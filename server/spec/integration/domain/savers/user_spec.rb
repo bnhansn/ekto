@@ -5,13 +5,9 @@ describe Savers::User do
     context 'success' do
       it 'creates a user' do
         attrs = {
-          data: {
-            attributes: {
-              name: 'Full name',
-              email: 'email@test.com',
-              password: 'password'
-            }
-          }
+          name: 'Full name',
+          email: 'email@test.com',
+          password: 'password'
         }
         params = ActionController::Parameters.new(attrs)
 
@@ -26,7 +22,7 @@ describe Savers::User do
 
     context 'errors' do
       it 'returns errors' do
-        attrs = { data: { attributes: { name: '' } } }
+        attrs = { name: '' }
         params = ActionController::Parameters.new(attrs)
 
         expect do
@@ -41,7 +37,7 @@ describe Savers::User do
   describe '#update' do
     before do
       @user = create(:user)
-      attrs = { data: { attributes: { name: 'Updated user name' } } }
+      attrs = { name: 'Updated user name' }
       @params = ActionController::Parameters.new(attrs)
     end
 
@@ -55,7 +51,7 @@ describe Savers::User do
 
     context 'errors' do
       it 'returns errors' do
-        @params[:data][:attributes][:name] = ''
+        @params[:name] = ''
 
         user = Savers::User.update(@user, @params)
 

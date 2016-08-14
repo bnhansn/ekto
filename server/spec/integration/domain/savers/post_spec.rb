@@ -4,7 +4,7 @@ describe Savers::Post do
   describe '#create' do
     context 'success' do
       it 'creates a post' do
-        attrs = { data: { attributes: { title: 'New post title' } } }
+        attrs = { title: 'New post title' }
         params = ActionController::Parameters.new(attrs)
         user_id = 1
         account = create(:account)
@@ -21,7 +21,7 @@ describe Savers::Post do
 
     context 'errors' do
       it 'returns errors' do
-        attrs = { data: { attributes: { title: '' } } }
+        attrs = { title: '' }
         params = ActionController::Parameters.new(attrs)
         user_id = nil
         account_id = nil
@@ -39,7 +39,7 @@ describe Savers::Post do
     it 'works' do
       account = create(:account)
       post = create(:post, account_id: account.id)
-      attrs = { data: { attributes: { title: 'Updated post title' } } }
+      attrs = { title: 'Updated post title' }
       params = ActionController::Parameters.new(attrs)
       user_id = 1
 

@@ -4,13 +4,9 @@ describe Factories::User do
   describe '#build' do
     it 'works' do
       attrs = {
-        data: {
-          attributes: {
-            name: 'Full name',
-            email: 'email@test.com',
-            password: 'password'
-          }
-        }
+        name: 'Full name',
+        email: 'email@test.com',
+        password: 'password'
       }
       params = ActionController::Parameters.new(attrs)
 
@@ -25,7 +21,7 @@ describe Factories::User do
   describe '#assign' do
     it 'works' do
       user = create(:user)
-      attrs = { data: { attributes: { name: 'Updated name' } } }
+      attrs = { name: 'Updated name' }
       params = ActionController::Parameters.new(attrs)
 
       user = Factories::User.assign(user, params)

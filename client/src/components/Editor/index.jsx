@@ -9,11 +9,9 @@ import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdow
 class Editor extends Component {
   static propTypes = {
     onDelete: PropTypes.func,
-    onUnpublish: PropTypes.func,
     initialValues: PropTypes.object,
     isSaving: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    onPublish: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   }
 
@@ -57,12 +55,14 @@ class Editor extends Component {
 
   handlePublish(data) {
     this.refs.dropdown.hide();
-    this.props.onPublish(data);
+    const post = { ...data, published: true };
+    this.props.onSubmit(post);
   }
 
   handleUnpublish(data) {
     this.refs.dropdown.hide();
-    this.props.onUnpublish(data);
+    const post = { ...data, published: false };
+    this.props.onSubmit(post);
   }
 
   handleSubmit(data) {

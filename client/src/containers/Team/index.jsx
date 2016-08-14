@@ -18,7 +18,7 @@ class Team extends Component {
   renderTeam() {
     const { team, account } = this.props;
     if (!team.length) { return null; }
-    const ownerId = account.attributes.ownerId.toString();
+    const ownerId = account.ownerId.toString();
 
     return team.map(user =>
       <li key={user.id} className="list-group-item">
@@ -27,11 +27,11 @@ class Team extends Component {
             <Gravatar
               size={30}
               className="img-circle"
-              email={user.attributes.email || ''}
+              email={user.email || ''}
             />
           </div>
           <div className="media-body">
-            {user.attributes.name}
+            {user.name}
             {ownerId === user.id &&
               <span className="tag tag-default m-l-1">Owner</span>
             }

@@ -18,10 +18,8 @@ module Factories
     end
 
     def sanitize(params)
-      params = params.require(:data).permit(
-        attributes: [:name]
-      )
-      params[:attributes] || {}
+      params = params.permit(:name)
+      params
     end
 
     def slug_id(account)

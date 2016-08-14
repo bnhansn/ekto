@@ -8,7 +8,7 @@ class Api::V0::AuthenticationController < Api::V0::BaseController
       render_user_and_token(user)
     else
       render json: {
-        errors: [{ title: 'Unauthorized' }]
+        errors: [{ message: 'Unauthorized' }]
       }, status: :unauthorized
     end
   end

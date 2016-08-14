@@ -6,13 +6,9 @@ RSpec.describe Api::V0::UsersController, type: :controller do
       process :create,
               method: :post,
               params: {
-                data: {
-                  attributes: {
-                    name: 'Full name',
-                    email: 'email@test.com',
-                    password: 'password'
-                  }
-                }
+                name: 'Full name',
+                email: 'email@test.com',
+                password: 'password'
               }
 
       result = JSON.parse(response.body)
@@ -20,28 +16,22 @@ RSpec.describe Api::V0::UsersController, type: :controller do
       expect(response).to have_http_status(:created)
       expect(result['meta']['token']).not_to be(nil)
       expect(result['data']['id']).not_to be(nil)
-      expect(result['data']['attributes']['email']).to eq('email@test.com')
+      expect(result['data']['email']).to eq('email@test.com')
     end
 
     it 'returns errors if unsuccessful' do
       process :create,
               method: :post,
               params: {
-                data: {
-                  attributes: {
-                    name: '',
-                    email: '',
-                    password: ''
-                  }
-                }
+                name: '',
+                email: '',
+                password: ''
               }
 
-      result = JSON.parse(response.body)
-
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(result.to_s).to include("Name can't be blank")
-      expect(result.to_s).to include("Email can't be blank")
-      expect(result.to_s).to include("Password can't be blank")
+      expect(response.body).to have_error("Name can't be blank")
+      expect(response.body).to have_error("Email can't be blank")
+      expect(response.body).to have_error("Password can't be blank")
     end
   end
 
@@ -55,14 +45,14 @@ RSpec.describe Api::V0::UsersController, type: :controller do
                   method: :patch,
                   params: {
                     id: @user.id,
-                    data: { attributes: { name: 'Updated name' } }
+                    name: 'Updated name'
                   }
 
           result = JSON.parse(response.body)
 
           expect(response).to have_http_status(:ok)
-          expect(result['data']['id']).to eq(@user.id.to_s)
-          expect(result['data']['attributes']['name']).to eq('Updated name')
+          expect(result['data']['id']).to eq(@user.id)
+          expect(result['data']['name']).to eq('Updated name')
         end
 
         it 'returns errors' do
@@ -70,7 +60,7 @@ RSpec.describe Api::V0::UsersController, type: :controller do
                   method: :patch,
                   params: {
                     id: @user.id,
-                    data: { attributes: { name: '' } }
+                    name: ''
                   }
 
           expect(response).to have_http_status(:unprocessable_entity)
@@ -86,7 +76,7 @@ RSpec.describe Api::V0::UsersController, type: :controller do
                   method: :patch,
                   params: {
                     id: user.id,
-                    data: { attributes: { name: 'Updated name' } }
+                    name: 'Updated name'
                   }
 
           expect(response).to have_http_status(:unauthorized)
@@ -102,7 +92,7 @@ RSpec.describe Api::V0::UsersController, type: :controller do
                 method: :patch,
                 params: {
                   id: user.id,
-                  data: { attributes: { name: 'Updated name' } }
+                  name: 'Updated name'
                 }
 
         expect(response).to have_http_status(:unauthorized)

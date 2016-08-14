@@ -14,6 +14,7 @@ export default function (state = initialState, action) {
     case FETCH_POSTS_START:
       return {
         ...state,
+        posts: [],
         isLoading: true,
       };
     case FETCH_POSTS_SUCCESS:
@@ -25,6 +26,7 @@ export default function (state = initialState, action) {
     case FETCH_POSTS_ERROR:
       return {
         ...state,
+        posts: [],
         isLoading: false,
       };
     default:

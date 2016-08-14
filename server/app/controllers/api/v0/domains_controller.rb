@@ -1,7 +1,7 @@
 class Api::V0::DomainsController < Api::V0::BaseController
   def index
     account = @user.accounts.find(params[:account_id])
-    render json: account.domains
+    render json: account.domains, root: 'data' # AMS #1536
   end
 
   def create
@@ -24,8 +24,6 @@ class Api::V0::DomainsController < Api::V0::BaseController
   private
 
   def domain_params
-    params.require(:data).permit(
-      attributes: [:url]
-    )
+    params.permit(:url)
   end
 end

@@ -28,8 +28,7 @@ class Accounts extends Component {
   }
 
   handleNewAccountSubmit(data) {
-    const attrs = { data: { attributes: { ...data } } };
-    this.props.createAccount(attrs);
+    this.props.createAccount(data);
   }
 
   renderAccounts() {
@@ -40,12 +39,12 @@ class Accounts extends Component {
     return accounts.map(account =>
       <Link
         key={account.id}
-        to={`/accounts/${account.attributes.slug}`}
+        to={`/accounts/${account.slug}`}
         className="list-group-item list-group-item-action"
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
       >
         <div className="account-icon"><i className="icon icon-earth2"></i></div>
-        <span>{account.attributes.name}</span>
+        <span>{account.name}</span>
         <div style={{ flexGrow: '1' }}></div>
         <i className="icon icon-arrow-right2"></i>
       </Link>

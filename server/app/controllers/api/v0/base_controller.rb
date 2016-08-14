@@ -19,7 +19,7 @@ class Api::V0::BaseController < ApplicationController
 
   def unauthorized_error
     render json: {
-      errors: [{ title: 'Unauthorized' }]
+      errors: [{ message: 'Unauthorized' }]
     }, status: :unauthorized
   end
 
@@ -39,19 +39,19 @@ class Api::V0::BaseController < ApplicationController
 
   def generic_error(error)
     render json: {
-      errors: [{ title: error.message.capitalize }]
+      errors: [{ message: error.message.capitalize }]
     }, status: :internal_server_error
   end
 
   def record_not_found(error)
     render json: {
-      errors: [{ title: error.message.capitalize }]
+      errors: [{ message: error.message.capitalize }]
     }, status: :not_found
   end
 
   def parameter_missing(error)
     render json: {
-      errors: [{ title: error.message.capitalize }]
+      errors: [{ message: error.message.capitalize }]
     }, status: :bad_request
   end
 end

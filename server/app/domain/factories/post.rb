@@ -21,19 +21,17 @@ module Factories
     end
 
     def sanitize(params)
-      params.require(:data).permit(
-        attributes: [
-          :author_id,
-          :featured,
-          :html,
-          :markdown,
-          :title,
-          :image,
-          :published,
-          :published_at,
-          :published_by,
-          :slug_candidate
-        ]
+      params.permit(
+        :author_id,
+        :featured,
+        :html,
+        :markdown,
+        :title,
+        :image,
+        :published,
+        :published_at,
+        :published_by,
+        :slug_candidate
       )
     end
 

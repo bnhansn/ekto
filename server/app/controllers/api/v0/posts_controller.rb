@@ -1,7 +1,7 @@
 class Api::V0::PostsController < Api::V0::BaseController
   def index
     account = @user.accounts.friendly.find(params[:account_id])
-    render json: account.posts
+    render json: account.posts, root: 'data' # AMS #1536
   end
 
   def create

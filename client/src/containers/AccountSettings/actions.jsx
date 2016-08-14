@@ -21,7 +21,7 @@ export function updateAccount(id, data) {
     api.patch(`/accounts/${id}`, data)
       .then(response => {
         if (isSuccess(response)) {
-          const accountSlug = response.data.data.attributes.slug;
+          const accountSlug = response.data.data.slug;
           dispatch({ type: UPDATE_ACCOUNT_SUCCESS, payload: response });
           // need to update slug in url if it changed
           dispatch(push(`/accounts/${accountSlug}/settings`));
@@ -90,7 +90,7 @@ export function deleteAccount(accountId) {
     api.delete(`/accounts/${accountId}`)
       .then(response => {
         if (isSuccess(response)) {
-          const accountName = response.data.data.attributes.name;
+          const accountName = response.data.data.name;
           dispatch(push('/accounts'));
           dispatch({
             type: SHOW_ALERT,

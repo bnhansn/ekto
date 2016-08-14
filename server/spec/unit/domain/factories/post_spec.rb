@@ -3,20 +3,16 @@ require_relative '../../../rails_helper'
 describe Factories::Post do
   before do
     attrs = {
-      data: {
-        attributes: {
-          author_id: 1,
-          featured: true,
-          html: '<div>test</div>',
-          markdown: '#Header',
-          title: 'Post title',
-          image: 'http://google.com',
-          published: true,
-          published_at: Date.today,
-          published_by: 1,
-          slug_candidate: 'slug-candidate'
-        }
-      }
+      author_id: 1,
+      featured: true,
+      html: '<div>test</div>',
+      markdown: '#Header',
+      title: 'Post title',
+      image: 'http://google.com',
+      published: true,
+      published_at: Date.today,
+      published_by: 1,
+      slug_candidate: 'slug-candidate'
     }
     @params = ActionController::Parameters.new(attrs)
     @user_id = 1
@@ -40,7 +36,7 @@ describe Factories::Post do
     end
 
     it 'sets default parameters' do
-      attrs = { data: { attributes: { html: '<div></div>' } } }
+      attrs = { html: '<div></div>' }
       params = ActionController::Parameters.new(attrs)
 
       post = Factories::Post.build(@user_id, @account_id, params)
@@ -73,7 +69,7 @@ describe Factories::Post do
 
     it 'resets null default parameters' do
       post = create(:post)
-      attrs = { data: { attributes: { title: '', slug_candidate: '' } } }
+      attrs = { title: '', slug_candidate: '' }
       params = ActionController::Parameters.new(attrs)
 
       post = Factories::Post.assign(post, @user_id, @account_id, params)

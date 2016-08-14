@@ -1,7 +1,6 @@
 import Input from '../Input';
 import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes, Component } from 'react';
-import { keyTransform, assignAttributes } from '../../utils';
 
 class SettingsForm extends Component {
   static propTypes = {
@@ -11,9 +10,7 @@ class SettingsForm extends Component {
   };
 
   handleSubmit(data) {
-    const attributes = keyTransform(data);
-    const user = assignAttributes(attributes);
-    this.props.onSubmit(user);
+    this.props.onSubmit(data);
   }
 
   render() {

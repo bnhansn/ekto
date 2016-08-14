@@ -1,7 +1,20 @@
 import axios from 'axios';
 import { API_URL } from 'config'; // eslint-disable-line
+import mapKeys from 'lodash/mapKeys';
 
 export default {
+  decamelize(str) {
+    return str.split(/(?=[A-Z])/).join('_').toLowerCase();
+  },
+
+  keyTransform(data) {
+    const obj = {};
+    mapKeys(data, (value, key) => {
+      obj[this.decamelize(key)] = value;
+    });
+    return obj;
+  },
+
   token() {
     return JSON.parse(localStorage.getItem('token'));
   },
@@ -17,7 +30,7 @@ export default {
   post(path, data) {
     return axios.post(
       `${API_URL}${path}`,
-      data,
+      this.keyTransform(data),
       { headers: { Authorization: `Bearer ${this.token()}` } })
       .then(response => response)
       .catch(error => error.response);
@@ -26,7 +39,7 @@ export default {
   patch(path, data) {
     return axios.patch(
       `${API_URL}${path}`,
-      data,
+      this.keyTransform(data),
       { headers: { Authorization: `Bearer ${this.token()}` } })
       .then(response => response)
       .catch(error => error.response);

@@ -3,7 +3,7 @@ require_relative '../../../rails_helper'
 describe Savers::Account do
   describe '#create' do
     before do
-      attrs = { data: { attributes: { name: 'New account name' } } }
+      attrs = { name: 'New account name' }
       @params = ActionController::Parameters.new(attrs)
       @user_id = 1
     end
@@ -40,8 +40,8 @@ describe Savers::Account do
       end
 
       it 'assigns unique slug_id scoped to name' do
-        attrs_1 = { data: { attributes: { name: 'Same name' } } }
-        attrs_2 = { data: { attributes: { name: 'Same name' } } }
+        attrs_1 = { name: 'Same name' }
+        attrs_2 = { name: 'Same name' }
         params_1 = ActionController::Parameters.new(attrs_1)
         params_2 = ActionController::Parameters.new(attrs_2)
 
@@ -54,7 +54,7 @@ describe Savers::Account do
 
     context 'errors' do
       it 'returns errors' do
-        @params[:data][:attributes][:name] = ''
+        @params[:name] = ''
 
         expect do
           result = Savers::Account.create(@user_id, @params)
@@ -64,7 +64,7 @@ describe Savers::Account do
       end
 
       it 'does not enable account access if save fails' do
-        @params[:data][:attributes][:name] = ''
+        @params[:name] = ''
 
         expect do
           Savers::Account.create(@user_id, @params)
@@ -76,7 +76,7 @@ describe Savers::Account do
   describe '#update' do
     before do
       @account = create(:account)
-      attrs = { data: { attributes: { name: 'Updated account name' } } }
+      attrs = { name: 'Updated account name' }
       @params = ActionController::Parameters.new(attrs)
     end
 
@@ -90,7 +90,7 @@ describe Savers::Account do
 
     context 'errors' do
       it 'returns errors' do
-        @params[:data][:attributes][:name] = ''
+        @params[:name] = ''
 
         result = Savers::Account.update(@account, @params)
 

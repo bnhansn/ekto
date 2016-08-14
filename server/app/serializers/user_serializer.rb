@@ -1,5 +1,10 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :created_at,
+  def json_key
+    'data'
+  end
+
+  attributes :id,
+             :created_at,
              :email,
              :name,
              :updated_at

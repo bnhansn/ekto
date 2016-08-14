@@ -1,5 +1,10 @@
 class AccountSerializer < ActiveModel::Serializer
-  attributes :created_at,
+  def json_key
+    'data'
+  end
+
+  attributes :id,
+             :created_at,
              :name,
              :owner_id,
              :slug,

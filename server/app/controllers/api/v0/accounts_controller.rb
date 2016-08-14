@@ -1,6 +1,6 @@
 class Api::V0::AccountsController < Api::V0::BaseController
   def index
-    render json: @user.accounts
+    render json: @user.accounts, root: 'data' # AMS #1536
   end
 
   def create
@@ -37,6 +37,6 @@ class Api::V0::AccountsController < Api::V0::BaseController
 
   def team
     account = @user.accounts.friendly.find(params[:id])
-    render json: account.users
+    render json: account.users, root: 'data' # AMS #1536
   end
 end

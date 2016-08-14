@@ -2,8 +2,6 @@ import {
   fetchPost,
   updatePost,
   deletePost,
-  publishPost,
-  unpublishPost,
 } from './actions';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
@@ -19,8 +17,6 @@ class PostEdit extends Component {
     isLoading: PropTypes.bool.isRequired,
     updatePost: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
-    publishPost: PropTypes.func.isRequired,
-    unpublishPost: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -31,16 +27,6 @@ class PostEdit extends Component {
   handleSubmit(data) {
     const { params: { accountSlug, id } } = this.props;
     this.props.updatePost(accountSlug, id, data);
-  }
-
-  handlePublish(data) {
-    const { params: { accountSlug, id } } = this.props;
-    this.props.publishPost(accountSlug, id, data);
-  }
-
-  handleUnpublish(data) {
-    const { params: { accountSlug, id } } = this.props;
-    this.props.unpublishPost(accountSlug, id, data);
   }
 
   handleDelete() {
@@ -59,11 +45,9 @@ class PostEdit extends Component {
       <div className="container">
         <Editor
           isSaving={isSaving}
+          initialValues={post}
           onSubmit={::this.handleSubmit}
           onDelete={::this.handleDelete}
-          initialValues={post.attributes}
-          onPublish={::this.handlePublish}
-          onUnpublish={::this.handleUnpublish}
         />
       </div>
     );
@@ -76,5 +60,5 @@ export default connect(
     isSaving: state.post.isSaving,
     isLoading: state.post.isLoading,
   }),
-  { fetchPost, updatePost, deletePost, publishPost, unpublishPost }
+  { fetchPost, updatePost, deletePost }
 )(PostEdit);

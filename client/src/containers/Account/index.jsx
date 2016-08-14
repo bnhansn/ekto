@@ -39,7 +39,7 @@ class Account extends Component {
         <Topnav
           header="Accounts"
           headerRoute="/accounts"
-          subheader={account.attributes.name}
+          subheader={account.name}
         />
         <AccountTabs account={account} />
         {children}

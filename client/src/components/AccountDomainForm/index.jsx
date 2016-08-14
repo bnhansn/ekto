@@ -1,6 +1,5 @@
 import { Field, reduxForm } from 'redux-form';
 import React, { Component, PropTypes } from 'react';
-import { keyTransform, assignAttributes } from '../../utils';
 
 const renderField = field =>
   <input
@@ -16,9 +15,7 @@ class AccountDomainForm extends Component {
   };
 
   handleSubmit(data) {
-    const attributes = keyTransform(data);
-    const domain = assignAttributes(attributes);
-    this.props.onSubmit(domain);
+    this.props.onSubmit(data);
   }
 
   render() {

@@ -26,8 +26,8 @@ class Posts extends Component {
         to={`/accounts/${accountSlug}/posts/${post.id}`}
         className="list-group-item list-group-item-action flex align-center justify-between"
       >
-        <span>{post.attributes.title}</span>
-        {!post.attributes.published &&
+        <span>{post.title}</span>
+        {!post.published &&
           <span className="tag tag-default m-l-1">Unpublished</span>
         }
         <div className="flex-grow"></div>

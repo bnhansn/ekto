@@ -9,7 +9,7 @@ class Api::V0::PasswordsController < Api::V0::BaseController
       render json: {}, status: :ok
     else
       render json: {
-        errors: [{ title: 'Account was not found by this email' }]
+        errors: [{ message: 'Account was not found by this email' }]
       }, status: :not_found
     end
   end
@@ -23,7 +23,7 @@ class Api::V0::PasswordsController < Api::V0::BaseController
       render_user_and_token(user)
     else
       render json: {
-        errors: [{ title: error }]
+        errors: [{ message: error }]
       }, status: status
     end
   end

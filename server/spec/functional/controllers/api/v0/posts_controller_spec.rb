@@ -20,7 +20,7 @@ RSpec.describe Api::V0::PostsController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(result['data'].count).to eq(2)
-        expect(ids).to include(*[@post_1.id.to_s, @post_2.id.to_s])
+        expect(ids).to include(@post_1.id, @post_2.id)
       end
     end
 
@@ -57,14 +57,14 @@ RSpec.describe Api::V0::PostsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: @account.id,
-                  data: { attributes: { title: 'New post title' } }
+                  title: 'New post title'
                 }
 
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
         expect(result['data']['id']).not_to be(nil)
-        expect(result['data']['attributes']['title']).to eq('New post title')
+        expect(result['data']['title']).to eq('New post title')
       end
     end
 
@@ -78,7 +78,7 @@ RSpec.describe Api::V0::PostsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: account.id,
-                  data: { attributes: { title: 'New post title' } }
+                  title: 'New post title'
                 }
 
         expect(response).to have_http_status(:not_found)
@@ -94,7 +94,7 @@ RSpec.describe Api::V0::PostsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: account.id,
-                  data: { attributes: { title: 'New post title' } }
+                  title: 'New post title'
                 }
 
         expect(response).to have_http_status(:unauthorized)
@@ -113,7 +113,7 @@ RSpec.describe Api::V0::PostsController, type: :controller do
 
         result = JSON.parse(response.body)
 
-        expect(result['data']['attributes']['title']).to eq(post.title)
+        expect(result['data']['title']).to eq(post.title)
       end
     end
 
@@ -154,14 +154,14 @@ RSpec.describe Api::V0::PostsController, type: :controller do
                 params: {
                   id: post.id,
                   account_id: @account.id,
-                  data: { attributes: { title: 'Updated title' } }
+                  title: 'Updated title'
                 }
 
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:ok)
-        expect(result['data']['id']).to eq(post.id.to_s)
-        expect(result['data']['attributes']['title']).to eq('Updated title')
+        expect(result['data']['id']).to eq(post.id)
+        expect(result['data']['title']).to eq('Updated title')
       end
     end
 
@@ -177,7 +177,7 @@ RSpec.describe Api::V0::PostsController, type: :controller do
                 params: {
                   id: post.id,
                   account_id: account.id,
-                  data: { attributes: { title: 'Updated title' } }
+                  title: 'Updated title'
                 }
 
         expect(response).to have_http_status(:not_found)
@@ -195,7 +195,7 @@ RSpec.describe Api::V0::PostsController, type: :controller do
                 params: {
                   id: post.id,
                   account_id: account.id,
-                  data: { attributes: { title: 'Updated title' } }
+                  title: 'Updated title'
                 }
 
         expect(response).to have_http_status(:unauthorized)

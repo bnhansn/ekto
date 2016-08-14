@@ -20,7 +20,7 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar bg-primary">
-        <Link to="/" className="navbar-brand">Ekto</Link>
+        <Link to={isAuthenticated ? '/accounts' : '/'} className="navbar-brand">Ekto</Link>
         {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
@@ -44,7 +44,7 @@ class Navbar extends Component {
                   <Gravatar
                     size={30}
                     className="img-circle"
-                    email={user.attributes.email || ''}
+                    email={user.email || ''}
                   />
                 </DropdownTrigger>
                 <DropdownContent className="dropdown-right">

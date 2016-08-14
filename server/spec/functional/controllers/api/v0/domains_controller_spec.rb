@@ -20,7 +20,7 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
 
         expect(response).to have_http_status(:ok)
         expect(result['data'].count).to eq(2)
-        expect(ids).to include(*[@domain_1.id.to_s, @domain_2.id.to_s])
+        expect(ids).to include(@domain_1.id, @domain_2.id)
       end
     end
 
@@ -57,14 +57,14 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: @account.id,
-                  data: { attributes: { url: 'http://test.com' } }
+                  url: 'http://test.com'
                 }
 
         result = JSON.parse(response.body)
 
         expect(response).to have_http_status(:created)
         expect(result['data']['id']).not_to be(nil)
-        expect(result['data']['attributes']['url']).to eq('http://test.com')
+        expect(result['data']['url']).to eq('http://test.com')
       end
     end
 
@@ -78,7 +78,7 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: account.id,
-                  data: { attributes: { url: 'http://test.com' } }
+                  url: 'http://test.com'
                 }
 
         expect(response).to have_http_status(:not_found)
@@ -94,7 +94,7 @@ RSpec.describe Api::V0::DomainsController, type: :controller do
                 method: :post,
                 params: {
                   account_id: account.id,
-                  data: { attributes: { url: 'http://test.com' } }
+                  url: 'http://test.com'
                 }
 
         expect(response).to have_http_status(:unauthorized)

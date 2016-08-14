@@ -3,7 +3,7 @@ require_relative '../../../rails_helper'
 describe Factories::Account do
   describe '#build' do
     it 'works' do
-      attrs = { data: { attributes: { name: 'Account name' } } }
+      attrs = { name: 'Account name' }
       params = ActionController::Parameters.new(attrs)
       user_id = 1
 
@@ -13,7 +13,7 @@ describe Factories::Account do
     end
 
     it 'sets owner_id to account creator id' do
-      attrs = { data: { attributes: { name: 'Account name' } } }
+      attrs = { name: 'Account name' }
       params = ActionController::Parameters.new(attrs)
       user = create(:user)
 
@@ -26,7 +26,7 @@ describe Factories::Account do
   describe '#assign' do
     it 'works' do
       account = create(:account)
-      attrs = { data: { attributes: { name: 'Updated name' } } }
+      attrs = { name: 'Updated name' }
       params = ActionController::Parameters.new(attrs)
 
       account = Factories::Account.build(account, params)
