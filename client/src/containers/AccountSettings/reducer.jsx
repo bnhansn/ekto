@@ -2,6 +2,7 @@ import {
   UPDATE_ACCOUNT_START,
   UPDATE_ACCOUNT_ERROR,
   UPDATE_ACCOUNT_SUCCESS,
+  FETCH_DOMAINS_START,
   FETCH_DOMAINS_SUCCESS,
   FETCH_DOMAINS_ERROR,
   CREATE_DOMAIN_START,
@@ -32,6 +33,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isSubmitting: false,
+      };
+    case FETCH_DOMAINS_START:
+      return {
+        ...state,
+        domains: [],
       };
     case FETCH_DOMAINS_SUCCESS:
       return {
