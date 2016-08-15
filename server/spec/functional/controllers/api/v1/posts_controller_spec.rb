@@ -1,19 +1,22 @@
-# rubocop:disable LineLength
 require_relative '../../../../rails_helper'
 
 RSpec.describe Api::V1::PostsController, type: :controller do
   describe 'GET #index' do
     before do
       @account = create(:account)
+      @test_origin = 'test.com'
+      request.env['HTTP_ORIGIN'] = @test_origin
     end
 
     it 'returns an accounts posts' do
       post_1 = create(:post, account_id: @account.id)
       post_2 = create(:post, account_id: @account.id)
       _post = create(:post)
-      Domain.create(account_id: @account.id, host: 'test.host')
+      Domain.create(account_id: @account.id, host: @test_origin)
 
-      process :index, method: :get, params: { account_id: @account.key }
+      process :index,
+              method: :get,
+              params: { account_id: @account.key }
 
       result = JSON.parse(response.body)
       ids = result['data'].map { |x| x['id'] }
@@ -34,7 +37,9 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       process :index, method: :get, params: { account_id: @account.key }
 
       expect(response).to have_http_status(:unauthorized)
-      expect(response.body).to have_error("Domain #{request.host} not whitelisted for account #{@account.key}")
+      expect(response.body).to have_error(
+        "Domain #{@test_origin} not whitelisted for account #{@account.key}"
+      )
     end
   end
 
@@ -42,10 +47,12 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     before do
       @account = create(:account)
       @post = create(:post, account_id: @account.id)
+      @test_origin = 'test.com'
+      request.env['HTTP_ORIGIN'] = @test_origin
     end
 
     it 'returns a post' do
-      Domain.create(account_id: @account.id, host: 'test.host')
+      Domain.create(account_id: @account.id, host: @test_origin)
 
       process :show,
               method: :get,
@@ -58,7 +65,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     end
 
     it 'returns not found if invalid post id' do
-      Domain.create(account_id: @account.id, host: 'test.host')
+      Domain.create(account_id: @account.id, host: @test_origin)
 
       process :show,
               method: :get,
@@ -69,6 +76,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     end
 
     it 'return not found if invalid key' do
+      Domain.create(account_id: @account.id, host: @test_origin)
+
       process :show,
               method: :get,
               params: { account_id: 'invalidkey', id: @post.id }
@@ -83,7 +92,9 @@ RSpec.describe Api::V1::PostsController, type: :controller do
               params: { account_id: @account.key, id: @post.id }
 
       expect(response).to have_http_status(:unauthorized)
-      expect(response.body).to have_error("Domain #{request.host} not whitelisted for account #{@account.key}")
+      expect(response.body).to have_error(
+        "Domain #{@test_origin} not whitelisted for account #{@account.key}"
+      )
     end
   end
 end

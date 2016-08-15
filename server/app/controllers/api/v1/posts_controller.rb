@@ -15,11 +15,8 @@ class Api::V1::PostsController < Api::V1::BaseController
   def authenticate_request
     @account = Account.find_by_key(params[:account_id])
     return account_not_found unless @account
-    puts '----------REQUEST.HOST----------'
-    puts request.host
-    puts '----------WHITELIST HOSTS----------'
-    puts @account.whitelist_hosts
-    return domain_unauthorized unless @account.whitelist_hosts.include?(request.host) # rubocop:disable LineLength
+    origin = request.headers['HTTP_ORIGIN']
+    return domain_unauthorized unless @account.whitelist_hosts.include?(origin)
   end
 
   def account_not_found
@@ -31,7 +28,8 @@ class Api::V1::PostsController < Api::V1::BaseController
   def domain_unauthorized
     render json: {
       errors: [{
-        message: "Domain #{request.host} not whitelisted for account #{@account.key}" # rubocop:disable LineLength
+        message: "Domain #{request.headers['HTTP_ORIGIN']} not whitelisted "\
+                 "for account #{@account.key}"
       }]
     }, status: :unauthorized
   end
