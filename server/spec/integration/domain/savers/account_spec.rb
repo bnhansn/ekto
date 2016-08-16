@@ -33,22 +33,14 @@ describe Savers::Account do
         expect(result.owner_id).to eq(@user_id)
       end
 
-      it 'creates slug as parameterized name' do
-        result = Savers::Account.create(@user_id, @params)
+      it 'assigns unique slug scoped to name' do
+        attrs = { name: 'Same name' }
+        params = ActionController::Parameters.new(attrs)
 
-        expect(result.slug).to eq(result.name.parameterize)
-      end
+        account_1 = Savers::Account.create(@user_id, params)
+        account_2 = Savers::Account.create(@user_id, params)
 
-      it 'assigns unique slug_id scoped to name' do
-        attrs_1 = { name: 'Same name' }
-        attrs_2 = { name: 'Same name' }
-        params_1 = ActionController::Parameters.new(attrs_1)
-        params_2 = ActionController::Parameters.new(attrs_2)
-
-        account_1 = Savers::Account.create(@user_id, params_1)
-        account_2 = Savers::Account.create(@user_id, params_2)
-
-        expect(account_1.slug_id).not_to eq(account_2.slug_id)
+        expect(account_1.slug).not_to eq(account_2.slug)
       end
     end
 

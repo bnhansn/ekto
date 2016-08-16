@@ -44,6 +44,7 @@ class PostEdit extends Component {
     return (
       <div className="container">
         <Editor
+          enableReinitialize
           isSaving={isSaving}
           initialValues={post}
           onSubmit={::this.handleSubmit}

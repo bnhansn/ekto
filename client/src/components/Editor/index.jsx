@@ -1,3 +1,4 @@
+import Input from '../Input';
 import showdown from 'showdown';
 import { newlineExtension } from './utils';
 import { Field, reduxForm } from 'redux-form';
@@ -67,7 +68,8 @@ class Editor extends Component {
 
   handleSubmit(data) {
     this.refs.dropdown.hide();
-    this.props.onSubmit(data);
+    const post = { ...data, html: this.state.preview };
+    this.props.onSubmit(post);
   }
 
   renderPreview() {
@@ -177,6 +179,12 @@ class Editor extends Component {
                 <h4 className="m-b-0">Settings</h4>
               </div>
               <div className="post-settings-content">
+                <Field
+                  type="text"
+                  name="slug"
+                  label="Slug"
+                  component={Input}
+                />
               </div>
             </div>
           </TabPanel>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814205445) do
+ActiveRecord::Schema.define(version: 20160816132936) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,7 +32,6 @@ ActiveRecord::Schema.define(version: 20160814205445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "slug"
-    t.integer  "slug_id"
     t.datetime "deleted_at"
     t.string   "key"
     t.index ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
@@ -53,17 +52,15 @@ ActiveRecord::Schema.define(version: 20160814205445) do
     t.text     "html"
     t.string   "image"
     t.integer  "author_id"
-    t.boolean  "featured",       default: false
-    t.boolean  "published",      default: false
+    t.boolean  "featured",     default: false
+    t.boolean  "published",    default: false
     t.integer  "published_by"
     t.datetime "published_at"
     t.integer  "created_by"
     t.integer  "updated_by"
     t.string   "slug"
-    t.string   "slug_candidate"
-    t.integer  "slug_id"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "deleted_at"
     t.index ["account_id"], name: "index_posts_on_account_id", using: :btree
     t.index ["deleted_at"], name: "index_posts_on_deleted_at", using: :btree

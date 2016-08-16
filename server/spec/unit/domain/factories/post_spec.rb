@@ -12,7 +12,7 @@ describe Factories::Post do
       published: true,
       published_at: Date.today,
       published_by: 1,
-      slug_candidate: 'slug-candidate'
+      slug: 'test-slug'
     }
     @params = ActionController::Parameters.new(attrs)
     @user_id = 1
@@ -32,7 +32,7 @@ describe Factories::Post do
       expect(post.published).to eq(true)
       expect(post.published_at).to eq(Date.today)
       expect(post.published_by).to eq(1)
-      expect(post.slug_candidate).to eq('slug-candidate')
+      expect(post.slug).to eq('test-slug')
     end
 
     it 'sets default parameters' do
@@ -44,8 +44,7 @@ describe Factories::Post do
       expect(post.account_id).to eq(@account_id)
       expect(post.created_by).to eq(@user_id)
       expect(post.title).to eq('Untitled')
-      expect(post.slug_candidate).to eq('untitled')
-      expect(post.slug_id).not_to be(nil)
+      expect(post.slug).to eq('untitled')
     end
   end
 
@@ -64,18 +63,18 @@ describe Factories::Post do
       expect(post.published).to eq(true)
       expect(post.published_at).to eq(Date.today)
       expect(post.published_by).to eq(1)
-      expect(post.slug_candidate).to eq('slug-candidate')
+      expect(post.slug).to eq('test-slug')
     end
 
     it 'resets null default parameters' do
       post = create(:post)
-      attrs = { title: '', slug_candidate: '' }
+      attrs = { title: '', slug: '' }
       params = ActionController::Parameters.new(attrs)
 
       post = Factories::Post.assign(post, @user_id, @account_id, params)
 
       expect(post.title).to eq('Untitled')
-      expect(post.slug_candidate).to eq('untitled')
+      expect(post.slug).to eq('untitled')
     end
   end
 end

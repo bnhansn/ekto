@@ -25,6 +25,12 @@ describe Factories::Account do
 
       expect(account.key).to match(/^[a-zA-Z0-9]{10,}/)
     end
+
+    it 'creates slug as parameterized name' do
+      result = Savers::Account.create(@user_id, @params)
+
+      expect(result.slug).to eq(result.name.parameterize)
+    end
   end
 
   describe '#assign' do

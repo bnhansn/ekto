@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       end
     end
     namespace :v1 do
-      resources :accounts, only: [] do
+      resources :accounts, path: '/', only: [] do
         resources :posts, only: [:index, :show]
       end
     end
