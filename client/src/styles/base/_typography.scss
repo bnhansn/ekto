@@ -15,3 +15,12 @@ blockquote {
   font-size: 1.25rem;
   border-left: .25rem solid $gray-lighter;
 }
+
+pre {
+  padding: 16px;
+  overflow: auto;
+  line-height: 1.45;
+  word-wrap: normal;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
