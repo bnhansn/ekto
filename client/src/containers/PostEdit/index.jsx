@@ -15,6 +15,7 @@ class PostEdit extends Component {
     post: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
     isSaving: PropTypes.bool.isRequired,
+    account: PropTypes.object.isRequired,
     fetchPost: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     updatePost: PropTypes.func.isRequired,
@@ -37,7 +38,7 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { post, user, team, isLoading, isSaving } = this.props;
+    const { post, user, team, account, isLoading, isSaving } = this.props;
 
     if (isLoading || isEmpty(post)) {
       return <div className="loader"></div>;
@@ -48,6 +49,7 @@ class PostEdit extends Component {
         <Editor
           user={user}
           team={team}
+          account={account}
           enableReinitialize
           isSaving={isSaving}
           initialValues={post}

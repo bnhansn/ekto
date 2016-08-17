@@ -18,6 +18,7 @@ class Editor extends Component {
     user: PropTypes.object.isRequired,
     isSaving: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
+    account: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   }
 
@@ -122,7 +123,7 @@ class Editor extends Component {
 
   render() {
     const { deleteModalOpen } = this.state;
-    const { initialValues, handleSubmit } = this.props;
+    const { account, initialValues, handleSubmit } = this.props;
     const existingPost = initialValues !== undefined;
     const published = existingPost && initialValues.published;
 
@@ -217,6 +218,9 @@ class Editor extends Component {
                     label="Slug"
                     component={Input}
                   />
+                  <p className="small text-muted">
+                    {`http://api.ekto.tech/v1/${account.key}/posts/${existingPost ? initialValues.slug : ''}`}
+                  </p>
                   <div className="form-group">
                     <label>Publish date</label>
                     <DatePicker

@@ -32,10 +32,10 @@
 // //
 // Grayscale and brand colors for use across Bootstrap.
 //
-$gray-dark:                 rgb(87,87,94) !default;
-$gray:                      rgb(120,120,127) !default;
-$gray-light:                rgb(160,173,192) !default;
-$gray-lighter:              rgb(233,239,243) !default;
+$gray-dark:                 rgb(85,90,95) !default;
+$gray:                      rgb(120,125,130) !default;
+$gray-light:                rgb(170,175,180) !default;
+$gray-lighter:              rgb(230,235,240) !default;
 $gray-lightest:             rgb(249,250,251) !default;
 //
 $brand-primary:             #2b71b1 !default;
@@ -189,7 +189,7 @@ $font-size-root: 14px !default;
 // $lead-font-size:   1.25rem !default;
 // $lead-font-weight: 300 !default;
 //
-// $small-font-size: 80% !default;
+$small-font-size: 85% !default;
 //
 // $text-muted: $gray-light !default;
 //

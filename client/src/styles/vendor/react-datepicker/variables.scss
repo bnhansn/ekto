@@ -1,8 +1,8 @@
-$border-color: #aeaeae;
-$background-color: #f0f0f0;
-$selected-color: #216ba5;
-$muted-color: #ccc;
-$text-color: #000;
+$border-color: $gray-light;
+$background-color: $gray-lighter;
+$selected-color: $brand-primary;
+$muted-color: $gray-light;
+$text-color: $body-color;
 
 $border-radius: 4px;
 $item-size: 24px;

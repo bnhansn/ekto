@@ -63,6 +63,12 @@ class AccountSettings extends Component {
 
     return (
       <div className="container">
+        <AccountSettingsForm
+          enableReinitialize
+          isSubmitting={isSubmitting}
+          initialValues={initialValues}
+          onSubmit={::this.handleSubmit}
+        />
         <div className="card">
           <div className="card-block">
             <div className="row">
@@ -81,12 +87,6 @@ class AccountSettings extends Component {
             </div>
           </div>
         </div>
-        <AccountSettingsForm
-          enableReinitialize
-          isSubmitting={isSubmitting}
-          initialValues={initialValues}
-          onSubmit={::this.handleSubmit}
-        />
         <AccountDomainsList
           domains={domains}
           isCreatingDomain={isCreatingDomain}
