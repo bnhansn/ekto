@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
 import AccountDomainsList from '../../components/AccountDomainsList';
 import AccountSettingsForm from '../../components/AccountSettingsForm';
-import { updateAccount, fetchDomains, createDomain, deleteDomain, deleteAccount } from './actions';
+import { updateAccount, createDomain, deleteDomain, deleteAccount } from './actions';
 
 class AccountSettings extends Component {
   static propTypes = {
@@ -14,7 +14,6 @@ class AccountSettings extends Component {
     account: PropTypes.object.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     createDomain: PropTypes.func.isRequired,
-    fetchDomains: PropTypes.func.isRequired,
     deleteDomain: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
@@ -27,10 +26,6 @@ class AccountSettings extends Component {
       modalOpen: false,
       deleteConfirmation: '',
     };
-  }
-
-  componentWillMount() {
-    this.props.fetchDomains(this.props.account.id);
   }
 
   handleSubmit(data) {
@@ -68,6 +63,24 @@ class AccountSettings extends Component {
 
     return (
       <div className="container">
+        <div className="card">
+          <div className="card-block">
+            <div className="row">
+              <div className="col-sm-4 col-xs-12">
+                <h5>Info</h5>
+              </div>
+              <div className="col-sm-8 col-xs-12">
+                <div className="form-group">
+                  <label>Account key</label>
+                  <input readOnly value={account.key} className="form-control" />
+                </div>
+                <p className="small text-muted">
+                  Blog posts can be retrieved from the api at <code style={{ wordWrap: 'break-word' }}>http://api.ekto.tech/v1/{account.key}/posts</code>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
         <AccountSettingsForm
           enableReinitialize
           isSubmitting={isSubmitting}
@@ -159,10 +172,10 @@ export default connect(
   state => ({
     user: state.app.user,
     account: state.account.account,
+    domains: state.account.domains,
     initialValues: state.account.account,
-    domains: state.accountSettings.domains,
     isSubmitting: state.accountSettings.isSubmitting,
     isCreatingDomain: state.accountSettings.isCreatingDomain,
   }),
-  { updateAccount, fetchDomains, createDomain, deleteDomain, deleteAccount }
+  { updateAccount, createDomain, deleteDomain, deleteAccount }
 )(AccountSettings);

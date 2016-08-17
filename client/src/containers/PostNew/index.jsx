@@ -5,6 +5,8 @@ import React, { Component, PropTypes } from 'react';
 
 class PostEdit extends Component {
   static propTypes = {
+    team: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
     isSaving: PropTypes.bool.isRequired,
     createPost: PropTypes.func.isRequired,
@@ -15,11 +17,13 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { isSaving } = this.props;
+    const { user, team, isSaving } = this.props;
 
     return (
       <div className="container">
         <Editor
+          user={user}
+          team={team}
           isSaving={isSaving}
           onSubmit={::this.handleSubmit}
         />
@@ -30,6 +34,8 @@ class PostEdit extends Component {
 
 export default connect(
   state => ({
+    user: state.app.user,
+    team: state.account.team,
     isSaving: state.postNew.isSaving,
   }),
   { createPost }

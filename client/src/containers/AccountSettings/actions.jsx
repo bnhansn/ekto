@@ -2,9 +2,6 @@ import {
   UPDATE_ACCOUNT_START,
   UPDATE_ACCOUNT_ERROR,
   UPDATE_ACCOUNT_SUCCESS,
-  FETCH_DOMAINS_START,
-  FETCH_DOMAINS_ERROR,
-  FETCH_DOMAINS_SUCCESS,
   CREATE_DOMAIN_START,
   CREATE_DOMAIN_ERROR,
   CREATE_DOMAIN_SUCCESS,
@@ -37,20 +34,6 @@ export function updateAccount(id, data) {
             type: SHOW_ALERT,
             alert: { klass: 'danger', message },
           });
-        }
-      });
-  };
-}
-
-export function fetchDomains(id) {
-  return dispatch => {
-    dispatch({ type: FETCH_DOMAINS_START });
-    api.get(`/accounts/${id}/domains`)
-      .then(response => {
-        if (isSuccess(response)) {
-          dispatch({ type: FETCH_DOMAINS_SUCCESS, payload: response });
-        } else {
-          dispatch({ type: FETCH_DOMAINS_ERROR });
         }
       });
   };

@@ -28,7 +28,7 @@ class AccountDomainForm extends Component {
             type="text"
             name="host"
             component={renderField}
-            placeholder="example.com"
+            placeholder="http://www.example.com"
           />
           <div className="input-group-btn">
             <button

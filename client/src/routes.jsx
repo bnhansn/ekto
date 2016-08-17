@@ -3,14 +3,14 @@ import Home from './pages/Home';
 import App from './containers/App';
 import Team from './containers/Team';
 import Login from './containers/Login';
-import Posts from './containers/Posts';
+import PostIndex from './containers/PostIndex';
 import NotFound from './pages/NotFound';
 import Signup from './containers/Signup';
 import Account from './containers/Account';
 import PostNew from './containers/PostNew';
 import PostEdit from './containers/PostEdit';
 import Settings from './containers/Settings';
-import Accounts from './containers/Accounts';
+import AccountIndex from './containers/AccountIndex';
 import ResetPassword from './containers/ResetPassword';
 import ForgotPassword from './containers/ForgotPassword';
 import AccountSettings from './containers/AccountSettings';
@@ -27,10 +27,10 @@ export default (
     <Route path="/reset/:token" component={redirectAuthenticated(ResetPassword)} />
 
     <Route path="/settings" component={authenticate(Settings)} />
-    <Route path="/accounts" component={authenticate(Accounts)} />
+    <Route path="/accounts" component={authenticate(AccountIndex)} />
     <Route path="/accounts/:accountSlug" component={authenticate(Account)}>
       <IndexRedirect to="/accounts/:accountSlug/posts" />
-      <Route path="/accounts/:accountSlug/posts" component={authenticate(Posts)} />
+      <Route path="/accounts/:accountSlug/posts" component={authenticate(PostIndex)} />
       <Route path="/accounts/:accountSlug/team" component={authenticate(Team)} />
       <Route
         path="/accounts/:accountSlug/settings"

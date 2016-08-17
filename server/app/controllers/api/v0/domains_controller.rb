@@ -1,11 +1,11 @@
 class Api::V0::DomainsController < Api::V0::BaseController
   def index
-    account = @user.accounts.find(params[:account_id])
+    account = @user.accounts.friendly.find(params[:account_id])
     render json: account.domains, root: 'data' # AMS #1536
   end
 
   def create
-    account = @user.accounts.find(params[:account_id])
+    account = @user.accounts.friendly.find(params[:account_id])
     domain = account.domains.new(domain_params)
     if domain.save
       render json: domain, status: :created
@@ -15,7 +15,7 @@ class Api::V0::DomainsController < Api::V0::BaseController
   end
 
   def destroy
-    account = @user.accounts.find(params[:account_id])
+    account = @user.accounts.friendly.find(params[:account_id])
     domain = account.domains.find(params[:id])
     domain.destroy
     render json: domain, status: :ok

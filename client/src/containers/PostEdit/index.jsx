@@ -10,6 +10,8 @@ import React, { Component, PropTypes } from 'react';
 
 class PostEdit extends Component {
   static propTypes = {
+    team: PropTypes.array.isRequired,
+    user: PropTypes.object.isRequired,
     post: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
     isSaving: PropTypes.bool.isRequired,
@@ -35,7 +37,7 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { post, isLoading, isSaving } = this.props;
+    const { post, user, team, isLoading, isSaving } = this.props;
 
     if (isLoading || isEmpty(post)) {
       return <div className="loader"></div>;
@@ -44,6 +46,8 @@ class PostEdit extends Component {
     return (
       <div className="container">
         <Editor
+          user={user}
+          team={team}
           enableReinitialize
           isSaving={isSaving}
           initialValues={post}
@@ -57,9 +61,12 @@ class PostEdit extends Component {
 
 export default connect(
   state => ({
-    post: state.post.post,
-    isSaving: state.post.isSaving,
-    isLoading: state.post.isLoading,
+    user: state.app.user,
+    team: state.account.team,
+    post: state.postEdit.post,
+    account: state.account.account,
+    isSaving: state.postEdit.isSaving,
+    isLoading: state.postEdit.isLoading,
   }),
   { fetchPost, updatePost, deletePost }
 )(PostEdit);

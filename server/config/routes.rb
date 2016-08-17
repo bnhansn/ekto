@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       resources :users, only: [:create, :update]
       resources :accounts, only: [:index, :create, :show, :update, :destroy] do
         member do
-          get 'team'
+          get 'users'
         end
         resources :posts, only: [:index, :create, :show, :update, :destroy]
         resources :domains, only: [:index, :create, :update, :destroy]

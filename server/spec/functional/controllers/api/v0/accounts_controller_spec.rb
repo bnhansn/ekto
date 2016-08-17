@@ -161,7 +161,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
     end
   end
 
-  describe 'GET #team' do
+  describe 'GET #users' do
     context 'authorized' do
       include_context :with_authorized_user_and_account
 
@@ -171,7 +171,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
         enable_account_access(user_1.id, @account.id)
         enable_account_access(user_2.id, @account.id)
 
-        process :team, method: :get, params: { id: @account.id }
+        process :users, method: :get, params: { id: @account.id }
 
         result = JSON.parse(response.body)
         ids = result['data'].map { |x| x['id'] }
@@ -188,7 +188,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       it 'returns not_found' do
         account = create(:account)
 
-        process :team, method: :get, params: { id: account.id }
+        process :users, method: :get, params: { id: account.id }
 
         expect(response).to have_http_status(:not_found)
       end
@@ -198,7 +198,7 @@ RSpec.describe Api::V0::AccountsController, type: :controller do
       it 'returns unauthorized' do
         account = create(:account)
 
-        process :team, method: :get, params: { id: account.id }
+        process :users, method: :get, params: { id: account.id }
 
         expect(response).to have_http_status(:unauthorized)
       end

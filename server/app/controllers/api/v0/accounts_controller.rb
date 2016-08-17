@@ -35,7 +35,7 @@ class Api::V0::AccountsController < Api::V0::BaseController
     render json: account, status: :ok
   end
 
-  def team
+  def users
     account = @user.accounts.friendly.find(params[:id])
     render json: account.users, root: 'data' # AMS #1536
   end

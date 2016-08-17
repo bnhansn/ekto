@@ -6,7 +6,7 @@ import React, { Component, PropTypes } from 'react';
 import { fetchAccounts, createAccount } from './actions';
 import NewAccountForm from '../../components/NewAccountForm';
 
-class Accounts extends Component {
+class AccountIndex extends Component {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
     accounts: PropTypes.array.isRequired,
@@ -95,4 +95,4 @@ export default connect(
     isSavingNewAccount: state.accounts.isSavingNewAccount,
   }),
   { fetchAccounts, createAccount }
-)(Accounts);
+)(AccountIndex);

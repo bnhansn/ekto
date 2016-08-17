@@ -1,17 +1,16 @@
 import { combineReducers } from 'redux';
 import appReducer from './containers/App/reducer';
 import { routerReducer } from 'react-router-redux';
-import teamReducer from './containers/Team/reducer';
 import { reducer as formReducer } from 'redux-form';
 import alertReducer from './containers/Alert/reducer';
 import loginReducer from './containers/Login/reducer';
-import postsReducer from './containers/Posts/reducer';
-import postReducer from './containers/PostEdit/reducer';
-import postNewReducer from './containers/PostNew/reducer';
 import signupReducer from './containers/Signup/reducer';
+import postNewReducer from './containers/PostNew/reducer';
 import accountReducer from './containers/Account/reducer';
+import postsReducer from './containers/PostIndex/reducer';
+import postEditReducer from './containers/PostEdit/reducer';
 import settingsReducer from './containers/Settings/reducer';
-import accountsReducer from './containers/Accounts/reducer';
+import accountsReducer from './containers/AccountIndex/reducer';
 import resetPasswordReducer from './containers/ResetPassword/reducer';
 import forgotPasswordReducer from './containers/ForgotPassword/reducer';
 import accountSettingsReducer from './containers/AccountSettings/reducer';
@@ -19,15 +18,14 @@ import accountSettingsReducer from './containers/AccountSettings/reducer';
 const reducers = combineReducers({
   app: appReducer,
   form: formReducer,
-  post: postReducer,
-  postNew: postNewReducer,
-  team: teamReducer,
   posts: postsReducer,
   alert: alertReducer,
   login: loginReducer,
   signup: signupReducer,
   routing: routerReducer,
   account: accountReducer,
+  postNew: postNewReducer,
+  postEdit: postEditReducer,
   accounts: accountsReducer,
   settings: settingsReducer,
   resetPassword: resetPasswordReducer,

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchPosts } from './actions';
 import React, { Component, PropTypes } from 'react';
 
-class Posts extends Component {
+class PostIndex extends Component {
   static propTypes = {
     posts: PropTypes.array.isRequired,
     params: PropTypes.object.isRequired,
@@ -61,4 +61,4 @@ export default connect(
     isLoading: state.posts.isLoading,
   }),
   { fetchPosts }
-)(Posts);
+)(PostIndex);

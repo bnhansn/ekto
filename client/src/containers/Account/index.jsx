@@ -1,9 +1,9 @@
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
-import { fetchAccount } from './actions';
+import Topnav from '../../components/Topnav';
 import React, { Component, PropTypes } from 'react';
 import AccountTabs from '../../components/AccountTabs';
-import Topnav from '../../components/Topnav';
+import { fetchAccount, fetchTeam, fetchDomains } from './actions';
 
 class Account extends Component {
   static propTypes = {
@@ -12,16 +12,24 @@ class Account extends Component {
     account: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     fetchAccount: PropTypes.func.isRequired,
+    fetchDomains: PropTypes.func.isRequired,
+    fetchTeam: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
-    this.props.fetchAccount(this.props.params.accountSlug);
+    this.fetchAccountData(this.props.params.accountSlug);
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.accountSlug !== this.props.params.accountSlug) {
-      this.props.fetchAccount(nextProps.params.accountSlug);
+      this.fetchAccountData(nextProps.params.accountSlug);
     }
+  }
+
+  fetchAccountData(accountSlug) {
+    this.props.fetchAccount(accountSlug);
+    this.props.fetchTeam(accountSlug);
+    this.props.fetchDomains(accountSlug);
   }
 
   render() {
@@ -53,5 +61,5 @@ export default connect(
     account: state.account.account,
     isLoading: state.account.isLoading,
   }),
-  { fetchAccount }
+  { fetchAccount, fetchTeam, fetchDomains }
 )(Account);

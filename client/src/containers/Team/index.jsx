@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { fetchTeam } from './actions';
 import Gravatar from '../../components/Gravatar';
 import React, { Component, PropTypes } from 'react';
 
@@ -7,13 +6,7 @@ class Team extends Component {
   static propTypes = {
     team: PropTypes.array.isRequired,
     account: PropTypes.object.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    fetchTeam: PropTypes.func.isRequired,
   };
-
-  componentWillMount() {
-    this.props.fetchTeam(this.props.account.id);
-  }
 
   renderTeam() {
     const { team, account } = this.props;
@@ -42,13 +35,10 @@ class Team extends Component {
   }
 
   render() {
-    const { isLoading } = this.props;
-
     return (
       <div className="container">
-        {isLoading && <div className="loader"></div>}
         <ul className="list-group">
-          {::this.renderTeam()}
+          {this.renderTeam()}
         </ul>
       </div>
     );
@@ -57,9 +47,8 @@ class Team extends Component {
 
 export default connect(
   state => ({
-    team: state.team.team,
+    team: state.account.team,
     account: state.account.account,
-    isLoading: state.team.isLoading,
   }),
-  { fetchTeam }
+  null
 )(Team);

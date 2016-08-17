@@ -3,7 +3,8 @@
 
 @import
 'vendor/icomoon',
-'vendor/bootstrap/bootstrap';
+'vendor/bootstrap/bootstrap',
+'vendor/react-datepicker/datepicker';
 
 @import
 'base/fonts',
@@ -12,6 +13,7 @@
 
 @import
 'modules/buttons',
+'modules/datepicker',
 'modules/dropdowns',
 'modules/loader',
 'modules/modals',
@@ -23,7 +25,7 @@
 '../pages/NotFound/styles';
 
 @import
-'../containers/Accounts/styles',
+'../containers/AccountIndex/styles',
 '../containers/App/styles';
 
 @import
