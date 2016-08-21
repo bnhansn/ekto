@@ -10,6 +10,15 @@
   background: rgba(255,255,255,.1);
 }
 
+.hero-header {
+  display: inline-block;
+  margin-right: .5rem;
+}
+
+.hero-beta {
+  color: rgba(255,255,255,.8);
+}
+
 .cta {
   padding-left: 2rem;
   font-size: 2rem;
@@ -17,11 +26,42 @@
 }
 
 .product-description {
-  padding: 75px 0;
+  padding-top: 75px;
+  background: #fff;
   border-bottom: 1px solid $gray-lighter;
 }
 
 .product-feature {
   margin-bottom: 1rem;
   font-size: 1.1rem;
+}
+
+.editor {
+  border: 1px solid rgb(220,220,220);
+  border-bottom: 0;
+  border-top-right-radius: 7px;
+  border-top-left-radius: 7px;
+}
+
+.product-steps {
+  padding: 100px 0;
+  font-size: 1.25rem;
+}
+
+.product-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: $brand-success;
+  border: 1px solid $brand-success;
+  border-radius: 50%;
+}
+
+.app-example-section {
+  padding: 50px 0;
+  font-size: 1.25rem;
+  text-align: center;
+  background: #fff;
 }

@@ -24,6 +24,12 @@ class Navbar extends Component {
         {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
+              <a href="https://ekto.readme.io/" className="nav-link">Docs</a>
+            </li>
+            <li className="nav-item">
+              <a href="https://github.com/bnhansn/ekto/" className="nav-link">Github</a>
+            </li>
+            <li className="nav-item">
               <Link to="/login" className="nav-link" activeClassName="active">
                 Login
               </Link>
