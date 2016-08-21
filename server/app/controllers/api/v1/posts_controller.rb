@@ -9,7 +9,7 @@ class Api::V1::PostsController < Api::V1::BaseController
 
   def show
     post = @account.posts.published.friendly.find(params[:id])
-    render json: post, each_serializer: PostV1Serializer
+    render json: post, serializer: PostV1Serializer
   end
 
   private
