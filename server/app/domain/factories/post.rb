@@ -8,7 +8,7 @@ module Factories
       post.account_id = account_id
       post.created_by = user_id
       post.updated_by = user_id
-      post = defaults(post, account_id)
+      post = defaults(post, user_id, account_id)
       post
     end
 
@@ -16,7 +16,7 @@ module Factories
       attributes = sanitize(params)
       post.assign_attributes(attributes)
       post.updated_by = user_id
-      post = defaults(post, account_id)
+      post = defaults(post, user_id, account_id)
       post
     end
 
@@ -34,7 +34,8 @@ module Factories
       )
     end
 
-    def defaults(post, account_id)
+    def defaults(post, user_id, account_id)
+      post.author_id = user_id unless post.author_id.present?
       post.title = 'Untitled' unless post.title.present?
       post.slug = post.title unless post.slug.present?
       post.slug = post.slug.parameterize

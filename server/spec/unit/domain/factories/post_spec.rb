@@ -39,6 +39,7 @@ describe Factories::Post do
 
       post = Factories::Post.build(@user_id, @account_id, params)
 
+      expect(post.author_id).to eq(@user_id)
       expect(post.account_id).to eq(@account_id)
       expect(post.created_by).to eq(@user_id)
       expect(post.title).to eq('Untitled')
@@ -70,6 +71,7 @@ describe Factories::Post do
 
       post = Factories::Post.assign(post, @user_id, @account_id, params)
 
+      expect(post.author_id).to eq(@user_id)
       expect(post.title).to eq('Untitled')
       expect(post.slug).to eq('untitled')
     end

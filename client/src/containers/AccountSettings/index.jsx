@@ -78,7 +78,7 @@ class AccountSettings extends Component {
               <div className="col-sm-8 col-xs-12">
                 <div className="form-group">
                   <label>Account key</label>
-                  <input readOnly value={account.key} className="form-control" />
+                  <input readOnly type="text" defaultValue={account.key} className="form-control" />
                 </div>
                 <p className="small text-muted">
                   Blog posts can be retrieved from the api at <code style={{ wordWrap: 'break-word' }}>http://api.ekto.tech/v1/{account.key}/posts</code>
