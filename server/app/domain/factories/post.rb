@@ -30,7 +30,6 @@ module Factories
         :image,
         :published,
         :published_at,
-        :published_by,
         :slug
       )
     end

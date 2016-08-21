@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816132936) do
+ActiveRecord::Schema.define(version: 20160817232829) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,7 +54,6 @@ ActiveRecord::Schema.define(version: 20160816132936) do
     t.integer  "author_id"
     t.boolean  "featured",     default: false
     t.boolean  "published",    default: false
-    t.integer  "published_by"
     t.datetime "published_at"
     t.integer  "created_by"
     t.integer  "updated_by"

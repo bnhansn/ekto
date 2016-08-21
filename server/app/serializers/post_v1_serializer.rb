@@ -1,21 +1,18 @@
-class PostSerializer < ActiveModel::Serializer
+class PostV1Serializer < ActiveModel::Serializer
   def json_key
     'data'
   end
 
+  has_one :author, serializer: AuthorSerializer
+
   attributes :id,
-             :account_id,
-             :author_id,
              :created_at,
-             :created_by,
              :featured,
              :html,
              :markdown,
              :title,
              :slug,
              :image,
-             :published,
              :published_at,
-             :updated_at,
-             :updated_by
+             :updated_at
 end

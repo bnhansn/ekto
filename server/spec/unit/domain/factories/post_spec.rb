@@ -11,7 +11,6 @@ describe Factories::Post do
       image: 'http://google.com',
       published: true,
       published_at: Date.today,
-      published_by: 1,
       slug: 'test-slug'
     }
     @params = ActionController::Parameters.new(attrs)
@@ -31,7 +30,6 @@ describe Factories::Post do
       expect(post.image).to eq('http://google.com')
       expect(post.published).to eq(true)
       expect(post.published_at).to eq(Date.today)
-      expect(post.published_by).to eq(1)
       expect(post.slug).to eq('test-slug')
     end
 
@@ -62,7 +60,6 @@ describe Factories::Post do
       expect(post.image).to eq('http://google.com')
       expect(post.published).to eq(true)
       expect(post.published_at).to eq(Date.today)
-      expect(post.published_by).to eq(1)
       expect(post.slug).to eq('test-slug')
     end
 
