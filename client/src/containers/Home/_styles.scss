@@ -28,7 +28,6 @@
 .product-description {
   padding-top: 75px;
   background: #fff;
-  border-bottom: 1px solid $gray-lighter;
 }
 
 .product-feature {
@@ -46,6 +45,8 @@
 .product-steps {
   padding: 100px 0;
   font-size: 1.25rem;
+  border-top: 1px solid $gray-lighter;
+  border-bottom: 1px solid $gray-lighter;
 }
 
 .product-step-number {

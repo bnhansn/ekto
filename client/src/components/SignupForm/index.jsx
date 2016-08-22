@@ -18,21 +18,43 @@ class SignupForm extends Component {
 
     return (
       <form
-        className="m-x-auto p-y-1"
-        style={{ maxWidth: '400px' }}
+        className="signup-form p-y-3"
         onSubmit={handleSubmit(::this.handleSubmit)}
       >
-        <div className="card">
-          <div className="card-header">
-            Signup
+        <div className="row">
+          <div className="col-md-3 col-xs-12">
+            <Field
+              name="name"
+              type="text"
+              component={Input}
+              placeholder="Full name"
+              className="form-control form-control-lg signup-input"
+            />
           </div>
-          <div className="card-block">
-            <Field name="name" type="text" component={Input} placeholder="Full name" />
-            <Field name="email" type="email" component={Input} placeholder="Email" />
-            <Field name="password" type="password" component={Input} placeholder="Password" />
+          <div className="col-md-3 col-xs-12">
+            <Field
+              name="email"
+              type="email"
+              component={Input}
+              autoComplete="off"
+              placeholder="Email"
+              className="form-control form-control-lg signup-input"
+            />
+          </div>
+          <div className="col-md-3 col-xs-12">
+            <Field
+              name="password"
+              type="password"
+              component={Input}
+              autoComplete="off"
+              placeholder="Password"
+              className="form-control form-control-lg signup-input"
+            />
+          </div>
+          <div className="col-md-3 col-xs-12">
             <button
               type="submit"
-              className="btn btn-primary"
+              className="btn btn-block btn-lg signup-button"
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting...' : 'Signup'}

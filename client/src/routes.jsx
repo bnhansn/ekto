@@ -1,11 +1,10 @@
 import React from 'react';
-import Home from './pages/Home';
 import App from './containers/App';
+import Home from './containers/Home';
 import Team from './containers/Team';
 import Login from './containers/Login';
 import PostIndex from './containers/PostIndex';
 import NotFound from './pages/NotFound';
-import Signup from './containers/Signup';
 import Account from './containers/Account';
 import PostNew from './containers/PostNew';
 import PostEdit from './containers/PostEdit';
@@ -22,7 +21,6 @@ export default (
   <Route path="/" component={App}>
     <IndexRoute component={redirectAuthenticated(Home)} />
     <Route path="/login" component={redirectAuthenticated(Login)} />
-    <Route path="/signup" component={redirectAuthenticated(Signup)} />
     <Route path="/forgot" component={redirectAuthenticated(ForgotPassword)} />
     <Route path="/reset/:token" component={redirectAuthenticated(ResetPassword)} />
 

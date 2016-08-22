@@ -21,12 +21,12 @@
 'modules/tabs';
 
 @import
-'../pages/Home/styles',
 '../pages/NotFound/styles';
 
 @import
 '../containers/AccountIndex/styles',
-'../containers/App/styles';
+'../containers/App/styles',
+'../containers/Home/styles';
 
 @import
 '../components/Alert/styles',
@@ -36,4 +36,5 @@
 '../components/Input/styles',
 '../components/MarkdownGuide/styles',
 '../components/Navbar/styles',
+'../components/SignupForm/styles',
 '../components/Topnav/styles';
