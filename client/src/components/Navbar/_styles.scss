@@ -2,9 +2,12 @@
 .navbar-brand {
   color: #fff;
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: rgba(255,255,255,.8);
+  }
+
+  &:focus {
+    color: #fff;
   }
 }
 
@@ -13,14 +16,29 @@
   align-items: center;
   color: #fff;
 
-  &:hover,
-  &:focus {
+  &:hover {
     color: rgba(255,255,255,.8);
     text-decoration: none;
+  }
+
+  &:focus {
+    color: #fff;
   }
 }
 
 .user-dropdown-icon {
   margin-right: .75rem;
   font-size: 16px;
+}
+
+.login-button {
+  color: $brand-primary;
+  background: #fff;
+  border: 1px solid #fff;
+
+  &:hover,
+  &:focus {
+    color: darken($brand-primary, 20%);
+    background: #fff;
+  }
 }

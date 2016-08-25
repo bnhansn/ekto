@@ -23,14 +23,13 @@ class Navbar extends Component {
         <Link to={isAuthenticated ? '/accounts' : '/'} className="navbar-brand">Ekto</Link>
         {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
-            <li className="nav-item">
-              <a href="https://ekto.readme.io/" target="_blank" className="nav-link">Docs</a>
+            <li className="nav-item m-r-sm">
+              <a href="https://github.com/bnhansn/ekto/" target="_blank" className="nav-link">
+                <i className="icon icon-github" style={{ fontSize: '1.5rem' }}></i>
+              </a>
             </li>
             <li className="nav-item">
-              <a href="https://github.com/bnhansn/ekto/" target="_blank" className="nav-link">Github</a>
-            </li>
-            <li className="nav-item">
-              <Link to="/login" className="nav-link" activeClassName="active">
+              <Link to="/login" className="nav-link btn login-button" activeClassName="active">
                 Login
               </Link>
             </li>

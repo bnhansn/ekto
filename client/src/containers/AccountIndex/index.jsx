@@ -43,7 +43,7 @@ class AccountIndex extends Component {
         className="list-group-item list-group-item-action"
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
       >
-        <div className="account-icon"><i className="icon icon-earth2"></i></div>
+        <div className="account-icon">{account.name.charAt(0)}</div>
         <span>{account.name}</span>
         <div style={{ flexGrow: '1' }}></div>
         <i className="icon icon-arrow-right2"></i>

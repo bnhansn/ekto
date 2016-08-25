@@ -5,7 +5,7 @@
   width: 30px;
   height: 30px;
   margin-right: 1rem;
-  color: rgb(200,200,200);
-  background: rgb(235,238,241);
+  color: $brand-primary;
+  background: rgba($brand-primary,.1);
   border-radius: 3px;
 }
