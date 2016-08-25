@@ -21,10 +21,10 @@ class SettingsForm extends Component {
         <div className="card">
           <div className="card-block">
             <div className="row">
-              <div className="col-sm-4">
+              <div className="col-sm-4 col-xs-12">
                 <h5>Profile</h5>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-12">
                 <Field
                   type="text"
                   name="name"
@@ -43,10 +43,10 @@ class SettingsForm extends Component {
           <hr />
           <div className="card-block">
             <div className="row">
-              <div className="col-sm-4">
+              <div className="col-sm-4 col-xs-12">
                 <h5>Password</h5>
               </div>
-              <div className="col-sm-8">
+              <div className="col-sm-8 col-xs-12">
                 <Field
                   type="password"
                   name="password"
