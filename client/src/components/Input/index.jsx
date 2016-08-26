@@ -13,7 +13,7 @@ const Input = (props) =>
 Input.propTypes = {
   label: PropTypes.string,
   error: PropTypes.string,
-  touched: PropTypes.bool.isRequired,
+  touched: PropTypes.bool,
   input: PropTypes.object.isRequired,
 };
 
