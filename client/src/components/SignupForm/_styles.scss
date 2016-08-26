@@ -13,11 +13,11 @@
 
 .signup-input {
   color: #fff !important;
-  background: rgba(0,0,0,.1);
+  background: rgba(0,0,0,.15);
   border: 1px solid #fff;
 
   &:focus {
-    background: rgba(255,255,255,.05);
+    background: rgba(0,0,0,.2);
     border: 1px solid #fff;
   }
 }

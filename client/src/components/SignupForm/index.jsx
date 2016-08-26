@@ -1,6 +1,6 @@
-import Input from '../Input';
 import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes, Component } from 'react';
+import Input from '../Input';
 
 class SignupForm extends Component {
   static propTypes = {
@@ -36,7 +36,6 @@ class SignupForm extends Component {
               name="email"
               type="email"
               component={Input}
-              autoComplete="off"
               placeholder="Email"
               className="form-control form-control-lg signup-input"
             />
@@ -46,7 +45,6 @@ class SignupForm extends Component {
               name="password"
               type="password"
               component={Input}
-              autoComplete="off"
               placeholder="Password"
               className="form-control form-control-lg signup-input"
             />

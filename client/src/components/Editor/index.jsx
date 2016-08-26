@@ -1,14 +1,14 @@
 import moment from 'moment';
-import Input from '../Input';
 import Modal from 'react-modal';
 import showdown from 'showdown';
 import DatePicker from 'react-datepicker';
-import { newlineExtension } from './utils';
 import { Field, reduxForm } from 'redux-form';
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import MarkdownGuide from '../../components/MarkdownGuide';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+import Input from '../Input';
+import { newlineExtension } from './utils';
+import MarkdownGuide from '../../components/MarkdownGuide';
 
 class Editor extends Component {
   static propTypes = {
@@ -66,16 +66,6 @@ class Editor extends Component {
     });
   }
 
-  handleMarkdownChange() {
-    const markdown = this.refs.markdown.value;
-    this.setPreview(markdown);
-  }
-
-  handleTitleChange() {
-    const title = this.refs.title.value;
-    this.setState({ title });
-  }
-
   handlePublish(data) {
     const post = { ...data, published: true };
     this.handleSubmit(post);
@@ -87,7 +77,7 @@ class Editor extends Component {
   }
 
   handleSubmit(data) {
-    this.refs.dropdown.hide();
+    this.dropdown.hide();
     const post = {
       ...data,
       html: this.state.preview,
@@ -135,10 +125,10 @@ class Editor extends Component {
               {this.renderNewSaveButton()}
               {this.renderEditSaveButton()}
             </button>
-            <Dropdown ref="dropdown">
+            <Dropdown ref={(c) => { this.dropdown = c; }}>
               <DropdownTrigger>
                 <button type="button" className="btn btn-primary post-dropdown-trigger">
-                  <i className="icon icon-arrow-down5"></i>
+                  <i className="icon icon-arrow-down5" />
                 </button>
               </DropdownTrigger>
               <DropdownContent className="dropdown-right text-xs-left">
@@ -178,28 +168,28 @@ class Editor extends Component {
           </div>
           <Tabs>
             <TabList>
-              <Tab><i className="icon icon-file-text m-r-sm"></i>Write</Tab>
-              <Tab><i className="icon icon-eye m-r-sm"></i>Preview</Tab>
-              <Tab><i className="icon icon-cogs m-r-sm"></i>Settings</Tab>
-              <Tab><i className="icon icon-map4 m-r-sm"></i>Guide</Tab>
+              <Tab><i className="icon icon-file-text m-r-sm" />Write</Tab>
+              <Tab><i className="icon icon-eye m-r-sm" />Preview</Tab>
+              <Tab><i className="icon icon-cogs m-r-sm" />Settings</Tab>
+              <Tab><i className="icon icon-map4 m-r-sm" />Guide</Tab>
             </TabList>
             <TabPanel>
               <Field
-                ref="title"
+                ref={(c) => { this.title = c; }}
                 type="text"
                 name="title"
                 component="input"
                 placeholder="Title"
                 className="post-title"
-                onKeyUp={::this.handleTitleChange}
+                onKeyUp={() => { this.setState({ title: this.title.value }); }}
               />
               <Field
                 type="text"
-                ref="markdown"
+                ref={(c) => { this.markdown = c; }}
                 name="markdown"
                 component="textarea"
                 className="post-markdown"
-                onKeyUp={::this.handleMarkdownChange}
+                onKeyUp={() => { this.setPreview(this.markdown.value); }}
               />
             </TabPanel>
             <TabPanel>
@@ -222,8 +212,9 @@ class Editor extends Component {
                     {`http://api.ekto.tech/v1/${account.key}/posts/${existingPost ? initialValues.slug : ''}`}
                   </p>
                   <div className="form-group">
-                    <label>Publish date</label>
+                    <label htmlFor="datepicker">Publish date</label>
                     <DatePicker
+                      name="datepicker"
                       className="form-control"
                       popoverAttachment="top left"
                       selected={this.state.publishedAt}
@@ -231,7 +222,7 @@ class Editor extends Component {
                       onChange={(date) => this.setState({ publishedAt: date })}
                     />
                   </div>
-                  <label>Author</label>
+                  <label htmlFor="authorId">Author</label>
                   <Field
                     label="Author"
                     name="authorId"
@@ -260,7 +251,7 @@ class Editor extends Component {
             <i
               className="modal-close"
               onClick={::this.handleModalClose}
-            ></i>
+            />
           </div>
           <div className="modal-content">
             <p>Are you sure you want to permanently delete this post?</p>
