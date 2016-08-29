@@ -66,13 +66,13 @@ class Navbar extends Component {
                     <i className="icon icon-equalizer2 user-dropdown-icon" />
                     <span>Settings</span>
                   </Link>
-                  <a
+                  <button
                     onClick={(e) => { this.handleLogoutClick(e); }}
                     className="dropdown-item"
                   >
                     <i className="icon icon-exit user-dropdown-icon" />
                     <span>Logout</span>
-                  </a>
+                  </button>
                 </DropdownContent>
               </Dropdown>
             </li>

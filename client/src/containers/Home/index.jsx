@@ -35,8 +35,8 @@ class Home extends Component {
           </div>
           <div className="container">
             <div className="cta">
-              <p>A full stack blogging service.</p>
-              <p>Publish on our platform and fetch through a simple api.</p>
+              <p>A blogging microservice</p>
+              <p>Publish on our platform and fetch through a simple api</p>
             </div>
             <SignupForm isSubmitting={isSubmitting} onSubmit={this.handleSubmit} />
           </div>
