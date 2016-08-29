@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
-import appReducer from './containers/App/reducer';
 import { routerReducer } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
+import appReducer from './containers/App/reducer';
 import homeReducer from './containers/Home/reducer';
 import alertReducer from './containers/Alert/reducer';
 import loginReducer from './containers/Login/reducer';

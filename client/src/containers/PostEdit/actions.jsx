@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import {
   FETCH_POST_START,
   FETCH_POST_ERROR,
@@ -7,7 +8,6 @@ import {
   UPDATE_POST_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 

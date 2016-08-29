@@ -16,10 +16,10 @@ const Alert = (props) => {
       className={`alert alert-${klass || 'danger'}`}
       onClick={() => { props.onClick(); }}
     >
-      <i className={`icon icon-${iconClass} alert-icon`}></i>
+      <i className={`icon icon-${iconClass} alert-icon`} />
       {message || 'Unknown error'}
-      <div style={{ flexGrow: 1 }}></div>
-      <i className="icon icon-cross alert-close"></i>
+      <div style={{ flexGrow: 1 }} />
+      <i className="icon icon-cross alert-close" />
     </div>
   );
 };

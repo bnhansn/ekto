@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
 
 class AccountDomain extends Component {
   static propTypes = {
@@ -6,6 +7,7 @@ class AccountDomain extends Component {
     onDelete: PropTypes.func.isRequired,
   };
 
+  @autobind
   handleDelete() {
     this.props.onDelete(this.props.domain.id);
   }
@@ -18,8 +20,8 @@ class AccountDomain extends Component {
         <div className="input-group">
           <input className="form-control" readOnly value={domain.host} />
           <div className="input-group-btn">
-            <button className="btn btn-secondary" onClick={::this.handleDelete}>
-              <i className="icon icon-bin"></i>
+            <button className="btn btn-secondary" onClick={this.handleDelete}>
+              <i className="icon icon-bin" />
             </button>
           </div>
         </div>

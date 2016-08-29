@@ -24,5 +24,8 @@
     "window": true,
     "localStorage": true,
     "dispatch": true
+  },
+  "rules": {
+    "import/prefer-default-export": 0,
   }
 }

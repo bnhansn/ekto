@@ -1,7 +1,8 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { autobind } from 'core-decorators';
 import { updateSettings } from './actions';
 import Topnav from '../../components/Topnav';
-import React, { Component, PropTypes } from 'react';
 import SettingsForm from '../../components/SettingsForm';
 
 class Settings extends Component {
@@ -12,6 +13,7 @@ class Settings extends Component {
     initialValues: PropTypes.object.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.updateSettings(this.props.user.id, data);
   }
@@ -27,7 +29,7 @@ class Settings extends Component {
             enableReinitialize
             isSubmitting={isSubmitting}
             initialValues={initialValues}
-            onSubmit={::this.handleSubmit}
+            onSubmit={this.handleSubmit}
           />
         </div>
       </div>

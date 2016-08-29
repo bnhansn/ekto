@@ -10,7 +10,7 @@ const Topnav = ({ className, header, headerRoute, subheader }) =>
         </Link> :
         <h5 className="topnav-header">{header}</h5>
       }
-      {subheader && <i className="icon icon-arrow-right4 subheader-arrow"></i>}
+      {subheader && <i className="icon icon-arrow-right4 subheader-arrow" />}
       {subheader && <h5 className="topnav-subheader">{subheader}</h5>}
     </div>
   </div>;

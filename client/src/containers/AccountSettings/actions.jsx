@@ -1,3 +1,5 @@
+import { reset } from 'redux-form';
+import { push } from 'react-router-redux';
 import {
   UPDATE_ACCOUNT_START,
   UPDATE_ACCOUNT_ERROR,
@@ -8,8 +10,6 @@ import {
   DELETE_DOMAIN_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { reset } from 'redux-form';
-import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 

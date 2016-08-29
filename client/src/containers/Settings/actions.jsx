@@ -1,10 +1,10 @@
+import { reset } from 'redux-form';
 import {
   UPDATE_SETTINGS_START,
   UPDATE_SETTINGS_ERROR,
   UPDATE_SETTINGS_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { reset } from 'redux-form';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 

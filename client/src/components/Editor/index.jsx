@@ -2,6 +2,7 @@ import moment from 'moment';
 import Modal from 'react-modal';
 import showdown from 'showdown';
 import DatePicker from 'react-datepicker';
+import { autobind } from 'core-decorators';
 import { Field, reduxForm } from 'redux-form';
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -60,22 +61,26 @@ class Editor extends Component {
     return initialValues.authorId;
   }
 
+  @autobind
   handleModalClose() {
     this.setState({
       deleteModalOpen: false,
     });
   }
 
+  @autobind
   handlePublish(data) {
     const post = { ...data, published: true };
     this.handleSubmit(post);
   }
 
+  @autobind
   handleUnpublish(data) {
     const post = { ...data, published: false };
     this.handleSubmit(post);
   }
 
+  @autobind
   handleSubmit(data) {
     this.dropdown.hide();
     const post = {
@@ -86,6 +91,7 @@ class Editor extends Component {
     this.props.onSubmit(post);
   }
 
+  @autobind
   renderPreview() {
     return { __html: this.state.preview };
   }
@@ -119,7 +125,7 @@ class Editor extends Component {
 
     return (
       <div>
-        <form onSubmit={handleSubmit(::this.handleSubmit)}>
+        <form onSubmit={handleSubmit(this.handleSubmit)}>
           <div className="text-xs-right m-b-1">
             <button type="submit" className="btn btn-primary save-post-button">
               {this.renderNewSaveButton()}
@@ -139,14 +145,14 @@ class Editor extends Component {
                   <button
                     type="button"
                     className="dropdown-item"
-                    onClick={handleSubmit(::this.handleUnpublish)}
+                    onClick={handleSubmit(this.handleUnpublish)}
                   >
                     Unpublish
                   </button> :
                   <button
                     type="button"
                     className="dropdown-item"
-                    onClick={handleSubmit(::this.handlePublish)}
+                    onClick={handleSubmit(this.handlePublish)}
                   >
                     Publish
                   </button>
@@ -194,7 +200,8 @@ class Editor extends Component {
             </TabPanel>
             <TabPanel>
               <div className="post-title-preview">{this.state.title}</div>
-              <div className="post-html-preview" dangerouslySetInnerHTML={::this.renderPreview()} />
+                @autobind
+              <div className="post-html-preview" dangerouslySetInnerHTML={this.renderPreview()} />
             </TabPanel>
             <TabPanel>
               <div className="post-settings">
@@ -244,13 +251,13 @@ class Editor extends Component {
           className="modal"
           isOpen={deleteModalOpen}
           overlayClassName="modal-overlay"
-          onRequestClose={::this.handleModalClose}
+          onRequestClose={this.handleModalClose}
         >
           <div className="modal-header">
             <h6 className="text-primary">Delete post</h6>
             <i
               className="modal-close"
-              onClick={::this.handleModalClose}
+              onClick={this.handleModalClose}
             />
           </div>
           <div className="modal-content">
@@ -261,7 +268,7 @@ class Editor extends Component {
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={::this.handleModalClose}
+                onClick={this.handleModalClose}
               >
                 Cancel
               </button>

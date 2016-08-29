@@ -1,6 +1,6 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Gravatar from '../../components/Gravatar';
-import React, { Component, PropTypes } from 'react';
 
 class Team extends Component {
   static propTypes = {

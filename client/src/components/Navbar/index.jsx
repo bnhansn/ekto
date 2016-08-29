@@ -1,7 +1,8 @@
-import Gravatar from '../Gravatar';
-import { Link } from 'react-router';
 import React, { Component, PropTypes } from 'react';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+import { Link } from 'react-router';
+import { autobind } from 'core-decorators';
+import Gravatar from '../Gravatar';
 
 class Navbar extends Component {
   static propTypes = {
@@ -11,6 +12,7 @@ class Navbar extends Component {
     isAuthenticating: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleLogoutClick(e) {
     this.props.onLogoutClick(e);
   }
@@ -24,8 +26,8 @@ class Navbar extends Component {
         {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item m-r-sm">
-              <a href="https://github.com/bnhansn/ekto/" target="_blank" className="nav-link">
-                <i className="icon icon-github" style={{ fontSize: '1.5rem' }}></i>
+              <a href="https://github.com/bnhansn/ekto/" target="_blank" rel="noopener noreferrer" className="nav-link">
+                <i className="icon icon-github" style={{ fontSize: '1.5rem' }} />
               </a>
             </li>
             <li className="nav-item">
@@ -38,9 +40,9 @@ class Navbar extends Component {
         {isAuthenticated &&
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
-              <Dropdown ref="dropdown">
+              <Dropdown ref={(c) => { this.dropdown = c; }}>
                 <DropdownTrigger className="user-dropdown-trigger">
-                  <i className="icon icon-menu7 user-dropdown-icon"></i>
+                  <i className="icon icon-menu7 user-dropdown-icon" />
                   <Gravatar
                     size={30}
                     className="img-circle"
@@ -51,25 +53,24 @@ class Navbar extends Component {
                   <Link
                     to="/accounts"
                     className="dropdown-item"
-                    onClick={() => this.refs.dropdown.hide()}
+                    onClick={() => this.dropdown.hide()}
                   >
-                    <i className="icon icon-database2 user-dropdown-icon"></i>
+                    <i className="icon icon-database2 user-dropdown-icon" />
                     <span>Dashboard</span>
                   </Link>
                   <Link
                     to="/settings"
                     className="dropdown-item"
-                    onClick={() => this.refs.dropdown.hide()}
+                    onClick={() => this.dropdown.hide()}
                   >
-                    <i className="icon icon-equalizer2 user-dropdown-icon"></i>
+                    <i className="icon icon-equalizer2 user-dropdown-icon" />
                     <span>Settings</span>
                   </Link>
                   <a
-                    href="#"
-                    onClick={(e) => { ::this.handleLogoutClick(e); }}
+                    onClick={(e) => { this.handleLogoutClick(e); }}
                     className="dropdown-item"
                   >
-                    <i className="icon icon-exit user-dropdown-icon"></i>
+                    <i className="icon icon-exit user-dropdown-icon" />
                     <span>Logout</span>
                   </a>
                 </DropdownContent>

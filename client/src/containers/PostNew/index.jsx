@@ -1,7 +1,8 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
+import { autobind } from 'core-decorators';
 import { createPost } from './actions';
 import Editor from '../../components/Editor';
-import React, { Component, PropTypes } from 'react';
 
 class PostEdit extends Component {
   static propTypes = {
@@ -13,6 +14,7 @@ class PostEdit extends Component {
     createPost: PropTypes.func.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.createPost(this.props.params.accountSlug, data);
   }
@@ -27,7 +29,7 @@ class PostEdit extends Component {
           team={team}
           account={account}
           isSaving={isSaving}
-          onSubmit={::this.handleSubmit}
+          onSubmit={this.handleSubmit}
         />
       </div>
     );

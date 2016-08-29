@@ -1,7 +1,8 @@
-import { login } from './actions';
-import { connect } from 'react-redux';
-import LoginForm from '../../components/LoginForm';
 import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
+import { connect } from 'react-redux';
+import { login } from './actions';
+import LoginForm from '../../components/LoginForm';
 
 class Login extends Component {
   static propTypes = {
@@ -9,6 +10,7 @@ class Login extends Component {
     isSubmitting: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.login(data);
   }
@@ -17,7 +19,7 @@ class Login extends Component {
     const { isSubmitting } = this.props;
 
     return (
-      <LoginForm isSubmitting={isSubmitting} onSubmit={::this.handleSubmit} />
+      <LoginForm isSubmitting={isSubmitting} onSubmit={this.handleSubmit} />
     );
   }
 }

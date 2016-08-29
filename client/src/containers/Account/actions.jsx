@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import {
   FETCH_ACCOUNT_START,
   FETCH_ACCOUNT_SUCCESS,
@@ -8,7 +9,6 @@ import {
   FETCH_DOMAINS_ERROR,
 } from './constants';
 import api from '../../api';
-import { push } from 'react-router-redux';
 import { isSuccess } from '../../utils';
 
 export function fetchAccount(accountSlug) {

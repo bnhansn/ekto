@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import {
   LOGOUT_SUCCESS,
   LOCATION_CHANGE,
@@ -7,7 +8,6 @@ import {
 } from './constants';
 import api from '../../api';
 import { isSuccess } from '../../utils';
-import { push } from 'react-router-redux';
 
 export function logout() {
   return dispatch => {

@@ -1,6 +1,7 @@
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
-import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
 import { resetPassword } from './actions';
 import ResetPasswordForm from '../../components/ResetPasswordForm';
 
@@ -28,6 +29,7 @@ class ResetPassword extends Component {
     }
   }
 
+  @autobind
   handleSubmit(data) {
     this.props.resetPassword({
       ...data,
@@ -39,7 +41,7 @@ class ResetPassword extends Component {
     const { isSubmitting } = this.props;
 
     return (
-      <ResetPasswordForm isSubmitting={isSubmitting} onSubmit={::this.handleSubmit} />
+      <ResetPasswordForm isSubmitting={isSubmitting} onSubmit={this.handleSubmit} />
     );
   }
 }

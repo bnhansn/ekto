@@ -1,7 +1,7 @@
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchPosts } from './actions';
-import React, { Component, PropTypes } from 'react';
 
 class PostIndex extends Component {
   static propTypes = {
@@ -30,8 +30,8 @@ class PostIndex extends Component {
         {!post.published &&
           <span className="tag tag-default m-l-1">Unpublished</span>
         }
-        <div className="flex-grow"></div>
-        <i className="icon icon-arrow-right2"></i>
+        <div className="flex-grow" />
+        <i className="icon icon-arrow-right2" />
       </Link>
     );
   }
@@ -42,7 +42,7 @@ class PostIndex extends Component {
     return (
       <div>
         <div className="container">
-          {isLoading && <div className="loader"></div>}
+          {isLoading && <div className="loader" />}
           <div className="list-group m-b-1">
             {this.renderPosts()}
           </div>

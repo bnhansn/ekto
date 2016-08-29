@@ -1,12 +1,9 @@
-import {
-  fetchPost,
-  updatePost,
-  deletePost,
-} from './actions';
+import React, { Component, PropTypes } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
+import { autobind } from 'core-decorators';
+import { fetchPost, updatePost, deletePost } from './actions';
 import Editor from '../../components/Editor';
-import React, { Component, PropTypes } from 'react';
 
 class PostEdit extends Component {
   static propTypes = {
@@ -27,11 +24,13 @@ class PostEdit extends Component {
     this.props.fetchPost(accountSlug, id);
   }
 
+  @autobind
   handleSubmit(data) {
     const { params: { accountSlug, id } } = this.props;
     this.props.updatePost(accountSlug, id, data);
   }
 
+  @autobind
   handleDelete() {
     const { params: { accountSlug, id } } = this.props;
     this.props.deletePost(accountSlug, id);
@@ -41,7 +40,7 @@ class PostEdit extends Component {
     const { post, user, team, account, isLoading, isSaving } = this.props;
 
     if (isLoading || isEmpty(post)) {
-      return <div className="loader"></div>;
+      return <div className="loader" />;
     }
 
     return (
@@ -53,8 +52,8 @@ class PostEdit extends Component {
           enableReinitialize
           isSaving={isSaving}
           initialValues={post}
-          onSubmit={::this.handleSubmit}
-          onDelete={::this.handleDelete}
+          onSubmit={this.handleSubmit}
+          onDelete={this.handleDelete}
         />
       </div>
     );

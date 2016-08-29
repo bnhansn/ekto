@@ -1,8 +1,9 @@
+import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { autobind } from 'core-decorators';
 import Topnav from '../../components/Topnav';
 import Callout from '../../components/Callout';
-import React, { Component, PropTypes } from 'react';
 import { fetchAccounts, createAccount } from './actions';
 import NewAccountForm from '../../components/NewAccountForm';
 
@@ -27,6 +28,7 @@ class AccountIndex extends Component {
     this.props.fetchAccounts();
   }
 
+  @autobind
   handleNewAccountSubmit(data) {
     this.props.createAccount(data);
   }
@@ -45,8 +47,8 @@ class AccountIndex extends Component {
       >
         <div className="account-icon">{account.name.charAt(0)}</div>
         <span>{account.name}</span>
-        <div style={{ flexGrow: '1' }}></div>
-        <i className="icon icon-arrow-right2"></i>
+        <div style={{ flexGrow: '1' }} />
+        <i className="icon icon-arrow-right2" />
       </Link>
     );
   }
@@ -60,7 +62,7 @@ class AccountIndex extends Component {
       <div>
         <Topnav header="Accounts" className="m-b-2" />
         <div className="container">
-          {isLoading && !accounts.length && <div className="loader"></div>}
+          {isLoading && !accounts.length && <div className="loader" />}
           {noAccounts &&
             <Callout klass="primary">
               <p>Create an account with the icon below to get started</p>
@@ -73,12 +75,12 @@ class AccountIndex extends Component {
             className="btn btn-secondary m-b-1"
             onClick={() => this.setState({ accountFormOpen: !accountFormOpen })}
           >
-            <i className={`icon icon-${accountFormOpen ? 'minus3' : 'plus3'}`}></i>
+            <i className={`icon icon-${accountFormOpen ? 'minus3' : 'plus3'}`} />
           </button>
           {accountFormOpen &&
             <NewAccountForm
               isSavingNewAccount={isSavingNewAccount}
-              onSubmit={::this.handleNewAccountSubmit}
+              onSubmit={this.handleNewAccountSubmit}
             />
           }
         </div>

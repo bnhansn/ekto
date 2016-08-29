@@ -36,11 +36,11 @@ const MarkdownGuide = () =>
         </tr>
         <tr>
           <td>[Link](http://)</td>
-          <td><a href="#" onClick={(e) => e.preventDefault()}>Link</a></td>
+          <td><a href={undefined} onClick={(e) => e.preventDefault()}>Link</a></td>
         </tr>
         <tr>
           <td>![alt](http://)</td>
-          <td><i className="icon icon-image5 m-r-sm"></i>Image</td>
+          <td><i className="icon icon-image5 m-r-sm" />Image</td>
         </tr>
         <tr>
           <td>* List item</td>
@@ -73,7 +73,11 @@ const MarkdownGuide = () =>
           <td><hr /></td>
         </tr>
         <tr>
-          <td><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Documentation</a></td>
+          <td>
+            <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank" rel="noopener noreferrer">
+              Documentation
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>

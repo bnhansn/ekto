@@ -1,6 +1,7 @@
-import Input from '../Input';
-import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes, Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { autobind } from 'core-decorators';
+import Input from '../Input';
 
 class ResetPasswordForm extends Component {
   static propTypes = {
@@ -9,6 +10,7 @@ class ResetPasswordForm extends Component {
     isSubmitting: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.onSubmit(data);
   }
@@ -20,7 +22,7 @@ class ResetPasswordForm extends Component {
       <form
         className="m-x-auto p-y-1"
         style={{ maxWidth: '400px' }}
-        onSubmit={handleSubmit(::this.handleSubmit)}
+        onSubmit={handleSubmit(this.handleSubmit)}
       >
         <div className="card">
           <div className="card-header">

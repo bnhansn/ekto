@@ -1,10 +1,10 @@
+import { push } from 'react-router-redux';
 import {
   SIGNUP_START,
   SIGNUP_ERROR,
   SIGNUP_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
 import { AUTHENTICATION_SUCCESS } from '../App/constants';
 import { isSuccess, parseError } from '../../utils';

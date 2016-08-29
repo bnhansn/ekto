@@ -1,8 +1,9 @@
+import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { autobind } from 'core-decorators';
 import Alert from '../Alert';
 import { logout } from './actions';
-import { connect } from 'react-redux';
 import Navbar from '../../components/Navbar';
-import React, { Component, PropTypes } from 'react';
 
 class App extends Component {
   static propTypes = {
@@ -13,6 +14,7 @@ class App extends Component {
     isAuthenticating: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleLogout(e) {
     e.preventDefault();
     this.props.logout();
@@ -28,7 +30,7 @@ class App extends Component {
           user={user}
           isAuthenticating={isAuthenticating}
           isAuthenticated={isAuthenticated}
-          onLogoutClick={::this.handleLogout}
+          onLogoutClick={this.handleLogout}
         />
         {children}
       </div>

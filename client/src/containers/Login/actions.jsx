@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import {
   LOGIN_START,
   LOGIN_ERROR,
@@ -9,7 +10,6 @@ import {
   AUTHENTICATION_SUCCESS,
 } from '../App/constants';
 import api from '../../api';
-import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 

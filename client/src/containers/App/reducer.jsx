@@ -46,7 +46,7 @@ export default function (state = initialState, action) {
     case LOCATION_CHANGE:
       return {
         ...state,
-        location: { ...location },
+        location: { ...action.location },
       };
     case UPDATE_SETTINGS_SUCCESS:
       return {

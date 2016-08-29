@@ -1,6 +1,7 @@
+import React, { Component, PropTypes } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
 import AccountDomainsList from '../../components/AccountDomainsList';
 import AccountSettingsForm from '../../components/AccountSettingsForm';
 import { updateAccount, createDomain, deleteDomain, deleteAccount } from './actions';
@@ -28,18 +29,22 @@ class AccountSettings extends Component {
     };
   }
 
+  @autobind
   handleSubmit(data) {
     this.props.updateAccount(this.props.account.id, data);
   }
 
+  @autobind
   handleNewDomainSubmit(data) {
     this.props.createDomain(this.props.account.id, data);
   }
 
+  @autobind
   handleDomainDelete(id) {
     this.props.deleteDomain(this.props.account.id, id);
   }
 
+  @autobind
   handleAccountDelete(e) {
     e.preventDefault();
     const { account } = this.props;
@@ -50,6 +55,7 @@ class AccountSettings extends Component {
     return true;
   }
 
+  @autobind
   handleModalClose() {
     this.setState({
       modalOpen: false,
@@ -67,7 +73,7 @@ class AccountSettings extends Component {
           enableReinitialize
           isSubmitting={isSubmitting}
           initialValues={initialValues}
-          onSubmit={::this.handleSubmit}
+          onSubmit={this.handleSubmit}
         />
         <div className="card">
           <div className="card-block">
@@ -77,8 +83,14 @@ class AccountSettings extends Component {
               </div>
               <div className="col-sm-8 col-xs-12">
                 <div className="form-group">
-                  <label>Account key</label>
-                  <input readOnly type="text" defaultValue={account.key} className="form-control" />
+                  <label htmlFor="key">Account key</label>
+                  <input
+                    readOnly
+                    name="key"
+                    type="text"
+                    defaultValue={account.key}
+                    className="form-control"
+                  />
                 </div>
                 <p className="small text-muted">
                   Blog posts can be retrieved from the api at <code style={{ wordWrap: 'break-word' }}>http://api.ekto.tech/v1/{account.key}/posts</code>
@@ -90,8 +102,8 @@ class AccountSettings extends Component {
         <AccountDomainsList
           domains={domains}
           isCreatingDomain={isCreatingDomain}
-          onDomainDelete={::this.handleDomainDelete}
-          onNewDomainSubmit={::this.handleNewDomainSubmit}
+          onDomainDelete={this.handleDomainDelete}
+          onNewDomainSubmit={this.handleNewDomainSubmit}
         />
         {user.id === account.ownerId &&
           <div className="card">
@@ -119,15 +131,15 @@ class AccountSettings extends Component {
           isOpen={modalOpen}
           className="modal"
           overlayClassName="modal-overlay"
-          onRequestClose={::this.handleModalClose}
+          onRequestClose={this.handleModalClose}
         >
-          <form onSubmit={::this.handleAccountDelete}>
+          <form onSubmit={this.handleAccountDelete}>
             <div className="modal-header">
               <h6 className="text-primary">Delete account</h6>
               <i
                 className="modal-close"
-                onClick={::this.handleModalClose}
-              ></i>
+                onClick={this.handleModalClose}
+              />
             </div>
             <div className="modal-content">
               <p>
@@ -148,7 +160,7 @@ class AccountSettings extends Component {
                 <button
                   type="button"
                   className="btn btn-secondary"
-                  onClick={::this.handleModalClose}
+                  onClick={this.handleModalClose}
                 >
                   Cancel
                 </button>

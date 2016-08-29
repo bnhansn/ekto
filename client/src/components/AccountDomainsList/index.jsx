@@ -1,5 +1,6 @@
-import AccountDomain from '../AccountDomain';
 import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
+import AccountDomain from '../AccountDomain';
 import AccountDomainForm from '../AccountDomainForm';
 
 class AccountDomainsList extends Component {
@@ -10,10 +11,12 @@ class AccountDomainsList extends Component {
     onNewDomainSubmit: PropTypes.func.isRequired,
   }
 
+  @autobind
   handleNewDomainSubmit(data) {
     this.props.onNewDomainSubmit(data);
   }
 
+  @autobind
   handleDomainDelete(id) {
     this.props.onDomainDelete(id);
   }
@@ -26,7 +29,7 @@ class AccountDomainsList extends Component {
       <AccountDomain
         key={domain.id}
         domain={domain}
-        onDelete={::this.handleDomainDelete}
+        onDelete={this.handleDomainDelete}
       />
     );
   }
@@ -48,7 +51,7 @@ class AccountDomainsList extends Component {
               {this.renderDomains()}
               <AccountDomainForm
                 isCreatingDomain={isCreatingDomain}
-                onSubmit={::this.handleNewDomainSubmit}
+                onSubmit={this.handleNewDomainSubmit}
               />
             </div>
           </div>

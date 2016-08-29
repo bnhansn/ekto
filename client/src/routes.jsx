@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import Team from './containers/Team';
@@ -13,7 +14,6 @@ import AccountIndex from './containers/AccountIndex';
 import ResetPassword from './containers/ResetPassword';
 import ForgotPassword from './containers/ForgotPassword';
 import AccountSettings from './containers/AccountSettings';
-import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import { authenticate } from './containers/AuthenticationWrapper';
 import { redirectAuthenticated } from './containers/RedirectWrapper';
 

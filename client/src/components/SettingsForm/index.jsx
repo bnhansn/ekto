@@ -1,6 +1,7 @@
-import Input from '../Input';
-import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes, Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { autobind } from 'core-decorators';
+import Input from '../Input';
 
 class SettingsForm extends Component {
   static propTypes = {
@@ -9,6 +10,7 @@ class SettingsForm extends Component {
     isSubmitting: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.onSubmit(data);
   }
@@ -17,7 +19,7 @@ class SettingsForm extends Component {
     const { handleSubmit, isSubmitting } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(::this.handleSubmit)}>
+      <form onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="card">
           <div className="card-block">
             <div className="row">

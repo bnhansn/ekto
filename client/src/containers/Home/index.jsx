@@ -1,5 +1,6 @@
-import { connect } from 'react-redux';
 import React, { Component, PropTypes } from 'react';
+import { autobind } from 'core-decorators';
+import { connect } from 'react-redux';
 import ekto from './ekto.svg';
 import editor from './editor.png';
 import { signup } from './actions';
@@ -11,6 +12,7 @@ class Home extends Component {
     isSubmitting: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.signup(data);
   }
@@ -36,7 +38,7 @@ class Home extends Component {
               <p>A full stack blogging service.</p>
               <p>Publish on our platform and fetch through a simple api.</p>
             </div>
-            <SignupForm isSubmitting={isSubmitting} onSubmit={::this.handleSubmit} />
+            <SignupForm isSubmitting={isSubmitting} onSubmit={this.handleSubmit} />
           </div>
         </div>
         <div className="p-y-3">

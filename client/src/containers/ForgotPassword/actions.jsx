@@ -1,10 +1,10 @@
+import { push } from 'react-router-redux';
 import {
   FORGOT_PASSWORD_START,
   FORGOT_PASSWORD_ERROR,
   FORGOT_PASSWORD_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { push } from 'react-router-redux';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 

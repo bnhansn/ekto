@@ -1,7 +1,7 @@
+import React, { Component, PropTypes } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
 import Topnav from '../../components/Topnav';
-import React, { Component, PropTypes } from 'react';
 import AccountTabs from '../../components/AccountTabs';
 import { fetchAccount, fetchTeam, fetchDomains } from './actions';
 
@@ -35,7 +35,7 @@ class Account extends Component {
   render() {
     const { account, children, isLoading } = this.props;
     if (isLoading) {
-      return <div className="loader"></div>;
+      return <div className="loader" />;
     }
 
     if (isEmpty(account)) {

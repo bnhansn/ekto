@@ -1,3 +1,4 @@
+import { reset } from 'redux-form';
 import {
   FETCH_ACCOUNTS_START,
   FETCH_ACCOUNTS_ERROR,
@@ -7,7 +8,6 @@ import {
   CREATE_ACCOUNT_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { reset } from 'redux-form';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 

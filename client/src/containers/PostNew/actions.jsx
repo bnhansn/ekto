@@ -1,10 +1,10 @@
+import { push } from 'react-router-redux';
 import {
   CREATE_POST_START,
   CREATE_POST_ERROR,
   CREATE_POST_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { push } from 'react-router-redux';
 import { isSuccess } from '../../utils';
 
 export function createPost(accountSlug, data) {

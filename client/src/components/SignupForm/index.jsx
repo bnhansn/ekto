@@ -1,5 +1,6 @@
-import { Field, reduxForm } from 'redux-form';
 import React, { PropTypes, Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
+import { autobind } from 'core-decorators';
 import Input from '../Input';
 
 class SignupForm extends Component {
@@ -9,6 +10,7 @@ class SignupForm extends Component {
     isSubmitting: PropTypes.bool.isRequired,
   };
 
+  @autobind
   handleSubmit(data) {
     this.props.onSubmit(data);
   }
@@ -19,7 +21,7 @@ class SignupForm extends Component {
     return (
       <form
         className="signup-form p-y-3"
-        onSubmit={handleSubmit(::this.handleSubmit)}
+        onSubmit={handleSubmit(this.handleSubmit)}
       >
         <div className="row">
           <div className="col-md-3 col-xs-12">

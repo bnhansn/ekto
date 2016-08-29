@@ -28,7 +28,7 @@ export function redirectAuthenticated(WrappedComponent) {
       const { isAuthenticating } = this.props;
 
       if (isAuthenticating) {
-        return <div></div>;
+        return <div />;
       }
       return <WrappedComponent {...this.props} />;
     }
