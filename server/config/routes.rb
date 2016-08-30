@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       post 'accounts/:account_id/team/remove', to: 'team#remove'
     end
     namespace :v1 do
-      resources :accounts, path: '/', only: [] do
+      resources :accounts, path: '/', only: [:show] do
         resources :posts, only: [:index, :show]
       end
     end
