@@ -19,8 +19,12 @@ module Factories
     end
 
     def sanitize(params)
-      params = params.permit(:name)
-      params
+      params.permit(
+        :description,
+        :meta_title,
+        :meta_description,
+        :name
+      )
     end
 
     def generate_key

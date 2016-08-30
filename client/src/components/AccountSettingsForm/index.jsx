@@ -2,6 +2,7 @@ import React, { PropTypes, Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { autobind } from 'core-decorators';
 import Input from '../Input';
+import Textarea from '../Textarea';
 
 class AccountSettingsForm extends Component {
   static propTypes = {
@@ -32,6 +33,22 @@ class AccountSettingsForm extends Component {
                   name="name"
                   label="Name"
                   component={Input}
+                />
+                <Field
+                  name="description"
+                  label="Description"
+                  component={Textarea}
+                />
+                <Field
+                  type="text"
+                  name="metaTitle"
+                  label="Meta title"
+                  component={Input}
+                />
+                <Field
+                  name="metaDescription"
+                  label="Meta description"
+                  component={Textarea}
                 />
               </div>
             </div>

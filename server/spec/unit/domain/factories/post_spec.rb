@@ -7,6 +7,8 @@ describe Factories::Post do
       featured: true,
       html: '<div>test</div>',
       markdown: '#Header',
+      meta_description: 'Meta description',
+      meta_title: 'Meta title',
       title: 'Post title',
       image: 'http://google.com',
       published: true,
@@ -26,6 +28,8 @@ describe Factories::Post do
       expect(post.featured).to eq(true)
       expect(post.html).to eq('<div>test</div>')
       expect(post.markdown).to eq('#Header')
+      expect(post.meta_description).to eq('Meta description')
+      expect(post.meta_title).to eq('Meta title')
       expect(post.title).to eq('Post title')
       expect(post.image).to eq('http://google.com')
       expect(post.published).to eq(true)
@@ -57,6 +61,8 @@ describe Factories::Post do
       expect(post.featured).to eq(true)
       expect(post.html).to eq('<div>test</div>')
       expect(post.markdown).to eq('#Header')
+      expect(post.meta_description).to eq('Meta description')
+      expect(post.meta_title).to eq('Meta title')
       expect(post.title).to eq('Post title')
       expect(post.image).to eq('http://google.com')
       expect(post.published).to eq(true)

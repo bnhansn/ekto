@@ -10,6 +10,8 @@ class PostV1Serializer < ActiveModel::Serializer
              :featured,
              :html,
              :markdown,
+             :meta_description,
+             :meta_title,
              :title,
              :slug,
              :image,

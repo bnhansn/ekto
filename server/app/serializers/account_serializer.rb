@@ -5,7 +5,10 @@ class AccountSerializer < ActiveModel::Serializer
 
   attributes :id,
              :created_at,
+             :description,
              :key,
+             :meta_description,
+             :meta_title,
              :name,
              :owner_id,
              :slug,

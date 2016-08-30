@@ -4,14 +4,22 @@ describe Factories::Account do
   describe '#build' do
     before do
       @user = create(:user)
-      attrs = { name: 'Account name' }
+      attrs = {
+        description: 'Account description',
+        name: 'Account name',
+        meta_title: 'Meta title',
+        meta_description: 'Meta description'
+      }
       @params = ActionController::Parameters.new(attrs)
     end
 
     it 'assigns passthrough fields' do
       account = Factories::Account.build(@user.id, @params)
 
+      expect(account.description).to eq('Account description')
       expect(account.name).to eq('Account name')
+      expect(account.meta_title).to eq('Meta title')
+      expect(account.meta_description).to eq('Meta description')
     end
 
     it 'sets owner_id to account creator id' do

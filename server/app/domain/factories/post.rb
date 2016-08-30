@@ -26,6 +26,8 @@ module Factories
         :featured,
         :html,
         :markdown,
+        :meta_title,
+        :meta_description,
         :title,
         :image,
         :published,
