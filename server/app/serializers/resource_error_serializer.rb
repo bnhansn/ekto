@@ -1,4 +1,4 @@
-module ErrorSerializer
+module ResourceErrorSerializer
   def self.serialize(object)
     object.errors.messages.map do |field, errors|
       errors.map do |error_message|

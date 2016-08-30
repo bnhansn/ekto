@@ -9,8 +9,20 @@ class Api::V0::BaseController < ApplicationController
 
   def render_errors(resource)
     render json: {
-      errors: ErrorSerializer.serialize(resource)
+      errors: ResourceErrorSerializer.serialize(resource)
     }, status: :unprocessable_entity
+  end
+
+  def render_error_messages(resource, status = :unprocessable_entity)
+    render json: {
+      errors: ErrorMessageSerializer.serialize(resource)
+    }, status: status
+  end
+
+  def render_error_message(message, status = :internal_server_error)
+    render json: {
+      errors: [{ message: message }]
+    }, status: status
   end
 
   def unauthorized_error

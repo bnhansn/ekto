@@ -19,10 +19,10 @@ export default {
     return JSON.parse(localStorage.getItem('token'));
   },
 
-  get(path) {
+  get(path, options) {
     return axios.get(
       `${API_URL}${path}`,
-      { headers: { Authorization: `Bearer ${this.token()}` } })
+      { ...options, headers: { Authorization: `Bearer ${this.token()}` } })
       .then(response => response)
       .catch(error => error.response);
   },

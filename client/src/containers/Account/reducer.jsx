@@ -12,6 +12,11 @@ import {
   CREATE_DOMAIN_SUCCESS,
   DELETE_DOMAIN_SUCCESS,
 } from '../AccountSettings/constants';
+import {
+  INVITE_NEW_USER_SUCCESS,
+  INVITE_EXISTING_USER_SUCCESS,
+  REMOVE_TEAM_MEMBER_SUCCESS,
+} from '../Team/constants';
 
 const initialState = {
   team: [],
@@ -79,6 +84,32 @@ export default function (state = initialState, action) {
         domains: [
           ...state.domains.slice(0, index),
           ...state.domains.slice(index + 1),
+        ],
+      };
+    }
+    case INVITE_NEW_USER_SUCCESS:
+      return {
+        ...state,
+        team: [
+          ...state.team,
+          action.payload.data.data,
+        ],
+      };
+    case INVITE_EXISTING_USER_SUCCESS:
+      return {
+        ...state,
+        team: [
+          ...state.team,
+          action.payload.data.data,
+        ],
+      };
+    case REMOVE_TEAM_MEMBER_SUCCESS: {
+      const index = state.team.map(u => u.id).indexOf(action.payload.data.data.id);
+      return {
+        ...state,
+        team: [
+          ...state.team.slice(0, index),
+          ...state.team.slice(index + 1),
         ],
       };
     }

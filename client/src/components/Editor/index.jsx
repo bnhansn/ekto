@@ -200,7 +200,6 @@ class Editor extends Component {
             </TabPanel>
             <TabPanel>
               <div className="post-title-preview">{this.state.title}</div>
-                @autobind
               <div className="post-html-preview" dangerouslySetInnerHTML={this.renderPreview()} />
             </TabPanel>
             <TabPanel>

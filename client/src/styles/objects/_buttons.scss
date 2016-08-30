@@ -57,3 +57,16 @@
     border-bottom-color: darken($btn-secondary-border, 10%);
   }
 }
+
+.btn-gray {
+  color: $body-color;
+  background: $gray-lighter;
+  border-color: $gray-lighter;
+  border-bottom-color: darken($gray-lighter, 5%);
+
+  @include hover-focus {
+    background: lighten($gray-lighter, 3%);
+    border-color: lighten($gray-lighter, 3%);
+    border-bottom-color: darken($gray-lighter, 2%);
+  }
+}

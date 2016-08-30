@@ -16,6 +16,16 @@ shared_context :with_authorized_user_and_account do
   end
 end
 
+shared_context :with_authorized_account_owner do
+  before(:each) do
+    @user = create(:user)
+    token = JsonWebToken.encode(user_id: @user.id)
+    @account = create(:account, owner_id: @user.id)
+    enable_account_access(@user.id, @account.id)
+    request.headers['Authorization'] = "Bearer #{token}"
+  end
+end
+
 def enable_account_access(user_id, account_id)
   AccountUser.create(user_id: user_id, account_id: account_id)
 end

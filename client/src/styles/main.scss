@@ -12,13 +12,13 @@
 'base/typography';
 
 @import
-'modules/buttons',
-'modules/datepicker',
-'modules/dropdowns',
-'modules/loader',
-'modules/modals',
-'modules/react-tabs',
-'modules/tabs';
+'objects/buttons',
+'objects/datepicker',
+'objects/dropdowns',
+'objects/loader',
+'objects/modals',
+'objects/react-tabs',
+'objects/tabs';
 
 @import
 '../pages/NotFound/styles';
@@ -37,4 +37,5 @@
 '../components/MarkdownGuide/styles',
 '../components/Navbar/styles',
 '../components/SignupForm/styles',
-'../components/Topnav/styles';
+'../components/Topnav/styles',
+'../components/UserSearchResult/styles';

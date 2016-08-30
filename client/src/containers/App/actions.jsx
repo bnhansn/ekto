@@ -34,5 +34,5 @@ export function authenticate(token) {
 }
 
 export function locationChange(location) {
-  return { type: LOCATION_CHANGE, ...location };
+  return { type: LOCATION_CHANGE, location: { ...location } };
 }

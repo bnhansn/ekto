@@ -12,7 +12,7 @@ import { isSuccess, parseError } from '../../utils';
 export function signup(data) {
   return dispatch => {
     dispatch({ type: SIGNUP_START });
-    api.post('/users', data)
+    api.post('/signup', data)
       .then(response => {
         if (isSuccess(response)) {
           localStorage.setItem('token', JSON.stringify(response.data.meta.token));
@@ -22,10 +22,7 @@ export function signup(data) {
         } else {
           const message = parseError(response, 'Error signing up');
           dispatch({ type: SIGNUP_ERROR });
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'danger', message },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
   };

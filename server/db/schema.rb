@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817232829) do
+ActiveRecord::Schema.define(version: 20160829181457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,9 +72,10 @@ ActiveRecord::Schema.define(version: 20160817232829) do
     t.string   "password_digest"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.datetime "deleted_at"
+    t.boolean  "is_pending",             default: false
     t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   end
 
