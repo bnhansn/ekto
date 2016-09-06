@@ -93,7 +93,7 @@ class AccountSettings extends Component {
                   />
                 </div>
                 <p className="small text-muted">
-                  Blog posts can be retrieved from the api at <code style={{ wordWrap: 'break-word' }}>http://api.ekto.tech/v1/{account.key}/posts</code>
+                  Blog posts can be retrieved from the api at <code style={{ wordWrap: 'break-word' }}>https://api.ekto.tech/v1/{account.key}/posts</code>
                 </p>
               </div>
             </div>

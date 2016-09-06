@@ -215,7 +215,7 @@ class Editor extends Component {
                     component={Input}
                   />
                   <p className="small text-muted">
-                    {`http://api.ekto.tech/v1/${account.key}/posts/${existingPost ? initialValues.slug : ''}`}
+                    {`https://api.ekto.tech/v1/${account.key}/posts/${existingPost ? initialValues.slug : ''}`}
                   </p>
                   <div className="form-group">
                     <label htmlFor="datepicker">Publish date</label>
