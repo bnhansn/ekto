@@ -21,8 +21,7 @@ module Factories
     def sanitize(params)
       params.permit(
         :description,
-        :meta_title,
-        :meta_description,
+        :image,
         :name
       )
     end

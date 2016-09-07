@@ -38,6 +38,9 @@ module.exports = {
         ]),
       },
     ],
+    noParse: [
+      /aws\-sdk/,
+    ],
   },
   postcss: function process() {
     return [autoprefixer];

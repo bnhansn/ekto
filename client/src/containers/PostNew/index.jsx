@@ -10,7 +10,6 @@ class PostEdit extends Component {
     user: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
     isSaving: PropTypes.bool.isRequired,
-    account: PropTypes.object.isRequired,
     createPost: PropTypes.func.isRequired,
   };
 
@@ -20,16 +19,16 @@ class PostEdit extends Component {
   }
 
   render() {
-    const { user, team, account, isSaving } = this.props;
+    const { user, team, isSaving } = this.props;
 
     return (
       <div className="container">
         <Editor
           user={user}
           team={team}
-          account={account}
           isSaving={isSaving}
           onSubmit={this.handleSubmit}
+          initialValues={{ authorId: user.id }}
         />
       </div>
     );
@@ -40,7 +39,6 @@ export default connect(
   state => ({
     user: state.app.user,
     team: state.account.team,
-    account: state.account.account,
     isSaving: state.postNew.isSaving,
   }),
   { createPost }

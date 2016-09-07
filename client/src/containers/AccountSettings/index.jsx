@@ -2,9 +2,10 @@ import React, { Component, PropTypes } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
+import { updateAccount, createDomain, deleteDomain, deleteAccount, updateImage } from './actions';
 import AccountDomainsList from '../../components/AccountDomainsList';
 import AccountSettingsForm from '../../components/AccountSettingsForm';
-import { updateAccount, createDomain, deleteDomain, deleteAccount } from './actions';
+import Uploader from '../../components/Uploader';
 
 class AccountSettings extends Component {
   static propTypes = {
@@ -13,6 +14,7 @@ class AccountSettings extends Component {
     domains: PropTypes.array.isRequired,
     params: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired,
+    updateImage: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
     createDomain: PropTypes.func.isRequired,
     deleteDomain: PropTypes.func.isRequired,
@@ -32,6 +34,11 @@ class AccountSettings extends Component {
   @autobind
   handleSubmit(data) {
     this.props.updateAccount(this.props.account.id, data);
+  }
+
+  @autobind
+  handleImageUpdate(data) {
+    this.props.updateImage(this.props.account.id, data);
   }
 
   @autobind
@@ -105,6 +112,25 @@ class AccountSettings extends Component {
           onDomainDelete={this.handleDomainDelete}
           onNewDomainSubmit={this.handleNewDomainSubmit}
         />
+        <div className="card">
+          <div className="card-block">
+            <div className="row">
+              <div className="col-sm-4 col-xs-12">
+                <h5>Blog cover</h5>
+                <p className="small text-muted">
+                  Display a cover image on your site.
+                </p>
+              </div>
+              <div className="col-sm-8 col-xs-12">
+                <Uploader
+                  image={account.image}
+                  onUpload={image => this.handleImageUpdate({ image })}
+                  onDelete={() => this.handleImageUpdate({ image: '' })}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
         {user.id === account.ownerId &&
           <div className="card">
             <div className="card-block">
@@ -189,5 +215,5 @@ export default connect(
     isSubmitting: state.accountSettings.isSubmitting,
     isCreatingDomain: state.accountSettings.isCreatingDomain,
   }),
-  { updateAccount, createDomain, deleteDomain, deleteAccount }
+  { updateAccount, createDomain, deleteDomain, deleteAccount, updateImage }
 )(AccountSettings);

@@ -8,18 +8,20 @@ import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import Input from '../Input';
+import Textarea from '../Textarea';
 import { newlineExtension } from './utils';
 import MarkdownGuide from '../../components/MarkdownGuide';
+import Uploader from '../../components/Uploader';
 
 class Editor extends Component {
   static propTypes = {
     onDelete: PropTypes.func,
+    existingPost: PropTypes.bool,
     initialValues: PropTypes.object,
     team: PropTypes.array.isRequired,
     user: PropTypes.object.isRequired,
     isSaving: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    account: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
   }
 
@@ -29,16 +31,17 @@ class Editor extends Component {
     this.state = {
       preview: '',
       deleteModalOpen: false,
-      title: props.initialValues ? props.initialValues.title : 'Untitled',
-      publishedAt: props.initialValues && props.initialValues.publishedAt ?
+      image: props.existingPost ? props.initialValues.image : null,
+      title: props.existingPost ? props.initialValues.title : 'Untitled',
+      publishedAt: props.existingPost && props.initialValues.publishedAt ?
                    moment(props.initialValues.publishedAt) :
                    moment(),
     };
   }
 
   componentWillMount() {
-    const { initialValues } = this.props;
-    if (initialValues) {
+    const { existingPost, initialValues } = this.props;
+    if (existingPost) {
       this.setPreview(initialValues.markdown);
     }
   }
@@ -53,19 +56,6 @@ class Editor extends Component {
     });
     const html = converter.makeHtml(markdown);
     this.setState({ preview: html });
-  }
-
-  getInitialAuthorId() {
-    const { user, initialValues } = this.props;
-    if (!initialValues) { return user.id; }
-    return initialValues.authorId;
-  }
-
-  @autobind
-  handleModalClose() {
-    this.setState({
-      deleteModalOpen: false,
-    });
   }
 
   @autobind
@@ -85,6 +75,7 @@ class Editor extends Component {
     this.dropdown.hide();
     const post = {
       ...data,
+      image: this.state.image,
       html: this.state.preview,
       publishedAt: this.state.publishedAt,
     };
@@ -97,15 +88,13 @@ class Editor extends Component {
   }
 
   renderNewSaveButton() {
-    const { isSaving, initialValues } = this.props;
-    const existingPost = initialValues !== undefined;
+    const { isSaving, existingPost } = this.props;
     if (existingPost) { return null; }
     return isSaving ? 'Saving...' : 'Save';
   }
 
   renderEditSaveButton() {
-    const { isSaving, initialValues } = this.props;
-    const existingPost = initialValues !== undefined;
+    const { isSaving, existingPost } = this.props;
     if (!existingPost) { return null; }
     return isSaving ? 'Updating...' : 'Update';
   }
@@ -119,12 +108,11 @@ class Editor extends Component {
 
   render() {
     const { deleteModalOpen } = this.state;
-    const { account, initialValues, handleSubmit } = this.props;
-    const existingPost = initialValues !== undefined;
-    const published = existingPost && initialValues.published;
+    const { initialValues, handleSubmit, existingPost } = this.props;
+    const isPublished = initialValues.published;
 
     return (
-      <div>
+      <div className="m-b-2">
         <form onSubmit={handleSubmit(this.handleSubmit)}>
           <div className="text-xs-right m-b-1">
             <button type="submit" className="btn btn-primary save-post-button">
@@ -141,7 +129,7 @@ class Editor extends Component {
                 <button type="submit" className="dropdown-item">
                   {existingPost ? 'Update post' : 'Save Draft'}
                 </button>
-                {published ?
+                {isPublished ?
                   <button
                     type="button"
                     className="dropdown-item"
@@ -181,20 +169,20 @@ class Editor extends Component {
             </TabList>
             <TabPanel>
               <Field
-                ref={(c) => { this.title = c; }}
                 type="text"
                 name="title"
                 component="input"
                 placeholder="Title"
                 className="post-title"
+                ref={(c) => { this.title = c; }}
                 onKeyUp={() => { this.setState({ title: this.title.value }); }}
               />
               <Field
                 type="text"
-                ref={(c) => { this.markdown = c; }}
                 name="markdown"
                 component="textarea"
                 className="post-markdown"
+                ref={(c) => { this.markdown = c; }}
                 onKeyUp={() => { this.setPreview(this.markdown.value); }}
               />
             </TabPanel>
@@ -214,9 +202,6 @@ class Editor extends Component {
                     label="Slug"
                     component={Input}
                   />
-                  <p className="small text-muted">
-                    {`https://api.ekto.tech/v1/${account.key}/posts/${existingPost ? initialValues.slug : ''}`}
-                  </p>
                   <div className="form-group">
                     <label htmlFor="datepicker">Publish date</label>
                     <DatePicker
@@ -228,16 +213,36 @@ class Editor extends Component {
                       onChange={(date) => this.setState({ publishedAt: date })}
                     />
                   </div>
-                  <label htmlFor="authorId">Author</label>
+                  <div className="form-group">
+                    <label htmlFor="authorId">Author</label>
+                    <Field
+                      label="Author"
+                      name="authorId"
+                      component="select"
+                      className="form-control"
+                    >
+                      {this.renderAuthorOptions()}
+                    </Field>
+                  </div>
                   <Field
-                    label="Author"
-                    name="authorId"
-                    component="select"
-                    className="form-control"
-                    defaultValue={this.getInitialAuthorId()}
-                  >
-                    {this.renderAuthorOptions()}
-                  </Field>
+                    type="text"
+                    name="metaTitle"
+                    label="Meta title"
+                    component={Input}
+                  />
+                  <Field
+                    name="metaDescription"
+                    label="Meta description"
+                    component={Textarea}
+                  />
+                  <div className="form-group">
+                    <label htmlFor="image">Featured image</label>
+                    <Uploader
+                      image={this.state.image}
+                      onUpload={image => this.setState({ image })}
+                      onDelete={() => this.setState({ image: '' })}
+                    />
+                  </div>
                 </div>
               </div>
             </TabPanel>
@@ -250,13 +255,13 @@ class Editor extends Component {
           className="modal"
           isOpen={deleteModalOpen}
           overlayClassName="modal-overlay"
-          onRequestClose={this.handleModalClose}
+          onRequestClose={() => this.setState({ deleteModalOpen: false })}
         >
           <div className="modal-header">
             <h6 className="text-primary">Delete post</h6>
             <i
               className="modal-close"
-              onClick={this.handleModalClose}
+              onClick={() => this.setState({ deleteModalOpen: false })}
             />
           </div>
           <div className="modal-content">
@@ -267,7 +272,7 @@ class Editor extends Component {
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={this.handleModalClose}
+                onClick={() => this.setState({ deleteModalOpen: false })}
               >
                 Cancel
               </button>
