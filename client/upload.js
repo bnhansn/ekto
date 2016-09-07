@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, import/no-extraneous-dependencies */
 const s3 = require('s3');
 require('dotenv').config();
 

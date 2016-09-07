@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, import/no-extraneous-dependencies */
 const ip = require('ip');
 const webpack = require('webpack');
 const config = require('./webpack.config.dev');

@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable import/no-extraneous-dependencies */
 const ip = require('ip');
 const path = require('path');
 const webpack = require('webpack');
