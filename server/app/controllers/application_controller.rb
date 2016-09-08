@@ -3,6 +3,12 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::ParameterMissing, with: :parameter_missing
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
 
+  def routing_error
+    render json: {
+      errors: [{ message: 'Route not found' }]
+    }, status: :not_found
+  end
+
   private
 
   def generic_error(error)
