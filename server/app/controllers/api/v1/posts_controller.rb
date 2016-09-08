@@ -1,8 +1,10 @@
 class Api::V1::PostsController < Api::V1::BaseController
   def index
-    render json: @account.posts.published,
-           each_serializer: PostV1Serializer,
-           root: 'data' # AMS #1536
+    posts = Repositories::Post.external_query(@account, params)
+    render json: posts,
+           meta: pagination(posts),
+           root: 'data',
+           each_serializer: PostV1Serializer
   end
 
   def show

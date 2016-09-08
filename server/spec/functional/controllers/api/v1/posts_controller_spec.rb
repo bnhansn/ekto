@@ -31,6 +31,22 @@ RSpec.describe Api::V1::PostsController, type: :controller do
         expect(ids).to include(post_1.id, post_2.id)
       end
 
+      it 'includes pagination' do
+        _post = create(:post, account_id: @account.id, published: true)
+        _post = create(:post, account_id: @account.id, published: true)
+        _post = create(:post, account_id: @account.id, published: true)
+
+        process :index, params: { account_id: @account.key }
+
+        result = JSON.parse(response.body)
+
+        expect(result['meta']).to have_key('currentPage')
+        expect(result['meta']).to have_key('nextPage')
+        expect(result['meta']).to have_key('prevPage')
+        expect(result['meta']).to have_key('totalPages')
+        expect(result['meta']).to have_key('totalCount')
+      end
+
       it 'return not found if invalid key' do
         process :index, method: :get, params: { account_id: 'invalid' }
 

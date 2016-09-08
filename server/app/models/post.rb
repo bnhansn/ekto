@@ -12,6 +12,5 @@ class Post < ApplicationRecord
     conditions: -> { where(deleted_at: nil) }
   }
 
-  default_scope { order(created_at: :desc) }
   scope :published, -> { where(published: true).order(published_at: :desc) }
 end

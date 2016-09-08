@@ -22,6 +22,35 @@ RSpec.describe Api::V0::PostsController, type: :controller do
         expect(result['data'].count).to eq(2)
         expect(ids).to include(@post_1.id, @post_2.id)
       end
+
+      it 'orders posts by published date' do
+        newest_post = create(:post, account_id: @account.id, published_at: 1.day.ago) # rubocop:disable LineLength
+        oldest_post = create(:post, account_id: @account.id, published_at: 3.days.ago) # rubocop:disable LineLength
+        _post = create(:post, account_id: @account.id, published_at: 2.days.ago)
+
+        process :index, params: { account_id: @account.id }
+
+        result = JSON.parse(response.body)
+
+        expect(result['data'][0]['id']).to eq(newest_post.id)
+        expect(result['data'][2]['id']).to eq(oldest_post.id)
+      end
+
+      it 'includes pagination' do
+        _post = create(:post, account_id: @account.id)
+        _post = create(:post, account_id: @account.id)
+        _post = create(:post, account_id: @account.id)
+
+        process :index, params: { account_id: @account.id }
+
+        result = JSON.parse(response.body)
+
+        expect(result['meta']).to have_key('currentPage')
+        expect(result['meta']).to have_key('nextPage')
+        expect(result['meta']).to have_key('prevPage')
+        expect(result['meta']).to have_key('totalPages')
+        expect(result['meta']).to have_key('totalCount')
+      end
     end
 
     context 'authorized user unauthorized account' do
