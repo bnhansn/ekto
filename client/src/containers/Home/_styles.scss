@@ -59,8 +59,15 @@
 }
 
 .app-example-section {
-  padding: 50px 0;
+  padding: 75px 0;
   font-size: 1.25rem;
   text-align: center;
   background: #fff;
+}
+
+.credits {
+  padding: 2rem 0;
+  text-align: center;
+  background: #fff;
+  border-top: 1px solid $gray-lighter;
 }

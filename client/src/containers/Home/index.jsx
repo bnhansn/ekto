@@ -113,8 +113,15 @@ class Home extends Component {
         <div className="app-example-section">
           <div className="container">
             <p>
-              💁&nbsp;&nbsp;How do I add an Ekto blog to my website? <a href="https://github.com/bnhansn/ekto">Check out an example React app (coming soon)</a>
+              💁&nbsp;&nbsp;How do I use Ekto on my website?&nbsp;
+              <a href="https://github.com/bnhansn/ava">Check out an example React app</a> and&nbsp;
+              <a href="http://demo.ekto.tech">view the online demo</a>.
             </p>
+          </div>
+        </div>
+        <div className="credits">
+          <div className="container">
+            <div>Developed at <a href="https://techbient.com">Techbient</a></div>
           </div>
         </div>
       </div>
