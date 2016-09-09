@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { autobind } from 'core-decorators';
 
 class AccountDomain extends Component {
   static propTypes = {
@@ -7,10 +6,7 @@ class AccountDomain extends Component {
     onDelete: PropTypes.func.isRequired,
   };
 
-  @autobind
-  handleDelete() {
-    this.props.onDelete(this.props.domain.id);
-  }
+  handleDelete = () => this.props.onDelete(this.props.domain.id);
 
   render() {
     const { domain } = this.props;

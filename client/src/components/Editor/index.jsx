@@ -1,7 +1,6 @@
 import moment from 'moment';
 import showdown from 'showdown';
 import DatePicker from 'react-datepicker';
-import { autobind } from 'core-decorators';
 import { Field, reduxForm } from 'redux-form';
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -58,20 +57,17 @@ class Editor extends Component {
     this.setState({ preview: html });
   }
 
-  @autobind
-  handlePublish(data) {
+  handlePublish = (data) => {
     const post = { ...data, published: true };
     this.handleSubmit(post);
   }
 
-  @autobind
-  handleUnpublish(data) {
+  handleUnpublish = (data) => {
     const post = { ...data, published: false };
     this.handleSubmit(post);
   }
 
-  @autobind
-  handleSubmit(data) {
+  handleSubmit = (data) => {
     this.dropdown.hide();
     const post = {
       ...data,
@@ -82,8 +78,7 @@ class Editor extends Component {
     this.props.onSubmit(post);
   }
 
-  @autobind
-  renderPreview() {
+  renderPreview = () => { // eslint:disable arrow-body-style
     return { __html: this.state.preview };
   }
 

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { autobind } from 'core-decorators';
 import includes from 'lodash/includes';
 import Gravatar from '../Gravatar';
 
@@ -10,10 +9,7 @@ class UserSearchResult extends Component {
     onUserInvite: PropTypes.func.isRequired,
   };
 
-  @autobind
-  handleUserInvite() {
-    this.props.onUserInvite({ userId: this.props.user.id });
-  }
+  handleUserInvite = () => this.props.onUserInvite({ userId: this.props.user.id });
 
   render() {
     const { user, teamIds } = this.props;

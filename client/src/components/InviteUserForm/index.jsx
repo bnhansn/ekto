@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { autobind } from 'core-decorators';
 import { reduxForm, Field } from 'redux-form';
 import { debouncedHandler } from '../../utils';
 import UserSearchResult from '../UserSearchResult';
@@ -26,8 +25,7 @@ class InviteUserForm extends Component {
     this.handleSearch = debouncedHandler(this.handleSearch, 500);
   }
 
-  @autobind
-  handleSearch(e) {
+  handleSearch = (e) => {
     this.setState({
       search: e.target.value,
     }, () => this.handleSearchChange());
@@ -39,10 +37,7 @@ class InviteUserForm extends Component {
     this.props.onSearch(search);
   }
 
-  @autobind
-  handleSubmit(data) {
-    this.props.onNewUserInvite(data);
-  }
+  handleSubmit = (data) => this.props.onNewUserInvite(data);
 
   renderSearchResults() {
     const { searchedUsers, teamIds } = this.props;

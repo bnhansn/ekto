@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { autobind } from 'core-decorators';
 import Input from '../Input';
 
 class NewAccountForm extends Component {
@@ -10,10 +9,7 @@ class NewAccountForm extends Component {
     isSavingNewAccount: PropTypes.bool.isRequired,
   };
 
-  @autobind
-  handleSubmit(data) {
-    this.props.onSubmit(data);
-  }
+  handleSubmit = (data) => this.props.onSubmit(data);
 
   render() {
     const { handleSubmit, isSavingNewAccount } = this.props;

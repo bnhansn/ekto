@@ -1,6 +1,5 @@
 import React, { PropTypes, Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { autobind } from 'core-decorators';
 import Input from '../Input';
 
 class SignupForm extends Component {
@@ -10,10 +9,7 @@ class SignupForm extends Component {
     isSubmitting: PropTypes.bool.isRequired,
   };
 
-  @autobind
-  handleSubmit(data) {
-    this.props.onSubmit(data);
-  }
+  handleSubmit = (data) => this.props.onSubmit(data);
 
   render() {
     const { handleSubmit, isSubmitting } = this.props;

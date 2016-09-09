@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { isInvalid } from 'redux-form';
 import { inviteNewUser, inviteExistingUser, searchUsers, removeTeamMember } from './actions';
 import InviteUserForm from '../../components/InviteUserForm';
@@ -33,31 +32,20 @@ class Team extends Component {
     };
   }
 
-  @autobind
-  handleSearch(search) {
-    this.props.searchUsers(search);
-  }
+  handleSearch = (search) => this.props.searchUsers(search);
 
-  @autobind
-  handleNewUserInvite(data) {
-    this.props.inviteNewUser(this.props.account.id, data);
-  }
+  handleNewUserInvite = (data) => this.props.inviteNewUser(this.props.account.id, data);
 
-  @autobind
-  handleExistingUserInvite(data) {
-    this.props.inviteExistingUser(this.props.account.id, data);
-  }
+  handleExistingUserInvite = (data) => this.props.inviteExistingUser(this.props.account.id, data);
 
-  @autobind
-  handleMemberRemoveClick(teamMemberId) {
+  handleMemberRemoveClick = (teamMemberId) => {
     this.setState({
       memberIdToRemove: teamMemberId,
       removeMemberModalOpen: true,
     });
   }
 
-  @autobind
-  handleMemberRemove() {
+  handleMemberRemove = () => {
     this.props.removeTeamMember(this.props.account.id, this.state.memberIdToRemove);
     this.setState({ removeMemberModalOpen: false });
   }

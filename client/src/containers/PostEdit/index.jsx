@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import isEmpty from 'lodash/isEmpty';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { fetchPost, updatePost, deletePost } from './actions';
 import Editor from '../../components/Editor';
 
@@ -23,14 +22,12 @@ class PostEdit extends Component {
     this.props.fetchPost(accountSlug, id);
   }
 
-  @autobind
-  handleSubmit(data) {
+  handleSubmit = (data) => {
     const { params: { accountSlug, id } } = this.props;
     this.props.updatePost(accountSlug, id, data);
   }
 
-  @autobind
-  handleDelete() {
+  handleDelete = () => {
     const { params: { accountSlug, id } } = this.props;
     this.props.deletePost(accountSlug, id);
   }

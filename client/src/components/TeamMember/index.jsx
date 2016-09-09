@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { autobind } from 'core-decorators';
 import Gravatar from '../../components/Gravatar';
 
 class TeamMember extends Component {
@@ -10,10 +9,7 @@ class TeamMember extends Component {
     currentUserId: PropTypes.number.isRequired,
   };
 
-  @autobind
-  handleRemoveClick() {
-    this.props.onRemoveClick(this.props.teamMember.id);
-  }
+  handleRemoveClick = () => this.props.onRemoveClick(this.props.teamMember.id);
 
   render() {
     const { teamMember, ownerId, currentUserId } = this.props;

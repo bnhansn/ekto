@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { hideAlert } from './actions';
 import Alert from '../../components/Alert';
 
@@ -14,10 +13,7 @@ class AlertContainer extends Component {
     }
   }
 
-  @autobind
-  handleClick() {
-    this.props.hideAlert();
-  }
+  handleClick = () => this.props.hideAlert();
 
   render() {
     const { alert: { visible } } = this.props;

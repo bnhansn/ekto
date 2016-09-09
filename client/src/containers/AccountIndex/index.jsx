@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import Topnav from '../../components/Topnav';
 import Callout from '../../components/Callout';
 import { fetchAccounts, createAccount } from './actions';
@@ -28,10 +27,7 @@ class AccountIndex extends Component {
     this.props.fetchAccounts();
   }
 
-  @autobind
-  handleNewAccountSubmit(data) {
-    this.props.createAccount(data);
-  }
+  handleNewAccountSubmit = (data) => this.props.createAccount(data);
 
   renderAccounts() {
     const { accounts } = this.props;

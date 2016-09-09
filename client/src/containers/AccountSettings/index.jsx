@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { updateAccount, createDomain, deleteDomain, deleteAccount, updateImage } from './actions';
 import AccountDomainsList from '../../components/AccountDomainsList';
 import AccountSettingsForm from '../../components/AccountSettingsForm';
@@ -31,28 +30,15 @@ class AccountSettings extends Component {
     };
   }
 
-  @autobind
-  handleSubmit(data) {
-    this.props.updateAccount(this.props.account.id, data);
-  }
+  handleSubmit = (data) => this.props.updateAccount(this.props.account.id, data);
 
-  @autobind
-  handleImageUpdate(data) {
-    this.props.updateImage(this.props.account.id, data);
-  }
+  handleImageUpdate = (data) => this.props.updateImage(this.props.account.id, data);
 
-  @autobind
-  handleNewDomainSubmit(data) {
-    this.props.createDomain(this.props.account.id, data);
-  }
+  handleNewDomainSubmit = (data) => this.props.createDomain(this.props.account.id, data);
 
-  @autobind
-  handleDomainDelete(id) {
-    this.props.deleteDomain(this.props.account.id, id);
-  }
+  handleDomainDelete = (id) => this.props.deleteDomain(this.props.account.id, id);
 
-  @autobind
-  handleAccountDelete(e) {
+  handleAccountDelete = (e) => {
     e.preventDefault();
     const { account } = this.props;
     if (this.state.deleteConfirmation !== account.name) {
@@ -62,8 +48,7 @@ class AccountSettings extends Component {
     return true;
   }
 
-  @autobind
-  handleModalClose() {
+  handleModalClose = () => {
     this.setState({
       modalOpen: false,
       deleteConfirmation: '',

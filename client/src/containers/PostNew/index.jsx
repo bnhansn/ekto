@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { createPost } from './actions';
 import Editor from '../../components/Editor';
 
@@ -13,10 +12,7 @@ class PostEdit extends Component {
     createPost: PropTypes.func.isRequired,
   };
 
-  @autobind
-  handleSubmit(data) {
-    this.props.createPost(this.props.params.accountSlug, data);
-  }
+  handleSubmit = (data) => this.props.createPost(this.props.params.accountSlug, data);
 
   render() {
     const { user, team, isSaving } = this.props;

@@ -2,7 +2,6 @@
 import React, { Component, PropTypes } from 'react';
 import 'aws-sdk/dist/aws-sdk';
 import Dropzone from 'react-dropzone';
-import { autobind } from 'core-decorators';
 import {
   PHOTO_BUCKET,
   PHOTO_BUCKET_REGION,
@@ -25,14 +24,12 @@ class Uploader extends Component {
     };
   }
 
-  @autobind
-  handleImageDelete() {
+  handleImageDelete = () => {
     this.setState({ currentImage: null });
     this.props.onDelete();
   }
 
-  @autobind
-  handleUpload(files) {
+  handleUpload = (files) => {
     this.setState({ isUploadingImage: true });
     const image = files[0];
     const filename = `${Math.random().toString(36).substring(13)}.${image.type.split('/')[1]}`;

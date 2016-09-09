@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import { Link } from 'react-router';
-import { autobind } from 'core-decorators';
 import Gravatar from '../Gravatar';
 
 class Navbar extends Component {
@@ -12,10 +11,7 @@ class Navbar extends Component {
     isAuthenticating: PropTypes.bool.isRequired,
   };
 
-  @autobind
-  handleLogoutClick(e) {
-    this.props.onLogoutClick(e);
-  }
+  handleLogoutClick = () => this.props.onLogoutClick();
 
   render() {
     const { user, isAuthenticated, isAuthenticating } = this.props;
@@ -67,8 +63,8 @@ class Navbar extends Component {
                     <span>Settings</span>
                   </Link>
                   <button
-                    onClick={(e) => { this.handleLogoutClick(e); }}
                     className="dropdown-item"
+                    onClick={this.handleLogoutClick}
                   >
                     <i className="icon icon-exit user-dropdown-icon" />
                     <span>Logout</span>

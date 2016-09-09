@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { routerActions } from 'react-router-redux';
-import { autobind } from 'core-decorators';
 import { resetPassword } from './actions';
 import ResetPasswordForm from '../../components/ResetPasswordForm';
 
@@ -29,8 +28,7 @@ class ResetPassword extends Component {
     }
   }
 
-  @autobind
-  handleSubmit(data) {
+  handleSubmit = (data) => {
     this.props.resetPassword({
       ...data,
       token: this.props.params.token,

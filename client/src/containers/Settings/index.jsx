@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { updateSettings } from './actions';
 import Topnav from '../../components/Topnav';
 import SettingsForm from '../../components/SettingsForm';
@@ -13,10 +12,7 @@ class Settings extends Component {
     initialValues: PropTypes.object.isRequired,
   };
 
-  @autobind
-  handleSubmit(data) {
-    this.props.updateSettings(this.props.user.id, data);
-  }
+  handleSubmit = (data) => this.props.updateSettings(this.props.user.id, data);
 
   render() {
     const { isSubmitting, initialValues } = this.props;

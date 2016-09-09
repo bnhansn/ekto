@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { autobind } from 'core-decorators';
 import { forgotPassword } from './actions';
 import ForgotPasswordForm from '../../components/ForgotPasswordForm';
 
@@ -10,10 +9,7 @@ class ForgotPassword extends Component {
     forgotPassword: PropTypes.func.isRequired,
   };
 
-  @autobind
-  handleSubmit(data) {
-    this.props.forgotPassword(data);
-  }
+  handleSubmit = (data) => this.props.forgotPassword(data);
 
   render() {
     const { isSubmitting } = this.props;
