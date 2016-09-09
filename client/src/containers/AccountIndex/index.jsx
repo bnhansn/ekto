@@ -5,6 +5,7 @@ import Topnav from '../../components/Topnav';
 import Callout from '../../components/Callout';
 import { fetchAccounts, createAccount } from './actions';
 import NewAccountForm from '../../components/NewAccountForm';
+import { colors } from '../../styles/variables';
 
 class AccountIndex extends Component {
   static propTypes = {
@@ -41,7 +42,21 @@ class AccountIndex extends Component {
         className="list-group-item list-group-item-action"
         style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
       >
-        <div className="account-icon">{account.name.charAt(0)}</div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '30px',
+            height: '30px',
+            marginRight: '1rem',
+            color: colors.primary,
+            background: 'rgba(0,0,0,.05)',
+            borderRadius: '3px',
+          }}
+        >
+          {account.name.charAt(0)}
+        </div>
         <span>{account.name}</span>
         <div style={{ flexGrow: '1' }} />
         <i className="icon icon-arrow-right2" />

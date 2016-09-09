@@ -1,7 +1,54 @@
 import React, { Component, PropTypes } from 'react';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
 import { Link } from 'react-router';
+import { css, StyleSheet } from 'aphrodite';
 import Gravatar from '../Gravatar';
+import { colors } from '../../styles/variables';
+
+const styles = StyleSheet.create({
+  navLink: {
+    color: '#fff',
+    ':hover': {
+      color: 'rgba(255,255,255,.8)',
+    },
+    ':focus': {
+      colors: '#fff',
+    },
+  },
+
+  dropdownTrigger: {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#fff',
+    ':hover': {
+      color: 'rgba(255,255,255,.8)',
+      textDecoration: 'none',
+    },
+    ':focus': {
+      color: '#fff',
+      textDecoration: 'none',
+    },
+  },
+
+  dropdownIcon: {
+    marginRight: '.75rem',
+    fontSize: '16px',
+  },
+
+  loginButton: {
+    color: colors.primary,
+    background: '#fff',
+    border: '1px solid #fff',
+    ':hover': {
+      color: colors.primary,
+      background: '#fff',
+    },
+    ':focus': {
+      color: colors.primary,
+      background: '#fff',
+    },
+  },
+});
 
 class Navbar extends Component {
   static propTypes = {
@@ -18,16 +65,26 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar bg-primary">
-        <Link to={isAuthenticated ? '/accounts' : '/'} className="navbar-brand">Ekto</Link>
+        <Link
+          to={isAuthenticated ? '/accounts' : '/'}
+          className={`navbar-brand ${css(styles.navLink)}`}
+        >
+          Ekto
+        </Link>
         {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item m-r-sm">
-              <a href="https://github.com/bnhansn/ekto/" target="_blank" rel="noopener noreferrer" className="nav-link">
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://github.com/bnhansn/ekto/"
+                className={`nav-link ${css(styles.navLink)}`}
+              >
                 <i className="icon icon-github" style={{ fontSize: '1.5rem' }} />
               </a>
             </li>
             <li className="nav-item">
-              <Link to="/login" className="nav-link btn login-button" activeClassName="active">
+              <Link to="/login" className={`btn nav-link ${css(styles.loginButton)}`}>
                 Login
               </Link>
             </li>
@@ -37,8 +94,8 @@ class Navbar extends Component {
           <ul className="nav navbar-nav pull-xs-right">
             <li className="nav-item">
               <Dropdown ref={(c) => { this.dropdown = c; }}>
-                <DropdownTrigger className="user-dropdown-trigger">
-                  <i className="icon icon-menu7 user-dropdown-icon" />
+                <DropdownTrigger className={css(styles.dropdownTrigger)}>
+                  <i className={`icon icon-menu7 ${css(styles.dropdownIcon)}`} />
                   <Gravatar
                     size={30}
                     className="img-circle"
@@ -51,7 +108,7 @@ class Navbar extends Component {
                     className="dropdown-item"
                     onClick={() => this.dropdown.hide()}
                   >
-                    <i className="icon icon-database2 user-dropdown-icon" />
+                    <i className={`icon icon-database2 ${css(styles.dropdownIcon)}`} />
                     <span>Dashboard</span>
                   </Link>
                   <Link
@@ -59,14 +116,14 @@ class Navbar extends Component {
                     className="dropdown-item"
                     onClick={() => this.dropdown.hide()}
                   >
-                    <i className="icon icon-equalizer2 user-dropdown-icon" />
+                    <i className={`icon icon-equalizer2 ${css(styles.dropdownIcon)}`} />
                     <span>Settings</span>
                   </Link>
                   <button
                     className="dropdown-item"
                     onClick={this.handleLogoutClick}
                   >
-                    <i className="icon icon-exit user-dropdown-icon" />
+                    <i className={`icon icon-exit ${css(styles.dropdownIcon)}`} />
                     <span>Logout</span>
                   </button>
                 </DropdownContent>

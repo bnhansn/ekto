@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { colors } from '../../styles/variables';
 
 const NotFound = () =>
-  <div className="not-found">
-    <h1 className="display-3">¡Not found!</h1>
-    <Link to="/" className="btn btn-link">Head to home page</Link>
+  <div style={{ padding: '100px 0', color: colors.gray, textAlign: 'center' }}>
+    <p>Page not found</p>
+    <p><Link to="/">Go to the home page →</Link></p>
   </div>;
 
 export default NotFound;

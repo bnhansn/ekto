@@ -1,7 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import moment from 'moment';
+import { css, StyleSheet } from 'aphrodite';
 import DeletePostModal from '../DeletePostModal';
+
+const styles = StyleSheet.create({
+  previewCard: {
+    marginBottom: '0',
+    borderBottom: '0',
+    borderBottomRightRadius: '0',
+    borderBottomLeftRadius: '0',
+  },
+
+  button: {
+    display: 'flex',
+    alignItems: 'center',
+    flexGrow: '1',
+    justifyContent: 'center',
+    borderTopRightRadius: '0',
+    borderTopLeftRadius: '0',
+    ':first-child': {
+      borderRight: '0',
+      borderBottomRightRadius: '0',
+    },
+    ':last-child': {
+      borderBottomLeftRadius: '0',
+    },
+  },
+});
 
 const excerpt = (html) => {
   const tmp = document.createElement('div');
@@ -31,8 +57,8 @@ class PostPreview extends Component {
     const { post, accountSlug } = this.props;
 
     return (
-      <div className="post-preview">
-        <div className="card post-preview-card">
+      <div className="m-b-1">
+        <div className={`card ${css(styles.previewCard)}`}>
           <div className="card-block">
             {!post.published &&
               <span className="tag tag-default pull-xs-right">Unpublished</span>
@@ -40,23 +66,25 @@ class PostPreview extends Component {
             <h3>{post.title}</h3>
             <p>{excerpt(post.html)}</p>
             <span className="text-muted">
-              <i className="icon icon-clock m-r-sm" />
+              <i className="icon icon-clock" style={{ marginRight: '.5rem' }} />
               <span>{moment(post.publishedAt).fromNow()}</span>
             </span>
           </div>
         </div>
         <div style={{ display: 'flex' }}>
           <Link
-            className="btn btn-secondary post-preview-button"
             to={`/accounts/${accountSlug}/posts/${post.id}`}
+            className={`btn btn-secondary ${css(styles.button)}`}
           >
-            <i className="icon icon-pencil m-r-sm" /><span>Edit</span>
+            <i className="icon icon-pencil" style={{ marginRight: '.5rem' }} />
+            <span>Edit</span>
           </Link>
           <button
-            className="btn btn-secondary post-preview-button"
+            className={`btn btn-secondary ${css(styles.button)}`}
             onClick={() => this.setState({ deleteModalOpen: true })}
           >
-            <i className="icon icon-bin m-r-sm" /><span>Delete</span>
+            <i className="icon icon-bin" style={{ marginRight: '.5rem' }} />
+            <span>Delete</span>
           </button>
         </div>
         <DeletePostModal

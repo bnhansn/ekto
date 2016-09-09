@@ -1,4 +1,14 @@
 import React, { PropTypes } from 'react';
+import { css, StyleSheet } from 'aphrodite';
+import { colors } from '../../styles/variables';
+
+const styles = StyleSheet.create({
+  error: {
+    height: '1rem',
+    fontSize: '90%',
+    color: colors.danger,
+  },
+});
 
 const Input = (props) =>
   <div className="form-group">
@@ -9,7 +19,9 @@ const Input = (props) =>
       placeholder={props.placeholder}
       className={props.className ? props.className : 'form-control'}
     />
-    {props.meta.touched && props.meta.error && <p className="input-error">{props.meta.error}</p>}
+    {props.meta.touched && props.meta.error &&
+      <div className={css(styles.error)}>{props.meta.error}</div>
+    }
   </div>;
 
 Input.propTypes = {

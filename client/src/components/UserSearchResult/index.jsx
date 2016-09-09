@@ -1,6 +1,19 @@
 import React, { Component, PropTypes } from 'react';
 import includes from 'lodash/includes';
+import { css, StyleSheet } from 'aphrodite';
 import Gravatar from '../Gravatar';
+
+const styles = StyleSheet.create({
+  userSearchResult: {
+    display: 'flex',
+    alignItems: 'center',
+    margin: '5px 0',
+  },
+
+  currentMember: {
+    opacity: '.5',
+  },
+});
 
 class UserSearchResult extends Component {
   static propTypes = {
@@ -14,9 +27,13 @@ class UserSearchResult extends Component {
   render() {
     const { user, teamIds } = this.props;
     const isCurrentMember = includes(teamIds, user.id);
+    const className = css(
+      styles.userSearchResult,
+      isCurrentMember && styles.currentMember,
+    );
 
     return (
-      <div key={user.id} className={`user-search-result ${isCurrentMember && 'is-current-member'}`}>
+      <div key={user.id} className={className}>
         <Gravatar email={user.email || ''} size={30} className="img-rounded m-r-sm" />
         <span style={{ marginRight: '4px' }}>{user.name}</span>
         <span className="small text-muted">{user.email}</span>

@@ -2,12 +2,47 @@
 import React, { Component, PropTypes } from 'react';
 import 'aws-sdk/dist/aws-sdk';
 import Dropzone from 'react-dropzone';
+import { css, StyleSheet } from 'aphrodite';
 import {
   PHOTO_BUCKET,
   PHOTO_BUCKET_REGION,
   PHOTO_BUCKET_ACCESS_KEY_ID,
   PHOTO_BUCKET_SECRET_ACCESS_KEY,
 } from 'config';
+import { colors } from '../../styles/variables';
+
+const styles = StyleSheet.create({
+  dropzone: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '150px',
+    height: '125px',
+    fontWeight: '500',
+    color: colors.primary,
+    cursor: 'pointer',
+    background: colors.grayLighter,
+    border: `3px dashed ${colors.grayLight}`,
+    borderRadius: '5px',
+    ':hover': {
+      background: 'rgb(225,230,235)',
+    },
+  },
+
+  deleteButton: {
+    position: 'absolute',
+    top: '10px',
+    right: '10px',
+    color: '#fff',
+    background: 'rgba(0,0,0,.6)',
+    border: '0',
+    boxShadow: 'rgba(255,255,255,.2) 0 0 0 1px',
+    ':hover': {
+      color: '#fff',
+      background: colors.danger,
+    },
+  },
+});
 
 class Uploader extends Component {
   static propTypes = {
@@ -67,7 +102,7 @@ class Uploader extends Component {
           <div style={{ position: 'relative' }}>
             <img src={currentImage} alt="preview" className="img-fluid" />
             <button
-              className="btn delete-image-button"
+              className={`btn ${css(styles.deleteButton)}`}
               onClick={this.handleImageDelete}
             >
               <i className="icon icon-bin2" />
@@ -75,7 +110,7 @@ class Uploader extends Component {
           </div>
         }
         {!currentImage && !isUploadingImage &&
-          <Dropzone onDrop={this.handleUpload} className="dropzone">
+          <Dropzone onDrop={this.handleUpload} className={css(styles.dropzone)}>
             Drop to upload
           </Dropzone>
         }

@@ -1,12 +1,6 @@
 import { Field, reduxForm } from 'redux-form';
 import React, { Component, PropTypes } from 'react';
 
-const renderField = field =>
-  <input
-    {...field.input}
-    className={`form-control ${(field.touched && field.error) ? 'has-error' : ''}`}
-  />;
-
 class AccountDomainForm extends Component {
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -14,20 +8,19 @@ class AccountDomainForm extends Component {
     isCreatingDomain: PropTypes.bool.isRequired,
   };
 
-  handleSubmit(data) {
-    this.props.onSubmit(data);
-  }
+  handleSubmit = (data) => this.props.onSubmit(data);
 
   render() {
     const { handleSubmit, isCreatingDomain } = this.props;
 
     return (
-      <form onSubmit={handleSubmit(::this.handleSubmit)}>
+      <form onSubmit={handleSubmit(this.handleSubmit)}>
         <div className="input-group">
           <Field
             type="text"
             name="host"
-            component={renderField}
+            component="input"
+            className="form-control"
             placeholder="http://www.example.com"
           />
           <div className="input-group-btn">

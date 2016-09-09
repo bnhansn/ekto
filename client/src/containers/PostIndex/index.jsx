@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPosts, deletePost } from './actions';
 import PostPreview from '../../components/PostPreview';
 import Pager from '../../components/Pager';
+import { colors } from '../../styles/variables';
 
 class PostIndex extends Component {
   static propTypes = {
@@ -79,7 +80,24 @@ class PostIndex extends Component {
             </div>
             <div className="col-md-10 pull-md-2 col-xs-12">
               {isLoading && <div className="loader" />}
-              {!isLoading && !posts.length && <div className="no-posts">No posts</div>}
+              {!isLoading && !posts.length &&
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '200px',
+                    fontSize: '1.5rem',
+                    fontWeight: '300',
+                    color: colors.grayLight,
+                    background: colors.grayLighter,
+                    borderRadius: '4px',
+                    boxShadow: 'inset 0 0 7px rgba(0,0,0,.05)',
+                  }}
+                >
+                  No posts
+                </div>
+              }
               {this.renderPosts()}
             </div>
           </div>

@@ -1,4 +1,4 @@
-/* eslint-disable no-console, import/no-extraneous-dependencies */
+/* eslint-disable no-console */
 const s3 = require('s3');
 require('dotenv').config();
 
@@ -11,7 +11,7 @@ const client = s3.createClient({
 });
 
 const params = {
-  localDir: './build',
+  localDir: 'build',
   deleteRemoved: true,
   s3Params: {
     Bucket: process.env.AWS_S3_BUCKET,

@@ -5,12 +5,62 @@ import { Field, reduxForm } from 'redux-form';
 import React, { Component, PropTypes } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdown';
+import { css, StyleSheet } from 'aphrodite';
 import Input from '../Input';
 import Textarea from '../Textarea';
 import { newlineExtension } from './utils';
 import MarkdownGuide from '../../components/MarkdownGuide';
 import Uploader from '../../components/Uploader';
 import DeletePostModal from '../../components/DeletePostModal';
+import { colors, media } from '../../styles/variables';
+
+const styles = StyleSheet.create({
+  editorPanel: {
+    width: '100%',
+    padding: '15px 20px',
+    color: colors.grayDark,
+    background: '#fff',
+    border: '0',
+    outline: 'none',
+  },
+
+  editorTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '500',
+    borderBottom: `1px solid ${colors.grayLightest}`,
+  },
+
+  contentView: {
+    minHeight: '450px',
+  },
+
+  savePostButton: {
+    borderTopRightRadius: 0,
+    borderBottomRightRadius: 0,
+  },
+
+  postDropdownTrigger: {
+    borderLeft: '1px solid rgba(0,0,0,.1)',
+    borderBottomLeftRadius: 0,
+    borderTopLeftRadius: 0,
+  },
+
+  editorTabList: {
+    [media.xsDown]: {
+      display: 'flex',
+    },
+  },
+
+  editorTab: {
+    [media.xsDown]: {
+      alignItems: 'center',
+      flexGrow: '1',
+      justifyContent: 'center',
+      padding: '10px 15px',
+      fontSize: '90%',
+    },
+  },
+});
 
 class Editor extends Component {
   static propTypes = {
@@ -78,8 +128,9 @@ class Editor extends Component {
     this.props.onSubmit(post);
   }
 
-  renderPreview = () => { // eslint:disable arrow-body-style
-    return { __html: this.state.preview };
+  renderPreview = () => {
+    const preview = { __html: this.state.preview };
+    return preview;
   }
 
   renderNewSaveButton() {
@@ -110,13 +161,16 @@ class Editor extends Component {
       <div className="m-b-2">
         <form onSubmit={handleSubmit(this.handleSubmit)}>
           <div className="text-xs-right m-b-1">
-            <button type="submit" className="btn btn-primary save-post-button">
+            <button type="submit" className={`btn btn-primary ${css(styles.savePostButton)}`}>
               {this.renderNewSaveButton()}
               {this.renderEditSaveButton()}
             </button>
             <Dropdown ref={(c) => { this.dropdown = c; }}>
               <DropdownTrigger>
-                <button type="button" className="btn btn-primary post-dropdown-trigger">
+                <button
+                  type="button"
+                  className={`btn btn-primary ${css(styles.postDropdownTrigger)}`}
+                >
                   <i className="icon icon-arrow-down5" />
                 </button>
               </DropdownTrigger>
@@ -156,11 +210,23 @@ class Editor extends Component {
             </Dropdown>
           </div>
           <Tabs>
-            <TabList className="editor-tab-list">
-              <Tab className="editor-tab"><i className="icon icon-file-text m-r-sm" />Write</Tab>
-              <Tab className="editor-tab"><i className="icon icon-eye m-r-sm" />Preview</Tab>
-              <Tab className="editor-tab"><i className="icon icon-cogs m-r-sm" />Settings</Tab>
-              <Tab className="editor-tab"><i className="icon icon-map4 m-r-sm" />Guide</Tab>
+            <TabList className={css(styles.editorTabList)}>
+              <Tab className={css(styles.editorTab)}>
+                <i className="icon icon-file-text" style={{ marginRight: '.5rem' }} />
+                <span>Write</span>
+              </Tab>
+              <Tab className={css(styles.editorTab)}>
+                <i className="icon icon-eye" style={{ marginRight: '.5rem' }} />
+                <span>Preview</span>
+              </Tab>
+              <Tab className={css(styles.editorTab)}>
+                <i className="icon icon-cogs" style={{ marginRight: '.5rem' }} />
+                <span>Settings</span>
+              </Tab>
+              <Tab className={css(styles.editorTab)}>
+                <i className="icon icon-map4" style={{ marginRight: '.5rem' }} />
+                <span>Guide</span>
+              </Tab>
             </TabList>
             <TabPanel>
               <Field
@@ -168,29 +234,30 @@ class Editor extends Component {
                 name="title"
                 component="input"
                 placeholder="Title"
-                className="post-title"
                 ref={(c) => { this.title = c; }}
+                className={css(styles.editorPanel, styles.editorTitle)}
                 onKeyUp={() => { this.setState({ title: this.title.value }); }}
               />
               <Field
                 type="text"
                 name="markdown"
                 component="textarea"
-                className="post-markdown"
                 ref={(c) => { this.markdown = c; }}
+                className={css(styles.editorPanel, styles.contentView)}
                 onKeyUp={() => { this.setPreview(this.markdown.value); }}
               />
             </TabPanel>
             <TabPanel>
-              <div className="post-title-preview">{this.state.title}</div>
-              <div className="post-html-preview" dangerouslySetInnerHTML={this.renderPreview()} />
+              <div className={css(styles.editorPanel, styles.editorTitle)}>{this.state.title}</div>
+              <div
+                className={css(styles.editorPanel, styles.contentView)}
+                dangerouslySetInnerHTML={this.renderPreview()}
+              />
             </TabPanel>
             <TabPanel>
-              <div className="post-settings">
-                <div className="post-settings-title">
-                  <h4 className="m-b-0">Settings</h4>
-                </div>
-                <div className="post-settings-content">
+              <div>
+                <div className={css(styles.editorPanel, styles.editorTitle)}>Settings</div>
+                <div className={css(styles.editorPanel)}>
                   <Field
                     type="text"
                     name="slug"
