@@ -46,16 +46,10 @@ export function deletePost(accountSlug, id) {
       .then(response => {
         if (isSuccess(response)) {
           dispatch(push(`/accounts/${accountSlug}/posts`));
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'white', message: 'Post deleted' },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Post deleted' } });
         } else {
           const message = parseError(response, 'Error deleting post');
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'danger', message },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
   };

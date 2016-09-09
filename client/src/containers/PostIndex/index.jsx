@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { fetchPosts } from './actions';
+import { fetchPosts, deletePost } from './actions';
+import PostPreview from '../../components/PostPreview';
 
 class PostIndex extends Component {
   static propTypes = {
@@ -9,11 +10,14 @@ class PostIndex extends Component {
     params: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     fetchPosts: PropTypes.func.isRequired,
+    deletePost: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
     this.props.fetchPosts(this.props.params.accountSlug);
   }
+
+  handlePostDelete = (id) => this.props.deletePost(this.props.params.accountSlug, id);
 
   renderPosts() {
     const { params: { accountSlug }, posts } = this.props;
@@ -21,18 +25,12 @@ class PostIndex extends Component {
     if (!posts.length) { return null; }
 
     return posts.map(post =>
-      <Link
+      <PostPreview
+        post={post}
         key={post.id}
-        to={`/accounts/${accountSlug}/posts/${post.id}`}
-        className="list-group-item list-group-item-action flex align-center justify-between"
-      >
-        <span>{post.title}</span>
-        {!post.published &&
-          <span className="tag tag-default m-l-1">Unpublished</span>
-        }
-        <div className="flex-grow" />
-        <i className="icon icon-arrow-right2" />
-      </Link>
+        accountSlug={accountSlug}
+        onDelete={this.handlePostDelete}
+      />
     );
   }
 
@@ -42,13 +40,20 @@ class PostIndex extends Component {
     return (
       <div>
         <div className="container">
-          {isLoading && <div className="loader" />}
-          <div className="list-group m-b-1">
-            {this.renderPosts()}
+          <div className="row">
+            <div className="col-md-2 push-md-10 col-xs-12 m-b-1">
+              <Link
+                className="btn btn-secondary btn-block"
+                to={`/accounts/${accountSlug}/posts/new`}
+              >
+                New post
+              </Link>
+            </div>
+            <div className="col-md-10 pull-md-2 col-xs-12">
+              {isLoading && <div className="loader" />}
+              {this.renderPosts()}
+            </div>
           </div>
-          <Link to={`/accounts/${accountSlug}/posts/new`} className="btn btn-secondary">
-            New post
-          </Link>
         </div>
       </div>
     );
@@ -60,5 +65,5 @@ export default connect(
     posts: state.posts.posts,
     isLoading: state.posts.isLoading,
   }),
-  { fetchPosts }
+  { fetchPosts, deletePost }
 )(PostIndex);

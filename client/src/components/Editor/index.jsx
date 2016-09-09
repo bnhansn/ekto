@@ -1,5 +1,4 @@
 import moment from 'moment';
-import Modal from 'react-modal';
 import showdown from 'showdown';
 import DatePicker from 'react-datepicker';
 import { autobind } from 'core-decorators';
@@ -12,6 +11,7 @@ import Textarea from '../Textarea';
 import { newlineExtension } from './utils';
 import MarkdownGuide from '../../components/MarkdownGuide';
 import Uploader from '../../components/Uploader';
+import DeletePostModal from '../../components/DeletePostModal';
 
 class Editor extends Component {
   static propTypes = {
@@ -251,40 +251,11 @@ class Editor extends Component {
             </TabPanel>
           </Tabs>
         </form>
-        <Modal
-          className="modal"
+        <DeletePostModal
           isOpen={deleteModalOpen}
-          overlayClassName="modal-overlay"
+          onDelete={() => this.props.onDelete()}
           onRequestClose={() => this.setState({ deleteModalOpen: false })}
-        >
-          <div className="modal-header">
-            <h6 className="text-primary">Delete post</h6>
-            <i
-              className="modal-close"
-              onClick={() => this.setState({ deleteModalOpen: false })}
-            />
-          </div>
-          <div className="modal-content">
-            <p>Are you sure you want to permanently delete this post?</p>
-          </div>
-          <div className="modal-footer text-xs-right">
-            <div className="btn-toolbar">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                onClick={() => this.setState({ deleteModalOpen: false })}
-              >
-                Cancel
-              </button>
-              <button
-                className="btn btn-danger"
-                onClick={() => this.props.onDelete()}
-              >
-                Delete post
-              </button>
-            </div>
-          </div>
-        </Modal>
+        />
       </div>
     );
   }
