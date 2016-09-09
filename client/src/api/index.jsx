@@ -2,27 +2,23 @@ import axios from 'axios';
 import { API_URL } from 'config'; // eslint-disable-line
 import mapKeys from 'lodash/mapKeys';
 
+const decamelize = (str) => str.split(/(?=[A-Z])/).join('_').toLowerCase();
+
+const keyTransform = (data) => {
+  const obj = {};
+  mapKeys(data, (value, key) => {
+    obj[decamelize(key)] = value;
+  });
+  return obj;
+};
+
+const token = () => JSON.parse(localStorage.getItem('token'));
+
 export default {
-  decamelize(str) {
-    return str.split(/(?=[A-Z])/).join('_').toLowerCase();
-  },
-
-  keyTransform(data) {
-    const obj = {};
-    mapKeys(data, (value, key) => {
-      obj[this.decamelize(key)] = value;
-    });
-    return obj;
-  },
-
-  token() {
-    return JSON.parse(localStorage.getItem('token'));
-  },
-
   get(path, options) {
     return axios.get(
       `${API_URL}${path}`,
-      { ...options, headers: { Authorization: `Bearer ${this.token()}` } })
+      { ...options, headers: { Authorization: `Bearer ${token()}` } })
       .then(response => response)
       .catch(error => error.response);
   },
@@ -30,8 +26,8 @@ export default {
   post(path, data) {
     return axios.post(
       `${API_URL}${path}`,
-      this.keyTransform(data),
-      { headers: { Authorization: `Bearer ${this.token()}` } })
+      keyTransform(data),
+      { headers: { Authorization: `Bearer ${token()}` } })
       .then(response => response)
       .catch(error => error.response);
   },
@@ -39,8 +35,8 @@ export default {
   patch(path, data) {
     return axios.patch(
       `${API_URL}${path}`,
-      this.keyTransform(data),
-      { headers: { Authorization: `Bearer ${this.token()}` } })
+      keyTransform(data),
+      { headers: { Authorization: `Bearer ${token()}` } })
       .then(response => response)
       .catch(error => error.response);
   },
@@ -48,7 +44,7 @@ export default {
   delete(path) {
     return axios.delete(
       `${API_URL}${path}`,
-      { headers: { Authorization: `Bearer ${this.token()}` } })
+      { headers: { Authorization: `Bearer ${token()}` } })
       .then(response => response)
       .catch(error => error.response);
   },
