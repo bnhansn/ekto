@@ -161,11 +161,11 @@ class Editor extends Component {
             </Dropdown>
           </div>
           <Tabs>
-            <TabList>
-              <Tab><i className="icon icon-file-text m-r-sm" />Write</Tab>
-              <Tab><i className="icon icon-eye m-r-sm" />Preview</Tab>
-              <Tab><i className="icon icon-cogs m-r-sm" />Settings</Tab>
-              <Tab><i className="icon icon-map4 m-r-sm" />Guide</Tab>
+            <TabList className="editor-tab-list">
+              <Tab className="editor-tab"><i className="icon icon-file-text m-r-sm" />Write</Tab>
+              <Tab className="editor-tab"><i className="icon icon-eye m-r-sm" />Preview</Tab>
+              <Tab className="editor-tab"><i className="icon icon-cogs m-r-sm" />Settings</Tab>
+              <Tab className="editor-tab"><i className="icon icon-map4 m-r-sm" />Guide</Tab>
             </TabList>
             <TabPanel>
               <Field

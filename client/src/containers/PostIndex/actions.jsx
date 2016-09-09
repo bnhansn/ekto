@@ -8,20 +8,17 @@ import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
 import { isSuccess, parseError } from '../../utils';
 
-export function fetchPosts(accountSlug) {
+export function fetchPosts(accountSlug, params) {
   return dispatch => {
     dispatch({ type: FETCH_POSTS_START });
-    api.get(`/accounts/${accountSlug}/posts`)
+    api.get(`/accounts/${accountSlug}/posts`, { params: { ...params } })
       .then(response => {
         if (isSuccess(response)) {
           dispatch({ type: FETCH_POSTS_SUCCESS, payload: response });
         } else {
           dispatch({ type: FETCH_POSTS_ERROR });
           const message = parseError(response, 'Error retrieving posts');
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'danger', message },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
   };

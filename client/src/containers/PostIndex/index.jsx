@@ -3,21 +3,48 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { fetchPosts, deletePost } from './actions';
 import PostPreview from '../../components/PostPreview';
+import Pager from '../../components/Pager';
 
 class PostIndex extends Component {
   static propTypes = {
     posts: PropTypes.array.isRequired,
+    meta: PropTypes.object.isRequired,
     params: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
     fetchPosts: PropTypes.func.isRequired,
     deletePost: PropTypes.func.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      page: 1,
+      limit: 5,
+    };
+  }
+
   componentWillMount() {
-    this.props.fetchPosts(this.props.params.accountSlug);
+    this.loadPosts();
+  }
+
+  loadPosts() {
+    const { page, limit } = this.state;
+    this.props.fetchPosts(this.props.params.accountSlug, { page, limit });
   }
 
   handlePostDelete = (id) => this.props.deletePost(this.props.params.accountSlug, id);
+
+  handlePagerClick = (direction) => {
+    if (direction === 'next') {
+      this.setState({
+        page: this.state.page + 1,
+      }, () => { this.loadPosts(); });
+    } else if (direction === 'prev') {
+      this.setState({
+        page: this.state.page - 1,
+      }, () => { this.loadPosts(); });
+    }
+  }
 
   renderPosts() {
     const { params: { accountSlug }, posts } = this.props;
@@ -35,7 +62,7 @@ class PostIndex extends Component {
   }
 
   render() {
-    const { params: { accountSlug }, isLoading } = this.props;
+    const { params: { accountSlug }, posts, meta, isLoading } = this.props;
 
     return (
       <div>
@@ -43,14 +70,16 @@ class PostIndex extends Component {
           <div className="row">
             <div className="col-md-2 push-md-10 col-xs-12 m-b-1">
               <Link
-                className="btn btn-secondary btn-block"
+                className="btn btn-secondary btn-block m-b-1"
                 to={`/accounts/${accountSlug}/posts/new`}
               >
                 New post
               </Link>
+              <Pager meta={meta} onPagerClick={this.handlePagerClick} />
             </div>
             <div className="col-md-10 pull-md-2 col-xs-12">
               {isLoading && <div className="loader" />}
+              {!isLoading && !posts.length && <div className="no-posts">No posts</div>}
               {this.renderPosts()}
             </div>
           </div>
@@ -62,6 +91,7 @@ class PostIndex extends Component {
 
 export default connect(
   state => ({
+    meta: state.posts.meta,
     posts: state.posts.posts,
     isLoading: state.posts.isLoading,
   }),

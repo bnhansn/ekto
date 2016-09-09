@@ -35,3 +35,19 @@
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
+
+.editor-tab-list {
+  @media #{$xs-down} {
+    display: flex;
+  }
+}
+
+.editor-tab {
+  @media #{$xs-down} {
+    align-items: center;
+    flex-grow: 1;
+    justify-content: center;
+    padding: 10px 15px;
+    font-size: 90%;
+  }
+}

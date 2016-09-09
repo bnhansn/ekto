@@ -6,6 +6,7 @@ import {
 } from './constants';
 
 const initialState = {
+  meta: {},
   posts: [],
   isLoading: false,
 };
@@ -16,17 +17,20 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: [],
+        meta: {},
         isLoading: true,
       };
     case FETCH_POSTS_SUCCESS:
       return {
         ...state,
         isLoading: false,
+        meta: action.payload.data.meta,
         posts: action.payload.data.data,
       };
     case FETCH_POSTS_ERROR:
       return {
         ...state,
+        meta: {},
         posts: [],
         isLoading: false,
       };
