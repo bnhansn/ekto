@@ -17,9 +17,8 @@ class LoginForm extends Component {
 
     return (
       <form
-        className="m-x-auto p-y-1"
-        style={{ maxWidth: '400px' }}
         onSubmit={handleSubmit(this.handleSubmit)}
+        style={{ maxWidth: '400px', margin: '0 auto', padding: '1rem 0' }}
       >
         <div className="card">
           <div className="card-header">

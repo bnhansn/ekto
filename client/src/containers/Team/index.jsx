@@ -83,12 +83,13 @@ class Team extends Component {
 
     return (
       <div className="container">
-        <ul className="list-group m-b-1">
+        <ul className="list-group" style={{ marginBottom: '1rem' }}>
           {this.renderTeam()}
         </ul>
         {isAccountOwner &&
           <button
-            className="btn btn-secondary m-b-1"
+            className="btn btn-secondary"
+            style={{ marginBottom: '1rem' }}
             onClick={() => this.setState({ inviteFormOpen: !inviteFormOpen })}
           >
             {!inviteFormOpen && <span style={{ fontSize: '20px', lineHeight: '1' }}>&#43;</span>}

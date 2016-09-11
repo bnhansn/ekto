@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { fetchPosts, deletePost } from './actions';
 import PostPreview from '../../components/PostPreview';
 import Pager from '../../components/Pager';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 
 class PostIndex extends Component {
   static propTypes = {
@@ -69,9 +69,10 @@ class PostIndex extends Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-md-2 push-md-10 col-xs-12 m-b-1">
+            <div className="col-md-2 push-md-10 col-xs-12" style={{ marginBottom: '1rem' }}>
               <Link
-                className="btn btn-secondary btn-block m-b-1"
+                style={{ marginBottom: '1rem' }}
+                className="btn btn-secondary btn-block"
                 to={`/accounts/${accountSlug}/posts/new`}
               >
                 New post

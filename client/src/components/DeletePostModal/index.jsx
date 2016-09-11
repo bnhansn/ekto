@@ -28,7 +28,7 @@ class DeletePostModal extends Component {
       >
         <div className="modal-header">
           <span className="modal-close" onClick={onRequestClose}>&times;</span>
-          <h6 className="text-primary">Delete post</h6>
+          <h6>Delete post</h6>
         </div>
         <div className="modal-content">
           <p>Are you sure you want to permanently delete this post?</p>

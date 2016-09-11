@@ -146,7 +146,7 @@ class AccountSettings extends Component {
         >
           <form onSubmit={this.handleAccountDelete}>
             <div className="modal-header">
-              <h6 className="text-primary">Delete account</h6>
+              <h6>Delete account</h6>
               <i
                 className="modal-close"
                 onClick={this.handleModalClose}

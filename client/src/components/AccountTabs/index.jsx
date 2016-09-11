@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 const AccountTabs = ({ account }) =>
-  <nav className="tabs m-b-2">
+  <nav className="tabs" style={{ marginBottom: '1.5rem' }}>
     <div className="container">
       <Link
         to={`/accounts/${account.slug}/posts`}

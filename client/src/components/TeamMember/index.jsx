@@ -27,7 +27,7 @@ class TeamMember extends Component {
           <div className="media-body">
             {teamMember.name}
             {ownerId === teamMember.id &&
-              <span className="tag tag-default m-l-1">Owner</span>
+              <span className="tag tag-default" style={{ marginLeft: '1rem' }}>Owner</span>
             }
           </div>
           {(currentUserId === ownerId) &&

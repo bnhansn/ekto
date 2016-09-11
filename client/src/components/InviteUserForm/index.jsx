@@ -74,14 +74,16 @@ class InviteUserForm extends Component {
               Search for a user in Ekto by name or email, or enter an email
               address to invite someone new.
             </p>
-            <Field
-              type="text"
-              name="email"
-              component="input"
-              style={{ maxWidth: '250px' }}
-              className="form-control m-b-1"
-              onKeyUp={e => this.handleSearch(e)}
-            />
+            <div className="form-group">
+              <Field
+                type="text"
+                name="email"
+                component="input"
+                style={{ maxWidth: '250px' }}
+                className="form-control"
+                onKeyUp={e => this.handleSearch(e)}
+              />
+            </div>
             {isSearchingUsers && <div className="loader" />}
             {this.renderSearchResults()}
             {hasSearched && !searchedUsers.length &&
@@ -97,8 +99,8 @@ class InviteUserForm extends Component {
                     type="text"
                     name="name"
                     component="input"
+                    className="form-control"
                     style={{ maxWidth: '250px' }}
-                    className="form-control m-b-1"
                   />
                 </div>
                 <button

@@ -5,7 +5,7 @@ import ekto from './ekto.svg';
 import editor from './editor.png';
 import { signup } from './actions';
 import SignupForm from '../../components/SignupForm';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 
 const styles = StyleSheet.create({
   hero: {
@@ -101,8 +101,7 @@ class Home extends Component {
               <img
                 src={ekto}
                 alt="Ekto"
-                className="d-block m-x-auto"
-                style={{ maxWidth: '100%' }}
+                style={{ display: 'block', maxWidth: '100%', margin: '0 auto' }}
               />
             </div>
           </div>
@@ -114,9 +113,9 @@ class Home extends Component {
             <SignupForm isSubmitting={isSubmitting} onSubmit={this.handleSubmit} />
           </div>
         </div>
-        <div className="p-y-3">
+        <div style={{ padding: '2rem 0' }}>
           <div className="container">
-            <p className="lead m-b-0">
+            <p className="lead" style={{ marginBottom: '0' }}>
               Ekto provides an easy solution for integrating blog content into
               single page JavaScript applications.
             </p>
@@ -124,7 +123,7 @@ class Home extends Component {
         </div>
         <div className={css(styles.productDescription)}>
           <div className="container">
-            <div className="row m-b-3">
+            <div className="row" style={{ marginBottom: '2rem' }}>
               <div className={`col-lg-3 col-sm-6 col-xs-12 ${css(styles.productFeature)}`}>
                 <span className="glyphicon glyphicon-book" style={{ marginRight: '10px' }} />
                 <b>Simple to publish</b>
@@ -151,7 +150,7 @@ class Home extends Component {
         </div>
         <div className={css(styles.productSteps)}>
           <div className="container">
-            <div className="media m-b-1">
+            <div className="media" style={{ marginBottom: '1rem' }}>
               <div className="media-left">
                 <span className={css(styles.productStepNumber)}>1</span>
               </div>
@@ -159,7 +158,7 @@ class Home extends Component {
                 <span>Create an account and publish posts with our online editor.</span>
               </div>
             </div>
-            <div className="media m-b-1">
+            <div className="media" style={{ marginBottom: '1rem' }}>
               <div className="media-left">
                 <span className={css(styles.productStepNumber)}>2</span>
               </div>
@@ -170,7 +169,7 @@ class Home extends Component {
                 </span>
               </div>
             </div>
-            <div className="media m-b-1">
+            <div className="media" style={{ marginBottom: '1rem' }}>
               <div className="media-left">
                 <span className={css(styles.productStepNumber)}>3</span>
               </div>

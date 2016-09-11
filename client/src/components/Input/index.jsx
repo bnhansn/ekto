@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { css, StyleSheet } from 'aphrodite';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 
 const styles = StyleSheet.create({
   error: {

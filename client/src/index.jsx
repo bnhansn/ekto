@@ -10,7 +10,9 @@ import routes from './routes';
 import reducers from './reducers';
 import { authenticate, locationChange } from './containers/App/actions';
 
-require('./styles/main.scss');
+require('./styles/bootstrap.css');
+require('./styles/glyphicons.css');
+require('./styles/index.css');
 
 const routingMiddleware = routerMiddleware(browserHistory);
 

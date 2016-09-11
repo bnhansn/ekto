@@ -5,7 +5,7 @@ import Topnav from '../../components/Topnav';
 import Callout from '../../components/Callout';
 import { fetchAccounts, createAccount } from './actions';
 import NewAccountForm from '../../components/NewAccountForm';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 
 class AccountIndex extends Component {
   static propTypes = {
@@ -69,7 +69,9 @@ class AccountIndex extends Component {
 
     return (
       <div>
-        <Topnav header="Accounts" className="m-b-2" />
+        <div style={{ marginBottom: '1.5rem' }}>
+          <Topnav header="Accounts" />
+        </div>
         <div className="container">
           {isLoading && !accounts.length && <div className="loader" />}
           {noAccounts &&
@@ -77,11 +79,11 @@ class AccountIndex extends Component {
               <p>Create an account with the icon below to get started</p>
             </Callout>
           }
-          <div className="list-group m-b-1">
+          <div className="list-group" style={{ marginBottom: '1rem' }}>
             {this.renderAccounts()}
           </div>
           <button
-            className="btn btn-secondary m-b-1"
+            className="btn btn-secondary" style={{ marginBottom: '1rem' }}
             onClick={() => this.setState({ accountFormOpen: !accountFormOpen })}
           >
             {!accountFormOpen && <span style={{ fontSize: '20px', lineHeight: '1' }}>&#43;</span>}

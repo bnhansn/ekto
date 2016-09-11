@@ -19,7 +19,9 @@ class Settings extends Component {
 
     return (
       <div>
-        <Topnav header="Settings" className="m-b-2" />
+        <div style={{ marginBottom: '2rem' }}>
+          <Topnav header="Settings" />
+        </div>
         <div className="container">
           <SettingsForm
             enableReinitialize

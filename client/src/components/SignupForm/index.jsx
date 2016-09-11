@@ -1,7 +1,7 @@
 import React, { PropTypes, Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { css, StyleSheet } from 'aphrodite';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 import Input from '../Input';
 
 const styles = StyleSheet.create({
@@ -57,7 +57,8 @@ class SignupForm extends Component {
 
     return (
       <form
-        className="signup-form p-y-3"
+        className="signup-form"
+        style={{ padding: '2rem 0' }}
         onSubmit={handleSubmit(this.handleSubmit)}
       >
         <div className="row">

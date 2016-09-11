@@ -1,6 +1,6 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 
 const styles = StyleSheet.create({
   guide: {
@@ -35,15 +35,15 @@ const MarkdownGuide = () =>
       <tbody>
         <tr>
           <td className={css(styles.td)}># H1</td>
-          <td className={css(styles.td)}><h1 className="m-b-0">H1</h1></td>
+          <td className={css(styles.td)}><h1 style={{ marginBottom: '0' }}>H1</h1></td>
         </tr>
         <tr>
           <td className={css(styles.td)}>## H2</td>
-          <td className={css(styles.td)}><h2 className="m-b-0">H2</h2></td>
+          <td className={css(styles.td)}><h2 style={{ marginBottom: '0' }}>H2</h2></td>
         </tr>
         <tr>
           <td className={css(styles.td)}>### H3</td>
-          <td className={css(styles.td)}><h3 className="m-b-0">H3</h3></td>
+          <td className={css(styles.td)}><h3 style={{ marginBottom: '0' }}>H3</h3></td>
         </tr>
         <tr>
           <td className={css(styles.td)}>**Bold**</td>

@@ -12,7 +12,7 @@ import { newlineExtension } from './utils';
 import MarkdownGuide from '../../components/MarkdownGuide';
 import Uploader from '../../components/Uploader';
 import DeletePostModal from '../../components/DeletePostModal';
-import { colors, media } from '../../styles/variables';
+import { colors, media } from '../../styles/settings';
 
 const styles = StyleSheet.create({
   editorPanel: {
@@ -158,9 +158,9 @@ class Editor extends Component {
     const isPublished = initialValues.published;
 
     return (
-      <div className="m-b-2">
+      <div style={{ marginBottom: '1.5rem' }}>
         <form onSubmit={handleSubmit(this.handleSubmit)}>
-          <div className="text-xs-right m-b-1">
+          <div className="text-xs-right" style={{ marginBottom: '1rem' }}>
             <button type="submit" className={`btn btn-primary ${css(styles.savePostButton)}`}>
               {this.renderNewSaveButton()}
               {this.renderEditSaveButton()}
@@ -171,7 +171,10 @@ class Editor extends Component {
                   type="button"
                   className={`btn btn-primary ${css(styles.postDropdownTrigger)}`}
                 >
-                  <span className="glyphicon glyphicon-triangle-bottom" style={{ fontSize: '11px' }} />
+                  <span
+                    style={{ fontSize: '11px' }}
+                    className="glyphicon glyphicon-triangle-bottom"
+                  />
                 </button>
               </DropdownTrigger>
               <DropdownContent className="dropdown-right text-xs-left">
@@ -196,7 +199,7 @@ class Editor extends Component {
                 }
                 {existingPost &&
                   <div>
-                    <hr className="m-a-0" />
+                    <hr style={{ margin: '0' }} />
                     <button
                       type="button"
                       className="dropdown-item"

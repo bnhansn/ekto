@@ -3,10 +3,15 @@ import Dropdown, { DropdownTrigger, DropdownContent } from 'react-simple-dropdow
 import { Link } from 'react-router';
 import { css, StyleSheet } from 'aphrodite';
 import Gravatar from '../Gravatar';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 import github from './github.png';
 
 const styles = StyleSheet.create({
+  navbar: {
+    background: colors.primary,
+    borderRadius: 0,
+  },
+
   navLink: {
     color: '#fff',
     ':hover': {
@@ -64,7 +69,7 @@ class Navbar extends Component {
     const { user, isAuthenticated, isAuthenticating } = this.props;
 
     return (
-      <nav className="navbar bg-primary">
+      <nav className={`navbar ${css(styles.navbar)}`}>
         <Link
           to={isAuthenticated ? '/accounts' : '/'}
           className={`navbar-brand ${css(styles.navLink)}`}
@@ -72,7 +77,7 @@ class Navbar extends Component {
           Ekto
         </Link>
         {!isAuthenticated && !isAuthenticating &&
-          <ul className="nav navbar-nav pull-xs-right">
+          <ul className="nav navbar-nav" style={{ float: 'right' }}>
             <li className="nav-item" style={{ marginRight: '.5rem' }}>
               <a
                 target="_blank"
@@ -92,7 +97,7 @@ class Navbar extends Component {
           </ul>
         }
         {isAuthenticated &&
-          <ul className="nav navbar-nav pull-xs-right">
+          <ul className="nav navbar-nav" style={{ float: 'right' }}>
             <li className="nav-item">
               <Dropdown ref={(c) => { this.dropdown = c; }}>
                 <DropdownTrigger className={css(styles.dropdownTrigger)}>

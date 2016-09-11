@@ -9,7 +9,7 @@ import {
   PHOTO_BUCKET_ACCESS_KEY_ID,
   PHOTO_BUCKET_SECRET_ACCESS_KEY,
 } from 'config';
-import { colors } from '../../styles/variables';
+import { colors } from '../../styles/settings';
 
 const styles = StyleSheet.create({
   dropzone: {

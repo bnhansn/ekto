@@ -57,11 +57,11 @@ class PostPreview extends Component {
     const { post, accountSlug } = this.props;
 
     return (
-      <div className="m-b-1">
+      <div style={{ marginBottom: '1rem' }}>
         <div className={`card ${css(styles.previewCard)}`}>
           <div className="card-block">
             {!post.published &&
-              <span className="tag tag-default pull-xs-right">Unpublished</span>
+              <span className="tag tag-default" style={{ float: 'right' }}>Unpublished</span>
             }
             <h3>{post.title}</h3>
             <p>{excerpt(post.html)}</p>

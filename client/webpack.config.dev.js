@@ -30,7 +30,7 @@ module.exports = {
         include: path.join(__dirname, 'src'),
       },
       {
-        test: /\.scss$/,
+        test: /\.(css|scss)$/,
         loader: ExtractTextPlugin.extract([
           'css-loader',
           'sass-loader',
