@@ -2,6 +2,17 @@
 const s3 = require('s3');
 require('dotenv').config();
 
+(() => {
+  if (!process.env.REACT_APP_EKTO_API ||
+      !process.env.REACT_APP_EKTO_PHOTO_BUCKET ||
+      !process.env.REACT_APP_EKTO_PHOTO_BUCKET_REGION ||
+      !process.env.REACT_APP_EKTO_PHOTO_BUCKET_ACCESS_KEY_ID ||
+      !process.env.REACT_APP_EKTO_PHOTO_BUCKET_SECRET_ACCESS_KEY) {
+    console.error('==> 🤔  Ensure all env variables are defined before deploying');
+    process.exit(1);
+  }
+})();
+
 const client = s3.createClient({
   s3Options: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -29,5 +40,5 @@ uploader.on('progress', () => {
 });
 
 uploader.on('end', () => {
-  console.log('==> 🎉  Upload successful');
+  console.log(`==> 🎉  Upload to ${process.env.AWS_S3_BUCKET} successful`);
 });

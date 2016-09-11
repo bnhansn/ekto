@@ -6,13 +6,13 @@ import { createStore, applyMiddleware } from 'redux';
 import useScroll from 'react-router-scroll/lib/useScroll';
 import { syncHistoryWithStore, routerMiddleware } from 'react-router-redux';
 import { applyRouterMiddleware, Router, browserHistory } from 'react-router';
+import 'react-datepicker/dist/react-datepicker.css';
 import routes from './routes';
 import reducers from './reducers';
 import { authenticate, locationChange } from './containers/App/actions';
-
-require('./styles/bootstrap.css');
-require('./styles/glyphicons.css');
-require('./styles/index.css');
+import './styles/bootstrap.css';
+import './styles/glyphicons.css';
+import './styles/index.css';
 
 const routingMiddleware = routerMiddleware(browserHistory);
 
@@ -23,10 +23,8 @@ const store = createStore(
 
 const history = syncHistoryWithStore(browserHistory, store);
 
-// update location store on route changes
 history.listen(location => store.dispatch(locationChange(location)));
 
-// attempt login if token is stored
 const token = localStorage.getItem('token');
 if (token !== null) {
   store.dispatch(authenticate(JSON.parse(token)));

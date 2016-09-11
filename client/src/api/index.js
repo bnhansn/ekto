@@ -1,6 +1,7 @@
 import axios from 'axios';
-import { API_URL } from 'config'; // eslint-disable-line
 import mapKeys from 'lodash/mapKeys';
+
+const API_URL = process.env.REACT_APP_EKTO_API;
 
 const decamelize = (str) => str.split(/(?=[A-Z])/).join('_').toLowerCase();
 

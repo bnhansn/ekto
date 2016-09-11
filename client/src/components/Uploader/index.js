@@ -1,15 +1,13 @@
-/* eslint-disable import/no-unresolved, import/no-extraneous-dependencies */
 import React, { Component, PropTypes } from 'react';
 import 'aws-sdk/dist/aws-sdk';
 import Dropzone from 'react-dropzone';
 import { css, StyleSheet } from 'aphrodite';
-import {
-  PHOTO_BUCKET,
-  PHOTO_BUCKET_REGION,
-  PHOTO_BUCKET_ACCESS_KEY_ID,
-  PHOTO_BUCKET_SECRET_ACCESS_KEY,
-} from 'config';
 import { colors } from '../../styles/settings';
+
+const PHOTO_BUCKET = process.env.REACT_APP_EKTO_PHOTO_BUCKET;
+const PHOTO_BUCKET_REGION = process.env.REACT_APP_EKTO_PHOTO_BUCKET_REGION;
+const PHOTO_BUCKET_ACCESS_KEY_ID = process.env.REACT_APP_EKTO_PHOTO_BUCKET_ACCESS_KEY_ID;
+const PHOTO_BUCKET_SECRET_ACCESS_KEY = process.env.REACT_APP_EKTO_PHOTO_BUCKET_SECRET_ACCESS_KEY;
 
 const styles = StyleSheet.create({
   dropzone: {
