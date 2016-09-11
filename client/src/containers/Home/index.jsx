@@ -126,22 +126,22 @@ class Home extends Component {
           <div className="container">
             <div className="row m-b-3">
               <div className={`col-lg-3 col-sm-6 col-xs-12 ${css(styles.productFeature)}`}>
-                <i className="icon icon-laptop m-r-sm" />
+                <span className="glyphicon glyphicon-book" style={{ marginRight: '10px' }} />
                 <b>Simple to publish</b>
                 <p>Use our online editor to publish and update content anytime.</p>
               </div>
               <div className={`col-lg-3 col-sm-6 col-xs-12 ${css(styles.productFeature)}`}>
-                <i className="icon icon-file-text m-r-sm" />
+                <span className="glyphicon glyphicon-edit" style={{ marginRight: '10px' }} />
                 <b>Powerful editor</b>
                 <p>Write in markdown syntax for hassle free content formatting.</p>
               </div>
               <div className={`col-lg-3 col-sm-6 col-xs-12 ${css(styles.productFeature)}`}>
-                <i className="icon icon-database-refresh m-r-sm" />
+                <span className="glyphicon glyphicon-tasks" style={{ marginRight: '10px' }} />
                 <b>Smooth integration</b>
                 <p>Retrieve data through our api and integrate directly with your frontend.</p>
               </div>
               <div className={`col-lg-3 col-sm-6 col-xs-12 ${css(styles.productFeature)}`}>
-                <i className="icon icon-users4 m-r-sm" />
+                <span className="glyphicon glyphicon-user" style={{ marginRight: '10px' }} />
                 <b>Team support</b>
                 <p>Collaborate on blog posts with multiple users.</p>
               </div>

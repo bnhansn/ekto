@@ -40,7 +40,7 @@ const Topnav = ({ className, header, headerRoute, subheader }) =>
         </Link> :
         <h5 className={css(styles.header)}>{header}</h5>
       }
-      {subheader && <i className="icon icon-arrow-right4" style={{ margin: '0 5px' }} />}
+      {subheader && <span style={{ margin: '0 8px 0 6px', fontSize: '20px' }}>&#8250;</span>}
       {subheader && <h5 className={css(styles.header)}>{subheader}</h5>}
     </div>
   </div>;

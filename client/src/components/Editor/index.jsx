@@ -171,7 +171,7 @@ class Editor extends Component {
                   type="button"
                   className={`btn btn-primary ${css(styles.postDropdownTrigger)}`}
                 >
-                  <i className="icon icon-arrow-down5" />
+                  <span className="glyphicon glyphicon-triangle-bottom" style={{ fontSize: '11px' }} />
                 </button>
               </DropdownTrigger>
               <DropdownContent className="dropdown-right text-xs-left">
@@ -212,19 +212,22 @@ class Editor extends Component {
           <Tabs>
             <TabList className={css(styles.editorTabList)}>
               <Tab className={css(styles.editorTab)}>
-                <i className="icon icon-file-text" style={{ marginRight: '.5rem' }} />
+                <span className="glyphicon glyphicon-book" style={{ marginRight: '8px' }} />
                 <span>Write</span>
               </Tab>
               <Tab className={css(styles.editorTab)}>
-                <i className="icon icon-eye" style={{ marginRight: '.5rem' }} />
+                <span className="glyphicon glyphicon-eye-open" style={{ marginRight: '8px' }} />
                 <span>Preview</span>
               </Tab>
               <Tab className={css(styles.editorTab)}>
-                <i className="icon icon-cogs" style={{ marginRight: '.5rem' }} />
+                <span className="glyphicon glyphicon-cog" style={{ marginRight: '8px' }} />
                 <span>Settings</span>
               </Tab>
               <Tab className={css(styles.editorTab)}>
-                <i className="icon icon-map4" style={{ marginRight: '.5rem' }} />
+                <span
+                  className="glyphicon glyphicon-question-sign"
+                  style={{ marginRight: '8px' }}
+                />
                 <span>Guide</span>
               </Tab>
             </TabList>

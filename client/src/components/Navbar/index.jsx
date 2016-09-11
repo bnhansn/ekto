@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { css, StyleSheet } from 'aphrodite';
 import Gravatar from '../Gravatar';
 import { colors } from '../../styles/variables';
+import github from './github.png';
 
 const styles = StyleSheet.create({
   navLink: {
@@ -31,8 +32,7 @@ const styles = StyleSheet.create({
   },
 
   dropdownIcon: {
-    marginRight: '.75rem',
-    fontSize: '16px',
+    marginRight: '.5rem',
   },
 
   loginButton: {
@@ -73,14 +73,15 @@ class Navbar extends Component {
         </Link>
         {!isAuthenticated && !isAuthenticating &&
           <ul className="nav navbar-nav pull-xs-right">
-            <li className="nav-item m-r-sm">
+            <li className="nav-item" style={{ marginRight: '.5rem' }}>
               <a
                 target="_blank"
                 rel="noopener noreferrer"
+                style={{ padding: '4px 0' }}
                 href="https://github.com/bnhansn/ekto/"
                 className={`nav-link ${css(styles.navLink)}`}
               >
-                <i className="icon icon-github" style={{ fontSize: '1.5rem' }} />
+                <img src={github} alt="github" style={{ width: '24px' }} />
               </a>
             </li>
             <li className="nav-item">
@@ -95,7 +96,7 @@ class Navbar extends Component {
             <li className="nav-item">
               <Dropdown ref={(c) => { this.dropdown = c; }}>
                 <DropdownTrigger className={css(styles.dropdownTrigger)}>
-                  <i className={`icon icon-menu7 ${css(styles.dropdownIcon)}`} />
+                  <div style={{ marginRight: '.75rem', fontSize: '18px' }}>&#9776;</div>
                   <Gravatar
                     size={30}
                     className="img-circle"
@@ -108,7 +109,7 @@ class Navbar extends Component {
                     className="dropdown-item"
                     onClick={() => this.dropdown.hide()}
                   >
-                    <i className={`icon icon-database2 ${css(styles.dropdownIcon)}`} />
+                    <span className={`glyphicon glyphicon-dashboard ${css(styles.dropdownIcon)}`} />
                     <span>Dashboard</span>
                   </Link>
                   <Link
@@ -116,14 +117,14 @@ class Navbar extends Component {
                     className="dropdown-item"
                     onClick={() => this.dropdown.hide()}
                   >
-                    <i className={`icon icon-equalizer2 ${css(styles.dropdownIcon)}`} />
+                    <span className={`glyphicon glyphicon-tasks ${css(styles.dropdownIcon)}`} />
                     <span>Settings</span>
                   </Link>
                   <button
                     className="dropdown-item"
                     onClick={this.handleLogoutClick}
                   >
-                    <i className={`icon icon-exit ${css(styles.dropdownIcon)}`} />
+                    <span className={`glyphicon glyphicon-log-out ${css(styles.dropdownIcon)}`} />
                     <span>Logout</span>
                   </button>
                 </DropdownContent>

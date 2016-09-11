@@ -38,7 +38,7 @@ class TeamMember extends Component {
                 onClick={this.handleRemoveClick}
                 disabled={ownerId === teamMember.id}
               >
-                <i className="icon icon-cross3" style={{ marginRight: '4px' }} />
+                <span style={{ marginRight: '4px' }}>&times;</span>
                 <span>Remove</span>
               </button>
             </div>

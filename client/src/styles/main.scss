@@ -3,10 +3,9 @@
 'vendor/bootstrap/bootstrap',
 'vendor/react-datepicker/datepicker';
 
-@import
-'base/fonts',
-'base/utilities',
-'base/typography';
+@import 'base/typography';
+
+@import './glyphicons';
 
 @import
 'objects/buttons',

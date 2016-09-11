@@ -13,9 +13,9 @@ class PagerLink extends Component {
 
     let icon;
     if (direction === 'prev') {
-      icon = <i className="icon icon-arrow-left2" />;
+      icon = <span style={{ fontSize: '20px', lineHeight: '1' }}>&lt;</span>;
     } else {
-      icon = <i className="icon icon-arrow-right2" />;
+      icon = <span style={{ fontSize: '20px', lineHeight: '1' }}>&gt;</span>;
     }
 
     const classes = classnames({

@@ -91,7 +91,8 @@ class Team extends Component {
             className="btn btn-secondary m-b-1"
             onClick={() => this.setState({ inviteFormOpen: !inviteFormOpen })}
           >
-            <i className={`icon icon-${inviteFormOpen ? 'minus3' : 'plus3'}`} />
+            {!inviteFormOpen && <span style={{ fontSize: '20px', lineHeight: '1' }}>&#43;</span>}
+            {inviteFormOpen && <span style={{ fontSize: '20px', lineHeight: '1' }}>&#8722;</span>}
           </button>
         }
         {inviteFormOpen &&

@@ -65,7 +65,7 @@ const MarkdownGuide = () =>
         </tr>
         <tr>
           <td className={css(styles.td)}>![alt](http://)</td>
-          <td className={css(styles.td)}><i className="icon icon-image5 m-r-sm" />Image</td>
+          <td className={css(styles.td)}><i className="glyphicon glyphicon-picture" />Image</td>
         </tr>
         <tr>
           <td className={css(styles.td)}>* List item</td>

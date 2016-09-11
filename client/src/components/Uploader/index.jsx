@@ -105,7 +105,7 @@ class Uploader extends Component {
               className={`btn ${css(styles.deleteButton)}`}
               onClick={this.handleImageDelete}
             >
-              <i className="icon icon-bin2" />
+              <span className="glyphicon glyphicon-trash" />
             </button>
           </div>
         }

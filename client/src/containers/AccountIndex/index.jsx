@@ -40,7 +40,7 @@ class AccountIndex extends Component {
         key={account.id}
         to={`/accounts/${account.slug}`}
         className="list-group-item list-group-item-action"
-        style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+        style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}
       >
         <div
           style={{
@@ -58,8 +58,6 @@ class AccountIndex extends Component {
           {account.name.charAt(0)}
         </div>
         <span>{account.name}</span>
-        <div style={{ flexGrow: '1' }} />
-        <i className="icon icon-arrow-right2" />
       </Link>
     );
   }
@@ -86,7 +84,8 @@ class AccountIndex extends Component {
             className="btn btn-secondary m-b-1"
             onClick={() => this.setState({ accountFormOpen: !accountFormOpen })}
           >
-            <i className={`icon icon-${accountFormOpen ? 'minus3' : 'plus3'}`} />
+            {!accountFormOpen && <span style={{ fontSize: '20px', lineHeight: '1' }}>&#43;</span>}
+            {accountFormOpen && <span style={{ fontSize: '20px', lineHeight: '1' }}>&#8722;</span>}
           </button>
           {accountFormOpen &&
             <NewAccountForm

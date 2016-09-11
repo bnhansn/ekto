@@ -27,11 +27,8 @@ class DeletePostModal extends Component {
         overlayClassName="modal-overlay"
       >
         <div className="modal-header">
+          <span className="modal-close" onClick={onRequestClose}>&times;</span>
           <h6 className="text-primary">Delete post</h6>
-          <i
-            className="modal-close"
-            onClick={onRequestClose}
-          />
         </div>
         <div className="modal-content">
           <p>Are you sure you want to permanently delete this post?</p>

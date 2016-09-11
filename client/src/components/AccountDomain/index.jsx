@@ -17,7 +17,7 @@ class AccountDomain extends Component {
           <input className="form-control" readOnly value={domain.host} />
           <div className="input-group-btn">
             <button className="btn btn-secondary" onClick={this.handleDelete}>
-              <i className="icon icon-bin" />
+              <span className="glyphicon glyphicon-trash" />
             </button>
           </div>
         </div>

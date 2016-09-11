@@ -34,8 +34,8 @@ class UserSearchResult extends Component {
 
     return (
       <div key={user.id} className={className}>
-        <Gravatar email={user.email || ''} size={30} className="img-rounded m-r-sm" />
-        <span style={{ marginRight: '4px' }}>{user.name}</span>
+        <Gravatar email={user.email || ''} size={30} className="img-rounded" />
+        <span style={{ marginRight: '4px', marginLeft: '10px' }}>{user.name}</span>
         <span className="small text-muted">{user.email}</span>
         {isCurrentMember && <span className="small" style={{ marginLeft: '4px' }}>(joined)</span>}
         <div style={{ flexGrow: '1' }} />

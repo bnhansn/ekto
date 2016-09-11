@@ -71,9 +71,9 @@ const Alert = (props) => {
   const { alert: { klass, icon, message } } = props;
   const iconClass = classnames({
     notification2: icon === 'notification' || (!icon && klass === 'warning'),
-    warning2: icon === 'warning' || ((!icon && klass === 'danger') || !klass),
-    info2: icon === 'info' || (!icon && includes(['primary', 'info'], klass)),
-    checkmark: icon === 'checkmark' || (!icon && includes(['success', 'white', 'black'], klass)),
+    'warning-sign': icon === 'warning' || ((!icon && klass === 'danger') || !klass),
+    'info-sign': icon === 'info' || (!icon && includes(['primary', 'info'], klass)),
+    ok: icon === 'checkmark' || (!icon && includes(['success', 'white', 'black'], klass)),
   });
 
   const alertClass = css(
@@ -96,10 +96,10 @@ const Alert = (props) => {
       className={alertClass}
       onClick={props.onClick}
     >
-      <i className={`icon icon-${iconClass}`} style={{ marginRight: '.75rem' }} />
+      <i className={`glyphicon glyphicon-${iconClass}`} style={{ marginRight: '.75rem' }} />
       {message || 'Unknown error'}
       <div style={{ flexGrow: 1 }} />
-      <i className={`icon icon-cross ${closeClass}`} />
+      <i className={`glyphicon glyphicon-remove ${closeClass}`} />
     </div>
   );
 };

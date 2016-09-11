@@ -66,7 +66,7 @@ class PostPreview extends Component {
             <h3>{post.title}</h3>
             <p>{excerpt(post.html)}</p>
             <span className="text-muted">
-              <i className="icon icon-clock" style={{ marginRight: '.5rem' }} />
+              <span className="glyphicon glyphicon-time" style={{ marginRight: '.5rem' }} />
               <span>{moment(post.publishedAt).fromNow()}</span>
             </span>
           </div>
@@ -76,14 +76,14 @@ class PostPreview extends Component {
             to={`/accounts/${accountSlug}/posts/${post.id}`}
             className={`btn btn-secondary ${css(styles.button)}`}
           >
-            <i className="icon icon-pencil" style={{ marginRight: '.5rem' }} />
+            <span className="glyphicon glyphicon-pencil" style={{ marginRight: '.5rem' }} />
             <span>Edit</span>
           </Link>
           <button
             className={`btn btn-secondary ${css(styles.button)}`}
             onClick={() => this.setState({ deleteModalOpen: true })}
           >
-            <i className="icon icon-bin" style={{ marginRight: '.5rem' }} />
+            <span className="glyphicon glyphicon-trash" style={{ marginRight: '.5rem' }} />
             <span>Delete</span>
           </button>
         </div>
