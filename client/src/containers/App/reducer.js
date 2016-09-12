@@ -1,4 +1,7 @@
 import {
+  LOGIN_START,
+  LOGIN_ERROR,
+  LOGIN_SUCCESS,
   LOGOUT_SUCCESS,
   LOCATION_CHANGE,
   AUTHENTICATION_START,
@@ -11,12 +14,30 @@ const initialState = {
   user: {},
   clients: [],
   location: {},
+  isLoggingIn: false,
   isAuthenticated: false,
   isAuthenticating: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case LOGIN_START:
+      return {
+        ...state,
+        isLoggingIn: true,
+      };
+    case LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoggingIn: false,
+        isAuthenticated: true,
+        user: action.payload.data,
+      };
+    case LOGIN_ERROR:
+      return {
+        ...state,
+        isLoggingIn: false,
+      };
     case AUTHENTICATION_START:
       return {
         ...state,

@@ -1,8 +1,18 @@
 import React, { PropTypes } from 'react';
+import { css, StyleSheet } from 'aphrodite';
+import { colors } from '../../styles/settings';
 
-const Callout = ({ klass, children }) =>
+const styles = StyleSheet.create({
+  callout: {
+    padding: '10px 15px',
+    color: '#fff',
+    background: colors.info,
+  },
+});
+
+const Callout = ({ children }) =>
   <div className="card media">
-    <div className={`bg-${klass} media-left`} style={{ padding: '10px 15px', color: '#fff' }}>
+    <div className={`${css(styles.callout)} media-left`}>
       <i className="glyphicon glyphicon-info-sign" />
     </div>
     <div className="media-body" style={{ padding: '10px' }}>
@@ -11,7 +21,6 @@ const Callout = ({ klass, children }) =>
   </div>;
 
 Callout.propTypes = {
-  klass: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 

@@ -14,13 +14,13 @@ export function authenticate(WrappedComponent) {
 
     componentWillMount() {
       if (!this.props.isAuthenticating && !this.props.isAuthenticated) {
-        this.context.router.push('/login');
+        this.context.router.push('/');
       }
     }
 
     componentWillReceiveProps(nextProps) {
       if (!nextProps.isAuthenticating && !nextProps.isAuthenticated) {
-        this.context.router.push('/login');
+        this.context.router.push('/');
       }
     }
 

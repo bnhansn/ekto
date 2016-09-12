@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: '50%',
   },
 
-  appExampleSection: {
+  demo: {
     padding: '75px 0',
     fontSize: '1.25rem',
     textAlign: 'center',
@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
 class Home extends Component {
   static propTypes = {
     signup: PropTypes.func.isRequired,
-    isSubmitting: PropTypes.bool.isRequired,
+    isSigningUp: PropTypes.bool.isRequired,
   };
 
   handleSubmit = (data) => this.props.signup(data);
 
   render() {
-    const { isSubmitting } = this.props;
+    const { isSigningUp } = this.props;
 
     return (
       <div>
@@ -110,7 +110,7 @@ class Home extends Component {
               <p>A blogging microservice</p>
               <p>Publish on our platform and fetch through a simple api</p>
             </div>
-            <SignupForm isSubmitting={isSubmitting} onSubmit={this.handleSubmit} />
+            <SignupForm isSubmitting={isSigningUp} onSubmit={this.handleSubmit} />
           </div>
         </div>
         <div style={{ padding: '2rem 0' }}>
@@ -182,10 +182,10 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <div className={css(styles.appExampleSection)}>
+        <div className={css(styles.demo)}>
           <div className="container">
             <p>
-              💁&nbsp;&nbsp;How do I use Ekto on my website?&nbsp;
+              <span style={{ marginRight: '10px' }}>💁</span>How do I use Ekto on my website?&nbsp;
               <a href="https://github.com/bnhansn/ava">Check out an example React app</a> and&nbsp;
               <a href="http://demo.ekto.tech">view the online demo</a>.
             </p>
@@ -203,7 +203,7 @@ class Home extends Component {
 
 export default connect(
   state => ({
-    isSubmitting: state.signup.isSubmitting,
+    isSigningUp: state.home.isSigningUp,
   }),
   { signup }
 )(Home);

@@ -75,7 +75,7 @@ class AccountIndex extends Component {
         <div className="container">
           {isLoading && !accounts.length && <div className="loader" />}
           {noAccounts &&
-            <Callout klass="primary">
+            <Callout>
               <p>Create an account with the icon below to get started</p>
             </Callout>
           }

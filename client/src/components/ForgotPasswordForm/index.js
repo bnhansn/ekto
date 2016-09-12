@@ -33,7 +33,7 @@ class ForgotPasswordForm extends Component {
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
-            <Link to="/login" className="btn btn-link">Cancel</Link>
+            <Link to="/" className="btn btn-link">Cancel</Link>
           </div>
         </div>
       </form>

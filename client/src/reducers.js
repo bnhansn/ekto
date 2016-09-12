@@ -5,7 +5,6 @@ import appReducer from './containers/App/reducer';
 import teamReducer from './containers/Team/reducer';
 import homeReducer from './containers/Home/reducer';
 import alertReducer from './containers/Alert/reducer';
-import loginReducer from './containers/Login/reducer';
 import postNewReducer from './containers/PostNew/reducer';
 import accountReducer from './containers/Account/reducer';
 import postsReducer from './containers/PostIndex/reducer';
@@ -20,10 +19,9 @@ const reducers = combineReducers({
   app: appReducer,
   team: teamReducer,
   form: formReducer,
+  home: homeReducer,
   posts: postsReducer,
   alert: alertReducer,
-  login: loginReducer,
-  signup: homeReducer,
   routing: routerReducer,
   account: accountReducer,
   postNew: postNewReducer,

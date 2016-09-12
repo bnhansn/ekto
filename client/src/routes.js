@@ -3,7 +3,6 @@ import { Route, IndexRoute, IndexRedirect } from 'react-router';
 import App from './containers/App';
 import Home from './containers/Home';
 import Team from './containers/Team';
-import Login from './containers/Login';
 import PostIndex from './containers/PostIndex';
 import NotFound from './pages/NotFound';
 import Account from './containers/Account';
@@ -20,7 +19,6 @@ import { redirectAuthenticated } from './containers/RedirectWrapper';
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={redirectAuthenticated(Home)} />
-    <Route path="/login" component={redirectAuthenticated(Login)} />
     <Route path="/forgot" component={redirectAuthenticated(ForgotPassword)} />
     <Route path="/reset/:token" component={redirectAuthenticated(ResetPassword)} />
 

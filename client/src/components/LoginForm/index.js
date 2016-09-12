@@ -5,8 +5,9 @@ import Input from '../Input';
 
 class LoginForm extends Component {
   static propTypes = {
-    handleSubmit: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
+    onLinkClick: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
   };
 
@@ -16,26 +17,19 @@ class LoginForm extends Component {
     const { handleSubmit, isSubmitting } = this.props;
 
     return (
-      <form
-        onSubmit={handleSubmit(this.handleSubmit)}
-        style={{ maxWidth: '400px', margin: '0 auto', padding: '1rem 0' }}
-      >
-        <div className="card">
-          <div className="card-header">
-            Login
-          </div>
-          <div className="card-block">
-            <Field name="email" type="text" component={Input} placeholder="Email" />
-            <Field name="password" type="password" component={Input} placeholder="Password" />
-            <button
-              type="submit"
-              className="btn btn-primary"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? 'Logging in...' : 'Login'}
-            </button>
-            <Link to="/forgot" className="btn btn-link">Forgot password</Link>
-          </div>
+      <form onSubmit={handleSubmit(this.handleSubmit)} style={{ padding: '10px 15px' }}>
+        <Field name="email" type="text" component={Input} placeholder="Email" />
+        <Field name="password" type="password" component={Input} placeholder="Password" />
+        <button
+          type="submit"
+          disabled={isSubmitting}
+          style={{ marginBottom: '5px' }}
+          className="btn btn-block btn-primary"
+        >
+          {isSubmitting ? 'Logging in...' : 'Login'}
+        </button>
+        <div style={{ textAlign: 'right' }}>
+          <small><Link to="/forgot" onClick={this.props.onLinkClick}>Forgot password?</Link></small>
         </div>
       </form>
     );

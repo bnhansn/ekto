@@ -5,6 +5,7 @@ import { css, StyleSheet } from 'aphrodite';
 import Gravatar from '../Gravatar';
 import { colors } from '../../styles/settings';
 import github from './github.png';
+import LoginForm from '../../components/LoginForm';
 
 const styles = StyleSheet.create({
   navbar: {
@@ -58,15 +59,19 @@ const styles = StyleSheet.create({
 class Navbar extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
+    isLoggingIn: PropTypes.bool.isRequired,
+    onLoginSubmit: PropTypes.func.isRequired,
     onLogoutClick: PropTypes.func.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
     isAuthenticating: PropTypes.bool.isRequired,
   };
 
+  handleLoginSubmit = (data) => this.props.onLoginSubmit(data);
+
   handleLogoutClick = () => this.props.onLogoutClick();
 
   render() {
-    const { user, isAuthenticated, isAuthenticating } = this.props;
+    const { user, isAuthenticated, isAuthenticating, isLoggingIn } = this.props;
 
     return (
       <nav className={`navbar ${css(styles.navbar)}`}>
@@ -90,16 +95,27 @@ class Navbar extends Component {
               </a>
             </li>
             <li className="nav-item">
-              <Link to="/login" className={`btn nav-link ${css(styles.loginButton)}`}>
-                Login
-              </Link>
+              <Dropdown ref={(c) => { this.loginDropdown = c; }}>
+                <DropdownTrigger style={{ textDecoration: 'none' }}>
+                  <button type="button" className={`btn nav-link ${css(styles.loginButton)}`}>
+                    Login
+                  </button>
+                </DropdownTrigger>
+                <DropdownContent style={{ right: '0', width: '225px' }}>
+                  <LoginForm
+                    isSubmitting={isLoggingIn}
+                    onSubmit={this.handleLoginSubmit}
+                    onLinkClick={() => this.loginDropdown.hide()}
+                  />
+                </DropdownContent>
+              </Dropdown>
             </li>
           </ul>
         }
         {isAuthenticated &&
           <ul className="nav navbar-nav" style={{ float: 'right' }}>
             <li className="nav-item">
-              <Dropdown ref={(c) => { this.dropdown = c; }}>
+              <Dropdown ref={(c) => { this.userDropdown = c; }}>
                 <DropdownTrigger className={css(styles.dropdownTrigger)}>
                   <div style={{ marginRight: '.75rem', fontSize: '18px' }}>&#9776;</div>
                   <Gravatar
@@ -112,7 +128,7 @@ class Navbar extends Component {
                   <Link
                     to="/accounts"
                     className="dropdown-item"
-                    onClick={() => this.dropdown.hide()}
+                    onClick={() => this.userDropdown.hide()}
                   >
                     <span className={`glyphicon glyphicon-dashboard ${css(styles.dropdownIcon)}`} />
                     <span>Dashboard</span>
@@ -120,7 +136,7 @@ class Navbar extends Component {
                   <Link
                     to="/settings"
                     className="dropdown-item"
-                    onClick={() => this.dropdown.hide()}
+                    onClick={() => this.userDropdown.hide()}
                   >
                     <span className={`glyphicon glyphicon-tasks ${css(styles.dropdownIcon)}`} />
                     <span>Settings</span>

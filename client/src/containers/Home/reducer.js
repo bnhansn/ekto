@@ -5,7 +5,7 @@ import {
 } from './constants';
 
 const initialState = {
-  isSubmitting: false,
+  isSigningUp: false,
 };
 
 export default function (state = initialState, action) {
@@ -13,17 +13,17 @@ export default function (state = initialState, action) {
     case SIGNUP_START:
       return {
         ...state,
-        isSubmitting: true,
+        isSigningUp: true,
       };
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        isSubmitting: false,
+        isSigningUp: false,
       };
     case SIGNUP_ERROR:
       return {
         ...state,
-        isSubmitting: false,
+        isSigningUp: false,
       };
     default:
       return state;

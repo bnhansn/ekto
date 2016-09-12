@@ -1,10 +1,10 @@
 import { push } from 'react-router-redux';
+import api from '../../api';
 import {
   FORGOT_PASSWORD_START,
   FORGOT_PASSWORD_ERROR,
   FORGOT_PASSWORD_SUCCESS,
 } from './constants';
-import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
 
 export function forgotPassword(data) {
@@ -13,7 +13,7 @@ export function forgotPassword(data) {
     api.post('/forgot', data)
       .then(() => {
         dispatch({ type: FORGOT_PASSWORD_SUCCESS });
-        dispatch(push('/login'));
+        dispatch(push('/'));
         dispatch({
           type: SHOW_ALERT,
           klass: 'info',

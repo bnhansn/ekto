@@ -45,8 +45,8 @@ const styles = StyleSheet.create({
 
 class SignupForm extends Component {
   static propTypes = {
-    handleSubmit: PropTypes.func,
     onSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
   };
 
