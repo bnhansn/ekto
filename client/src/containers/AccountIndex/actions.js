@@ -20,7 +20,7 @@ export function fetchAccounts() {
       .catch(error => {
         dispatch({ type: FETCH_ACCOUNTS_ERROR });
         const message = api.parseError(error, 'Error retrieving accounts');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
@@ -36,7 +36,7 @@ export function createAccount(data) {
       .catch(error => {
         dispatch({ type: CREATE_ACCOUNT_ERROR });
         const message = api.parseError(error, 'Error creating account');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

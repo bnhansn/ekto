@@ -17,7 +17,7 @@ export function fetchPosts(accountSlug, params) {
       .catch(error => {
         dispatch({ type: FETCH_POSTS_ERROR });
         const message = api.parseError(error, 'Error retrieving posts');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
@@ -27,7 +27,7 @@ export function deletePost(accountSlug, id) {
     api.delete(`/accounts/${accountSlug}/posts/${id}`)
       .then(response => {
         dispatch({ type: DELETE_POST_SUCCESS, payload: response });
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Post deleted' } });
+        dispatch({ type: SHOW_ALERT, klass: 'white', message: 'Post deleted' });
       });
   };
 }

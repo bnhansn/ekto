@@ -5,7 +5,7 @@ import Alert from '../../components/Alert';
 
 class AlertContainer extends Component {
   componentWillReceiveProps(newProps) {
-    const { alert: { visible }, location: { pathname } } = this.props;
+    const { visible, location: { pathname } } = this.props;
     const newPathname = newProps.location.pathname;
 
     if (visible && pathname !== newPathname) {
@@ -16,21 +16,27 @@ class AlertContainer extends Component {
   handleClick = () => this.props.hideAlert();
 
   render() {
-    const { alert: { visible } } = this.props;
+    const { visible } = this.props;
 
     return visible ? <Alert {...this.props} onClick={this.handleClick} /> : null;
   }
 }
 
 AlertContainer.propTypes = {
-  alert: PropTypes.object.isRequired,
+  icon: PropTypes.string,
+  visible: PropTypes.bool.isRequired,
+  klass: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
   hideAlert: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired,
 };
 
 export default connect(
   state => ({
-    alert: state.alert,
+    icon: state.alert.icon,
+    klass: state.alert.klass,
+    message: state.alert.message,
+    visible: state.alert.visible,
     location: state.app.location,
   }),
   { hideAlert }

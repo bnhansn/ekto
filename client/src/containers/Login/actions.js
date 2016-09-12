@@ -27,7 +27,7 @@ export function login(data) {
         dispatch({ type: LOGIN_ERROR });
         dispatch({ type: AUTHENTICATION_ERROR });
         const message = api.parseError(error, 'Error logging in');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

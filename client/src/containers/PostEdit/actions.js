@@ -42,11 +42,11 @@ export function deletePost(accountSlug, id) {
     api.delete(`/accounts/${accountSlug}/posts/${id}`)
       .then(() => {
         dispatch(push(`/accounts/${accountSlug}/posts`));
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Post deleted' } });
+        dispatch({ type: SHOW_ALERT, klass: 'white', message: 'Post deleted' });
       })
       .catch(error => {
         const message = api.parseError(error, 'Error deleting post');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

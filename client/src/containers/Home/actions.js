@@ -21,7 +21,7 @@ export function signup(data) {
       .catch(error => {
         dispatch({ type: SIGNUP_ERROR });
         const message = api.parseError(error, 'Error signing up');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

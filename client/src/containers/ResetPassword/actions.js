@@ -17,13 +17,14 @@ export function resetPassword(data) {
         dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
         dispatch({
           type: SHOW_ALERT,
-          alert: { klass: 'success', message: 'Your password has been updated' },
+          klass: 'success',
+          message: 'Your password has been updated',
         });
       })
       .catch(error => {
         dispatch({ type: RESET_PASSWORD_ERROR });
         const message = api.parseError(error, 'Error resetting password');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

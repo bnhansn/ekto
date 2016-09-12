@@ -16,16 +16,14 @@ export function forgotPassword(data) {
         dispatch(push('/login'));
         dispatch({
           type: SHOW_ALERT,
-          alert: {
-            klass: 'info',
-            message: 'Please check your email for a password reset link',
-          },
+          klass: 'info',
+          message: 'Please check your email for a password reset link',
         });
       })
       .catch(error => {
         dispatch({ type: FORGOT_PASSWORD_ERROR });
         const message = api.parseError(error, 'Error resetting password');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

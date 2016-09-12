@@ -1,18 +1,21 @@
 import { SHOW_ALERT, HIDE_ALERT } from './constants';
 
-const initialState = { klass: '', message: '', visible: false };
+const initialState = { klass: '', message: '', icon: '', visible: false };
 
 export default function (state = initialState, action) {
   switch (action.type) {
     case SHOW_ALERT:
       return {
         ...state,
-        ...action.alert,
         visible: true,
+        icon: action.icon,
+        klass: action.klass,
+        message: action.message,
       };
     case HIDE_ALERT:
       return {
         ...state,
+        icon: '',
         klass: '',
         message: '',
         visible: false,

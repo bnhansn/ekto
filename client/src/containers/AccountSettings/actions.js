@@ -21,12 +21,12 @@ export function updateAccount(id, data) {
         dispatch({ type: UPDATE_ACCOUNT_SUCCESS, payload: response });
         // need to update slug in url if it changed
         dispatch(push(`/accounts/${accountSlug}/settings`));
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Account updated' } });
+        dispatch({ type: SHOW_ALERT, klass: 'white', message: 'Account updated' });
       })
       .catch(error => {
         dispatch({ type: UPDATE_ACCOUNT_ERROR });
         const message = api.parseError(error, 'Error updating account');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
@@ -51,7 +51,7 @@ export function createDomain(id, data) {
       .catch(error => {
         dispatch({ type: CREATE_DOMAIN_ERROR });
         const message = api.parseError(error, 'Error creating domain');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
@@ -73,12 +73,13 @@ export function deleteAccount(accountId) {
         dispatch(push('/accounts'));
         dispatch({
           type: SHOW_ALERT,
-          alert: { klass: 'white', message: `Account ${accountName} has been deleted` },
+          klass: 'white',
+          message: `Account ${accountName} has been deleted`,
         });
       })
       .catch(error => {
         const message = api.parseError(error, 'Error deleting account');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

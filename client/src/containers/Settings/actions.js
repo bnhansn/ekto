@@ -14,12 +14,12 @@ export function updateSettings(id, data) {
       .then(response => {
         dispatch({ type: UPDATE_SETTINGS_SUCCESS, payload: response });
         dispatch(reset('settings'));
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Account updated' } });
+        dispatch({ type: SHOW_ALERT, klass: 'white', message: 'Account updated' });
       })
       .catch(error => {
         dispatch({ type: UPDATE_SETTINGS_ERROR });
         const message = api.parseError(error, 'Error updating account');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }

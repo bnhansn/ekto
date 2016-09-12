@@ -1,6 +1,5 @@
-import classnames from 'classnames';
-import includes from 'lodash/includes';
 import React, { PropTypes } from 'react';
+import includes from 'lodash/includes';
 import { css, StyleSheet } from 'aphrodite';
 import { colors } from '../../styles/settings';
 
@@ -68,13 +67,20 @@ const styles = StyleSheet.create({
 });
 
 const Alert = (props) => {
-  const { alert: { klass, icon, message } } = props;
-  const iconClass = classnames({
-    notification2: icon === 'notification' || (!icon && klass === 'warning'),
-    'warning-sign': icon === 'warning' || ((!icon && klass === 'danger') || !klass),
-    'info-sign': icon === 'info' || (!icon && includes(['primary', 'info'], klass)),
-    ok: icon === 'checkmark' || (!icon && includes(['success', 'white', 'black'], klass)),
-  });
+  const { klass, icon, message } = props;
+  let iconClass;
+  if (icon === 'notification' || (!icon && klass === 'warning')) {
+    iconClass = 'notification2';
+  }
+  if (icon === 'warning' || ((!icon && klass === 'danger') || !klass)) {
+    iconClass = 'warning-sign';
+  }
+  if (icon === 'info' || (!icon && includes(['primary', 'info'], klass))) {
+    iconClass = 'info-sign';
+  }
+  if (icon === 'checkmark' || (!icon && includes(['success', 'white', 'black'], klass))) {
+    iconClass = 'ok';
+  }
 
   const alertClass = css(
     styles.alert,
@@ -105,7 +111,9 @@ const Alert = (props) => {
 };
 
 Alert.propTypes = {
-  alert: PropTypes.object.isRequired,
+  icon: PropTypes.string,
+  klass: PropTypes.string.isRequired,
+  message: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
 };
 

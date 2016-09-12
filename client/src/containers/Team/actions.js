@@ -38,7 +38,7 @@ export function inviteNewUser(accountId, data) {
       .catch(error => {
         dispatch({ type: INVITE_NEW_USER_ERROR });
         const message = api.parseError(error, 'Error inviting user');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
@@ -53,7 +53,7 @@ export function inviteExistingUser(accountId, data) {
       .catch(error => {
         dispatch({ type: INVITE_EXISTING_USER_ERROR });
         const message = api.parseError(error, 'Error inviting user');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
@@ -63,11 +63,11 @@ export function removeTeamMember(accountId, userId) {
     api.post(`/accounts/${accountId}/team/remove`, { userId })
       .then(response => {
         dispatch({ type: REMOVE_TEAM_MEMBER_SUCCESS, payload: response });
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'User removed' } });
+        dispatch({ type: SHOW_ALERT, klass: 'white', message: 'User removed' });
       })
       .catch(error => {
         const message = api.parseError(error, 'Error removing user');
-        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
+        dispatch({ type: SHOW_ALERT, klass: 'danger', message });
       });
   };
 }
