@@ -1,5 +1,6 @@
 import axios from 'axios';
 import mapKeys from 'lodash/mapKeys';
+import get from 'lodash/get';
 
 const API_URL = process.env.REACT_APP_EKTO_API;
 
@@ -48,5 +49,9 @@ export default {
       { headers: { Authorization: `Bearer ${token()}` } })
       .then(response => response)
       .catch(error => error.response);
+  },
+
+  parseError(response, defaultMessage) {
+    return get(response, 'data.errors[0].message', defaultMessage);
   },
 };

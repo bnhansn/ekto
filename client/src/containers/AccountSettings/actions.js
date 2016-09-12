@@ -11,7 +11,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function updateAccount(id, data) {
   return dispatch => {
@@ -26,7 +26,7 @@ export function updateAccount(id, data) {
           dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Account updated' } });
         } else {
           dispatch({ type: UPDATE_ACCOUNT_ERROR });
-          const message = parseError(response, 'Error updating account');
+          const message = api.parseError(response, 'Error updating account');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
@@ -54,7 +54,7 @@ export function createDomain(id, data) {
           dispatch(reset('createDomain'));
         } else {
           dispatch({ type: CREATE_DOMAIN_ERROR });
-          const message = parseError(response, 'Error creating domain');
+          const message = api.parseError(response, 'Error creating domain');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
@@ -84,7 +84,7 @@ export function deleteAccount(accountId) {
             alert: { klass: 'white', message: `Account ${accountName} has been deleted` },
           });
         } else {
-          const message = parseError(response, 'Error deleting account');
+          const message = api.parseError(response, 'Error deleting account');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });

@@ -6,7 +6,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function forgotPassword(data) {
   return dispatch => {
@@ -24,7 +24,7 @@ export function forgotPassword(data) {
             },
           });
         } else {
-          const message = parseError(response, 'Error resetting password');
+          const message = api.parseError(response, 'Error resetting password');
           dispatch({ type: FORGOT_PASSWORD_ERROR });
           dispatch({
             type: SHOW_ALERT,

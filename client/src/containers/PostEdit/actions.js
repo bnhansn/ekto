@@ -9,7 +9,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function fetchPost(accountSlug, id) {
   return dispatch => {
@@ -48,7 +48,7 @@ export function deletePost(accountSlug, id) {
           dispatch(push(`/accounts/${accountSlug}/posts`));
           dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Post deleted' } });
         } else {
-          const message = parseError(response, 'Error deleting post');
+          const message = api.parseError(response, 'Error deleting post');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });

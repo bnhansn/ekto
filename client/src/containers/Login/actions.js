@@ -11,7 +11,7 @@ import {
 } from '../App/constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function login(data) {
   return dispatch => {
@@ -25,13 +25,10 @@ export function login(data) {
           dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
           dispatch(push('/accounts'));
         } else {
-          const message = parseError(response, 'Error logging in');
+          const message = api.parseError(response, 'Error logging in');
           dispatch({ type: LOGIN_ERROR });
           dispatch({ type: AUTHENTICATION_ERROR });
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'danger', message },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
   };

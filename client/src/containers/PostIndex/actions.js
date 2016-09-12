@@ -6,7 +6,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function fetchPosts(accountSlug, params) {
   return dispatch => {
@@ -17,7 +17,7 @@ export function fetchPosts(accountSlug, params) {
           dispatch({ type: FETCH_POSTS_SUCCESS, payload: response });
         } else {
           dispatch({ type: FETCH_POSTS_ERROR });
-          const message = parseError(response, 'Error retrieving posts');
+          const message = api.parseError(response, 'Error retrieving posts');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });

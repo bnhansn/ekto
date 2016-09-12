@@ -6,7 +6,7 @@ import {
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
 import { AUTHENTICATION_SUCCESS } from '../App/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function resetPassword(data) {
   return dispatch => {
@@ -22,12 +22,9 @@ export function resetPassword(data) {
             alert: { klass: 'success', message: 'Your password has been updated' },
           });
         } else {
-          const message = parseError(response, 'Error resetting password');
+          const message = api.parseError(response, 'Error resetting password');
           dispatch({ type: RESET_PASSWORD_ERROR });
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'danger', message },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
   };

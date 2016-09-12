@@ -6,7 +6,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function updateSettings(id, data) {
   return dispatch => {
@@ -16,17 +16,11 @@ export function updateSettings(id, data) {
         if (isSuccess(response)) {
           dispatch({ type: UPDATE_SETTINGS_SUCCESS, payload: response });
           dispatch(reset('settings'));
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'white', message: 'Account updated' },
-          });
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Account updated' } });
         } else {
           dispatch({ type: UPDATE_SETTINGS_ERROR });
-          const message = parseError(response, 'Error updating account');
-          dispatch({
-            type: SHOW_ALERT,
-            alert: { klass: 'danger', message },
-          });
+          const message = api.parseError(response, 'Error updating account');
+          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
   };

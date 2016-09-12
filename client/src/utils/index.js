@@ -1,4 +1,3 @@
-import get from 'lodash/get';
 import debounce from 'lodash/debounce';
 
 export function isSuccess(response) {
@@ -6,10 +5,6 @@ export function isSuccess(response) {
     return true;
   }
   return false;
-}
-
-export function parseError(response, defaultMessage) {
-  return get(response, 'data.errors[0].message', defaultMessage);
 }
 
 export function debouncedHandler(...args) {

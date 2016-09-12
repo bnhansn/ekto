@@ -9,7 +9,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function fetchAccounts() {
   return dispatch => {
@@ -20,7 +20,7 @@ export function fetchAccounts() {
           dispatch({ type: FETCH_ACCOUNTS_SUCCESS, payload: response });
         } else {
           dispatch({ type: FETCH_ACCOUNTS_ERROR });
-          const message = parseError(response, 'Error retrieving accounts');
+          const message = api.parseError(response, 'Error retrieving accounts');
           dispatch({
             type: SHOW_ALERT,
             alert: { klass: 'danger', message },

@@ -13,7 +13,7 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess, parseError } from '../../utils';
+import { isSuccess } from '../../utils';
 
 export function searchUsers(search) {
   return dispatch => {
@@ -39,7 +39,7 @@ export function inviteNewUser(accountId, data) {
           dispatch(reset('inviteUser'));
         } else {
           dispatch({ type: INVITE_NEW_USER_ERROR });
-          const message = parseError(response, 'Error inviting user');
+          const message = api.parseError(response, 'Error inviting user');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
@@ -55,7 +55,7 @@ export function inviteExistingUser(accountId, data) {
           dispatch({ type: INVITE_EXISTING_USER_SUCCESS, payload: response });
         } else {
           dispatch({ type: INVITE_EXISTING_USER_ERROR });
-          const message = parseError(response, 'Error inviting user');
+          const message = api.parseError(response, 'Error inviting user');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
@@ -70,7 +70,7 @@ export function removeTeamMember(accountId, userId) {
           dispatch({ type: REMOVE_TEAM_MEMBER_SUCCESS, payload: response });
           dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'User removed' } });
         } else {
-          const message = parseError(response, 'Error removing user');
+          const message = api.parseError(response, 'Error removing user');
           dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
         }
       });
