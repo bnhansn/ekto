@@ -10,7 +10,7 @@ import { SHOW_ALERT } from '../Alert/constants';
 export function fetchPosts(accountSlug, params) {
   return dispatch => {
     dispatch({ type: FETCH_POSTS_START });
-    api.fetch(`/accounts/${accountSlug}/posts`, { params: { ...params } })
+    api.fetch(`/accounts/${accountSlug}/posts`, params)
       .then(response => {
         dispatch({ type: FETCH_POSTS_SUCCESS, payload: response });
       })
