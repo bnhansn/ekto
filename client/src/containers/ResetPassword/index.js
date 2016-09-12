@@ -46,7 +46,7 @@ class ResetPassword extends Component {
 
 export default connect(
   (state, ownProps) => ({
-    isSubmitting: state.reset.isSubmitting,
+    isSubmitting: state.resetPassword.isSubmitting,
     isAuthenticated: state.app.isAuthenticated,
     redirect: ownProps.location.query.redirect || '/',
   }),
