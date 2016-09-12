@@ -1,4 +1,5 @@
 require_relative '../../../rails_helper'
+include ActiveJob::TestHelper
 
 describe Services::PasswordReset do
   before do
@@ -16,7 +17,9 @@ describe Services::PasswordReset do
 
       it 'sends a password reset email' do
         expect do
-          Services::PasswordReset.send_reset(@user)
+          perform_enqueued_jobs do
+            Services::PasswordReset.send_reset(@user)
+          end
         end.to change { ActionMailer::Base.deliveries.count }.from(0).to(1)
       end
 

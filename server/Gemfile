@@ -10,6 +10,7 @@ gem 'pg', '~> 0.18.4'
 gem 'puma', '~> 3.4'
 gem 'rack-cors', '~> 0.4.0'
 gem 'rails', '5.0.0'
+gem 'sidekiq', '~> 4.1.2'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -19,8 +20,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem 'dotenv', '~> 2.1', '>= 2.1.1'
+end
+
+group :test do
+  gem 'database_cleaner', '~> 1.5', '>= 1.5.3'
   gem 'guard-rspec', '~> 4.7', '>= 4.7.2', require: false
   gem 'factory_girl_rails', '~> 4.7'
   gem 'rspec-rails', '~> 3.5', '>= 3.5.1'

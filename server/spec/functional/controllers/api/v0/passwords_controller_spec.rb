@@ -1,4 +1,5 @@
 require_relative '../../../../rails_helper'
+include ActiveJob::TestHelper
 
 RSpec.describe Api::V0::PasswordsController, type: :controller do
   describe 'POST #forgot' do
@@ -6,7 +7,9 @@ RSpec.describe Api::V0::PasswordsController, type: :controller do
       user = create(:user)
 
       expect do
-        process :forgot, method: :post, params: { email: user.email }
+        perform_enqueued_jobs do
+          process :forgot, method: :post, params: { email: user.email }
+        end
       end.to change { ActionMailer::Base.deliveries.count }.from(0).to(1)
 
       email = ActionMailer::Base.deliveries.last

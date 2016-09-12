@@ -1,4 +1,5 @@
 require_relative '../../../../rails_helper'
+include ActiveJob::TestHelper
 
 RSpec.describe Api::V0::TeamController, type: :controller do
   describe 'POST #invite_new' do
@@ -25,13 +26,15 @@ RSpec.describe Api::V0::TeamController, type: :controller do
 
         it 'sends invitation email' do
           expect do
-            process :invite_new,
-                    method: :post,
-                    params: {
-                      name: 'Full name',
-                      email: 'email@test.com',
-                      account_id: @account.id
-                    }
+            perform_enqueued_jobs do
+              process :invite_new,
+                      method: :post,
+                      params: {
+                        name: 'Full name',
+                        email: 'email@test.com',
+                        account_id: @account.id
+                      }
+            end
           end.to change { ActionMailer::Base.deliveries.count }.by(1)
 
           email = ActionMailer::Base.deliveries.last

@@ -5,7 +5,7 @@ class Api::V0::TeamController < Api::V0::BaseController
 
     user, errors = Savers::User.create_from_invitation(params)
     if errors.empty?
-      InvitationMailer.new_user_invitation(user, account).deliver_now
+      InvitationMailer.new_user_invitation(user, account).deliver_later
       render json: user, status: :created
     else
       render_error_messages(errors)

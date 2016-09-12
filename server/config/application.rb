@@ -20,5 +20,7 @@ module Ekto
     config.api_only = true
     config.autoload_paths += %W(#{config.root}/lib)
     config.generators.test_framework = false
+    config.active_job.queue_adapter = :sidekiq
+    config.active_record.time_zone_aware_types = [:datetime, :time]
   end
 end

@@ -7,7 +7,7 @@ module Services
         generate_token(user)
         user.password_reset_sent_at = Time.zone.now
         user.save
-        PasswordMailer.password_reset(user).deliver_now
+        PasswordMailer.password_reset(user).deliver_later
         true
       else
         false
