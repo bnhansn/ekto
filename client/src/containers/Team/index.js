@@ -32,7 +32,7 @@ class Team extends Component {
     };
   }
 
-  handleSearch = (search) => this.props.searchUsers(search);
+  handleSearch = (search) => this.props.searchUsers({ search });
 
   handleNewUserInvite = (data) => this.props.inviteNewUser(this.props.account.id, data);
 

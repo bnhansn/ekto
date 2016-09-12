@@ -24,8 +24,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        meta: action.payload.data.meta,
-        posts: action.payload.data.data,
+        meta: action.payload.meta,
+        posts: action.payload.data,
       };
     case FETCH_POSTS_ERROR:
       return {
@@ -35,7 +35,7 @@ export default function (state = initialState, action) {
         isLoading: false,
       };
     case DELETE_POST_SUCCESS: {
-      const index = state.posts.map(x => x.id).indexOf(action.payload.data.data.id);
+      const index = state.posts.map(x => x.id).indexOf(action.payload.data.id);
       return {
         ...state,
         posts: [

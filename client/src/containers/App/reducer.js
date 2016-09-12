@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
         ...state,
         isAuthenticated: true,
         isAuthenticating: false,
-        user: action.payload.data.data,
+        user: action.payload.data,
       };
     case AUTHENTICATION_ERROR:
       return {
@@ -51,7 +51,7 @@ export default function (state = initialState, action) {
     case UPDATE_SETTINGS_SUCCESS:
       return {
         ...state,
-        user: action.payload.data.data,
+        user: action.payload.data,
       };
     default:
       return state;

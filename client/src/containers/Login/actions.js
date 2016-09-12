@@ -11,7 +11,6 @@ import {
 } from '../App/constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess } from '../../utils';
 
 export function login(data) {
   return dispatch => {
@@ -19,17 +18,16 @@ export function login(data) {
     dispatch({ type: AUTHENTICATION_START });
     api.post('/login', data)
       .then(response => {
-        if (isSuccess(response)) {
-          localStorage.setItem('token', JSON.stringify(response.data.meta.token));
-          dispatch({ type: LOGIN_SUCCESS });
-          dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
-          dispatch(push('/accounts'));
-        } else {
-          const message = api.parseError(response, 'Error logging in');
-          dispatch({ type: LOGIN_ERROR });
-          dispatch({ type: AUTHENTICATION_ERROR });
-          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
-        }
+        localStorage.setItem('token', JSON.stringify(response.meta.token));
+        dispatch({ type: LOGIN_SUCCESS });
+        dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
+        dispatch(push('/accounts'));
+      })
+      .catch(error => {
+        dispatch({ type: LOGIN_ERROR });
+        dispatch({ type: AUTHENTICATION_ERROR });
+        const message = api.parseError(error, 'Error logging in');
+        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
       });
   };
 }

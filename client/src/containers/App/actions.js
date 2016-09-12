@@ -7,7 +7,6 @@ import {
   AUTHENTICATION_SUCCESS,
 } from './constants';
 import api from '../../api';
-import { isSuccess } from '../../utils';
 
 export function logout() {
   return dispatch => {
@@ -22,13 +21,12 @@ export function authenticate(token) {
     dispatch({ type: AUTHENTICATION_START });
     api.post('/authenticate', { token })
       .then(response => {
-        if (isSuccess(response)) {
-          localStorage.setItem('token', JSON.stringify(response.data.meta.token));
-          dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
-        } else {
-          dispatch({ type: AUTHENTICATION_ERROR });
-          dispatch(logout());
-        }
+        localStorage.setItem('token', JSON.stringify(response.meta.token));
+        dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
+      })
+      .catch(() => {
+        dispatch({ type: AUTHENTICATION_ERROR });
+        dispatch(logout());
       });
   };
 }

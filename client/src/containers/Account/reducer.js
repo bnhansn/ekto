@@ -37,12 +37,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        account: action.payload.data.data,
+        account: action.payload.data,
       };
     case UPDATE_ACCOUNT_SUCCESS:
       return {
         ...state,
-        account: action.payload.data.data,
+        account: action.payload.data,
       };
     case FETCH_TEAM_START:
       return {
@@ -52,7 +52,7 @@ export default function (state = initialState, action) {
     case FETCH_TEAM_SUCCESS:
       return {
         ...state,
-        team: action.payload.data.data,
+        team: action.payload.data,
       };
     case FETCH_DOMAINS_START:
       return {
@@ -62,7 +62,7 @@ export default function (state = initialState, action) {
     case FETCH_DOMAINS_SUCCESS:
       return {
         ...state,
-        domains: action.payload.data.data,
+        domains: action.payload.data,
       };
     case FETCH_DOMAINS_ERROR:
       return {
@@ -74,11 +74,11 @@ export default function (state = initialState, action) {
         ...state,
         domains: [
           ...state.domains,
-          action.payload.data.data,
+          action.payload.data,
         ],
       };
     case DELETE_DOMAIN_SUCCESS: {
-      const index = state.domains.map(x => x.id).indexOf(action.payload.data.data.id);
+      const index = state.domains.map(x => x.id).indexOf(action.payload.data.id);
       return {
         ...state,
         domains: [
@@ -92,7 +92,7 @@ export default function (state = initialState, action) {
         ...state,
         team: [
           ...state.team,
-          action.payload.data.data,
+          action.payload.data,
         ],
       };
     case INVITE_EXISTING_USER_SUCCESS:
@@ -100,11 +100,11 @@ export default function (state = initialState, action) {
         ...state,
         team: [
           ...state.team,
-          action.payload.data.data,
+          action.payload.data,
         ],
       };
     case REMOVE_TEAM_MEMBER_SUCCESS: {
-      const index = state.team.map(u => u.id).indexOf(action.payload.data.data.id);
+      const index = state.team.map(u => u.id).indexOf(action.payload.data.id);
       return {
         ...state,
         team: [

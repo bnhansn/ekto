@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        post: action.payload.data.data,
+        post: action.payload.data,
       };
     case FETCH_POST_ERROR:
       return {
@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isSaving: false,
-        post: action.payload.data.data,
+        post: action.payload.data,
       };
     case UPDATE_POST_ERROR:
       return {

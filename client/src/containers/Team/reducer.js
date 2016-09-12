@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
     case SEARCH_USERS_SUCCESS:
       return {
         ...state,
-        searchedUsers: action.payload.data.data,
+        searchedUsers: action.payload.data,
         isSearchingUsers: false,
       };
     case SEARCH_USERS_ERROR:

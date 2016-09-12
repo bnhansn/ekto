@@ -1,4 +1,3 @@
-import axios from 'axios';
 import mapKeys from 'lodash/mapKeys';
 import get from 'lodash/get';
 
@@ -16,42 +15,96 @@ const keyTransform = (data) => {
 
 const token = () => JSON.parse(localStorage.getItem('token'));
 
+const queryString = (params) => {
+  const query = Object.keys(params)
+                      .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+                      .join('&');
+  return `${query.length ? '?' : ''}${query}`;
+};
+
 export default {
-  get(path, options) {
-    return axios.get(
-      `${API_URL}${path}`,
-      { ...options, headers: { Authorization: `Bearer ${token()}` } })
-      .then(response => response)
-      .catch(error => error.response);
+  fetch(path, params = {}) {
+    return fetch(
+      `${API_URL}${path}${queryString(params)}`,
+      { headers: { Authorization: `Bearer ${token()}` } }
+    )
+      .then(response =>
+        response.json().then(json => {
+          if (!response.ok) {
+            return Promise.reject(json);
+          }
+          return json;
+        })
+      );
   },
 
   post(path, data) {
-    return axios.post(
+    return fetch(
       `${API_URL}${path}`,
-      keyTransform(data),
-      { headers: { Authorization: `Bearer ${token()}` } })
-      .then(response => response)
-      .catch(error => error.response);
+      {
+        method: 'POST',
+        body: JSON.stringify(keyTransform(data)),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token()}`,
+        },
+      }
+    )
+      .then(response =>
+        response.json().then(json => {
+          if (!response.ok) {
+            return Promise.reject(json);
+          }
+          return json;
+        })
+      );
   },
 
   patch(path, data) {
-    return axios.patch(
+    return fetch(
       `${API_URL}${path}`,
-      keyTransform(data),
-      { headers: { Authorization: `Bearer ${token()}` } })
-      .then(response => response)
-      .catch(error => error.response);
+      {
+        method: 'PATCH',
+        body: JSON.stringify(keyTransform(data)),
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token()}`,
+        },
+      }
+    )
+      .then(response =>
+        response.json().then(json => {
+          if (!response.ok) {
+            return Promise.reject(json);
+          }
+          return json;
+        })
+      );
   },
 
   delete(path) {
-    return axios.delete(
+    return fetch(
       `${API_URL}${path}`,
-      { headers: { Authorization: `Bearer ${token()}` } })
-      .then(response => response)
-      .catch(error => error.response);
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token()}`,
+        },
+      }
+    )
+      .then(response =>
+        response.json().then(json => {
+          if (!response.ok) {
+            return Promise.reject(json);
+          }
+          return json;
+        })
+      );
   },
 
   parseError(response, defaultMessage) {
-    return get(response, 'data.errors[0].message', defaultMessage);
+    return get(response, 'errors[0].message', defaultMessage);
   },
 };

@@ -26,7 +26,7 @@ export default function (state = initialState, action) {
         ...state,
         isLoading: false,
         finishedLoading: true,
-        accounts: action.payload.data.data,
+        accounts: action.payload.data,
       };
     case FETCH_ACCOUNTS_ERROR:
       return {
@@ -43,7 +43,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isSavingNewAccount: false,
-        accounts: [...state.accounts, action.payload.data.data],
+        accounts: [...state.accounts, action.payload.data],
       };
     case CREATE_ACCOUNT_ERROR:
       return {

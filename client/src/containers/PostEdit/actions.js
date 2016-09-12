@@ -9,19 +9,17 @@ import {
 } from './constants';
 import api from '../../api';
 import { SHOW_ALERT } from '../Alert/constants';
-import { isSuccess } from '../../utils';
 
 export function fetchPost(accountSlug, id) {
   return dispatch => {
     dispatch({ type: FETCH_POST_START });
-    api.get(`/accounts/${accountSlug}/posts/${id}`)
+    api.fetch(`/accounts/${accountSlug}/posts/${id}`)
       .then(response => {
-        if (isSuccess(response)) {
-          dispatch({ type: FETCH_POST_SUCCESS, payload: response });
-        } else {
-          dispatch({ type: FETCH_POST_ERROR });
-          dispatch(push(`/accounts/${accountSlug}`));
-        }
+        dispatch({ type: FETCH_POST_SUCCESS, payload: response });
+      })
+      .catch(() => {
+        dispatch({ type: FETCH_POST_ERROR });
+        dispatch(push(`/accounts/${accountSlug}`));
       });
   };
 }
@@ -31,11 +29,10 @@ export function updatePost(accountSlug, id, data) {
     dispatch({ type: UPDATE_POST_START });
     api.patch(`/accounts/${accountSlug}/posts/${id}`, data)
       .then(response => {
-        if (isSuccess(response)) {
-          dispatch({ type: UPDATE_POST_SUCCESS, payload: response });
-        } else {
-          dispatch({ type: UPDATE_POST_ERROR });
-        }
+        dispatch({ type: UPDATE_POST_SUCCESS, payload: response });
+      })
+      .catch(() => {
+        dispatch({ type: UPDATE_POST_ERROR });
       });
   };
 }
@@ -43,14 +40,13 @@ export function updatePost(accountSlug, id, data) {
 export function deletePost(accountSlug, id) {
   return dispatch => {
     api.delete(`/accounts/${accountSlug}/posts/${id}`)
-      .then(response => {
-        if (isSuccess(response)) {
-          dispatch(push(`/accounts/${accountSlug}/posts`));
-          dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Post deleted' } });
-        } else {
-          const message = api.parseError(response, 'Error deleting post');
-          dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
-        }
+      .then(() => {
+        dispatch(push(`/accounts/${accountSlug}/posts`));
+        dispatch({ type: SHOW_ALERT, alert: { klass: 'white', message: 'Post deleted' } });
+      })
+      .catch(error => {
+        const message = api.parseError(error, 'Error deleting post');
+        dispatch({ type: SHOW_ALERT, alert: { klass: 'danger', message } });
       });
   };
 }
