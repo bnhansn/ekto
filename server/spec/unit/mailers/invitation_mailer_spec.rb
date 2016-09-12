@@ -23,7 +23,7 @@ RSpec.describe InvitationMailer, type: :mailer do
     end
 
     it 'includes a signup link in the email' do
-      expect(mail.body.encoded).to match('http://ekto.tech')
+      expect(mail.body.encoded).to match('https://ekto.tech')
     end
   end
 end

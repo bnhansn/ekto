@@ -15,7 +15,7 @@ RSpec.describe PasswordMailer, type: :mailer do
     end
 
     it 'includes the reset password link & token in the email body' do
-      expect(mail.body.encoded).to match("http://ekto.tech/reset/#{@user.password_reset_token}") # rubocop:disable LineLength
+      expect(mail.body.encoded).to match("https://ekto.tech/reset/#{@user.password_reset_token}") # rubocop:disable LineLength
     end
   end
 end
