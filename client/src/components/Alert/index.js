@@ -89,6 +89,7 @@ const Alert = (props) => {
     klass === 'primary' && styles.alertPrimary,
     klass === 'info' && styles.alertInfo,
     klass === 'warning' && styles.alertWarning,
+    klass === 'success' && styles.alertSuccess,
     (klass === 'danger' || !klass) && styles.alertDanger,
   );
 

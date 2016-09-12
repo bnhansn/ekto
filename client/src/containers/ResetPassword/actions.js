@@ -12,7 +12,7 @@ export function resetPassword(data) {
     dispatch({ type: RESET_PASSWORD_START });
     api.post('/reset', data)
       .then(response => {
-        localStorage.setItem('token', JSON.stringify(response.data.token));
+        localStorage.setItem('token', JSON.stringify(response.meta.token));
         dispatch({ type: RESET_PASSWORD_SUCCESS });
         dispatch({ type: AUTHENTICATION_SUCCESS, payload: response });
         dispatch({

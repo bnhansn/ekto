@@ -598,7 +598,7 @@ mark,
   background-color: #fcf8e3;
 }
 
-.list-unstyled {
+/*.list-unstyled {
   padding-left: 0;
   list-style: none;
 }
@@ -619,7 +619,7 @@ mark,
 .initialism {
   font-size: 90%;
   text-transform: uppercase;
-}
+}*/
 
 /*.blockquote {
   padding: 0.5rem 1rem;
@@ -1950,10 +1950,10 @@ select.form-control:focus::-ms-value {
   background-color: #fff;
 }
 
-.form-control-file,
+/*.form-control-file,
 .form-control-range {
   display: block;
-}
+}*/
 
 /*.col-form-label {
   padding-top: 0.5rem;
@@ -2173,7 +2173,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23d9534f' viewBox='-2 -2 7 7'%3E%3Cpath stroke='%23d9534f' d='M0 0l3 3m0-3L0 3'/%3E%3Ccircle r='.5'/%3E%3Ccircle cx='3' r='.5'/%3E%3Ccircle cy='3' r='.5'/%3E%3Ccircle cx='3' cy='3' r='.5'/%3E%3C/svg%3E");
 }
 */
-@media (min-width: 544px) {
+/*@media (min-width: 544px) {
   .form-inline .form-group {
     display: inline-block;
     margin-bottom: 0;
@@ -2220,7 +2220,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     top: 0;
   }
 }
-
+*/
 .btn {
   display: inline-block;
   font-weight: normal;
@@ -3687,7 +3687,7 @@ input[type="button"].btn-block {
   display: block;
 }*/
 
-.navbar {
+/*.navbar {
   position: relative;
   padding: 0.5rem 1rem;
 }
@@ -3696,9 +3696,9 @@ input[type="button"].btn-block {
   content: "";
   display: table;
   clear: both;
-}
+}*/
 
-@media (min-width: 544px) {
+/*@media (min-width: 544px) {
   .navbar {
     border-radius: 0.25rem;
   }
@@ -3749,9 +3749,9 @@ input[type="button"].btn-block {
   .navbar-sticky-top {
     border-radius: 0;
   }
-}
+}*/
 
-.navbar-brand {
+/*.navbar-brand {
   float: left;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -3765,9 +3765,9 @@ input[type="button"].btn-block {
 
 .navbar-brand > img {
   display: block;
-}
+}*/
 
-.navbar-divider {
+/*.navbar-divider {
   float: left;
   width: 1px;
   padding-top: .425rem;
@@ -3792,7 +3792,7 @@ input[type="button"].btn-block {
 
 .navbar-toggler:focus, .navbar-toggler:hover {
   text-decoration: none;
-}
+}*/
 
 .navbar-nav .nav-item {
   float: left;
@@ -4896,7 +4896,7 @@ base::-moz-progress-bar,
   background-color: #f5f5f5;
 }
 
-.list-group-item-success {
+/*.list-group-item-success {
   color: #3c763d;
   background-color: #dff0d8;
 }
@@ -5028,7 +5028,7 @@ button.list-group-item-danger.active:hover {
 .list-group-item-text {
   margin-bottom: 0;
   line-height: 1.3;
-}
+}*/
 
 /*.embed-responsive {
   position: relative;

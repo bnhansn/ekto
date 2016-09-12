@@ -9,17 +9,30 @@ import LoginForm from '../../components/LoginForm';
 
 const styles = StyleSheet.create({
   navbar: {
+    padding: '0.5rem 1rem',
     background: colors.primary,
-    borderRadius: 0,
+    ':after': {
+      content: '""',
+      display: 'table',
+      clear: 'both',
+    },
+  },
+
+  navLogo: {
+    float: 'left',
+    padding: '.25rem 0',
+    fontSize: '1.25rem',
   },
 
   navLink: {
     color: '#fff',
     ':hover': {
       color: 'rgba(255,255,255,.8)',
+      textDecoration: 'none',
     },
     ':focus': {
       colors: '#fff',
+      textDecoration: 'none',
     },
   },
 
@@ -74,10 +87,10 @@ class Navbar extends Component {
     const { user, isAuthenticated, isAuthenticating, isLoggingIn } = this.props;
 
     return (
-      <nav className={`navbar ${css(styles.navbar)}`}>
+      <nav className={css(styles.navbar)}>
         <Link
           to={isAuthenticated ? '/accounts' : '/'}
-          className={`navbar-brand ${css(styles.navLink)}`}
+          className={css(styles.navLink, styles.navLogo)}
         >
           Ekto
         </Link>
