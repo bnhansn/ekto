@@ -7,17 +7,21 @@ describe Factories::Account do
       attrs = {
         description: 'Account description',
         name: 'Account name',
-        image: 'https://s3-us-west-2.amazonaws.com/ekto.dev/a0jx7f5s46lxr.jpeg'
+        image: 'https://s3-us-west-2.amazonaws.com/ekto.dev/a0jx7f5s46lxr.jpeg',
+        meta_title: 'Meta title',
+        meta_description: 'Meta description'
       }
       @params = ActionController::Parameters.new(attrs)
     end
 
-    it 'assigns permitted fields' do
+    it 'allows permitted fields' do
       account = Factories::Account.build(@user.id, @params)
 
       expect(account.description).to eq('Account description')
       expect(account.name).to eq('Account name')
       expect(account.image).to eq('https://s3-us-west-2.amazonaws.com/ekto.dev/a0jx7f5s46lxr.jpeg')
+      expect(account.meta_title).to eq('Meta title')
+      expect(account.meta_description).to eq('Meta description')
     end
 
     it 'sets owner_id to account creator id' do
@@ -40,7 +44,7 @@ describe Factories::Account do
   end
 
   describe '#assign' do
-    it 'assigns permitted fields' do
+    it 'allows permitted fields' do
       account = create(:account)
       attrs = { name: 'Updated name' }
       params = ActionController::Parameters.new(attrs)

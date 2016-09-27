@@ -1,4 +1,4 @@
-class AccountSerializer < ActiveModel::Serializer
+class AccountV1Serializer < ActiveModel::Serializer
   def json_key
     'data'
   end
@@ -7,7 +7,6 @@ class AccountSerializer < ActiveModel::Serializer
              :created_at,
              :description,
              :image,
-             :key,
              :meta_title,
              :meta_description,
              :name,

@@ -22,6 +22,8 @@ module Factories
       params.permit(
         :description,
         :image,
+        :meta_title,
+        :meta_description,
         :name
       )
     end

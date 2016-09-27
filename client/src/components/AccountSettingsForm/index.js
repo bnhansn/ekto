@@ -35,6 +35,17 @@ class AccountSettingsForm extends Component {
                   label="Description"
                   component={Textarea}
                 />
+                <Field
+                  type="text"
+                  name="metaTitle"
+                  label="Meta title"
+                  component={Input}
+                />
+                <Field
+                  name="metaDescription"
+                  label="Meta description"
+                  component={Textarea}
+                />
               </div>
             </div>
           </div>
