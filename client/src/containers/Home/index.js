@@ -155,7 +155,7 @@ class Home extends Component {
                 <span className={css(styles.productStepNumber)}>1</span>
               </div>
               <div className="media-body media-middle">
-                <span>Create an account and publish posts with our online editor.</span>
+                <span>Create an account.</span>
               </div>
             </div>
             <div className="media" style={{ marginBottom: '1rem' }}>
@@ -164,8 +164,7 @@ class Home extends Component {
               </div>
               <div className="media-body media-middle">
                 <span>
-                  Add your website's url to the account's whitelisted domains to allow
-                  blog posts to be retrieved through the api.
+                  Publish posts with our online editor.
                 </span>
               </div>
             </div>

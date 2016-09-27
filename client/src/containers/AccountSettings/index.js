@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Modal from 'react-modal';
 import { connect } from 'react-redux';
-import { updateAccount, createDomain, deleteDomain, deleteAccount, updateImage } from './actions';
-import AccountDomainsList from '../../components/AccountDomainsList';
+import { updateAccount, deleteAccount, updateImage } from './actions';
 import AccountSettingsForm from '../../components/AccountSettingsForm';
 import Uploader from '../../components/Uploader';
 
@@ -10,16 +9,12 @@ class AccountSettings extends Component {
   static propTypes = {
     initialValues: PropTypes.object,
     user: PropTypes.object.isRequired,
-    domains: PropTypes.array.isRequired,
     params: PropTypes.object.isRequired,
     account: PropTypes.object.isRequired,
     updateImage: PropTypes.func.isRequired,
     isSubmitting: PropTypes.bool.isRequired,
-    createDomain: PropTypes.func.isRequired,
-    deleteDomain: PropTypes.func.isRequired,
     updateAccount: PropTypes.func.isRequired,
     deleteAccount: PropTypes.func.isRequired,
-    isCreatingDomain: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -33,10 +28,6 @@ class AccountSettings extends Component {
   handleSubmit = (data) => this.props.updateAccount(this.props.account.id, data);
 
   handleImageUpdate = (data) => this.props.updateImage(this.props.account.id, data);
-
-  handleNewDomainSubmit = (data) => this.props.createDomain(this.props.account.id, data);
-
-  handleDomainDelete = (id) => this.props.deleteDomain(this.props.account.id, id);
 
   handleAccountDelete = (e) => {
     e.preventDefault();
@@ -57,7 +48,7 @@ class AccountSettings extends Component {
 
   render() {
     const { modalOpen } = this.state;
-    const { isSubmitting, initialValues, domains, isCreatingDomain, user, account } = this.props;
+    const { isSubmitting, initialValues, user, account } = this.props;
 
     return (
       <div className="container">
@@ -75,7 +66,7 @@ class AccountSettings extends Component {
               </div>
               <div className="col-sm-8 col-xs-12">
                 <div className="form-group">
-                  <label htmlFor="key">Account key</label>
+                  <label htmlFor="key">API key</label>
                   <input
                     readOnly
                     name="key"
@@ -91,12 +82,6 @@ class AccountSettings extends Component {
             </div>
           </div>
         </div>
-        <AccountDomainsList
-          domains={domains}
-          isCreatingDomain={isCreatingDomain}
-          onDomainDelete={this.handleDomainDelete}
-          onNewDomainSubmit={this.handleNewDomainSubmit}
-        />
         <div className="card">
           <div className="card-block">
             <div className="row">
@@ -195,10 +180,8 @@ export default connect(
   state => ({
     user: state.app.user,
     account: state.account.account,
-    domains: state.account.domains,
     initialValues: state.account.account,
     isSubmitting: state.accountSettings.isSubmitting,
-    isCreatingDomain: state.accountSettings.isCreatingDomain,
   }),
-  { updateAccount, createDomain, deleteDomain, deleteAccount, updateImage }
+  { updateAccount, deleteAccount, updateImage }
 )(AccountSettings);

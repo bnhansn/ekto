@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927183600) do
+ActiveRecord::Schema.define(version: 20160927184624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,14 +39,6 @@ ActiveRecord::Schema.define(version: 20160927183600) do
     t.string   "meta_title",       default: ""
     t.string   "meta_description", default: ""
     t.index ["deleted_at"], name: "index_accounts_on_deleted_at", using: :btree
-  end
-
-  create_table "domains", force: :cascade do |t|
-    t.integer  "account_id"
-    t.string   "host"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_domains_on_account_id", using: :btree
   end
 
   create_table "posts", force: :cascade do |t|

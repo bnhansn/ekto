@@ -12,7 +12,6 @@ Rails.application.routes.draw do
           get 'users'
         end
         resources :posts, only: [:index, :create, :show, :update, :destroy]
-        resources :domains, only: [:index, :create, :update, :destroy]
       end
       post 'accounts/:account_id/team/invite_new', to: 'team#invite_new'
       post 'accounts/:account_id/team/invite_existing',
