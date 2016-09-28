@@ -4,7 +4,7 @@ import App from './containers/App';
 import Home from './containers/Home';
 import Team from './containers/Team';
 import PostIndex from './containers/PostIndex';
-import NotFound from './pages/NotFound';
+import NotFound from './components/NotFound';
 import Account from './containers/Account';
 import PostNew from './containers/PostNew';
 import PostEdit from './containers/PostEdit';

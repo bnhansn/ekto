@@ -70,7 +70,6 @@ const styles = StyleSheet.create({
   demo: {
     padding: '75px 0',
     fontSize: '1.25rem',
-    textAlign: 'center',
     background: '#fff',
   },
 
@@ -108,7 +107,7 @@ class Home extends Component {
           <div className="container">
             <div className={css(styles.cta)}>
               <p>A blogging microservice</p>
-              <p>Publish on our platform and fetch through a simple api</p>
+              <p>Publish on our platform and fetch through a simple API</p>
             </div>
             <SignupForm isSubmitting={isSigningUp} onSubmit={this.handleSubmit} />
           </div>
@@ -174,7 +173,7 @@ class Home extends Component {
               </div>
               <div className="media-body media-middle">
                 <span>
-                  Query the Ekto api from your application to display the blog content
+                  Query the Ekto API from your application to display the blog content
                   on your website.
                 </span>
               </div>
@@ -183,10 +182,15 @@ class Home extends Component {
         </div>
         <div className={css(styles.demo)}>
           <div className="container">
+            <p style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+              <span style={{ marginRight: '10px' }}>💁</span>How do I use Ekto?
+              Check out the demo React applications.
+            </p>
             <p>
-              <span style={{ marginRight: '10px' }}>💁</span>How do I use Ekto on my website?&nbsp;
-              <a href="https://github.com/bnhansn/ava">Check out an example React app</a> and&nbsp;
-              <a href="http://demo.ekto.tech">view the online demo</a>.
+              Ava: <a href="https://github.com/bnhansn/ava">Source code</a> - <a href="http://demo.ekto.tech">Online demo</a>
+            </p>
+            <p>
+              Eve (server side rendering): <a href="https://github.com/bnhansn/eve">Source code</a> - <a href="http://eve.ekto.tech">Online demo</a>
             </p>
           </div>
         </div>
