@@ -184,13 +184,13 @@ class Home extends Component {
           <div className="container">
             <p style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
               <span style={{ marginRight: '10px' }}>💁</span>How do I use Ekto?
-              Check out the demo React applications.
+              Check out the demo applications.
             </p>
             <p>
-              Ava: <a href="https://github.com/bnhansn/ava">Source code</a> - <a href="http://demo.ekto.tech">Online demo</a>
+              Ava (React app): <a href="https://github.com/bnhansn/ava">Source code</a> - <a href="http://demo.ekto.tech">Online demo</a>
             </p>
             <p>
-              Eve (server side rendering): <a href="https://github.com/bnhansn/eve">Source code</a> - <a href="http://eve.ekto.tech">Online demo</a>
+              Eve (Node + Express + React app with server side rendering): <a href="https://github.com/bnhansn/eve">Source code</a> - <a href="http://eve.ekto.tech">Online demo</a>
             </p>
           </div>
         </div>
